@@ -1604,7 +1604,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/quicksear
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Person entity type.
+This endpoint allows you to pass a search term to get a list of entities where the `PersonName` string matches <b>OR</b> partially matches the search term.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v2/quicksearch/people?request.searchTerm=John&request.pageIndex=0&request.pageSize=10`
@@ -1653,7 +1653,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Company entity type.
+This endpoint allows you to pass a search term to get a list of entities where the `DisplayName` string matches <b>OR</b> partially matches the search term.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/quicksearch/companies?request.searchTerm=Inv&request.pageIndex=0&request.pageSize=10`
@@ -1695,7 +1695,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Company entity type flagged as a 'Place of Study'.
+This endpoint allows you to pass a search term to get a list of entities where the `DisplayName` string matches <b>OR</b> partially matches the search term.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/quicksearch/educationalorganisations?request.searchTerm=Aca&request.pageIndex=0&request.pageSize=10`
@@ -1737,7 +1737,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Assignment entity type.
+This endpoint allows you to pass a search term to get a list of entities where the `CompanyName` string matches <b>OR</b> partially matches the search term.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/quicksearch/assignments?request.searchTerm=Vice&request.pageIndex=0&request.pageSize=10`
@@ -1789,7 +1789,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Programme entity type.
+This endpoint allows you to pass a search term to get a list of entities where the `DisplayName` string matches <b>OR</b> partially matches the search term.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/quicksearch/programmes?request.searchTerm=Net&request.pageIndex=0&request.pageSize=10`
@@ -1845,7 +1845,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Professional User entity type.
+This endpoint allows you to pass a search term to get a list of entities where the `PersonName` string matches <b>OR</b> partially matches the search term.
 
 <aside class="notice">
 Please note, each Professional User will have both a Person and User type entity. This endpoint specifically returns information related to their Person entity.
@@ -1879,14 +1879,14 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
     "CompanyName": "Lloyds Banking Group",
     "JobTitle": "Chief Executive Officer",
     "ItemId": "e3617a59-2cd1-4eea-974d-aaa9ad4742ab",
-    "DisplaySummary": "Janet Doe, Lloyds Banking Group, Chief Executive Officer",
-    "DisplayName": "Janet Davis",
+    "DisplaySummary": "Jane Doe, Lloyds Banking Group, Chief Executive Officer",
+    "DisplayName": "Jane Doe",
     "ItemType": "People"
   }...
 ]...
 
 ```
-This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Client User entity type.
+This endpoint allows you to pass a search term to get a list of entities where the `PersonName` string matches <b>OR</b> partially matches the search term.
 
 <aside class="notice">
 Please note, the definition of a Client User is a Person type entity who has been added to the 'Client' team in one or more Assignment Type entities, the Invenias Client feature is enabled on the tenant and at least one Assignment has been shared with them.
@@ -1967,7 +1967,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/u
     ]
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter Professional User entities to get a list of entities that match <b>OR</b> partially match the term for the Professional User entity type.
+This endpoint allows you to pass a search term and select, group, and filter Professional User entities to get a list of entities where the `DisplayFileAs` string matches <b>OR</b> partially matches the search term.
 
 <aside class="notice">
 Please note, each Professional User will have both a Person and User type entity. This endpoint will return information related to both the Person and User entities.
@@ -2065,7 +2065,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/p
     ]...
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter People type entities to get a list of entities that match <b>OR</b> partially match the search term.
+This endpoint allows you to pass a search term and select, group, and filter People type entities to get a list of entities where the `DisplayFileAs` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2144,7 +2144,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/c
     ]...
 }...
 ```
-This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities that match <b>OR</b> partially match the search term.
+This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities where the `FileAs` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2219,7 +2219,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/e
     ]...
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities flagged as a 'Place of Study' that match <b>OR</b> partially match the search term.
+This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities flagged as a 'Place of Study' where the `FileAs` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2304,7 +2304,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/a
     ]
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter Assignment type entities to get a list of entities that match <b>OR</b> partially match the search term.
+This endpoint allows you to pass a search term and select, group, and filter Assignment type entities to get a list of entities where the `FileAs` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2400,7 +2400,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/p
     ]
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter Programme type entities to get a list of entities that match <b>OR</b> partially match the search term.
+This endpoint allows you to pass a search term and select, group, and filter Programme type entities to get a list of entities where the `Name` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2433,7 +2433,146 @@ IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column
 IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/documents
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/documents?request.searchTerm=Jane' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "PageSize": 50,
+    "PageIndex": 0,
+    "Select": [
+        "AttachmentName",
+        "DocumentExtension",
+        "IsDefaultCv"
+    ],
+    "Sort": [
+        {
+            "Selector": "IsDefaultCv",
+            "Desc": true
+        }
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AttachmentName": "Jane_Doe_CV.pdf",
+            "DocumentExtension": "pdf",
+            "ItemId": "0247367e-3e54-4edd-ba80-c9b16a2b6f02",
+            "ItemType": "Documents",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AttachmentName": "Jane_D_CV.docx",
+            "DocumentExtension": "docx",
+            "ItemId": "5679cee4-e14a-4fc8-8018-d1c12511bd51",
+            "ItemType": "Documents",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter Document type entities to get a list of entities where the `AttachmentName` or `Creator` string matches <b>OR</b> partially matches the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/documents?request.searchTerm=Jane`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
 ## POST /api/v1/search/recordmanagementgroupentries
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/recordmanagementgroupentries?request.searchTerm=London' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+  "Items": [
+    {
+      "FileAs": "London",
+      "IsActive": true,
+      "ItemType": "RecordManagementGroupListEntries",
+      "RecordManagementGroupFileAs": "Client Locations",
+      "RecordManagementGroupId": {
+        "Id": "43400b86-5a99-4b84-8e7c-55701df1d37e"
+      },
+      "ItemId": "18a7f342-e0ca-4f76-91f0-fafc19347361",
+      "Image": "INVENIAS",
+      "OffLimitsStatus": "Off"
+    }...
+  ]...
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter Record Management Group entities to get a list of entities where the `FileAs` string matches <b>OR</b> partially matches the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/recordmanagementgroupentries?request.searchTerm=London`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 # FAQ
 ## Frequently asked questions
