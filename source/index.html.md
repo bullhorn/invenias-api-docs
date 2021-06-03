@@ -1901,9 +1901,6 @@ request.searchTerm | [required] | Specify the desired search term for the query 
 request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
 request.pageSize (optional) | | Specify the number of search results to return.
 
-## <strike>GET /api/v1/quicksearch/candidateusers</strike>
-To be deprecated.
-
 # Search
 The Invenias REST API has endpoints available for most entity types allowing you to find entities that correspond to keywords or characters specified in the search term.
 
@@ -2435,9 +2432,6 @@ IncludeDisplayViews (optional) | true | Boolean | Displays the details of the pr
 IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
 IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
-## <strike>POST /api/v1/search/placements</strike>
-Doesn't Currently Work.
-
 ## POST /api/v1/search/documents
 ## POST /api/v1/search/recordmanagementgroupentries
 
@@ -2521,7 +2515,7 @@ Please note, the database may have data management policies enabled on the entit
 The `503` error always occurs when our servers can’t deliver the requested resources at the time the client requests them. 
 Usually, this is due to a database upgrade and is accompanied by the following comment in the response body "Tenant is in Maintenance Mode - Upgrade in progress".
 
-Other causes of 503 errors:
+Other causes of `503` errors:
 <ul>
     <li>The server is overloaded, meaning that is it receiving more requests than it can handle. This is why it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks as well as web applications or the content management system being incorrectly programmed.</li>
     <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may result in an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a 'Service Unavailable' message.</li>
