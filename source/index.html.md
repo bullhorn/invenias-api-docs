@@ -31,8 +31,12 @@ The REST API follows the specifications and conventions of the JavaScript Object
 
 # Creating an API Application
 ## POST /api/v1/thirdpartyapplications
+
+
+> Example Response (JSON)
+
+
 ```shell
-# Example Response:
 {
   "ClientId": "your_client_id",
   "ClientSecret": "your_client_secret",
@@ -71,8 +75,12 @@ ReplyURL (Optional)| | The post-login URL to redirect to your Application.
 
 # Renewing an Application
 ## POST /api/v1/thirdpartyapplications/{id}/renew
+
+
+> Example Response (JSON)
+
+
 ```shell
-# Example Response:
 {
   "ClientId": "your_client_id",
   "ClientSecret": "your_client_secret",
@@ -124,8 +132,13 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
 --data-urlencode 'client_id={client_id}' \
 --data-urlencode 'scope=openid profile api email' \
 --data-urlencode 'username={username}'
+```
 
-# Example Response:
+
+> Example Response (JSON)
+
+
+```shell
 {
     "access_token": "{token}",
     "expires_in": 86400,
@@ -212,7 +225,7 @@ Once the `X-Request-Quota-Remaining reaches` 0, all succeeding requests made wil
 Failure to add adequate mechanisms to your Application instructing it to wait after receiving a 429 error may result in the user account used to authenticate the requests being disabled by our BTO team. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until their satisfied that steps have been taken to prevent the problem from occurring again.
 </aside>
 
-# HTTP response status codes
+# HTTP Response Status Codes
 HTTP response status codes indicate whether a specific HTTP request has been successfully completed.
 ## Successful Responses
 
@@ -256,16 +269,20 @@ There are many list endpoints available for Invenias core entities that can be l
 
 It's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 
+<aside class="notice">
+Please note, there is a row limit of <b>1000</b> rows per call when using a List endpoint.
+</aside>
+
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
 Take (optional) | 0 | Integer | Specify the number of search results to return.
 PageSize (optional) | 0 | Integer | Specify the number of search results to return.
 PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | TRUE | Boolean | 
-ReturnTotalCount (optional) | TRUE | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | TRUE | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | TRUE | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
 Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
 Filter (optional) | [List] | Array | Filter items by column names and values.
 CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
@@ -273,13 +290,13 @@ Sort (optional) | [List] | Array | Sort an array of items to sort by.
 Group (optional) | [List] | Array | Group results together by a column in the array.
 FormFactor (optional) | Any | String | Filter the items by the application used to create them 
 DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | TRUE | Boolean | 
-IsFirstLoad (optional) | TRUE | Boolean | 
-IncludeAdditionalValues (optional) | TRUE | Boolean | 
-UseLookUpViewDefinition (optional) | TRUE | Boolean | 
-IncludeDisplayViews (optional) | TRUE | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | TRUE | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | TRUE | Boolean | Returns the category lists and categories enabled for the entity.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 
 ## Select
@@ -297,8 +314,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
       "FileAs"
    ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -346,8 +366,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
       }
    ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -399,8 +422,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
     ],
     "RequireGroupCount": true
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Groups": [
         {
@@ -435,8 +461,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
       "FileAs"
    ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -485,8 +514,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
         ]
     ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -522,8 +554,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
         "isnull"
     ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -566,8 +601,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
     ],
     "RequireGroupCount": true
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Groups": [
         {
@@ -645,8 +683,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
         ]
     ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
         "Items": [
         {
@@ -710,8 +751,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
     ],
     "RequireGroupCount": true
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Groups": [
         {
@@ -738,8 +782,8 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 The `and` and `or` operators are used to filter records based on more than one condition:
 
 <ul>
-<li>The 'and' operator displays a record if all the conditions separated by 'and' are TRUE.</li>
-<li>The 'or' operator displays a record if any of the conditions separated by 'or' is TRUE.</li>
+<li>The 'and' operator displays a record if all the conditions separated by 'and' are true.</li>
+<li>The 'or' operator displays a record if any of the conditions separated by 'or' is true.</li>
 </ul>
 
 <aside class="notice">
@@ -761,8 +805,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
       }
    ]
 }'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -801,8 +848,11 @@ Please note, data management policies are not available for the Progra
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanagement/people/rules' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer {token}'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Fields": [
         {
@@ -840,8 +890,11 @@ This endpoint will display any data management polices applied to this entity ty
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanagement/companies/rules' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer {token}'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Fields": [
         {
@@ -878,8 +931,11 @@ This endpoint will display any data management polices applied to this entity ty
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanagement/assignment/rules' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer {token}'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Fields": [
         {
@@ -927,8 +983,11 @@ This endpoint will display any data management polices applied to this entity ty
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/settings/AssignmentCandidateStatus' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer {token}'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "SettingName": "AssignmentCandidateStatus",
     "Settings": {
@@ -1083,8 +1142,11 @@ key | [required] | The display name of the enumeration.
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/countries' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer {token}'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 {
     "Items": [
         {
@@ -1111,59 +1173,296 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/countries
 }
 ```
 The GET/api/v1/countries endpoint will get a list of all of the country codes and names supported by the Invenias systems.
-# Duplicate Records
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/countries`
+
+<aside class="warning">
+The Invenias systems use the USPS standard for country names. When adding entries to Address fields the value must exist within the GET/api/v1/countries list and it must be entered entirely in uppercase (e.g. UNITED KINGDOM, FRANCE, INDIA, etc...). Failure to follow these guidelines will result in a null value in this field when creating or updating entities.
+</aside>
+
+# Lookup Lists
+A Lookup List is a list of values which have either been used or which are suggested for use in a field. In other words, a Lookup List can be built from values keyed by users into a field and / or it can be pre-loaded with values.
+
+
+## POST /api/v1/lookuplists/list
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookuplists/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "ItemType": "LookupLists",
+            "Name": "DataManagementPriorities",
+            "ItemId": "b06f6dea-e72f-44f0-b311-f0697b1e17aa",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ItemType": "LookupLists",
+            "Name": "TeamRole",
+            "ItemId": "b906ef4d-3ee2-4a31-8ff4-f32d7b75ffaa",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ItemType": "LookupLists",
+            "Name": "PriorityTypes",
+            "ItemId": "5a294ba8-427c-4ca6-bd23-fb47356e176b",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ItemType": "LookupLists",
+            "Name": "AssignmentClientRole",
+            "ItemId": "793b73af-7ad8-4d1c-b9ba-fdc6a5a168b7",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ItemType": "LookupLists",
+            "Name": "NoteActionTypes",
+            "ItemId": "e103fc3c-e797-408f-bcec-ff4dc4f965aa",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+
+This endpoint can be used to get the names of all of the available Lookup Lists in the database.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/lookuplists/list`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/lookuplists/{id}/entries/list
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "IsActive": true,
+            "ItemType": "LookupListEntries",
+            "LookupListId": {
+                "Id": "dc10b565-1f05-4561-a394-8019a7f760aa"
+            },
+            "Name": "Placement",
+            "OrderIndex": 0,
+            "ItemId": "3775f6d6-af16-45c3-bfa5-3e28d6fde30d",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "IsActive": true,
+            "ItemType": "LookupListEntries",
+            "LookupListId": {
+                "Id": "dc10b565-1f05-4561-a394-8019a7f760aa"
+            },
+            "Name": "Active",
+            "OrderIndex": 1,
+            "ItemId": "12a6b6f2-f121-47d4-870c-2c93fee84a71",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "IsActive": true,
+            "ItemType": "LookupListEntries",
+            "LookupListId": {
+                "Id": "dc10b565-1f05-4561-a394-8019a7f760aa"
+            },
+            "Name": "Cancelled",
+            "OrderIndex": 4,
+            "ItemId": "71b671b0-83b9-4411-8bde-1f8453635ef0",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "IsActive": true,
+            "ItemType": "LookupListEntries",
+            "LookupListId": {
+                "Id": "dc10b565-1f05-4561-a394-8019a7f760aa"
+            },
+            "Name": "Completed",
+            "OrderIndex": 5,
+            "ItemId": "34e89aee-df20-4699-bb9a-e436c3dfc44f",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+This endpoint can be used to get the values withing a specific Lookup List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for a Lookup List.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/lookuplists/{id}/entries
+> Request Model Example (JSON)
+
+```shell
+{
+  "Name": "Lost"
+}
+```
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+  "Name": "Lost"
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "IsActive": true,
+            "ItemType": "LookupListEntries",
+            "LookupListId": {
+                "Id": "dc10b565-1f05-4561-a394-8019a7f760aa"
+            },
+            "Name": "Lost",
+            "OrderIndex": 10,
+            "ItemId": "2927c7dd-ab34-4686-8504-03e31d36e898",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+This endpoint can be used to create new entries in a specific Lookup List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for the Lookup List.
+request | [required] | String | The request model used to create a new value in the Lookup List.
+
+## PUT /api/v1/lookuplists/{id}/entries/{itemId}
+
+# Duplicates
 The Invenias REST API has two endpoints available to help flag 'People' and 'Company'  type entities that <i>may</i> already exist within the database. By utilizing these endpoints it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
 
 ## GET /api/v1/duplicates/people
 > Example (cURL)
 
 ```shell
-curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicates/people?request.personName=Glen%20Chamberlain&request.emailAddress=someemailaddress@gmail.com&request.pageIndex=0&request.pageSize=10' \
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicates/people?request.personName=John%20Doe&request.emailAddress=someemailaddress@gmail.com&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --header 'Authorization: Bearer {token}'
+```
 
-# Example Response:
+> Example Response (JSON)
+
+```shell
 [
     {
-        "PersonName": "Glen Chamberlain",
-        "CompanyName": "Internal Dev Database",
+        "PersonName": "Johnny Doe",
+        "CompanyName": "Microsoft",
         "JobTitle": "Technical Operations Engineer",
         "EmailAddress1": "someemailaddress@gmail.com",
         "EmailAddress2": "email2@aaa.com",
-        "IsExactEmailMatch": false,
+        "IsExactEmailMatch": true,
         "MatchingFields": [
             {
                 "FieldName": "PersonName",
-                "Value": "Glen Chamberlain"
+                "Value": "John Doe"
             }
         ],
         "ItemId": "7d68cd5d-cb47-4710-8641-2bf3a57a2e80",
-        "DisplaySummary": "Glen Chamberlain (Chamberlain), Internal Dev Database, Technical Operations Engineer",
-        "DisplayName": "Glen Chamberlain (Chamberlain)",
+        "DisplaySummary": "John Doe (Doe), Microsoft, Technical Operations Engineer",
+        "DisplayName": "John Doe (Doe)",
         "ItemType": "People",
     },
     {
-        "PersonName": "Glen Chamberlain",
-        "CompanyName": "Internal Dev Database",
+        "PersonName": "John Doe",
+        "CompanyName": "Apple Inc.",
         "JobTitle": "Partner",
-        "EmailAddress1": "someemailaddress@gmail.com",
-        "EmailAddress2": "email2@aaa.com",
-        "EmailAddress3": "email3@aaa.com",
+        "EmailAddress1": "email2@aaa.com",
+        "EmailAddress2": "email3@aaa.com",
         "IsExactEmailMatch": false,
         "MatchingFields": [
             {
                 "FieldName": "PersonName",
-                "Value": "Glen Chamberlain"
+                "Value": "John Doe"
             }
         ],
         "ItemId": "9edf2ce8-39ad-4b3c-a36f-3872ff43e5f8",
-        "DisplaySummary": "Glen Chamberlain, Internal Dev Database, Partner",
-        "DisplayName": "Glen Chamberlain",
+        "DisplaySummary": "John Doe, Apple Inc., Partner",
+        "DisplayName": "John Doe",
         "ItemType": "People",
     }...
 ]
 ```
-The GET /api/v1/duplicates/people endpoint is designed to flag potentially existing 'People' types entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
+The GET /api/v1/duplicates/people endpoint is designed to flag potentially existing 'People' type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
 
 For performance, it's <b>strongly</b> advised to pass the simplest search term possible via the 'request.personName'. The reason for this is that the search term will be split using the spaces as delimiters and parameters will be created in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query the longer it will take to return a response.
 
@@ -1186,7 +1485,7 @@ This endpoint does not comparatively reference all of the email fields for 'Peop
 </ul>
 
 ### HTTP Request
-`https://{subdomain}.invenias.com/api/v1/duplicates/people?request.personName=Glen%20Chamberlain&request.emailAddress=inveniasreporting%2Bdemo%40gmail.com&request.pageIndex=0&request.pageSize=10`
+`https://{subdomain}.invenias.com/api/v1/duplicates/people?request.personName=John%20Doe&request.emailAddress=someemailaddress%2Bdemo%40gmail.com&request.pageIndex=0&request.pageSize=10`
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -1200,6 +1499,947 @@ Please note, it may be optional to pass a value in both the 'request.personName'
 </aside>
 
 ## GET /api/v1/duplicates/companies
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+    {
+        "IsPlaceOfStudy": false,
+        "Location": "Default",
+        "IsExactMatch": false,
+        "MatchingFields": [
+            {
+                "FieldName": "CompanyName",
+                "Value": "Invenias by Bullhorn"
+            }
+        ],
+        "ItemId": "7fbd6130-a867-4901-9284-06ac9c6dfdd1",
+        "DisplaySummary": "Invenias by Bullhorn, Default",
+        "DisplayName": "Invenias by Bullhorn",
+        "ItemType": "Companies"
+    },
+    {
+        "IsPlaceOfStudy": false,
+        "Location": "Default",
+        "IsExactMatch": false,
+        "MatchingFields": [
+            {
+                "FieldName": "CompanyName",
+                "Value": "Invenias Limited"
+            }
+        ],
+        "ItemId": "0e5c71d2-bdd4-43ab-90ff-69c9824eca39",
+        "DisplaySummary": "Invenias Limited, Default",
+        "DisplayName": "Invenias Limited",
+        "ItemType": "Companies"
+    }
+]
+```
+The GET /api/v1/duplicates/companies endpoint is designed to flag potentially existing 'Company' type entities based upon the search terms passed via the `request.companyName` parameter.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.companyName | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+# Quick Search
+The quick search endpoints allow you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for many entity types.
+
+<aside class="notice">
+The key distinction between the 'Quick Search' and 'Search' endpoints is that the 'Search' endpoints allow you to select columns, filter, and group the results. The 'Quick Search' endpoints do not.
+</aside>
+
+## GET /api/v2/quicksearch/people
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/quicksearch/people?request.searchTerm=John&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+    {
+        "PersonName": "John Doe",
+        "CompanyName": "Microsoft",
+        "JobTitle": "Technical Operations Engineer",
+        "ItemId": "a9504f72-4f20-4d4a-a8d1-1a18ed571c9d",
+        "DisplaySummary": "John Doe, Microsoft, Technical Operations Engineer",
+        "DisplayName": "John Doe",
+        "ItemType": "People"
+    },
+    {
+        "PersonName": "Johnny Doe",
+        "CompanyName": "",
+        "JobTitle": "Senior Data Engineer",
+        "ItemId": "90b38639-096c-4745-9750-a379379c6d15",
+        "DisplaySummary": "John Doe, Senior Data Engineer",
+        "DisplayName": "John Doe",
+        "ItemType": "People"
+    },
+    {
+        "PersonName": "Jane Doe",
+        "CompanyName": "John Corp.",
+        "JobTitle": "Partner",
+        "ItemId": "6e5a99e7-0389-4a16-8ca6-459ca4197690",
+        "DisplaySummary": "John Doe, Janen Corp.",
+        "DisplayName": "John Doe",
+        "ItemType": "People"
+    }...
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Person entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v2/quicksearch/people?request.searchTerm=John&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+extendedSearch (optional) | true | Boolean | Specify if you wish to extend the search to the Person entities default Position entities `Job Title`.
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+## GET /api/v1/quicksearch/companies
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/companies?request.searchTerm=Inv&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+    {
+        "LocationName": "Default",
+        "ItemId": "d4fcae19-8c29-49cd-be11-be82b9b2a366",
+        "DisplaySummary": "Invenias by Bullhorn, Default",
+        "DisplayName": "Invenias by Bullhorn",
+        "ItemType": "Companies"
+    },
+    {
+        "LocationName": "Default",
+        "ItemId": "0e5c71d2-bdd4-43ab-90ff-69c9824eca39",
+        "DisplaySummary": "Invenias Limited, Default",
+        "DisplayName": "Invenias Limited",
+        "ItemType": "Companies"
+    },
+    {
+        "LocationName": "",
+        "ItemId": "956e89e3-5e89-4704-b6cc-1ff27ec24e4e",
+        "DisplaySummary": "Investec",
+        "DisplayName": "Investec",
+        "ItemType": "Companies"
+    }...
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Company entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/quicksearch/companies?request.searchTerm=Inv&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+## GET /api/v1/quicksearch/educationalorganisations
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/educationalorganisations?request.searchTerm=Aca&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+    {
+        "LocationName": "Default",
+        "ItemId": "11db8c22-81de-4a82-9b47-dc4b54ad415a",
+        "DisplaySummary": "Academy of Contemporary Music, Default",
+        "DisplayName": "Academy of Contemporary Music",
+        "ItemType": "Companies"
+    },
+    {
+        "LocationName": "Guildford",
+        "ItemId": "7bc5b01f-c36a-4828-bea5-e3af7f5882e1",
+        "DisplaySummary": "Academy of Contemporary Music",
+        "DisplayName": "Academy of Contemporary Music",
+        "ItemType": "Companies"
+    }...
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Company entity type flagged as a 'Place of Study'.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/quicksearch/educationalorganisations?request.searchTerm=Aca&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+## GET /api/v1/quicksearch/assignments
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/assignments?request.searchTerm=Vice&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+    {
+        "CompanyName": "Old Mutual",
+        "ItemId": "bbd2c96c-00bc-4ef9-aae7-9ec88b9d80cd",
+        "DisplaySummary": "Vice President, Securities, Old Mutual",
+        "DisplayName": "Vice President, Securities",
+        "ItemType": "Assignments"
+    },
+    {
+        "CompanyName": "JP Morgan",
+        "ItemId": "f6284f92-1cb0-4d67-8eed-d8b021155752",
+        "DisplaySummary": "Executive Vice President, JP Morgan",
+        "DisplayName": "Executive Vice President",
+        "ItemType": "Assignments"
+    }...
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Assignment entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/quicksearch/assignments?request.searchTerm=Vice&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+## GET /api/v1/quicksearch/programmes
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/programmes?request.searchTerm=Net&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+    {
+        "ProgrammeTypeId": "886f1f8f-e651-4a80-9a86-63ef3600337d",
+        "ProgrammeType": "Business Development",
+        "ItemId": "8f537861-7709-4ef2-bbec-68db11b19ade",
+        "DisplaySummary": "Network Groups",
+        "DisplayName": "Network Groups",
+        "ItemType": "Programmes"
+    },
+    {
+        "ProgrammeTypeId": "886f1f8f-e651-4a80-9a86-63ef3600337d",
+        "ProgrammeType": "Business Development",
+        "ItemId": "a2adc7f7-973a-4751-99bd-c9ce7ed3c504",
+        "DisplaySummary": "Networking Breakfast Event 2017 (Business Development)",
+        "DisplayName": "Networking Breakfast Event 2017",
+        "ItemType": "Programmes"
+    },
+    {
+        "ProgrammeTypeId": "e1c7f9b0-03b2-4aca-a103-ae75480d1315",
+        "ProgrammeType": "Marketing Event",
+        "ItemId": "470efcfd-f4ff-4155-b098-e5f5ef80aee6",
+        "DisplaySummary": "Networking Lunch Event 2017 (Marketing Event)",
+        "DisplayName": "Networking Lunch Event 2017",
+        "ItemType": "Programmes"
+    }
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Programme entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/quicksearch/programmes?request.searchTerm=Net&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+
+## GET /api/v1/quicksearch/professionalusers
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/professionalusers?request.searchTerm=Jane&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+  {
+    "PersonName": "Jane Doe",
+    "CompanyName": "Internal Dev Database",
+    "JobTitle": "Partner",
+    "ItemId": "a9504f72-4f20-4d4a-a8d1-1a18ed571c9d",
+    "DisplaySummary": "Jane Doe, Internal Dev Database, Partner",
+    "DisplayName": "Jane Doe",
+    "ItemType": "People",
+  },
+  {
+    "PersonName": "Jane Doe",
+    "CompanyName": "Internal Dev Database",
+    "JobTitle": "Technical Operations Engineer",
+    "ItemId": "7d68cd5d-cb47-4710-8641-2bf3a57a2e80",
+    "DisplaySummary": "Jane Doe (Doe), Internal Dev Database, Technical Operations Engineer",
+    "DisplayName": "Jane Doe (Doe)",
+    "ItemType": "People",
+  },
+  {
+    "PersonName": "Acacia Richards",
+    "CompanyName": "Internal Dev Database",
+    "JobTitle": "Jane",
+    "ItemId": "40c52385-c8f7-4092-83b3-46a84209ed45",
+    "DisplaySummary": "Acacia Richards, Internal Dev Database, Jane",
+    "DisplayName": "Acacia Richards",
+    "ItemType": "People",
+  }...
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Professional User entity type.
+
+<aside class="notice">
+Please note, each Professional User will have both a Person and User type entity. This endpoint specifically returns information related to their Person entity.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/quicksearch/quicksearch/professionalusers?request.searchTerm=Jane&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+## GET /api/v1/quicksearch/clientusers
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/clientusers?request.searchTerm=Jane&request.pageIndex=0&request.pageSize=10' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+[
+  {
+    "PersonName": "Jane Doe",
+    "CompanyName": "Lloyds Banking Group",
+    "JobTitle": "Chief Executive Officer",
+    "ItemId": "e3617a59-2cd1-4eea-974d-aaa9ad4742ab",
+    "DisplaySummary": "Janet Doe, Lloyds Banking Group, Chief Executive Officer",
+    "DisplayName": "Janet Davis",
+    "ItemType": "People"
+  }...
+]...
+
+```
+This endpoint allows you to pass a search term to get a list of entities that match <b>OR</b> partially match the term for the Client User entity type.
+
+<aside class="notice">
+Please note, the definition of a Client User is a Person type entity who has been added to the 'Client' team in one or more Assignment Type entities, the Invenias Client feature is enabled on the tenant and at least one Assignment has been shared with them.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/quicksearch/clientusers?request.searchTerm=Jane&request.pageIndex=0&request.pageSize=10`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+request.searchTerm | [required] | Specify the desired search term for the query to be executed on the server.
+request.pageIndex (optional) | | Specify the PageIndex property to determine the index of the currently displayed page.
+request.pageSize (optional) | | Specify the number of search results to return.
+
+## <strike>GET /api/v1/quicksearch/candidateusers</strike>
+To be deprecated.
+
+# Search
+The Invenias REST API has endpoints available for most entity types allowing you to find entities that correspond to keywords or characters specified in the search term.
+
+<aside class="warning">
+Please note, the minimum charater length for the search term is 3 characters.
+</aside>
+
+<aside class="notice">
+The key distinction between the 'Quick Search' and 'Search' endpoints is that the 'Search' endpoints allow you to select columns, filter, and group the results. The 'Quick Search' endpoints do not.
+</aside>
+
+## POST /api/v1/search/users
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/users?request.searchTerm=Jane' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Select": [
+        "Disabled",
+        "IsLicenseAssigned",
+        "DisplayFileAs",
+        "UserId"
+    ],
+    "Filter": [
+        "IsLicenseAssigned",
+        "=",
+        "true"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "Disabled": false,
+            "DisplayFileAs": "Jane Doe",
+            "FileAs": "Jane Doe",
+            "IsLicenseAssigned": true,
+            "ItemType": "People",
+            "UserId": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+            },
+            "ItemId": "a9504f72-4f20-4d4a-a8d1-1a18ed571c9d",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "Disabled": false,
+            "DisplayFileAs": "Jane Doe",
+            "FileAs": "Ms Jane Doe B.A. (Hons) (Doe) (J)",
+            "IsLicenseAssigned": true,
+            "ItemType": "People",
+            "UserId": {
+                "Id": "c49c61bb-d321-452c-b77d-62ef6661e1f4"
+            },
+            "ItemId": "7d68cd5d-cb47-4710-8641-2bf3a57a2e80",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter Professional User entities to get a list of entities that match <b>OR</b> partially match the term for the Professional User entity type.
+
+<aside class="notice">
+Please note, each Professional User will have both a Person and User type entity. This endpoint will return information related to both the Person and User entities.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/users?request.searchTerm=Jane`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/search/people
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/people?request.searchTerm=Jane' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Select": [
+        "DisplayFileAs",
+        "PositionJobTitle",
+        "CompanyDisplayName",
+        "TotalCandidateAssignments"
+    ],
+    "Filter": [
+        [
+            "CompanyDisplayName",
+            "contains",
+            "Int"
+        ],
+        "and",
+        [
+            "TotalCandidateAssignments",
+            ">",
+            0
+        ]
+    ],
+       "Sort":[
+      {
+         "Selector":"TotalCandidateAssignments",
+         "Desc":true
+      }
+   ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "CompanyDisplayName": "Invenias by Bullhorn",
+            "DisplayFileAs": "Jane Doe",
+            "ItemType": "People",
+            "PositionJobTitle": "Technical Operations Engineer",
+            "TotalCandidateAssignments": 3,
+            "ItemId": "7d68cd5d-cb47-4710-8641-2bf3a57a2e80",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "CompanyDisplayName": "Bullhorn",
+            "DisplayFileAs": "Jane Doe",
+            "ItemType": "People",
+            "PositionJobTitle": "Technical Operations Engineer",
+            "TotalCandidateAssignments": 1,
+            "ItemId": "72a0fabd-7c04-4436-878f-b3ff68461c51",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter People type entities to get a list of entities that match <b>OR</b> partially match the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/people?request.searchTerm=John`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+extendedSearch (optional) | true | Boolean | Specify if you wish to extend the search to the Person entities default Position entities `Job Title`.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/search/companies
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/companies?request.searchTerm=Old' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Select": [
+        "FileAs",
+        "ClientStatus_lookup",
+        "CompanyDisplayName",
+        "TotalNumberOfAssignments"
+    ],
+       "Sort":[
+      {
+         "Selector":"TotalNumberOfAssignments",
+         "Desc":true
+      }
+   ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "FileAs": "Old Mutual",
+            "ItemType": "Companies",
+            "TotalNumberOfAssignments": 6,
+            "ItemId": "ab4f3fce-3387-4e02-83d3-d99cab1df59e",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "FileAs": "Old Mutual Plc.",
+            "ItemType": "Companies",
+            "TotalNumberOfAssignments": 0,
+            "ItemId": "676339da-8e18-497f-9f27-52740dfc4fe0",
+            "OffLimitsStatus": "Off"
+        }
+    ]...
+}...
+```
+This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities that match <b>OR</b> partially match the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/companies?request.searchTerm=Old`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+
+## POST /api/v1/search/educationalorganisations
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/educationalorganisations?request.searchTerm=Aca' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "FileAs": "Academy of Contemporary Music",
+            "ItemType": "Companies",
+            "RecordOwners": [
+                {
+                    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                    "ItemDisplayText": "Glen Chamberlain"
+                }
+            ],
+            "ItemId": "11db8c22-81de-4a82-9b47-dc4b54ad415a",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "FileAs": "Academy of Contemporary Music",
+            "ItemType": "Companies",
+            "RecordOwners": [
+                {
+                    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                    "ItemDisplayText": "Glen Chamberlain"
+                }
+            ],
+            "ItemId": "7bc5b01f-c36a-4828-bea5-e3af7f5882e1",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities flagged as a 'Place of Study' that match <b>OR</b> partially match the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/educationalorganisations?request.searchTerm=Aca`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/search/assignments
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/assignments?request.searchTerm=Head' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Select": [
+        "AssignmentReferenceNumber",
+        "CompanyId",
+        "CompanyDisplayName",
+        "FileAs",
+        "Status_lookup",
+        "EngagementType_lookup"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AssignmentReferenceNumber": "A000002",
+            "CompanyDisplayName": "Old Mutual",
+            "CompanyId": {
+                "Id": "ab4f3fce-3387-4e02-83d3-d99cab1df59e"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Head of Sales & Marketing",
+            "ItemType": "Assignments",
+            "Status_lookup": "On Hold",
+            "ItemId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000004",
+            "CompanyDisplayName": "Deutsche Bank",
+            "CompanyId": {
+                "Id": "5d2c28b5-032b-4e17-ac9c-a8bfa2d94dff"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Head of Marketing, EMEA",
+            "ItemType": "Assignments",
+            "Status_lookup": "Placement",
+            "ItemId": "ed25ed9b-062b-4e10-a055-6fb024fe53b2",
+            "OffLimitsStatus": "Off"
+        }...
+    ]
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter Assignment type entities to get a list of entities that match <b>OR</b> partially match the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/assignments?request.searchTerm=Head`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/search/programmes
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/programmes?request.searchTerm=Network' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Select": [
+        "ProgrammeReferenceNumber",
+        "Name",
+        "ProgrammeType",
+        "ProgrammeStatusDisplay",
+        "RecordOwners"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "ItemType": "Programmes",
+            "Name": "Networking Lunch 2020",
+            "ProgrammeReferenceNumber": "CA000020",
+            "ProgrammeType": "Business Development",
+            "ItemId": "f252a77b-713f-4214-ae4f-ac644d3b6057",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ItemType": "Programmes",
+            "Name": "Networking Breakfast Event 2017",
+            "ProgrammeReferenceNumber": "CA000006",
+            "ProgrammeStatusDisplay": "Active",
+            "ProgrammeType": "Business Development",
+            "RecordOwners": [
+                {
+                    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                    "ItemDisplayText": "Glen Chamberlain"
+                }
+            ],
+            "ItemId": "a2adc7f7-973a-4751-99bd-c9ce7ed3c504",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ItemType": "Programmes",
+            "Name": "Networking Lunch Event 2017",
+            "ProgrammeReferenceNumber": "CA000007",
+            "ProgrammeType": "Marketing Event",
+            "RecordOwners": [
+                {
+                    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                    "ItemDisplayText": "Glen Chamberlain"
+                }
+            ],
+            "ItemId": "470efcfd-f4ff-4155-b098-e5f5ef80aee6",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+This endpoint allows you to pass a search term and select, group, and filter Programme type entities to get a list of entities that match <b>OR</b> partially match the search term.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/search/programmes?request.searchTerm=Network`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## <strike>POST /api/v1/search/placements</strike>
+Doesn't Currently Work.
+
+## POST /api/v1/search/documents
+## POST /api/v1/search/recordmanagementgroupentries
 
 # FAQ
 ## Frequently asked questions
@@ -1227,7 +2467,7 @@ Yes, it's possible to arrange for a clone of a tenant to be created to be used a
 This section has troubleshooting procedures for the following problems that people may encounter with the Invenias API.
 
 ## Bad Request (400) Response Code
-A `400` Bad Request error indicates that the data provided in an API call is unrecognizable. The culprit is often broken or invalid JSON, perhaps a parse error. For the most part, 400 errors have already passed authentication, so the error response message will provide more specific information about the error.
+A `400` Bad Request error indicates that the data provided in an API call is unrecognizable. The culprit is often broken or invalid JSON, perhaps a parse error. For the most part, `400` errors have already passed authentication, so the error response message will provide more specific information about the error.
 
 A `400` status code means that the server could not process an API request due to invalid syntax. A few possibilities why this might happen are:
 <ul>
@@ -1243,26 +2483,26 @@ If this response is accompanied by the message "invalid_client" the 'Content-Typ
 </aside>
 
 ## Unauthorized (401) Response Code
-The 401 Unauthorized status code is returned when the API request is missing authentication credentials or the credentials provided are invalid. This may happen for any of the following reasons:
+The `401` Unauthorized status code is returned when the API request is missing authentication credentials or the credentials provided are invalid. This may happen for any of the following reasons:
 <ul>
-    <li>The username has been changed.</li>
+    <li>The user account username has been changed.</li>
     <li>The user account password has been reset.</li>
     <li>The user account has been disabled.</li>
     <li>The token has expired.</li>
     <li>The license has been removed from the user account.</li>
     <li>The user accounts permission group has been changed and it's no longer in the 'System Administrator' group.</li>
+    <li>The tenant's database has been pushed from our production environment to another environment to be worked on (e.g. Merging databases, data cleansing, etc...) by an SI Partner or our Professional Services team and all tokens have been invalidated.</li>
     <li>The user account has been disabled by our BTO team due to exceeding 9000 429 responses within a 5 minute period. Please check your logs for 429 responses. Please note, in this event, the primary contact of the Invenias customer will be notified of this action.</li>
 </ul>
 
 ## Forbidden (403) Response Code
 The `403` error status code indicates the server understood the request but refuses to authorize it.
 
-If authentication credentials were provided in the request, the server considers them insufficient to grant access. For example, the user might be trying to access account-level information that's only viewable by the account administrator, and the credentials being passed on the API request are for a regular user account.
+If authentication credentials were provided in the request, the server considers them insufficient to grant access. For example, a user might be trying to delete entities and the credentials being passed on the API request are for a user account without the appropriate permissions to do so.
 
 Another reason this status code might be returned is in case the user did not request an API access token with the correct permissions.
 
 To fix the API call for those two situations, make sure that the credentials you are using have the access level required by the endpoint, or that the access token has the correct permissions.
-
 
 Please note, if you are receiving `404` or `403` response codes from our servers there's a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you're unsure if your Application has expired or not please email our support team using support@invenias.com and they will be able to check for you.
 
@@ -1276,5 +2516,19 @@ The `500` Internal Server Error server error response code indicates that the se
 
 Please note, the database may have data management policies enabled on the entity types you're trying to work with. Please see [here](https://bullhorn.github.io/invenias-api-docs/#data-management) for more information on data management policies.
 
+## Service Unavailable (503) Response Code
 
+The `503` error always occurs when our servers can’t deliver the requested resources at the time the client requests them. 
+Usually, this is due to a database upgrade and is accompanied by the following comment in the response body "Tenant is in Maintenance Mode - Upgrade in progress".
 
+Other causes of 503 errors:
+<ul>
+    <li>The server is overloaded, meaning that is it receiving more requests than it can handle. This is why it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks as well as web applications or the content management system being incorrectly programmed.</li>
+    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may result in an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a 'Service Unavailable' message.</li>
+</ul>
+
+In summary, `503` errors are sometimes unavoidable, it's good practice to add logic to handle them in your Application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.
+
+<aside class="notice">
+Please note, database upgrades are always scheduled outside of our customer's typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers then the database upgrade will be scheduled to run on a weekend to minimize disruption.
+</aside>
