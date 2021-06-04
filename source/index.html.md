@@ -12,7 +12,7 @@ code_clipboard: true
 ---
 
 # Introduction
-Invenias has a REST API for integrations, providing programmatic access to create, read, update and delete data from your Invenias database.
+Invenias has a REST API for integrations, providing programmatic access to create, read, update and delete data in your Invenias database.
 
 The Invenias API Swagger UI documentation can be found by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain to this URL.
 
@@ -20,7 +20,7 @@ The Invenias API Swagger UI documentation can be found by navigating to https://
 Whenever possible, the REST API will follow specifications, conventions, and practices of HTTP and the web in general. This includes things like case-sensitivity of URLs, character encodings, HTTP methods, and so forth. Additional recommended practices for REST APIs are also observed whenever appropriate.
 
 ### Entities
-Invenias uses the term entity to refer to a type represented in the Invenias system. People, Companies, Assignments, and Placements are examples of entities. Entities capture the core concepts within the Invenias system and provide an organization for storing executive search data and applying the rules and processing that comprise the Invenias system.
+Invenias uses the term entity to refer to a type represented in the Invenias system. People, Companies, Assignments, and Programmes are examples of entities. Entities capture the core concepts within the Invenias system and provide an organization for storing executive search data and applying the rules and processing that comprise the Invenias system.
 
 ### JSON 
 The REST API follows the specifications and conventions of the JavaScript Object Notation (JSON) data format and any related Javascript syntax specifications. For more information, see the following articles:
@@ -47,7 +47,7 @@ The REST API follows the specifications and conventions of the JavaScript Object
   "FlowType": "ResourceOwner"
 }
 ```
-> Please note, this is the only time you'll get the client_id and client_secret - please store these securely.</aside>
+> Please note, this is the only time you'll get the client_id and client_secret - please store these securely.
 
 To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger. 
 
