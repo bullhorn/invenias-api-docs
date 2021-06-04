@@ -55,7 +55,7 @@ To create a new integration, use the POST /api/v1/thirdpartyapplications endpoin
 Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to be able to perform this operation.
 </aside>
 
-Before you can use the POST /api/v1/thirdpartyapplications endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this simply double click into the `api_key` field in the header to automatically generate one. This will prompt you to log in if you're not already logged in. 
+Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this simply double click into the `api_key` field in the header to automatically generate one. This will prompt you to log in if you're not already logged in. 
 
 An `api_key` will be generated which will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
 
