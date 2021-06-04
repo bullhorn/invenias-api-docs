@@ -214,7 +214,7 @@ If you attempt to use an expired access_token and you get an invalid token error
 # Rate Limiting
 We use a fixed-window rate limiting strategy, up to `3000` api calls can be made at any interval within a 5 minute window.
 
-You can find out how many requests you have remaining by checking the value in the `X-Request-Quota-Remaining reaches` header.
+You can find out how many requests you have remaining by checking the value in the `X-Request-Quota-Remaining` response header.
 
 <img src="images\quotaremaining.png" alt="X-Request-Quota-Remaining" class="inline"/>
 <i>Figure 1. API Call Response Headers - X-Request-Quota-Remaining</i>
