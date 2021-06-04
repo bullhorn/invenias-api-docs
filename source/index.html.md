@@ -76,9 +76,14 @@ ReplyURL (Optional)| | The post-login URL to redirect to your Application.
 # Renewing an Application
 ## POST /api/v1/thirdpartyapplications/{id}/renew
 
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/thirdpartyapplications/363bde35-aec3-4ec7-9d33-9befdb7f0220/renew?expiration=FiveYears' \
+--header 'Authorization: Bearer {token}'
+```
 
 > Example Response (JSON)
-
 
 ```shell
 {
