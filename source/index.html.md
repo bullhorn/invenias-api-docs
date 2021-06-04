@@ -222,7 +222,7 @@ You can find out how many requests you have remaining by checking the value in t
 Once the `X-Request-Quota-Remaining reaches` 0, all succeeding requests made will return `429` errors, until the current rate limit window resets. At this time your Application should wait for the limit to become available again.
 
 <aside class="warning">
-Failure to add adequate mechanisms to your Application instructing it to wait after receiving a 429 error may result in the user account used to authenticate the requests being disabled by our BTO team. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until their satisfied that steps have been taken to prevent the problem from occurring again.
+Failure to add adequate mechanisms to your Application instructing it to wait after receiving a 429 error may result in the user account used to authenticate the requests being disabled by Bullhorn. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until Bullhorn is satisfied that steps have been taken to prevent the problem from occurring again.
 </aside>
 
 # HTTP Response Status Codes
