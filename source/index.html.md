@@ -49,7 +49,7 @@ The REST API follows the specifications and conventions of the JavaScript Object
 ```
 > Please note, this is the only time you'll get the client_id and client_secret - please store these securely.</aside>
 
-To create a new integration, use the POST /api/v1/thirdpartyapplications endpoint using Swagger. 
+To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger. 
 
 <aside class="notice">
 Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to be able to perform this operation.
