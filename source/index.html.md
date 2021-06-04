@@ -1464,7 +1464,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
 ```
 The GET /api/v1/duplicates/people endpoint is designed to flag potentially existing 'People' type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
 
-For performance, it's <b>strongly</b> advised to pass the simplest search term possible via the 'request.personName'. The reason for this is that the search term will be split using the spaces as delimiters and parameters will be created in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query the longer it will take to return a response.
+For performance, it's <strong>strongly</strong> advised to pass the simplest search term possible via the 'request.personName'. The reason for this is that the search term will be split using the spaces as delimiters and parameters will be created in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query the longer it will take to return a response.
 
 ### Name Components
 This endpoint does not comparatively reference all of the naming component fields for 'People' type entities. Please do not include salutations, suffixes, and prefixes in the 'request.personName' parameter. For a full list of the naming components leveraged by this endpoint please see below:
