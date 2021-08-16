@@ -14,7 +14,7 @@ code_clipboard: true
 # Introduction
 Invenias has a REST API for integrations, providing programmatic access to create, read, update and delete data in your Invenias database.
 
-The Invenias API Swagger UI documentation can be found by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain to this URL.
+The Invenias API Swagger UI documentation can be found by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain in this URL.
 
 ## General Conventions
 Whenever possible, the REST API will follow specifications, conventions, and practices of HTTP and the web in general. This includes things like case-sensitivity of URLs, character encodings, HTTP methods, and so forth. Additional recommended practices for REST APIs are also observed whenever appropriate.
@@ -47,7 +47,7 @@ The REST API follows the specifications and conventions of the JavaScript Object
   "FlowType": "ResourceOwner"
 }
 ```
-> Please note, this is the only time you'll get the client_id and client_secret - please store these securely.
+> Please note, this is the only time you'll get the client_id and client_secret - please store these securely as you won't be able to retrieve these again.
 
 To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger. 
 
