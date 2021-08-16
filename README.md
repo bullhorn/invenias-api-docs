@@ -1,3 +1,12 @@
+Invenias API documentation
+------------
+ - Published to [Github Pages](https://bullhorn.github.io/invenias-api-docs/)
+ - API questions to [support@invenias.com](mailto:support@invenias.com)
+
+
+------------
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>
