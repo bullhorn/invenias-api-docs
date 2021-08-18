@@ -14,13 +14,13 @@ code_clipboard: true
 # Introduction
 Invenias has a REST API for integrations, providing programmatic access to create, read, update and delete data in your Invenias database.
 
-The Invenias API Swagger UI documentation can be found by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain in this URL.
+You can find the Invenias API Swagger UI documentation by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain in this URL.
 
 ## General Conventions
-Whenever possible, the REST API will follow specifications, conventions, and practices of HTTP and the web in general. This includes things like case-sensitivity of URLs, character encodings, HTTP methods, and so forth. Additional recommended practices for REST APIs are also observed whenever appropriate.
+The REST API will follow specifications, conventions, and practices of HTTP and the web. This includes things like case-sensitivity of URLs, character encoding, HTTP methods, and so forth. We also observe recommended practices for REST APIs whenever appropriate.
 
 ### Entities
-Invenias uses the term entity to refer to a type represented in the Invenias system. People, Companies, Assignments, and Programmes are examples of entities. Entities capture the core concepts within the Invenias system and provide an organization for storing executive search data and applying the rules and processing that comprise the Invenias system.
+Invenias uses the term entity to refer to a type represented in the Invenias system. People, companies, assignments, and programmes are examples of entities. Entities capture the core concepts within the Invenias system and provide an organization for storing executive search data and applying the rules and processing that comprise the Invenias system.
 
 ### JSON 
 The REST API follows the specifications and conventions of the JavaScript Object Notation (JSON) data format and any related Javascript syntax specifications. For more information, see the following articles:
@@ -47,21 +47,23 @@ The REST API follows the specifications and conventions of the JavaScript Object
   "FlowType": "ResourceOwner"
 }
 ```
-> Please note, this is the only time you'll get the client_id and client_secret - please store these securely as you won't be able to retrieve these again.
+> Please note, this is the only time you’ll get the client_id and client_secret - please store these securely, as you won’t be able to retrieve these again.
 
-To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger. 
+To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to be able to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
 </aside>
 
-Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this simply double click into the `api_key` field in the header to automatically generate one. This will prompt you to log in if you're not already logged in. 
-
-An `api_key` will be generated which will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. 
 
 After Swagger returns you an `api_key`, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the `client_id` and the `client_secret`. 
 
-From here, you will need to choose the flow type that your application requires. There's some documentation available [here](https://auth0.com/docs/flows) to help.
+From here, you will need to choose the flow type that your application requires. There’s some documentation available [here](https://auth0.com/docs/flows) to help.
+
+<aside class="notice">
+An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+</aside>
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/thirdpartyapplications`
@@ -98,20 +100,22 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/thirdpar
 ```
 > Please note, this is the only time you'll get the client_secret - please store it securely.</aside>
 
-To renew an expired Application use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint using Swagger. 
+To renew an expired application, use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to be able to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
 </aside>
 
-Before you can use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this simply double click into the `api_key` field in the header to automatically generate one. This will prompt you to log in if you're not already logged in. 
+Before you can use the `POST /api/v1/thirdpartyapplications/{id}/renew` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. 
 
-An `api_key` will be generated which will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+After Swagger returns you an 'api_key', you can then call the `POST /api/v1/thirdpartyapplications/{id}/renew` endpoint to renew the expired application.
 
-After Swagger returns you an 'api_key', you can then call the POST /api/v1/thirdpartyapplications/{id}/renew endpoint to renew the expired Application.
+<aside class="notice">
+An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+</aside>
 
 <aside class="warning">
-Please note, when renewing your Application it will be issued a new client_secret, please remember you update this in your Application or you will not be able to successfully authenticate.
+Please note, when renewing your application we will issue a new client_secret, please remember you update this on your application or you cannot authenticate.
 </aside>
 
 ### HTTP Request
@@ -119,8 +123,8 @@ Please note, when renewing your Application it will be issued a new client_secre
 
 Parameter | Default | Description
 --------- | ------- | -----------
-id | [required] | This is the unique identifier for the expired Application you wish to renew. 
-expiration | [required] | The period of time you wish the renew the Application for: `OneYear`, `TwoYears`, or `FiveYears`.
+id | [required] | This is the unique identifier for the expired application you wish to renew. 
+expiration | [required] | The time you wish the renew the application for: `OneYear`, `TwoYears`, or `FiveYears`.
 
 # Authentication
 ## POST /identity/connect/token
@@ -161,7 +165,7 @@ Every API integration has a `client_id` and `client_secret`, which are used when
 <li>Refresh Token</li>
 </ul>
 
-Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can be used to authenticate.
+Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.
 
 Here’s an example of authenticating when using the password grant type:
 
@@ -172,25 +176,25 @@ Parameter | Default | Description
 --------- | ------- | -----------
 username | [required] | Invenias user account username.
 password | [required] | Invenias user account password.
-client_id | [required] | This is the unique identifier for your Application.
+client_id | [required] | This is the unique identifier for your application.
 client_secret | [required] | This is a secret key known only to the application and the authorization server.
 grant_type | password | The method an application uses gets an access token.
 scope | openid profile api email | Scope is a mechanism in OAuth 2.0 to limit an application's access to a user's account.
 
-You will need to use this token to authenticate when using all endpoints using the Authorization header using the format "Authorization: {type} {credentials}", where the type is your `token_type` and the credentials are your `access_token`.
+You will need to use this token to authenticate when using all endpoints using the Authorization header using the format “Authorization: {type} {credentials}”, where the type is your `token_type` and the credentials are your `access_token`.
 
-Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the new features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.
+Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the additional features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.
 
 <aside class="notice">
-The token is valid for 24 hours. We use short-lived access tokens for security and this period cannot be extended.
+A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
 
-The tokens are issued with a short expiration time so that the application is forced to continually refresh them, giving the service a chance to revoke an application’s access if needed.
+Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application’s access if needed.
 
-When the access token expires, the application can use the refresh token to obtain a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
+When an access token expires, the application can use the refresh token to get a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
 </aside>
 
 ### Unauthorized requests
-If a client request contains an invalid `bearer_token`, the server returns response status 401 (unauthorized). For more information on HTTP status codes see [here](https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes).
+If a client request contains an invalid `bearer_token`, the server returns response status 401 (unauthorized). For more information on HTTP status codes, see [here](https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes).
 
 ### Identifying if an OAuth token has expired
 
@@ -198,7 +202,7 @@ There are two common approaches adopted by web developers to identify when an OA
 
 <b> Token Refresh Handling: Method 1 </b>
 
-Upon receiving a valid `access_token`, `expires_in value`, `refresh_token`, etc., clients can process this by storing an expiration time as a local variable and checking it on each request. This can be done using the following steps:
+Upon receiving a valid `access_token`, `expires_in value`, `refresh_token`, etc., clients can process this by storing an expiration time as a local variable and checking it on each request. You can do this using the following steps:
 
 <ol>
 	<li>Convert expires_in to an expire time (epoch, RFC-3339/ISO-8601 datetime, etc.)</li>
@@ -206,38 +210,38 @@ Upon receiving a valid `access_token`, `expires_in value`, `refresh_token`, etc.
 	<li>On each resource request, check the current time against the 'expire time' and make a token refresh request before the resource request if the token has expired.</li>
 </ol>
 
-When checking the time, be sure you are at the same time, for example, using the same timezone by converting all times to epoch or UTC timezone.
+When checking the time, be sure you are (at the same time), for example, using the same timezone by converting all times to epoch or UTC timezone.
 
-In addition to receiving a new `access_token`, you may receive a new `refresh_token` with an expiration time further in the future. If you receive this, you should store the new refresh_token to extend the life of your session.
+Besides receiving a new `access_token`, you may receive a new `refresh_token` with an expiration time further in the future. If you receive this, store the new refresh_token to extend the life of your session.
 
 <b>Token Refresh Handling: Method 2</b>
 
-Another method of handling token refresh is to manually refresh after receiving an invalid token error. This can be done with the previous approach or by itself.
+Another method of handling token refresh is performing a manual refresh after receiving an invalid token error. We can do this with the previous approach or by itself.
 
-If you attempt to use an expired access_token and you get an invalid token error, you should perform a token refresh. Since different services can use different error codes for expired tokens, you can either keep track of the code for each service, or an easy way to refresh tokens across services is to simply try a single refresh upon encountering a 401 error. 
+If you attempt to use an expired access_token and you get an invalid token error, perform a token refresh. Since different services can use different error codes for expired tokens, you can either keep track of the code for each service, or an easy way to refresh tokens across services is to perform a single refresh upon encountering a 401 error. 
 
 # Rate Limiting
-We use a fixed-window rate limiting strategy, up to `3000` api calls can be made at any interval within a 5 minute window.
+We use a fixed-window rate limiting strategy you can make up to `3000` api calls at any interval within a 5 minute window.
 
 You can find out how many requests you have remaining by checking the value in the `X-Request-Quota-Remaining` response header.
 
 <img src="images\quotaremaining.png" alt="X-Request-Quota-Remaining" class="inline"/>
 <i>Figure 1. API Call Response Headers - X-Request-Quota-Remaining</i>
 
-Once the `X-Request-Quota-Remaining reaches` 0, all succeeding requests made will return `429` errors, until the current rate limit window resets. At this time your Application should wait for the limit to become available again.
+Once the `X-Request-Quota-Remaining reaches` 0, all succeeding requests made will return `429` errors until the current rate limit window resets. Your application should wait for the limit to become available again before making any further requests.
 
 <aside class="warning">
-Failure to add adequate mechanisms to your Application instructing it to wait after receiving a 429 error may result in the user account used to authenticate the requests being disabled by Bullhorn. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until Bullhorn is satisfied that steps have been taken to prevent the problem from occurring again.
+Failure to add adequate mechanisms to your application instructing it to wait after receiving a 429 error may cause the user account used to authenticate the requests being disabled by Bullhorn. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until you have taken sufficient steps to prevent the problem from occurring again.
 </aside>
 
 # HTTP Response Status Codes
-HTTP response status codes indicate whether a specific HTTP request has been successfully completed.
+HTTP response status codes show whether it has successfully completed a specific HTTP request.
 ## Successful Responses
 
 Code | Name | Description
 ---- | ---- | -----------
 200 | OK | The request has succeeded.
-201 | Created | The request has succeeded and a new resource has been created as a result.
+201 | Created | The request has succeeded, and it has created a new resource.
 204 | No Content | There is no content to send for this request, but the headers may be useful.
 
 ## Redirection Messages
@@ -250,9 +254,9 @@ Code | Name | Description
 Code | Name | Description
 ---- | ---- | -----------
 400 | Bad Request | The server could not understand the request due to invalid syntax.
-401 | Unauthorized | Although the HTTP standard specifies "unauthorized", semantically this response means "unauthenticated". That is, the client must authenticate itself to get the requested response.
-403 | Forbidden | The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client's identity is known to the server.
-404 | Not Found | The server can not find the requested resource. This can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurrence on the web.
+401 | Unauthorized | Although the HTTP standard specifies “unauthorized”, semantically this response means “unauthenticated”. The client must authenticate itself to get the requested response.
+403 | Forbidden | The client does not have access rights to the content; It is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client’s identity is known to the server.
+404 | Not Found | The server can not find the requested resource. This can also mean that the endpoint is valid, but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one because of its frequent occurrence on the web.
 405 | Method Not Allowed | The request method is known by the server but has been disabled and cannot be used.
 406 | Not Acceptable | This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content that conforms to the criteria given by the user agent.
 409 | Conflict | This response is sent when a request conflicts with the current state of the server.
@@ -270,12 +274,12 @@ Code | Name | Description
 503 | Service Unavailable | The server is not ready to handle the request.
 
 # Using Lists
-There are many list endpoints available for Invenias core entities that can be leveraged to be used in Applications.
+There are many list endpoints available for Invenias core entities that applications can use.
 
-It's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+It’s possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 
 <aside class="notice">
-Please note, there is a row limit of <b>1000</b> rows per call when using a List endpoint.
+Please note, there is a row limit of <b>1000</b> rows per call when using a list endpoint.
 </aside>
 
 Parameter | Default | Type | Description
@@ -342,10 +346,10 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 Select allows you to specify an array of column names to be returned in the response.
 
-If you do not specify an array of column names in the request body the response will return the columns visible in the 'default' global display view for the entity you're requesting.
+If you do not specify an array of column names in the request body, the response will return the columns visible in the ‘default’ global display view for the entity you’re requesting.
 
 <aside class="notice">
-Please note, for each item where there is 'null' data for a specified column, this column will not be returned in the response for those items.
+Please note, for each item where there is ‘null’ data for a specified column, it will not return this column in the response to those items.
 </aside>
 
 ## Pagination
@@ -395,9 +399,9 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 
 Pagination is a method of dividing web content into discrete pages, thus presenting content in a limited and digestible manner.
 
-List endpoints have a maximum row limit of 1,000 rows per request. If you wanted to display the content in a paginated format or export all of the available results you will need to use these parameters.
+List endpoints have a maximum row limit of 1,000 rows per request. If you wanted to display the content in a paginated format or export all the results, you will need to use these parameters.
 
-`PageSize`, `PageIndex` and `UsePaging` are all used to paginate the dataset, as follows:
+`PageSize`, `PageIndex` and `UsePaging` are all used to paginate the dataset:
 
 <ul>
 	<li>PageSize - how many items you want in each page (max 1,000).</li>
@@ -406,7 +410,7 @@ List endpoints have a maximum row limit of 1,000 rows per request. If you wanted
 
 
 <aside class="notice">
-If you wish to get all of the available records in a list and wish to know how many requests you will need to make, simply make a request and use the ReturnTotalDatabaseItemCount parameter. Once the total number of items in the database has been determined you should know how many requests you need to make incrementing the page index each time to get all of the items in the list (e.g. TotalItemCount/PageSize = the number of requests required).
+If you wish to get all the records in a list and wish to know how many requests you will need to make, simply make a request and use the ReturnTotalDatabaseItemCount parameter. Once you know the total number of items in the database, you can determine how many requests you need to make incrementing the page index each time to get all the items in the list (e.g. TotalItemCount/PageSize = the number of requests required).
 </aside>
 
 ## Group
@@ -445,9 +449,9 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
     ]
 }
 ```
-A group is a number of things that are located, gathered, or classed together.
+A group is several things that are located, gathered, or classified together.
 
-Group can be leveraged to group results together by a column in the array.
+A column in an array can leveraged to group results together.
 ## Count
 
 > Count Example (cURL)
@@ -784,7 +788,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
     ]
 }
 ```
-The `and` and `or` operators are used to filter records based on more than one condition:
+The `and` and `or` operators are used to filter records based on over a single condition:
 
 <ul>
 <li>The 'and' operator displays a record if all the conditions separated by 'and' are true.</li>
@@ -834,12 +838,12 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 Sort An array of objects to sort by, using the following format {"Selector":"ColumnName","Desc": true}.
 
 # Data Management
-Data management policies are used to ensure that an organization's data and information assets are managed consistently and used properly. Invenias provides functionality allowing our customers to apply policies to any numbers of fields (within a predefined list) to core entities allowing them to either make filling them in a `preferred` or `compulsory` task. 
+Data management policies are used to ensure that an organization’s data and information assets are managed consistently and used properly. Invenias provides functionality allowing our customers to apply policies to any numbers of fields (within a pre-defined list) to core entities, allowing them to either make filling them in a `preferred` or `compulsory` task. 
 
-If one or more fields within an entity are marked as `compulsory` you will not be able to update the entity (or create a new one) unless you populate the compulsory field(s) via the most applicable method(s).
+If one or more fields within an entity are marked as `compulsory` you cannot update the entity (or create a new one) unless you populate the compulsory field(s) via the most applicable method(s).
 
 <aside class="warning">
-Failure to respect compulsory data management policies when crating or updating records will result in a failed request with a 500 HTTP code. The response may include a message like "Invenias.Model.Services.Services.Services.DataManagementService.ValidatePositionCompanyPolicy".
+Failure to respect compulsory data management policies when creating or updating records will cause a failed request with a 500 HTTP code. The response may include a message like “Invenias.Model.Services.Services.Services.DataManagementService.ValidatePositionCompanyPolicy”.
 </aside>
 
 <aside class="notice">
@@ -1052,7 +1056,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/settings/
 ```
 > Returns a list of the items available used to track where a candidate is in the search process.
 
-The Invenias system has many default and customizable enumerations. When designing an integration it may be necessary to know the values of the items in a collection for any given enumeration. The GET /api/v1/settings/{key} endpoint will return the items for any enumeration name defined in the `{key}`.
+The Invenias system has many default and customizable enumerations. When designing an integration, it may be necessary to know the values of the items in a collection for any enumeration. The GET /api/v1/settings/{key} endpoint will return the items for any enumeration name defined in the `{key}`.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/settings/{key}`
@@ -1183,7 +1187,7 @@ The GET/api/v1/countries endpoint will get a list of all of the country codes an
 `https://{subdomain}.invenias.com/api/v1/countries`
 
 <aside class="warning">
-The Invenias systems use the USPS standard for country names. When adding entries to Address fields the value must exist within the GET/api/v1/countries list and it must be entered entirely in uppercase (e.g. UNITED KINGDOM, FRANCE, INDIA, etc...). Failure to follow these guidelines will result in a null value in this field when creating or updating entities.
+The Invenias systems use the USPS standard for country names. When adding entries to Address fields, the value must exist within the GET/api/v1/countries list and entered entirely in uppercase (e.g. UNITED KINGDOM, FRANCE, INDIA, etc...). Failure to follow these guidelines will cause a null value in this field when creating or updating entities.
 </aside>
 
 # Lookup Lists
@@ -1239,7 +1243,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookupli
 }
 ```
 
-This endpoint can be used to get the names of all of the available Lookup Lists in the database.
+This endpoint can get the names of all the Lookup Lists in the database.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/lookuplists/list`
@@ -1331,7 +1335,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookupli
     ]...
 }
 ```
-This endpoint can be used to get the values withing a specific Lookup List.
+This endpoint will get the values within a specific Lookup List.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list`
@@ -1401,7 +1405,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookupli
     ]
 }
 ```
-This endpoint can be used to create new entries in a specific Lookup List.
+This endpoint can create new entries on a specific Lookup List.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list`
@@ -1414,7 +1418,7 @@ request | [required] | String | The request model used to create a new value in 
 ## PUT /api/v1/lookuplists/{id}/entries/{itemId}
 
 # Duplicates
-The Invenias REST API has two endpoints available to help flag 'People' and 'Company'  type entities that <i>may</i> already exist within the database. By utilizing these endpoints it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
+The Invenias REST API has two endpoints available to help flag ‘People’ and ‘Company’ type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
 
 ## GET /api/v1/duplicates/people
 > Example (cURL)
@@ -1467,12 +1471,12 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
     }...
 ]
 ```
-The GET /api/v1/duplicates/people endpoint is designed to flag potentially existing 'People' type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
+The GET /api/v1/duplicates/people endpoint flags potentially existing ‘People’ type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
 
-For performance, it's <strong>strongly</strong> advised to pass the simplest search term possible via the 'request.personName'. The reason for this is that the search term will be split using the spaces as delimiters and parameters will be created in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query the longer it will take to return a response.
+For performance, it’s <strong>strongly</strong> advised to pass the simplest search term possible via the ‘request.personName’. The reason for this is that it will split the search term using the spaces as delimiters and parameters in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query, the longer it will take to return a response.
 
 ### Name Components
-This endpoint does not comparatively reference all of the naming component fields for 'People' type entities. Please do not include salutations, suffixes, and prefixes in the 'request.personName' parameter. For a full list of the naming components leveraged by this endpoint please see below:
+This endpoint does not comparatively reference all the naming component fields for ‘People’ type entities. Please do not include salutations, suffixes, and prefixes in the ‘request.personName’ parameter. For a full list of the naming components leveraged by this endpoint, please see below:
 <ul>
     <li>PersonFirstName</li>
     <li>PersonMiddleName</li>
@@ -1482,7 +1486,7 @@ This endpoint does not comparatively reference all of the naming component field
 </ul>
 
 ### Email Address
-This endpoint does not comparatively reference all of the email fields for 'People' type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint please see below:
+This endpoint does not comparatively reference all the email fields for ‘People’ type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint, please see below:
 <ul>
     <li>PersonEmailAddress1</li>
     <li>PersonEmailAddress2</li>
@@ -1500,7 +1504,7 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 <aside class="notice">
-Please note, it may be optional to pass a value in both the 'request.personName' and 'request.emailAddress' parameters individually, you must input a value into at least one of them to make a successful request.
+Please note, it may be optional to pass a value on both the ‘request.personName’ and ‘request.emailAddress’ parameters individually, however; you must input a value into at least one of them to make a successful request.
 </aside>
 
 ## GET /api/v1/duplicates/companies
@@ -1548,7 +1552,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
     }
 ]
 ```
-The GET /api/v1/duplicates/companies endpoint is designed to flag potentially existing 'Company' type entities based upon the search terms passed via the `request.companyName` parameter.
+The GET /api/v1/duplicates/companies endpoint flags potentially existing ‘Company’ type entities based upon the search terms passed via the `request.companyName` parameter.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&request.pageIndex=0&request.pageSize=10`
@@ -1907,10 +1911,10 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 # Search
-The Invenias REST API has endpoints available for most entity types allowing you to find entities that correspond to keywords or characters specified in the search term.
+The Invenias REST API has endpoints available for most entity types, allowing you to find entities that correspond to keywords or characters specified in the search term.
 
 <aside class="warning">
-Please note, the minimum charater length for the search term is 3 characters.
+Please note, the minimum character length for the search term is 3 characters.
 </aside>
 
 <aside class="notice">
@@ -1975,7 +1979,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/u
 This endpoint allows you to pass a search term and select, group, and filter Professional User entities to get a list of entities where the `DisplayFileAs` string matches <b>OR</b> partially matches the search term.
 
 <aside class="notice">
-Please note, each Professional User will have both a Person and User type entity. This endpoint will return information related to both the Person and User entities.
+Please note, each Professional User will have both a person and User type entity. This endpoint will return information related to both the Person and user entities.
 </aside>
 
 ### HTTP Request
@@ -2149,7 +2153,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/c
     ]...
 }...
 ```
-This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities where the `FileAs` string matches <b>OR</b> partially matches the search term.
+This endpoint allows you to pass a search term and select, group, and filter company type entities to get a list of entities where the `FileAs` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2405,7 +2409,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/p
     ]
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter Programme type entities to get a list of entities where the `Name` string matches <b>OR</b> partially matches the search term.
+This endpoint allows you to pass a search term and select, group, and filter programme type entities to get a list of entities where the `Name` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2484,7 +2488,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/d
     ]
 }
 ```
-This endpoint allows you to pass a search term and select, group, and filter Document type entities to get a list of entities where the `AttachmentName` or `Creator` string matches <b>OR</b> partially matches the search term.
+This endpoint allows you to pass a search term and select, group, and filter document type entities to get a list of entities where the `AttachmentName` or `Creator` string matches <b>OR</b> partially matches the search term.
 
 
 ### HTTP Request
@@ -2579,6 +2583,785 @@ IncludeDisplayViews (optional) | true | Boolean | Displays the details of the pr
 IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
 IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
+# Documents
+<i>Table 1. Documents Summery</i>
+
+Name | Description
+---- | -----------
+[POST /api/v1/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-documents-list)  | Returns a list of `Document` entities in the database.
+[DELETE /api/v1/documents/{id}] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-documents-id) | Deletes a single `Document` entity per request.
+[PUT /api/v1/documents/{id}] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-documents-id) | Adds or changes values to a single `Document` entity per request.
+[POST /api/v1/documents/bulkDelete] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-documents-bulkdelete) | Deletes many `Document` entities per request.
+[PUT /api/v1/documents/{id}/rename] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-documents-id-rename) | Renames a single `Document` entity per request.
+[POST /api/v1/people/{id}/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-documents-list) | Returns a list of `Document` entities in the database that are relationally linked to a single `Person` entity.
+[POST /api/v1/people/{id}/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-document) | Adds a single document to Azure Blob Storage and relationally link it to a single `Person` entity.
+[GET /api/v1/people/{id}/documents/{documentId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-id-documents-documentid) | Downloads a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Person` entity.
+[POST /api/v1/people/{id}/documents/{documentId}/defaultCv] (https://bullhorn.github.io/invenias-api-docs/post-api-v1-people-id-documents-documentid-defaultcv) | Flags a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Person` entity as the `Default` Curriculum Vitae.
+[POST /api/v1/companies/{id}/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-documents-list) | Returns a list of `Document` entities in the database that are relationally linked to a single `Company` entity.
+[POST /api/v1/companies/{id}/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-document) | Adds a single document to Azure Blob Storage and relationally link it to a single `Company` entity.
+[GET /api/v1/companies/{id}/documents/{documentId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-id-documents-documentid) | Downloads a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Company` entity.
+[POST /api/v1/assignments/{id}/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-documents-list) | Returns a list of `Document` entities in the database that are relationally linked to a single `Assignment` entity.
+[POST /api/v1/assignments/{id}/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-document) | Adds a single document to Azure Blob Storage and relationally link it to a single `Assignment` entity.
+[GET /api/v1/assignments/{id}/documents/{documentId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id-documents-documentid) | Downloads a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Assignment` entity.
+[POST /api/v1/programmes/{id}/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-programmes-id-documents-list) | Returns a list of `Document` entities in the database that are relationally linked to a single `Programme` entity.
+[POST /api/v1/programmes/{id}/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-programmes-id-document) | Adds a single document to Azure Blob Storage and relationally link it to a single `Programme` entity.
+[GET /api/v1/programmes/{id}/documents/{documentId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-programmes-id-documents-documentid) | Downloads a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Programme` entity.
+
+
+## POST /api/v1/documents/list
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/documents/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "ExpirationDate",
+        "CreatedBy"
+    ],
+    "Filter": [
+        "ExpirationDate",
+        ">",
+        "2021-04-01T00:00:00+01:00"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AttachmentName": "John Doe CV.docx",
+            "DocumentTypeDisplayText": "Curriculum Vitae",
+            "ItemId": "92582db4-5a10-47c2-94d3-59ced071d8a2",
+            "ItemType": "Documents",
+            "CreatedBy": "Glen Chamberlain",
+            "ExpirationDate": "2021-06-01T00:00:00+01:00",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+
+The POST /api/v1/documents/list endpoint will return a list of Document Type entities in the database.
+
+Amongst other things this endpoint can be leveraged for the following purposes:
+<ul>
+    <li>Identifying expired documents.</li>
+    <li>Searching for documents tagged as 'default' Curriculum Vitaes.</li>
+    <li>Searching for documents with specific 'Document Types'.</li>
+    <li>Determining the total size and number of documents in the database.</li>
+</ul>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/documents/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## DELETE /api/v1/documents/{id}
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/documents/92582db4-5a10-47c2-94d3-59ced071d8a2' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The DELETE /api/v1/documents/{id} endpoint is used to `permanently` delete a single Document entity per request.
+
+<aside class="notice">
+    Please note, when deleting a 'Document' entity, it will also delete any relations that exist between it and other core entities.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/documents/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the document entity you wish to delete.
+
+## PUT /api/v1/documents/{id}
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/documents/35351a78-40f0-463f-8912-1ebdd347644e' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "IsDefaultCv": true,
+    "ExpirationDate": "2021-12-01T00:00:00.000Z"
+}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The PUT /api/v1/documents/{id} endpoint can be used to add or change values to a single Document entity per request. 
+
+<aside class="warning">
+Please note, the PUT method uses the request URI to supply a changed version of the requested resource, which replaces the original version of the resource. You must include the values you wish to keep alongside those you wish to change in the request when updating the resource. Failure to do so may cause data loss.
+</aside>
+
+Amongst other things this endpoint can be leveraged for the following purposes:
+<ul>
+    <li>Adding an expiry date to a document.</li>
+    <li>Tagging a document as a 'default' Curriculum Vitae.</li>
+    <li>Tagging the document as 'Published'. </li>
+</ul>
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/documents/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the document entity you wish to change.
+request | [required] | The request model used to declare which values to change in the requested resource.
+
+## POST /api/v1/documents/bulkDelete
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://iddgc.miginvenias.com/api/v1/documents/bulkDelete' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ItemReferences": [
+        {
+            "Id": "35351a78-40f0-463f-8912-1ebdd347644e"
+        },
+        {
+            "Id": "2044b110-1805-4b15-bb1b-ec3515625f4a"
+        }
+    ]
+}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The POST /api/v1/documents/bulkDelete endpoints allows you delete many `Document` entities in a single requests.
+
+<aside class="notice">
+Please note, when deleting a ‘Document’ entity, it will also delete any relations that exist between it and other core entities.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/documents/bulkDelete`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+ids | [required] | Specify the unique identifiers for the 'Document' entities you wish to delete.
+
+## PUT /api/v1/documents/{id}/rename
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/documents/a548424c-2ad9-4531-ac00-41f5b4fa3332/rename?documentName=John%20Doe%20Curriculum%20Vitae' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The PUT /api/v1/documents/{id}/rename allows you to rename the name of a single 'Document' entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/documents/{id}/rename`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the 'Document' entity you wish to rename.
+documentName | [required] | Specify the new name for the 'Document' entity.
+
+## POST /api/v1/people/{id}/documents/list
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://subdomain.invenias.com/api/v1/people/e2082622-9357-4130-aec8-c7a546906050/documents/list' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "ExpirationDate",
+        "CreatedBy"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AttachmentName": "John Doe CV.docx",
+            "DocumentTypeDisplayText": "Curriculum Vitae",
+            "ItemId": "92582db4-5a10-47c2-94d3-59ced071d8a2",
+            "ItemType": "Documents",
+            "CreatedBy": "Glen Chamberlain",
+            "ExpirationDate": "2021-06-01T00:00:00+01:00",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+
+The POST /api/v1/people/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single ‘Person’ entity in the database.
+
+Amongst others, we can leverage this endpoint for the following purposes:
+<ul>
+    <li>Identifying expired documents.</li>
+    <li>Searching for documents tagged as ‘default’ Curriculum Vitae’s.</li>
+    <li>Searching for documents with specific 'Document Types'.</li>
+</ul>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{id}/documents/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Person' entity.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/people/{id}/document
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/e2082622-9357-4130-aec8-c7a546906050/document' \
+--header 'Authorization: Bearer {token}' \
+--form 'file=@"/C:/Users/glen.chamberlain/Documents/Jane_Doe_CV.pdf"'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AttachmentName": "Jane_Doe_CV.pdf",
+    "DocumentExtension": "application/pdf",
+    "DocumentSize": 159205,
+    "ItemId": "d3d7c45b-0a24-4452-b618-fc6e53833497",
+    "OffLimitsStatus": "Off"
+}
+```
+
+The POST /api/v1/people/{id}/document endpoint will add a document to Azure Blob Storage and relationally link it to a single 'Person' entity in the database.
+
+### HTTP Request
+`POST /api/v1/people/{id}/document`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Person' entity.
+
+## GET /api/v1/people/{id}/documents/{documentId}
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/ed7c8fb4-495c-4f2a-a6a9-72b518c61da5/documents/b735c164-646a-4965-81b3-4d028989b828' \
+--header 'Authorization: Bearer {token}'
+```
+
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+
+The `GET /api/v1/people/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Person’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+
+### HTTP Request
+`GET /api/v1/people/{id}/documents/{documentId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Person' entity.
+documentid | [required] | String | Specify the unique identifier for 'Document' entity.
+
+## POST /api/v1/people/{id}/documents/{documentId}/defaultCv
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/ed7c8fb4-495c-4f2a-a6a9-72b518c61da5/documents/b735c164-646a-4965-81b3-4d028989b828/defaultCv' \
+--header 'Authorization: Bearer {token}'
+```
+
+> A successful request will return a 204 response code "No Content".
+
+The `POST /api/v1/people/{id}/documents/{documentId}/defaultCv` endpoint will flag the specific document as a 'Person' entities default curriculum vitae.
+
+<aside class="notice">
+    Please note, this endpoint will <strong>not</strong> parse the document and write the contents to the 'CV/Resume' tab within the 'Summary' pane in the 'Person' entities record.
+</aside>
+
+### HTTP Request
+`POST /api/v1/people/{id}/documents/{documentId}/defaultCv`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Person' entity.
+documentid | [required] | String | Specify the unique identifier for 'Document' entity.
+
+## POST /api/v1/companies/{id}/documents/list
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/list' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "CreatedBy",
+		"DocumentExtension"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AttachmentName": "INVACM180821.pdf",
+			"DocumentExtension": "pdf",
+            "DocumentTypeDisplayText": "Invoice",
+            "ItemId": "7901923e-deb6-4cbb-8742-b2587414796e",
+            "ItemType": "Documents",
+            "CreatedBy": "Glen Chamberlain",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+
+The POST /api/v1/companies/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single `Company` entity in the database.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{id}/documents/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Company' entity.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/companies/{id}/document
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/document' \
+--header 'Authorization: Bearer {token}' \
+--form 'file=@"/C:/Users/glen.chamberlain/Documents/INVACM180821.pdf"'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AttachmentName": "INVACM180821.pdf",
+    "DocumentExtension": "application/pdf",
+    "DocumentSize": 189345,
+    "ItemId": "7901923e-deb6-4cbb-8742-b2587414796e",
+    "OffLimitsStatus": "Off"
+}
+```
+
+The `POST /api/v1/companies/{id}/document` endpoint will add a document to Azure Blob Storage and relationally link it to a single 'Company' entity in the database.
+
+### HTTP Request
+`POST /api/v1/companies/{id}/document`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Company' entity.
+
+## GET /api/v1/companies/{id}/documents/{documentId}
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/7901923e-deb6-4cbb-8742-b2587414796e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+
+The `GET /api/v1/companies/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Company’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+
+### HTTP Request
+`GET /api/v1/companies/{id}/documents/{documentId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Company' entity.
+documentid | [required] | String | Specify the unique identifier for 'Document' entity.
+
+## POST /api/v1/assignments/{id}/documents/list
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/list' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "CreatedBy",
+		"DocumentExtension"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AttachmentName": "A000002_Brief.pdf",
+			"DocumentExtension": "pdf",
+            "DocumentTypeDisplayText": "Client Brief",
+            "ItemId": "7901923e-deb6-4cbb-8742-b2587414796e",
+            "ItemType": "Documents",
+            "CreatedBy": "Glen Chamberlain",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+
+The POST /api/v1/assignments/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single `Assignment` entity in the database.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/documents/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Assignment' entity.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/assignments/{id}/document
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/40c04603-650a-4bda-82bc-b242e0df9c7b/document' \
+--header 'Authorization: Bearer {token}' \
+--form 'file=@"/C:/Users/glen.chamberlain/Documents/A000002_Brief.pdf"'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AttachmentName": "A000002_Brief.pdf",
+    "DocumentExtension": "application/pdf",
+    "DocumentSize": 189345,
+    "ItemId": "ed25ed9b-062b-4e10-a055-6fb024fe53b2",
+    "OffLimitsStatus": "Off"
+}
+```
+
+The `POST /api/v1/assignments/{id}/document` endpoint will add a document to Azure Blob Storage and relationally link it to a single 'Assignment' entity in the database.
+
+### HTTP Request
+`POST /api/v1/assignments/{id}/document`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Assignment' entity.
+
+## GET /api/v1/assignments/{id}/documents/{documentId}
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignments/40c04603-650a-4bda-82bc-b242e0df9c7b/documents/ed25ed9b-062b-4e10-a055-6fb024fe53b2' \
+--header 'Authorization: Bearer {token}'
+```
+
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+
+The `GET /api/v1/assignments/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Assignment’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+
+### HTTP Request
+`GET /api/v1/Assignments/{id}/documents/{documentId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Assignment' entity.
+documentid | [required] | String | Specify the unique identifier for 'Document' entity.
+
+## POST /api/v1/programmes/{id}/documents/list
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/a2adc7f7-973a-4751-99bd-c9ce7ed3c504/documents/list' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "CreatedBy",
+		"DocumentExtension"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AttachmentName": "Talent_Mapping.xlsx",
+			"DocumentExtension": "xlsx",
+            "ItemId": "27569250-5c88-4d19-9d31-e02d46a403a7",
+            "ItemType": "Documents",
+            "CreatedBy": "Glen Chamberlain",
+            "OffLimitsStatus": "Off"
+        }...
+    ]...
+}
+```
+
+The POST /api/v1/programmes/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single `Programme` entity in the database.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/programmes/{id}/documents/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Programme' entity.
+Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
+Take (optional) | 0 | Integer | Specify the number of search results to return.
+PageSize (optional) | 0 | Integer | Specify the number of search results to return.
+PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
+UsePaging (optional) | true | Boolean | 
+ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
+ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
+ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
+Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
+Filter (optional) | [List] | Array | Filter items by column names and values.
+CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
+Sort (optional) | [List] | Array | Sort an array of items to sort by.
+Group (optional) | [List] | Array | Group results together by a column in the array.
+FormFactor (optional) | Any | String | Filter the items by the application used to create them 
+DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
+RequireGroupCount (optional) | true | Boolean | 
+IsFirstLoad (optional) | true | Boolean | 
+IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
+UseLookUpViewDefinition (optional) | true | Boolean | 
+IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
+IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
+IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
+
+## POST /api/v1/programmes/{id}/document
+
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/a2adc7f7-973a-4751-99bd-c9ce7ed3c504/document' \
+--header 'Authorization: Bearer {token}' \
+--form 'file=@"/C:/Users/glen.chamberlain/Documents/Talent_Mapping.xlsx"'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AttachmentName": "Talent_Mapping.xlsx",
+    "DocumentExtension": "application/xlsx",
+    "DocumentSize": 234123,
+    "ItemId": "27569250-5c88-4d19-9d31-e02d46a403a7",
+    "OffLimitsStatus": "Off"
+}
+```
+
+The `POST /api/v1/programmes/{id}/document` endpoint will add a document to Azure Blob Storage and relationally link it to a single 'Programme' entity in the database.
+
+## GET /api/v1/programmes/{id}/documents/{documentId}
+
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programmes/40c04603-650a-4bda-82bc-b242e0df9c7b/documents/27569250-5c88-4d19-9d31-e02d46a403a7' \
+--header 'Authorization: Bearer {token}'
+```
+
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+
+The `GET /api/v1/programmes/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Programme’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+
+### HTTP Request
+`GET /api/v1/programmes/{id}/documents/{documentId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | Specify the unique identifier for 'Programme' entity.
+documentid | [required] | String | Specify the unique identifier for 'Document' entity.
+
 # FAQ
 ## Frequently asked questions
 This section provides answers to common questions from both developers and customers:
@@ -2587,13 +3370,13 @@ This section provides answers to common questions from both developers and custo
 An application programming interface (API) is a set of routines, protocols, and tools for building software applications.
 
 ### What is the rate limit of the API?
-We use a fixed-window rate-limiting strategy, up to `3000` API calls can be made at any interval within a 5-minute window. For more information on rate limits please see [here](https://bullhorn.github.io/invenias-api-docs/#rate-limiting).
+We use a fixed-window rate limiting strategy you can make up to `3000` api calls at any interval within a 5 minute window. For more information on rate limits please see [here](https://bullhorn.github.io/invenias-api-docs/#rate-limiting).
 
 ### Will, you make changes to your API that will leave my integration unusable?
 Whenever we make a change to the API we try to do so in an additive way that won't break existing integrations. However, occasionally things can change in a way that isn't backward compatible. In this event, communication will be provided.
 
 ### Can you help us with the coding?
-REST is an industry standard that is not dependant on any programming language or technology apart from HTTP. Our support team may not be able to help you with your coding problems as they are not aware of all the possible ways to implement a web service client and have limited knowledge about your platform architecture or technology stack. Therefore, Invenias may not be able to guarantee and support your code.
+REST is an industry standard that is not dependent on any programming language or technology apart from HTTP. Our support team may not help you with your coding problems as they are not aware of all the ways to implement a web service client and have limited knowledge about your platform architecture or technology stack. Therefore, Invenias may not guarantee and support your code.
 
 ### How do I filter lists?
 Yes, it's possible to leverage both comparison and logical operators to filter lists. You can find more information [here](https://bullhorn.github.io/invenias-api-docs/#using-lists).
@@ -2614,7 +3397,7 @@ A `400` status code means that the server could not process an API request due t
     <li>The request is missing authentication information, or the Authorization header provided could not be validated.</li>
 </ul>
 
-Please review every single piece of text in the request, ensuring that there are no typos in the endpoint, headers (name and values), and body. If you copied and pasted any part of your API request, pay extra attention that they don't include any mistakes or random characters that could be causing an issue.
+Please review every single piece of text in the request, ensuring that there are no typos in the endpoint, headers (name and values), and body. If you copied and pasted any part of your API request, pay extra attention that they don’t include any mistakes or random characters that could cause an issue.
 
 <aside class="warning">
 If this response is accompanied by the message "invalid_client" the 'Content-Type' header is incorrect or is missing from the request. Please ensure the 'Content-Type' header is declared in your request and the value is set to 'application/x-www-form-urlencoded'.
@@ -2628,31 +3411,31 @@ The `401` Unauthorized status code is returned when the API request is missing a
     <li>The user account has been disabled.</li>
     <li>The token has expired.</li>
     <li>The license has been removed from the user account.</li>
-    <li>The user accounts permission group has been changed and it's no longer in the 'System Administrator' group.</li>
+    <li>The user accounts permission group has been changed, and it’s no longer in the ‘System Administrator’ group.</li>
     <li>The tenant's database has been pushed from our production environment to another environment to be worked on (e.g. Merging databases, data cleansing, etc...) by an SI Partner or our Professional Services team and all tokens have been invalidated.</li>
     <li>The user account has been disabled by our BTO team due to exceeding 9000 429 responses within a 5 minute period. Please check your logs for 429 responses. Please note, in this event, the primary contact of the Invenias customer will be notified of this action.</li>
 </ul>
 
 ## Forbidden (403) Response Code
-The `403` error status code indicates the server understood the request but refuses to authorize it.
+The `403` error status code shows the server understood the request but refuses to authorize it.
 
-If authentication credentials were provided in the request, the server considers them insufficient to grant access. For example, a user might be trying to delete entities and the credentials being passed on the API request are for a user account without the appropriate permissions to do so.
+If authentication credentials were provided in the request, the server considers them insufficient to grant access. For example, a user might try to delete entities and the credentials being passed on the API request are for a user account without the permissions to do so.
 
 Another reason this status code might be returned is in case the user did not request an API access token with the correct permissions.
 
 To fix the API call for those two situations, make sure that the credentials you are using have the access level required by the endpoint, or that the access token has the correct permissions.
 
-Please note, if you are receiving `404` or `403` response codes from our servers there's a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you're unsure if your Application has expired or not please email our support team using support@invenias.com and they will be able to check for you.
+Please note, if you are receiving `404` or `403` response codes from our servers, there’s a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you’re unsure if your application has expired or not please email our support team using support@invenias.com and they will check for you.
 
 ## Not Found (404) Response Code
-The `404` error status code indicates that the REST API can't map the client's URI to a resource but may be available in the future. ... This status code is used when our server does not wish to reveal exactly why the request has been refused, or when no other response is applicable.
+The `404` error status code indicates that the REST API can’t map the client’s URI to a resource, but may be available in the future. ... This status code is used when our server does not wish to reveal exactly why the request has been refused, or when no other response applies.
 
-Please note, if you are receiving `404` or `403` response codes from our servers there's a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you're unsure if your Application has expired or not please email our support team using support@invenias.com and they will be able to check for you.
+Please note, if you are receiving `404` or `403` response codes from our servers, there’s a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you’re unsure if your application has expired or not, please email our support team using support@invenias.com and they will check for you.
 
 ## Internal Server Error (500) Response Code
-The `500` Internal Server Error server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+The `500` Internal Server Error server error response code shows that the server encountered an unexpected condition that prevented it from fulfilling the request.
 
-Please note, the database may have data management policies enabled on the entity types you're trying to work with. Please see [here](https://bullhorn.github.io/invenias-api-docs/#data-management) for more information on data management policies.
+Please note, the database may have data management policies enabled on the entity types you’re trying to work with. Please see [here](https://bullhorn.github.io/invenias-api-docs/#data-management) for more information on data management policies.
 
 ## Service Unavailable (503) Response Code
 
@@ -2661,12 +3444,12 @@ Usually, this is due to a database upgrade and is accompanied by the following c
 
 Other causes of `503` errors:
 <ul>
-    <li>The server is overloaded, meaning that is it receiving more requests than it can handle. This is why it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks as well as web applications or the content management system being incorrectly programmed.</li>
-    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may result in an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a 'Service Unavailable' message.</li>
+    <li>The server is overloaded, meaning that is it receiving more requests than it can handle. Therefore, it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks and web applications, or the content management system being incorrectly programmed.</li>
+    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may cause an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a ‘Service Unavailable’ message.</li>
 </ul>
 
-In summary, `503` errors are sometimes unavoidable, it's good practice to add logic to handle them in your Application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.
+In summary, `503` errors are sometimes unavoidable, it's good practice to add logic to handle them in your application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.
 
 <aside class="notice">
-Please note, database upgrades are always scheduled outside of our customer's typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers then the database upgrade will be scheduled to run on a weekend to minimize disruption.
+Please note, database upgrades run outside of our customer’s typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers, then the database upgrade will run on a weekend to minimize disruption.
 </aside>
