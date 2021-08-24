@@ -492,6 +492,65 @@
               </ul>
           </li>
           <li>
+            <a href="#documents" class="toc-h1 toc-link" data-title="Documents">Documents</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-api-v1-documents-list" class="toc-h2 toc-link" data-title="POST /api/v1/documents/list">POST /api/v1/documents/list</a>
+                  </li>
+                  <li>
+                    <a href="#delete-api-v1-documents-id" class="toc-h2 toc-link" data-title="DELETE /api/v1/documents/{id}">DELETE /api/v1/documents/{id}</a>
+                  </li>
+                  <li>
+                    <a href="#put-api-v1-documents-id" class="toc-h2 toc-link" data-title="PUT /api/v1/documents/{id}">PUT /api/v1/documents/{id}</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-documents-bulkdelete" class="toc-h2 toc-link" data-title="POST /api/v1/documents/bulkDelete">POST /api/v1/documents/bulkDelete</a>
+                  </li>
+                  <li>
+                    <a href="#put-api-v1-documents-id-rename" class="toc-h2 toc-link" data-title="PUT /api/v1/documents/{id}/rename">PUT /api/v1/documents/{id}/rename</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-people-id-documents-list" class="toc-h2 toc-link" data-title="POST /api/v1/people/{id}/documents/list">POST /api/v1/people/{id}/documents/list</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-people-id-document" class="toc-h2 toc-link" data-title="POST /api/v1/people/{id}/document">POST /api/v1/people/{id}/document</a>
+                  </li>
+                  <li>
+                    <a href="#get-api-v1-people-id-documents-documentid" class="toc-h2 toc-link" data-title="GET /api/v1/people/{id}/documents/{documentId}">GET /api/v1/people/{id}/documents/{documentId}</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-people-id-documents-documentid-defaultcv" class="toc-h2 toc-link" data-title="POST /api/v1/people/{id}/documents/{documentId}/defaultCv">POST /api/v1/people/{id}/documents/{documentId}/defaultCv</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-companies-id-documents-list" class="toc-h2 toc-link" data-title="POST /api/v1/companies/{id}/documents/list">POST /api/v1/companies/{id}/documents/list</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-companies-id-document" class="toc-h2 toc-link" data-title="POST /api/v1/companies/{id}/document">POST /api/v1/companies/{id}/document</a>
+                  </li>
+                  <li>
+                    <a href="#get-api-v1-companies-id-documents-documentid" class="toc-h2 toc-link" data-title="GET /api/v1/companies/{id}/documents/{documentId}">GET /api/v1/companies/{id}/documents/{documentId}</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-assignments-id-documents-list" class="toc-h2 toc-link" data-title="POST /api/v1/assignments/{id}/documents/list">POST /api/v1/assignments/{id}/documents/list</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-assignments-id-document" class="toc-h2 toc-link" data-title="POST /api/v1/assignments/{id}/document">POST /api/v1/assignments/{id}/document</a>
+                  </li>
+                  <li>
+                    <a href="#get-api-v1-assignments-id-documents-documentid" class="toc-h2 toc-link" data-title="GET /api/v1/assignments/{id}/documents/{documentId}">GET /api/v1/assignments/{id}/documents/{documentId}</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-programmes-id-documents-list" class="toc-h2 toc-link" data-title="POST /api/v1/programmes/{id}/documents/list">POST /api/v1/programmes/{id}/documents/list</a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-programmes-id-document" class="toc-h2 toc-link" data-title="POST /api/v1/programmes/{id}/document">POST /api/v1/programmes/{id}/document</a>
+                  </li>
+                  <li>
+                    <a href="#get-api-v1-programmes-id-documents-documentid" class="toc-h2 toc-link" data-title="GET /api/v1/programmes/{id}/documents/{documentId}">GET /api/v1/programmes/{id}/documents/{documentId}</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#faq" class="toc-h1 toc-link" data-title="FAQ">FAQ</a>
               <ul class="toc-list-h2">
                   <li>
@@ -530,11 +589,11 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Invenias has a REST API for integrations, providing programmatic access to create, read, update and delete data in your Invenias database.</p>
 
-<p>The Invenias API Swagger UI documentation can be found by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain in this URL.</p>
+<p>You can find the Invenias API Swagger UI documentation by navigating to https://{subdomain}.invenias.com/api, where you need to enter your subdomain in this URL.</p>
 <h2 id='general-conventions'>General Conventions</h2>
-<p>Whenever possible, the REST API will follow specifications, conventions, and practices of HTTP and the web in general. This includes things like case-sensitivity of URLs, character encodings, HTTP methods, and so forth. Additional recommended practices for REST APIs are also observed whenever appropriate.</p>
+<p>The REST API will follow specifications, conventions, and practices of HTTP and the web. This includes things like case-sensitivity of URLs, character encoding, HTTP methods, and so forth. We also observe recommended practices for REST APIs whenever appropriate.</p>
 <h3 id='entities'>Entities</h3>
-<p>Invenias uses the term entity to refer to a type represented in the Invenias system. People, Companies, Assignments, and Programmes are examples of entities. Entities capture the core concepts within the Invenias system and provide an organization for storing executive search data and applying the rules and processing that comprise the Invenias system.</p>
+<p>Invenias uses the term entity to refer to a type represented in the Invenias system. People, companies, assignments, and programmes are examples of entities. Entities capture the core concepts within the Invenias system and provide an organization for storing executive search data and applying the rules and processing that comprise the Invenias system.</p>
 <h3 id='json'>JSON</h3>
 <p>The REST API follows the specifications and conventions of the JavaScript Object Notation (JSON) data format and any related Javascript syntax specifications. For more information, see the following articles:
 <ul>
@@ -557,22 +616,24 @@
 </code></pre>
 
 <blockquote>
-<p>Please note, this is the only time you&#39;ll get the client_id and client_secret - please store these securely as you won&#39;t be able to retrieve these again.</p>
+<p>Please note, this is the only time you’ll get the client_id and client_secret - please store these securely, as you won’t be able to retrieve these again.</p>
 </blockquote>
 
-<p>To create a new integration, use the <code>POST /api/v1/thirdpartyapplications</code> endpoint using Swagger. </p>
+<p>To create a new integration, use the <code>POST /api/v1/thirdpartyapplications</code> endpoint using Swagger.</p>
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to be able to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
 </aside>
 
-<p>Before you can use the <code>POST /api/v1/thirdpartyapplications</code> endpoint, you need to enter an <code>api_key</code> in the field at the top right-hand corner of the Swagger page. To do this simply double click into the <code>api_key</code> field in the header to automatically generate one. This will prompt you to log in if you&#39;re not already logged in. </p>
-
-<p>An <code>api_key</code> will be generated which will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.</p>
+<p>Before you can use the <code>POST /api/v1/thirdpartyapplications</code> endpoint, you need to enter an <code>api_key</code> in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the <code>api_key</code> field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. </p>
 
 <p>After Swagger returns you an <code>api_key</code>, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the <code>client_id</code> and the <code>client_secret</code>. </p>
 
-<p>From here, you will need to choose the flow type that your application requires. There&#39;s some documentation available <a href="https://auth0.com/docs/flows">here</a> to help.</p>
+<p>From here, you will need to choose the flow type that your application requires. There’s some documentation available <a href="https://auth0.com/docs/flows">here</a> to help.</p>
+
+<aside class="notice">
+An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+</aside>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/thirdpartyapplications</code></p>
 
@@ -630,20 +691,22 @@ Please note, you must have a licensed Invenias User Account and be in the 'Syste
 <p>Please note, this is the only time you&#39;ll get the client_secret - please store it securely.</aside></p>
 </blockquote>
 
-<p>To renew an expired Application use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint using Swagger. </p>
+<p>To renew an expired application, use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint using Swagger.</p>
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to be able to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
 </aside>
 
-<p>Before you can use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint, you need to enter an <code>api_key</code> in the field at the top right-hand corner of the Swagger page. To do this simply double click into the <code>api_key</code> field in the header to automatically generate one. This will prompt you to log in if you&#39;re not already logged in. </p>
+<p>Before you can use the <code>POST /api/v1/thirdpartyapplications/{id}/renew</code> endpoint, you need to enter an <code>api_key</code> in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the <code>api_key</code> field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. </p>
 
-<p>An <code>api_key</code> will be generated which will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.</p>
+<p>After Swagger returns you an &#39;api_key&#39;, you can then call the <code>POST /api/v1/thirdpartyapplications/{id}/renew</code> endpoint to renew the expired application.</p>
 
-<p>After Swagger returns you an &#39;api_key&#39;, you can then call the POST /api/v1/thirdpartyapplications/{id}/renew endpoint to renew the expired Application.</p>
+<aside class="notice">
+An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+</aside>
 
 <aside class="warning">
-Please note, when renewing your Application it will be issued a new client_secret, please remember you update this in your Application or you will not be able to successfully authenticate.
+Please note, when renewing your application we will issue a new client_secret, please remember you update this on your application or you cannot authenticate.
 </aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/thirdpartyapplications/{client_id}/renew?expiration=FiveYears</code></p>
@@ -658,12 +721,12 @@ Please note, when renewing your Application it will be issued a new client_secre
 <tr>
 <td>id</td>
 <td>[required]</td>
-<td>This is the unique identifier for the expired Application you wish to renew.</td>
+<td>This is the unique identifier for the expired application you wish to renew.</td>
 </tr>
 <tr>
 <td>expiration</td>
 <td>[required]</td>
-<td>The period of time you wish the renew the Application for: <code>OneYear</code>, <code>TwoYears</code>, or <code>FiveYears</code>.</td>
+<td>The time you wish the renew the application for: <code>OneYear</code>, <code>TwoYears</code>, or <code>FiveYears</code>.</td>
 </tr>
 </tbody></table>
 <h1 id='authentication'>Authentication</h1><h2 id='post-identity-connect-token'>POST /identity/connect/token</h2>
@@ -701,7 +764,7 @@ Please note, when renewing your Application it will be issued a new client_secre
 <li>Refresh Token</li>
 </ul>
 
-<p>Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can be used to authenticate.</p>
+<p>Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.</p>
 
 <p>Here’s an example of authenticating when using the password grant type:</p>
 <h3 id='http-request-3'>HTTP Request</h3>
@@ -727,7 +790,7 @@ Please note, when renewing your Application it will be issued a new client_secre
 <tr>
 <td>client_id</td>
 <td>[required]</td>
-<td>This is the unique identifier for your Application.</td>
+<td>This is the unique identifier for your application.</td>
 </tr>
 <tr>
 <td>client_secret</td>
@@ -746,25 +809,25 @@ Please note, when renewing your Application it will be issued a new client_secre
 </tr>
 </tbody></table>
 
-<p>You will need to use this token to authenticate when using all endpoints using the Authorization header using the format &quot;Authorization: {type} {credentials}&quot;, where the type is your <code>token_type</code> and the credentials are your <code>access_token</code>.</p>
+<p>You will need to use this token to authenticate when using all endpoints using the Authorization header using the format “Authorization: {type} {credentials}”, where the type is your <code>token_type</code> and the credentials are your <code>access_token</code>.</p>
 
-<p>Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the new features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.</p>
+<p>Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the additional features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.</p>
 
 <aside class="notice">
-The token is valid for 24 hours. We use short-lived access tokens for security and this period cannot be extended.
+A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
 
-The tokens are issued with a short expiration time so that the application is forced to continually refresh them, giving the service a chance to revoke an application’s access if needed.
+Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application’s access if needed.
 
-When the access token expires, the application can use the refresh token to obtain a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
+When an access token expires, the application can use the refresh token to get a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
 </aside>
 <h3 id='unauthorized-requests'>Unauthorized requests</h3>
-<p>If a client request contains an invalid <code>bearer_token</code>, the server returns response status 401 (unauthorized). For more information on HTTP status codes see <a href="https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes">here</a>.</p>
+<p>If a client request contains an invalid <code>bearer_token</code>, the server returns response status 401 (unauthorized). For more information on HTTP status codes, see <a href="https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes">here</a>.</p>
 <h3 id='identifying-if-an-oauth-token-has-expired'>Identifying if an OAuth token has expired</h3>
 <p>There are two common approaches adopted by web developers to identify when an OAuth token has expired:</p>
 
 <p><b> Token Refresh Handling: Method 1 </b></p>
 
-<p>Upon receiving a valid <code>access_token</code>, <code>expires_in value</code>, <code>refresh_token</code>, etc., clients can process this by storing an expiration time as a local variable and checking it on each request. This can be done using the following steps:</p>
+<p>Upon receiving a valid <code>access_token</code>, <code>expires_in value</code>, <code>refresh_token</code>, etc., clients can process this by storing an expiration time as a local variable and checking it on each request. You can do this using the following steps:</p>
 
 <ol>
     <li>Convert expires_in to an expire time (epoch, RFC-3339/ISO-8601 datetime, etc.)</li>
@@ -772,30 +835,30 @@ When the access token expires, the application can use the refresh token to obta
     <li>On each resource request, check the current time against the 'expire time' and make a token refresh request before the resource request if the token has expired.</li>
 </ol>
 
-<p>When checking the time, be sure you are at the same time, for example, using the same timezone by converting all times to epoch or UTC timezone.</p>
+<p>When checking the time, be sure you are (at the same time), for example, using the same timezone by converting all times to epoch or UTC timezone.</p>
 
-<p>In addition to receiving a new <code>access_token</code>, you may receive a new <code>refresh_token</code> with an expiration time further in the future. If you receive this, you should store the new refresh_token to extend the life of your session.</p>
+<p>Besides receiving a new <code>access_token</code>, you may receive a new <code>refresh_token</code> with an expiration time further in the future. If you receive this, store the new refresh_token to extend the life of your session.</p>
 
 <p><b>Token Refresh Handling: Method 2</b></p>
 
-<p>Another method of handling token refresh is to manually refresh after receiving an invalid token error. This can be done with the previous approach or by itself.</p>
+<p>Another method of handling token refresh is performing a manual refresh after receiving an invalid token error. We can do this with the previous approach or by itself.</p>
 
-<p>If you attempt to use an expired access_token and you get an invalid token error, you should perform a token refresh. Since different services can use different error codes for expired tokens, you can either keep track of the code for each service, or an easy way to refresh tokens across services is to simply try a single refresh upon encountering a 401 error. </p>
+<p>If you attempt to use an expired access_token and you get an invalid token error, perform a token refresh. Since different services can use different error codes for expired tokens, you can either keep track of the code for each service, or an easy way to refresh tokens across services is to perform a single refresh upon encountering a 401 error. </p>
 <h1 id='rate-limiting'>Rate Limiting</h1>
-<p>We use a fixed-window rate limiting strategy, up to <code>3000</code> api calls can be made at any interval within a 5 minute window.</p>
+<p>We use a fixed-window rate limiting strategy you can make up to <code>3000</code> api calls at any interval within a 5 minute window.</p>
 
 <p>You can find out how many requests you have remaining by checking the value in the <code>X-Request-Quota-Remaining</code> response header.</p>
 
 <p><img src="images\quotaremaining.png" alt="X-Request-Quota-Remaining" class="inline"/>
 <i>Figure 1. API Call Response Headers - X-Request-Quota-Remaining</i></p>
 
-<p>Once the <code>X-Request-Quota-Remaining reaches</code> 0, all succeeding requests made will return <code>429</code> errors, until the current rate limit window resets. At this time your Application should wait for the limit to become available again.</p>
+<p>Once the <code>X-Request-Quota-Remaining reaches</code> 0, all succeeding requests made will return <code>429</code> errors until the current rate limit window resets. Your application should wait for the limit to become available again before making any further requests.</p>
 
 <aside class="warning">
-Failure to add adequate mechanisms to your Application instructing it to wait after receiving a 429 error may result in the user account used to authenticate the requests being disabled by Bullhorn. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until Bullhorn is satisfied that steps have been taken to prevent the problem from occurring again.
+Failure to add adequate mechanisms to your application instructing it to wait after receiving a 429 error may cause the user account used to authenticate the requests being disabled by Bullhorn. This would happen should it generate 9000 (or more) 429 errors within any given 5-minute period. The account will remain disabled until you have taken sufficient steps to prevent the problem from occurring again.
 </aside>
 <h1 id='http-response-status-codes'>HTTP Response Status Codes</h1>
-<p>HTTP response status codes indicate whether a specific HTTP request has been successfully completed.</p>
+<p>HTTP response status codes show whether it has successfully completed a specific HTTP request.</p>
 <h2 id='successful-responses'>Successful Responses</h2>
 <table><thead>
 <tr>
@@ -812,7 +875,7 @@ Failure to add adequate mechanisms to your Application instructing it to wait af
 <tr>
 <td>201</td>
 <td>Created</td>
-<td>The request has succeeded and a new resource has been created as a result.</td>
+<td>The request has succeeded, and it has created a new resource.</td>
 </tr>
 <tr>
 <td>204</td>
@@ -855,17 +918,17 @@ Failure to add adequate mechanisms to your Application instructing it to wait af
 <tr>
 <td>401</td>
 <td>Unauthorized</td>
-<td>Although the HTTP standard specifies &quot;unauthorized&quot;, semantically this response means &quot;unauthenticated&quot;. That is, the client must authenticate itself to get the requested response.</td>
+<td>Although the HTTP standard specifies “unauthorized”, semantically this response means “unauthenticated”. The client must authenticate itself to get the requested response.</td>
 </tr>
 <tr>
 <td>403</td>
 <td>Forbidden</td>
-<td>The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client&#39;s identity is known to the server.</td>
+<td>The client does not have access rights to the content; It is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client’s identity is known to the server.</td>
 </tr>
 <tr>
 <td>404</td>
 <td>Not Found</td>
-<td>The server can not find the requested resource. This can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurrence on the web.</td>
+<td>The server can not find the requested resource. This can also mean that the endpoint is valid, but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one because of its frequent occurrence on the web.</td>
 </tr>
 <tr>
 <td>405</td>
@@ -933,12 +996,12 @@ Failure to add adequate mechanisms to your Application instructing it to wait af
 </tr>
 </tbody></table>
 <h1 id='using-lists'>Using Lists</h1>
-<p>There are many list endpoints available for Invenias core entities that can be leveraged to be used in Applications.</p>
+<p>There are many list endpoints available for Invenias core entities that applications can use.</p>
 
-<p>It&#39;s possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.</p>
+<p>It’s possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.</p>
 
 <aside class="notice">
-Please note, there is a row limit of <b>1000</b> rows per call when using a List endpoint.
+Please note, there is a row limit of <b>1000</b> rows per call when using a list endpoint.
 </aside>
 
 <table><thead>
@@ -1121,10 +1184,10 @@ Please note, there is a row limit of <b>1000</b> rows per call when using a List
 
 <p>Select allows you to specify an array of column names to be returned in the response.</p>
 
-<p>If you do not specify an array of column names in the request body the response will return the columns visible in the &#39;default&#39; global display view for the entity you&#39;re requesting.</p>
+<p>If you do not specify an array of column names in the request body, the response will return the columns visible in the ‘default’ global display view for the entity you’re requesting.</p>
 
 <aside class="notice">
-Please note, for each item where there is 'null' data for a specified column, this column will not be returned in the response for those items.
+Please note, for each item where there is ‘null’ data for a specified column, it will not return this column in the response to those items.
 </aside>
 <h2 id='pagination'>Pagination</h2>
 <blockquote>
@@ -1173,9 +1236,9 @@ Please note, for each item where there is 'null' data for a specified column, th
 
 <p>Pagination is a method of dividing web content into discrete pages, thus presenting content in a limited and digestible manner.</p>
 
-<p>List endpoints have a maximum row limit of 1,000 rows per request. If you wanted to display the content in a paginated format or export all of the available results you will need to use these parameters.</p>
+<p>List endpoints have a maximum row limit of 1,000 rows per request. If you wanted to display the content in a paginated format or export all the results, you will need to use these parameters.</p>
 
-<p><code>PageSize</code>, <code>PageIndex</code> and <code>UsePaging</code> are all used to paginate the dataset, as follows:</p>
+<p><code>PageSize</code>, <code>PageIndex</code> and <code>UsePaging</code> are all used to paginate the dataset:</p>
 
 <ul>
     <li>PageSize - how many items you want in each page (max 1,000).</li>
@@ -1183,7 +1246,7 @@ Please note, for each item where there is 'null' data for a specified column, th
 </ul>
 
 <aside class="notice">
-If you wish to get all of the available records in a list and wish to know how many requests you will need to make, simply make a request and use the ReturnTotalDatabaseItemCount parameter. Once the total number of items in the database has been determined you should know how many requests you need to make incrementing the page index each time to get all of the items in the list (e.g. TotalItemCount/PageSize = the number of requests required).
+If you wish to get all the records in a list and wish to know how many requests you will need to make, simply make a request and use the ReturnTotalDatabaseItemCount parameter. Once you know the total number of items in the database, you can determine how many requests you need to make incrementing the page index each time to get all the items in the list (e.g. TotalItemCount/PageSize = the number of requests required).
 </aside>
 <h2 id='group'>Group</h2>
 <blockquote>
@@ -1221,9 +1284,9 @@ If you wish to get all of the available records in a list and wish to know how m
 <span class="o">}</span>
 </code></pre>
 
-<p>A group is a number of things that are located, gathered, or classed together.</p>
+<p>A group is several things that are located, gathered, or classified together.</p>
 
-<p>Group can be leveraged to group results together by a column in the array.</p>
+<p>A column in an array can leveraged to group results together.</p>
 <h2 id='count'>Count</h2>
 <blockquote>
 <p>Count Example (cURL)</p>
@@ -1600,7 +1663,7 @@ All comparison operators above require 3 inputs as described above (property, op
 <span class="o">}</span>
 </code></pre>
 
-<p>The <code>and</code> and <code>or</code> operators are used to filter records based on more than one condition:</p>
+<p>The <code>and</code> and <code>or</code> operators are used to filter records based on over a single condition:</p>
 
 <ul>
 <li>The 'and' operator displays a record if all the conditions separated by 'and' are true.</li>
@@ -1649,12 +1712,12 @@ Please note, the 'not' operator is not supported.
 
 <p>Sort An array of objects to sort by, using the following format {&quot;Selector&quot;:&quot;ColumnName&quot;,&quot;Desc&quot;: true}.</p>
 <h1 id='data-management'>Data Management</h1>
-<p>Data management policies are used to ensure that an organization&#39;s data and information assets are managed consistently and used properly. Invenias provides functionality allowing our customers to apply policies to any numbers of fields (within a predefined list) to core entities allowing them to either make filling them in a <code>preferred</code> or <code>compulsory</code> task. </p>
+<p>Data management policies are used to ensure that an organization’s data and information assets are managed consistently and used properly. Invenias provides functionality allowing our customers to apply policies to any numbers of fields (within a pre-defined list) to core entities, allowing them to either make filling them in a <code>preferred</code> or <code>compulsory</code> task. </p>
 
-<p>If one or more fields within an entity are marked as <code>compulsory</code> you will not be able to update the entity (or create a new one) unless you populate the compulsory field(s) via the most applicable method(s).</p>
+<p>If one or more fields within an entity are marked as <code>compulsory</code> you cannot update the entity (or create a new one) unless you populate the compulsory field(s) via the most applicable method(s).</p>
 
 <aside class="warning">
-Failure to respect compulsory data management policies when crating or updating records will result in a failed request with a 500 HTTP code. The response may include a message like "Invenias.Model.Services.Services.Services.DataManagementService.ValidatePositionCompanyPolicy".
+Failure to respect compulsory data management policies when creating or updating records will cause a failed request with a 500 HTTP code. The response may include a message like “Invenias.Model.Services.Services.Services.DataManagementService.ValidatePositionCompanyPolicy”.
 </aside>
 
 <aside class="notice">
@@ -1867,7 +1930,7 @@ Please note, data management policies are not available for the Progra
 <p>Returns a list of the items available used to track where a candidate is in the search process.</p>
 </blockquote>
 
-<p>The Invenias system has many default and customizable enumerations. When designing an integration it may be necessary to know the values of the items in a collection for any given enumeration. The GET /api/v1/settings/{key} endpoint will return the items for any enumeration name defined in the <code>{key}</code>.</p>
+<p>The Invenias system has many default and customizable enumerations. When designing an integration, it may be necessary to know the values of the items in a collection for any enumeration. The GET /api/v1/settings/{key} endpoint will return the items for any enumeration name defined in the <code>{key}</code>.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/settings/{key}</code></p>
 
@@ -2005,7 +2068,7 @@ Please note, data management policies are not available for the Progra
 <p><code>https://{subdomain}.invenias.com/api/v1/countries</code></p>
 
 <aside class="warning">
-The Invenias systems use the USPS standard for country names. When adding entries to Address fields the value must exist within the GET/api/v1/countries list and it must be entered entirely in uppercase (e.g. UNITED KINGDOM, FRANCE, INDIA, etc...). Failure to follow these guidelines will result in a null value in this field when creating or updating entities.
+The Invenias systems use the USPS standard for country names. When adding entries to Address fields, the value must exist within the GET/api/v1/countries list and entered entirely in uppercase (e.g. UNITED KINGDOM, FRANCE, INDIA, etc...). Failure to follow these guidelines will cause a null value in this field when creating or updating entities.
 </aside>
 <h1 id='lookup-lists'>Lookup Lists</h1>
 <p>A Lookup List is a list of values which have either been used or which are suggested for use in a field. In other words, a Lookup List can be built from values keyed by users into a field and / or it can be pre-loaded with values.</p>
@@ -2058,7 +2121,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 <span class="o">}</span>
 </code></pre>
 
-<p>This endpoint can be used to get the names of all of the available Lookup Lists in the database.</p>
+<p>This endpoint can get the names of all the Lookup Lists in the database.</p>
 <h3 id='http-request-9'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/lookuplists/list</code></p>
 
@@ -2266,7 +2329,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 <span class="o">}</span>
 </code></pre>
 
-<p>This endpoint can be used to get the values withing a specific Lookup List.</p>
+<p>This endpoint will get the values within a specific Lookup List.</p>
 <h3 id='http-request-10'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list</code></p>
 
@@ -2457,7 +2520,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 <span class="o">}</span>
 </code></pre>
 
-<p>This endpoint can be used to create new entries in a specific Lookup List.</p>
+<p>This endpoint can create new entries on a specific Lookup List.</p>
 <h3 id='http-request-11'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list</code></p>
 
@@ -2483,7 +2546,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 </tr>
 </tbody></table>
 <h2 id='put-api-v1-lookuplists-id-entries-itemid'>PUT /api/v1/lookuplists/{id}/entries/{itemId}</h2><h1 id='duplicates'>Duplicates</h1>
-<p>The Invenias REST API has two endpoints available to help flag &#39;People&#39; and &#39;Company&#39;  type entities that <i>may</i> already exist within the database. By utilizing these endpoints it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.</p>
+<p>The Invenias REST API has two endpoints available to help flag ‘People’ and ‘Company’ type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.</p>
 <h2 id='get-api-v1-duplicates-people'>GET /api/v1/duplicates/people</h2>
 <blockquote>
 <p>Example (cURL)</p>
@@ -2536,11 +2599,11 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 <span class="o">]</span>
 </code></pre>
 
-<p>The GET /api/v1/duplicates/people endpoint is designed to flag potentially existing &#39;People&#39; type entities based upon the search terms passed via the <code>request.personName</code> and <code>request.emailAddress</code> parameters.</p>
+<p>The GET /api/v1/duplicates/people endpoint flags potentially existing ‘People’ type entities based upon the search terms passed via the <code>request.personName</code> and <code>request.emailAddress</code> parameters.</p>
 
-<p>For performance, it&#39;s <strong>strongly</strong> advised to pass the simplest search term possible via the &#39;request.personName&#39;. The reason for this is that the search term will be split using the spaces as delimiters and parameters will be created in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query the longer it will take to return a response.</p>
+<p>For performance, it’s <strong>strongly</strong> advised to pass the simplest search term possible via the ‘request.personName’. The reason for this is that it will split the search term using the spaces as delimiters and parameters in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query, the longer it will take to return a response.</p>
 <h3 id='name-components'>Name Components</h3>
-<p>This endpoint does not comparatively reference all of the naming component fields for &#39;People&#39; type entities. Please do not include salutations, suffixes, and prefixes in the &#39;request.personName&#39; parameter. For a full list of the naming components leveraged by this endpoint please see below:
+<p>This endpoint does not comparatively reference all the naming component fields for ‘People’ type entities. Please do not include salutations, suffixes, and prefixes in the ‘request.personName’ parameter. For a full list of the naming components leveraged by this endpoint, please see below:
 <ul>
     <li>PersonFirstName</li>
     <li>PersonMiddleName</li>
@@ -2549,7 +2612,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
     <li>PersonMaidenName</li>
 </ul></p>
 <h3 id='email-address'>Email Address</h3>
-<p>This endpoint does not comparatively reference all of the email fields for &#39;People&#39; type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint please see below:
+<p>This endpoint does not comparatively reference all the email fields for ‘People’ type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint, please see below:
 <ul>
     <li>PersonEmailAddress1</li>
     <li>PersonEmailAddress2</li>
@@ -2588,7 +2651,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 </tbody></table>
 
 <aside class="notice">
-Please note, it may be optional to pass a value in both the 'request.personName' and 'request.emailAddress' parameters individually, you must input a value into at least one of them to make a successful request.
+Please note, it may be optional to pass a value on both the ‘request.personName’ and ‘request.emailAddress’ parameters individually, however; you must input a value into at least one of them to make a successful request.
 </aside>
 <h2 id='get-api-v1-duplicates-companies'>GET /api/v1/duplicates/companies</h2>
 <blockquote>
@@ -2636,7 +2699,7 @@ Please note, it may be optional to pass a value in both the 'request.personName'
 <span class="o">]</span>
 </code></pre>
 
-<p>The GET /api/v1/duplicates/companies endpoint is designed to flag potentially existing &#39;Company&#39; type entities based upon the search terms passed via the <code>request.companyName</code> parameter.</p>
+<p>The GET /api/v1/duplicates/companies endpoint flags potentially existing ‘Company’ type entities based upon the search terms passed via the <code>request.companyName</code> parameter.</p>
 <h3 id='http-request-13'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
@@ -3127,10 +3190,10 @@ Please note, the definition of a Client User is a Person type entity who has bee
 </tr>
 </tbody></table>
 <h1 id='search'>Search</h1>
-<p>The Invenias REST API has endpoints available for most entity types allowing you to find entities that correspond to keywords or characters specified in the search term.</p>
+<p>The Invenias REST API has endpoints available for most entity types, allowing you to find entities that correspond to keywords or characters specified in the search term.</p>
 
 <aside class="warning">
-Please note, the minimum charater length for the search term is 3 characters.
+Please note, the minimum character length for the search term is 3 characters.
 </aside>
 
 <aside class="notice">
@@ -3194,7 +3257,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 <p>This endpoint allows you to pass a search term and select, group, and filter Professional User entities to get a list of entities where the <code>DisplayFileAs</code> string matches <b>OR</b> partially matches the search term.</p>
 
 <aside class="notice">
-Please note, each Professional User will have both a Person and User type entity. This endpoint will return information related to both the Person and User entities.
+Please note, each Professional User will have both a person and User type entity. This endpoint will return information related to both the Person and user entities.
 </aside>
 <h3 id='http-request-21'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/users?request.searchTerm=Jane</code></p>
@@ -3612,7 +3675,7 @@ Please note, each Professional User will have both a Person and User type entity
 <span class="o">}</span>...
 </code></pre>
 
-<p>This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities where the <code>FileAs</code> string matches <b>OR</b> partially matches the search term.</p>
+<p>This endpoint allows you to pass a search term and select, group, and filter company type entities to get a list of entities where the <code>FileAs</code> string matches <b>OR</b> partially matches the search term.</p>
 <h3 id='http-request-23'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/companies?request.searchTerm=Old</code></p>
 
@@ -4226,7 +4289,7 @@ Please note, each Professional User will have both a Person and User type entity
 <span class="o">}</span>
 </code></pre>
 
-<p>This endpoint allows you to pass a search term and select, group, and filter Programme type entities to get a list of entities where the <code>Name</code> string matches <b>OR</b> partially matches the search term.</p>
+<p>This endpoint allows you to pass a search term and select, group, and filter programme type entities to get a list of entities where the <code>Name</code> string matches <b>OR</b> partially matches the search term.</p>
 <h3 id='http-request-26'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/programmes?request.searchTerm=Network</code></p>
 
@@ -4424,7 +4487,7 @@ Please note, each Professional User will have both a Person and User type entity
 <span class="o">}</span>
 </code></pre>
 
-<p>This endpoint allows you to pass a search term and select, group, and filter Document type entities to get a list of entities where the <code>AttachmentName</code> or <code>Creator</code> string matches <b>OR</b> partially matches the search term.</p>
+<p>This endpoint allows you to pass a search term and select, group, and filter document type entities to get a list of entities where the <code>AttachmentName</code> or <code>Creator</code> string matches <b>OR</b> partially matches the search term.</p>
 <h3 id='http-request-27'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/documents?request.searchTerm=Jane</code></p>
 
@@ -4757,16 +4820,1593 @@ Please note, each Professional User will have both a Person and User type entity
 <td>Returns the category lists and categories enabled for the entity.</td>
 </tr>
 </tbody></table>
+<h1 id='documents'>Documents</h1>
+<p><i>Table 1. Documents Summery</i></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-documents-list">POST /api/v1/documents/list</a></td>
+<td>Returns a list of <code>Document</code> entities in the database.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-documents-id">DELETE /api/v1/documents/{id}</a></td>
+<td>Deletes a single <code>Document</code> entity per request.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#put-api-v1-documents-id">PUT /api/v1/documents/{id}</a></td>
+<td>Adds or changes values to a single <code>Document</code> entity per request.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-documents-bulkdelete">POST /api/v1/documents/bulkDelete</a></td>
+<td>Deletes many <code>Document</code> entities per request.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#put-api-v1-documents-id-rename">PUT /api/v1/documents/{id}/rename</a></td>
+<td>Renames a single <code>Document</code> entity per request.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-documents-list">POST /api/v1/people/{id}/documents/list</a></td>
+<td>Returns a list of <code>Document</code> entities in the database that are relationally linked to a single <code>Person</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-document">POST /api/v1/people/{id}/document</a></td>
+<td>Adds a single document to Azure Blob Storage and relationally link it to a single <code>Person</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-id-documents-documentid">GET /api/v1/people/{id}/documents/{documentId}</a></td>
+<td>Downloads a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Person</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/post-api-v1-people-id-documents-documentid-defaultcv">POST /api/v1/people/{id}/documents/{documentId}/defaultCv</a></td>
+<td>Flags a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Person</code> entity as the <code>Default</code> Curriculum Vitae.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-documents-list">POST /api/v1/companies/{id}/documents/list</a></td>
+<td>Returns a list of <code>Document</code> entities in the database that are relationally linked to a single <code>Company</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-document">POST /api/v1/companies/{id}/document</a></td>
+<td>Adds a single document to Azure Blob Storage and relationally link it to a single <code>Company</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-id-documents-documentid">GET /api/v1/companies/{id}/documents/{documentId}</a></td>
+<td>Downloads a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Company</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-documents-list">POST /api/v1/assignments/{id}/documents/list</a></td>
+<td>Returns a list of <code>Document</code> entities in the database that are relationally linked to a single <code>Assignment</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-document">POST /api/v1/assignments/{id}/document</a></td>
+<td>Adds a single document to Azure Blob Storage and relationally link it to a single <code>Assignment</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id-documents-documentid">GET /api/v1/assignments/{id}/documents/{documentId}</a></td>
+<td>Downloads a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Assignment</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-programmes-id-documents-list">POST /api/v1/programmes/{id}/documents/list</a></td>
+<td>Returns a list of <code>Document</code> entities in the database that are relationally linked to a single <code>Programme</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-programmes-id-document">POST /api/v1/programmes/{id}/document</a></td>
+<td>Adds a single document to Azure Blob Storage and relationally link it to a single <code>Programme</code> entity.</td>
+</tr>
+<tr>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#get-api-v1-programmes-id-documents-documentid">GET /api/v1/programmes/{id}/documents/{documentId}</a></td>
+<td>Downloads a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Programme</code> entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-documents-list'>POST /api/v1/documents/list</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/documents/list'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "ExpirationDate",
+        "CreatedBy"
+    ],
+    "Filter": [
+        "ExpirationDate",
+        "&gt;",
+        "2021-04-01T00:00:00+01:00"
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"Items"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"AttachmentName"</span>: <span class="s2">"John Doe CV.docx"</span>,
+            <span class="s2">"DocumentTypeDisplayText"</span>: <span class="s2">"Curriculum Vitae"</span>,
+            <span class="s2">"ItemId"</span>: <span class="s2">"92582db4-5a10-47c2-94d3-59ced071d8a2"</span>,
+            <span class="s2">"ItemType"</span>: <span class="s2">"Documents"</span>,
+            <span class="s2">"CreatedBy"</span>: <span class="s2">"Glen Chamberlain"</span>,
+            <span class="s2">"ExpirationDate"</span>: <span class="s2">"2021-06-01T00:00:00+01:00"</span>,
+            <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+        <span class="o">}</span>...
+    <span class="o">]</span>...
+<span class="o">}</span>
+</code></pre>
+
+<p>The POST /api/v1/documents/list endpoint will return a list of Document Type entities in the database.</p>
+
+<p>Amongst other things this endpoint can be leveraged for the following purposes:
+<ul>
+    <li>Identifying expired documents.</li>
+    <li>Searching for documents tagged as &#39;default&#39; Curriculum Vitaes.</li>
+    <li>Searching for documents with specific &#39;Document Types&#39;.</li>
+    <li>Determining the total size and number of documents in the database.</li>
+</ul></p>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+<h3 id='http-request-29'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/documents/list</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Skip (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Bypass a specified number of search results then return the remaining results.</td>
+</tr>
+<tr>
+<td>Take (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageSize (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageIndex (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the PageIndex property to determine the index of the currently displayed page.</td>
+</tr>
+<tr>
+<td>UsePaging (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>ReturnTotalCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the response.</td>
+</tr>
+<tr>
+<td>ReturnTotalDatabaseItemCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the database.</td>
+</tr>
+<tr>
+<td>ReturnUniqueValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns an object containing an array of unique values queried from a given field (or values returned from an expression).</td>
+</tr>
+<tr>
+<td>Select (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Specify an array of column names to be returned in the response.</td>
+</tr>
+<tr>
+<td>Filter (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Filter items by column names and values.</td>
+</tr>
+<tr>
+<td>CategoryFilter (optional)</td>
+<td>[Record]</td>
+<td>String</td>
+<td>Filter items by relationally linked categories.</td>
+</tr>
+<tr>
+<td>Sort (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Sort an array of items to sort by.</td>
+</tr>
+<tr>
+<td>Group (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Group results together by a column in the array.</td>
+</tr>
+<tr>
+<td>FormFactor (optional)</td>
+<td>Any</td>
+<td>String</td>
+<td>Filter the items by the application used to create them</td>
+</tr>
+<tr>
+<td>DisplayViewId (optional)</td>
+<td>00000000-0000-0000-0000-000000000000</td>
+<td>String</td>
+<td>Predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application.</td>
+</tr>
+<tr>
+<td>RequireGroupCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IsFirstLoad (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeAdditionalValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td><u>Some</u> list endpoints contain a nested array of columns named <code>AdditionalValues</code>, this parameter can be used to specify if they should be visible in the response body</td>
+</tr>
+<tr>
+<td>UseLookUpViewDefinition (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeDisplayViews (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the details of the predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application for this entity.</td>
+</tr>
+<tr>
+<td>IncludeAvailableColumns (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays all of the column names available in the list for the entity.</td>
+</tr>
+<tr>
+<td>IncludeCategories (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns the category lists and categories enabled for the entity.</td>
+</tr>
+</tbody></table>
+<h2 id='delete-api-v1-documents-id'>DELETE /api/v1/documents/{id}</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request DELETE <span class="s1">'https://{subdomain}.invenias.com/api/v1/documents/92582db4-5a10-47c2-94d3-59ced071d8a2'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>Please note, successful requests will return a 200 OK response code.</p>
+</blockquote>
+
+<p>The DELETE /api/v1/documents/{id} endpoint is used to <code>permanently</code> delete a single Document entity per request.</p>
+
+<aside class="notice">
+    Please note, when deleting a 'Document' entity, it will also delete any relations that exist between it and other core entities.
+</aside>
+<h3 id='http-request-30'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/documents/{id}</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>Specify the unique identifier for the document entity you wish to delete.</td>
+</tr>
+</tbody></table>
+<h2 id='put-api-v1-documents-id'>PUT /api/v1/documents/{id}</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request PUT <span class="s1">'https://{subdomain}.invenias.com/api/v1/documents/35351a78-40f0-463f-8912-1ebdd347644e'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "IsDefaultCv": true,
+    "ExpirationDate": "2021-12-01T00:00:00.000Z"
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Please note, successful requests will return a 200 OK response code.</p>
+</blockquote>
+
+<p>The PUT /api/v1/documents/{id} endpoint can be used to add or change values to a single Document entity per request. </p>
+
+<aside class="warning">
+Please note, the PUT method uses the request URI to supply a changed version of the requested resource, which replaces the original version of the resource. You must include the values you wish to keep alongside those you wish to change in the request when updating the resource. Failure to do so may cause data loss.
+</aside>
+
+<p>Amongst other things this endpoint can be leveraged for the following purposes:
+<ul>
+    <li>Adding an expiry date to a document.</li>
+    <li>Tagging a document as a &#39;default&#39; Curriculum Vitae.</li>
+    <li>Tagging the document as &#39;Published&#39;. </li>
+</ul></p>
+<h3 id='http-request-31'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/documents/{id}</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>Specify the unique identifier for the document entity you wish to change.</td>
+</tr>
+<tr>
+<td>request</td>
+<td>[required]</td>
+<td>The request model used to declare which values to change in the requested resource.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-documents-bulkdelete'>POST /api/v1/documents/bulkDelete</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://iddgc.miginvenias.com/api/v1/documents/bulkDelete'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "ItemReferences": [
+        {
+            "Id": "35351a78-40f0-463f-8912-1ebdd347644e"
+        },
+        {
+            "Id": "2044b110-1805-4b15-bb1b-ec3515625f4a"
+        }
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Please note, successful requests will return a 200 OK response code.</p>
+</blockquote>
+
+<p>The POST /api/v1/documents/bulkDelete endpoints allows you delete many <code>Document</code> entities in a single requests.</p>
+
+<aside class="notice">
+Please note, when deleting a ‘Document’ entity, it will also delete any relations that exist between it and other core entities.
+</aside>
+<h3 id='http-request-32'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/documents/bulkDelete</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ids</td>
+<td>[required]</td>
+<td>Specify the unique identifiers for the &#39;Document&#39; entities you wish to delete.</td>
+</tr>
+</tbody></table>
+<h2 id='put-api-v1-documents-id-rename'>PUT /api/v1/documents/{id}/rename</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request PUT <span class="s1">'https://{subdomain}.invenias.com/api/v1/documents/a548424c-2ad9-4531-ac00-41f5b4fa3332/rename?documentName=John%20Doe%20Curriculum%20Vitae'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>Please note, successful requests will return a 200 OK response code.</p>
+</blockquote>
+
+<p>The PUT /api/v1/documents/{id}/rename allows you to rename the name of a single &#39;Document&#39; entity.</p>
+<h3 id='http-request-33'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/documents/{id}/rename</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>Specify the unique identifier for the &#39;Document&#39; entity you wish to rename.</td>
+</tr>
+<tr>
+<td>documentName</td>
+<td>[required]</td>
+<td>Specify the new name for the &#39;Document&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-people-id-documents-list'>POST /api/v1/people/{id}/documents/list</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://subdomain.invenias.com/api/v1/people/e2082622-9357-4130-aec8-c7a546906050/documents/list'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "ExpirationDate",
+        "CreatedBy"
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"Items"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"AttachmentName"</span>: <span class="s2">"John Doe CV.docx"</span>,
+            <span class="s2">"DocumentTypeDisplayText"</span>: <span class="s2">"Curriculum Vitae"</span>,
+            <span class="s2">"ItemId"</span>: <span class="s2">"92582db4-5a10-47c2-94d3-59ced071d8a2"</span>,
+            <span class="s2">"ItemType"</span>: <span class="s2">"Documents"</span>,
+            <span class="s2">"CreatedBy"</span>: <span class="s2">"Glen Chamberlain"</span>,
+            <span class="s2">"ExpirationDate"</span>: <span class="s2">"2021-06-01T00:00:00+01:00"</span>,
+            <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+        <span class="o">}</span>...
+    <span class="o">]</span>...
+<span class="o">}</span>
+</code></pre>
+
+<p>The POST /api/v1/people/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single ‘Person’ entity in the database.</p>
+
+<p>Amongst others, we can leverage this endpoint for the following purposes:
+<ul>
+    <li>Identifying expired documents.</li>
+    <li>Searching for documents tagged as ‘default’ Curriculum Vitae’s.</li>
+    <li>Searching for documents with specific &#39;Document Types&#39;.</li>
+</ul></p>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+<h3 id='http-request-34'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/people/{id}/documents/list</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Person&#39; entity.</td>
+</tr>
+<tr>
+<td>Skip (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Bypass a specified number of search results then return the remaining results.</td>
+</tr>
+<tr>
+<td>Take (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageSize (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageIndex (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the PageIndex property to determine the index of the currently displayed page.</td>
+</tr>
+<tr>
+<td>UsePaging (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>ReturnTotalCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the response.</td>
+</tr>
+<tr>
+<td>ReturnTotalDatabaseItemCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the database.</td>
+</tr>
+<tr>
+<td>ReturnUniqueValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns an object containing an array of unique values queried from a given field (or values returned from an expression).</td>
+</tr>
+<tr>
+<td>Select (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Specify an array of column names to be returned in the response.</td>
+</tr>
+<tr>
+<td>Filter (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Filter items by column names and values.</td>
+</tr>
+<tr>
+<td>CategoryFilter (optional)</td>
+<td>[Record]</td>
+<td>String</td>
+<td>Filter items by relationally linked categories.</td>
+</tr>
+<tr>
+<td>Sort (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Sort an array of items to sort by.</td>
+</tr>
+<tr>
+<td>Group (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Group results together by a column in the array.</td>
+</tr>
+<tr>
+<td>FormFactor (optional)</td>
+<td>Any</td>
+<td>String</td>
+<td>Filter the items by the application used to create them</td>
+</tr>
+<tr>
+<td>DisplayViewId (optional)</td>
+<td>00000000-0000-0000-0000-000000000000</td>
+<td>String</td>
+<td>Predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application.</td>
+</tr>
+<tr>
+<td>RequireGroupCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IsFirstLoad (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeAdditionalValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td><u>Some</u> list endpoints contain a nested array of columns named <code>AdditionalValues</code>, this parameter can be used to specify if they should be visible in the response body</td>
+</tr>
+<tr>
+<td>UseLookUpViewDefinition (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeDisplayViews (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the details of the predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application for this entity.</td>
+</tr>
+<tr>
+<td>IncludeAvailableColumns (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays all of the column names available in the list for the entity.</td>
+</tr>
+<tr>
+<td>IncludeCategories (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns the category lists and categories enabled for the entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-people-id-document'>POST /api/v1/people/{id}/document</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/people/e2082622-9357-4130-aec8-c7a546906050/document'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--form <span class="s1">'file=@"/C:/Users/glen.chamberlain/Documents/Jane_Doe_CV.pdf"'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"AttachmentName"</span>: <span class="s2">"Jane_Doe_CV.pdf"</span>,
+    <span class="s2">"DocumentExtension"</span>: <span class="s2">"application/pdf"</span>,
+    <span class="s2">"DocumentSize"</span>: 159205,
+    <span class="s2">"ItemId"</span>: <span class="s2">"d3d7c45b-0a24-4452-b618-fc6e53833497"</span>,
+    <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>The POST /api/v1/people/{id}/document endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Person&#39; entity in the database.</p>
+<h3 id='http-request-35'>HTTP Request</h3>
+<p><code>POST /api/v1/people/{id}/document</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Person&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='get-api-v1-people-id-documents-documentid'>GET /api/v1/people/{id}/documents/{documentId}</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request GET <span class="s1">'https://{subdomain}.invenias.com/api/v1/people/ed7c8fb4-495c-4f2a-a6a9-72b518c61da5/documents/b735c164-646a-4965-81b3-4d028989b828'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.</p>
+</blockquote>
+
+<p>The <code>GET /api/v1/people/{id}/documents/{documentId}</code> endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Person’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.</p>
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+<h3 id='http-request-36'>HTTP Request</h3>
+<p><code>GET /api/v1/people/{id}/documents/{documentId}</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Person&#39; entity.</td>
+</tr>
+<tr>
+<td>documentid</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Document&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-people-id-documents-documentid-defaultcv'>POST /api/v1/people/{id}/documents/{documentId}/defaultCv</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/people/ed7c8fb4-495c-4f2a-a6a9-72b518c61da5/documents/b735c164-646a-4965-81b3-4d028989b828/defaultCv'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>A successful request will return a 204 response code &quot;No Content&quot;.</p>
+</blockquote>
+
+<p>The <code>POST /api/v1/people/{id}/documents/{documentId}/defaultCv</code> endpoint will flag the specific document as a &#39;Person&#39; entities default curriculum vitae.</p>
+
+<aside class="notice">
+    Please note, this endpoint will <strong>not</strong> parse the document and write the contents to the 'CV/Resume' tab within the 'Summary' pane in the 'Person' entities record.
+</aside>
+<h3 id='http-request-37'>HTTP Request</h3>
+<p><code>POST /api/v1/people/{id}/documents/{documentId}/defaultCv</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Person&#39; entity.</td>
+</tr>
+<tr>
+<td>documentid</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Document&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-companies-id-documents-list'>POST /api/v1/companies/{id}/documents/list</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/list'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "CreatedBy",
+        "DocumentExtension"
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"Items"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"AttachmentName"</span>: <span class="s2">"INVACM180821.pdf"</span>,
+            <span class="s2">"DocumentExtension"</span>: <span class="s2">"pdf"</span>,
+            <span class="s2">"DocumentTypeDisplayText"</span>: <span class="s2">"Invoice"</span>,
+            <span class="s2">"ItemId"</span>: <span class="s2">"7901923e-deb6-4cbb-8742-b2587414796e"</span>,
+            <span class="s2">"ItemType"</span>: <span class="s2">"Documents"</span>,
+            <span class="s2">"CreatedBy"</span>: <span class="s2">"Glen Chamberlain"</span>,
+            <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+        <span class="o">}</span>...
+    <span class="o">]</span>...
+<span class="o">}</span>
+</code></pre>
+
+<p>The POST /api/v1/companies/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single <code>Company</code> entity in the database.</p>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+<h3 id='http-request-38'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/companies/{id}/documents/list</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Company&#39; entity.</td>
+</tr>
+<tr>
+<td>Skip (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Bypass a specified number of search results then return the remaining results.</td>
+</tr>
+<tr>
+<td>Take (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageSize (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageIndex (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the PageIndex property to determine the index of the currently displayed page.</td>
+</tr>
+<tr>
+<td>UsePaging (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>ReturnTotalCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the response.</td>
+</tr>
+<tr>
+<td>ReturnTotalDatabaseItemCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the database.</td>
+</tr>
+<tr>
+<td>ReturnUniqueValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns an object containing an array of unique values queried from a given field (or values returned from an expression).</td>
+</tr>
+<tr>
+<td>Select (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Specify an array of column names to be returned in the response.</td>
+</tr>
+<tr>
+<td>Filter (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Filter items by column names and values.</td>
+</tr>
+<tr>
+<td>CategoryFilter (optional)</td>
+<td>[Record]</td>
+<td>String</td>
+<td>Filter items by relationally linked categories.</td>
+</tr>
+<tr>
+<td>Sort (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Sort an array of items to sort by.</td>
+</tr>
+<tr>
+<td>Group (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Group results together by a column in the array.</td>
+</tr>
+<tr>
+<td>FormFactor (optional)</td>
+<td>Any</td>
+<td>String</td>
+<td>Filter the items by the application used to create them</td>
+</tr>
+<tr>
+<td>DisplayViewId (optional)</td>
+<td>00000000-0000-0000-0000-000000000000</td>
+<td>String</td>
+<td>Predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application.</td>
+</tr>
+<tr>
+<td>RequireGroupCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IsFirstLoad (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeAdditionalValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td><u>Some</u> list endpoints contain a nested array of columns named <code>AdditionalValues</code>, this parameter can be used to specify if they should be visible in the response body</td>
+</tr>
+<tr>
+<td>UseLookUpViewDefinition (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeDisplayViews (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the details of the predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application for this entity.</td>
+</tr>
+<tr>
+<td>IncludeAvailableColumns (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays all of the column names available in the list for the entity.</td>
+</tr>
+<tr>
+<td>IncludeCategories (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns the category lists and categories enabled for the entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-companies-id-document'>POST /api/v1/companies/{id}/document</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/document'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--form <span class="s1">'file=@"/C:/Users/glen.chamberlain/Documents/INVACM180821.pdf"'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"AttachmentName"</span>: <span class="s2">"INVACM180821.pdf"</span>,
+    <span class="s2">"DocumentExtension"</span>: <span class="s2">"application/pdf"</span>,
+    <span class="s2">"DocumentSize"</span>: 189345,
+    <span class="s2">"ItemId"</span>: <span class="s2">"7901923e-deb6-4cbb-8742-b2587414796e"</span>,
+    <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>The <code>POST /api/v1/companies/{id}/document</code> endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Company&#39; entity in the database.</p>
+<h3 id='http-request-39'>HTTP Request</h3>
+<p><code>POST /api/v1/companies/{id}/document</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Company&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='get-api-v1-companies-id-documents-documentid'>GET /api/v1/companies/{id}/documents/{documentId}</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request GET <span class="s1">'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/7901923e-deb6-4cbb-8742-b2587414796e'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.</p>
+</blockquote>
+
+<p>The <code>GET /api/v1/companies/{id}/documents/{documentId}</code> endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Company’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.</p>
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+<h3 id='http-request-40'>HTTP Request</h3>
+<p><code>GET /api/v1/companies/{id}/documents/{documentId}</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Company&#39; entity.</td>
+</tr>
+<tr>
+<td>documentid</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Document&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-assignments-id-documents-list'>POST /api/v1/assignments/{id}/documents/list</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/assignments/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/list'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "CreatedBy",
+        "DocumentExtension"
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"Items"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"AttachmentName"</span>: <span class="s2">"A000002_Brief.pdf"</span>,
+            <span class="s2">"DocumentExtension"</span>: <span class="s2">"pdf"</span>,
+            <span class="s2">"DocumentTypeDisplayText"</span>: <span class="s2">"Client Brief"</span>,
+            <span class="s2">"ItemId"</span>: <span class="s2">"7901923e-deb6-4cbb-8742-b2587414796e"</span>,
+            <span class="s2">"ItemType"</span>: <span class="s2">"Documents"</span>,
+            <span class="s2">"CreatedBy"</span>: <span class="s2">"Glen Chamberlain"</span>,
+            <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+        <span class="o">}</span>...
+    <span class="o">]</span>...
+<span class="o">}</span>
+</code></pre>
+
+<p>The POST /api/v1/assignments/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single <code>Assignment</code> entity in the database.</p>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+<h3 id='http-request-41'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/assignments/{id}/documents/list</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Assignment&#39; entity.</td>
+</tr>
+<tr>
+<td>Skip (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Bypass a specified number of search results then return the remaining results.</td>
+</tr>
+<tr>
+<td>Take (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageSize (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageIndex (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the PageIndex property to determine the index of the currently displayed page.</td>
+</tr>
+<tr>
+<td>UsePaging (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>ReturnTotalCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the response.</td>
+</tr>
+<tr>
+<td>ReturnTotalDatabaseItemCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the database.</td>
+</tr>
+<tr>
+<td>ReturnUniqueValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns an object containing an array of unique values queried from a given field (or values returned from an expression).</td>
+</tr>
+<tr>
+<td>Select (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Specify an array of column names to be returned in the response.</td>
+</tr>
+<tr>
+<td>Filter (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Filter items by column names and values.</td>
+</tr>
+<tr>
+<td>CategoryFilter (optional)</td>
+<td>[Record]</td>
+<td>String</td>
+<td>Filter items by relationally linked categories.</td>
+</tr>
+<tr>
+<td>Sort (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Sort an array of items to sort by.</td>
+</tr>
+<tr>
+<td>Group (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Group results together by a column in the array.</td>
+</tr>
+<tr>
+<td>FormFactor (optional)</td>
+<td>Any</td>
+<td>String</td>
+<td>Filter the items by the application used to create them</td>
+</tr>
+<tr>
+<td>DisplayViewId (optional)</td>
+<td>00000000-0000-0000-0000-000000000000</td>
+<td>String</td>
+<td>Predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application.</td>
+</tr>
+<tr>
+<td>RequireGroupCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IsFirstLoad (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeAdditionalValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td><u>Some</u> list endpoints contain a nested array of columns named <code>AdditionalValues</code>, this parameter can be used to specify if they should be visible in the response body</td>
+</tr>
+<tr>
+<td>UseLookUpViewDefinition (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeDisplayViews (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the details of the predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application for this entity.</td>
+</tr>
+<tr>
+<td>IncludeAvailableColumns (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays all of the column names available in the list for the entity.</td>
+</tr>
+<tr>
+<td>IncludeCategories (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns the category lists and categories enabled for the entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-assignments-id-document'>POST /api/v1/assignments/{id}/document</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/assignments/40c04603-650a-4bda-82bc-b242e0df9c7b/document'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--form <span class="s1">'file=@"/C:/Users/glen.chamberlain/Documents/A000002_Brief.pdf"'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"AttachmentName"</span>: <span class="s2">"A000002_Brief.pdf"</span>,
+    <span class="s2">"DocumentExtension"</span>: <span class="s2">"application/pdf"</span>,
+    <span class="s2">"DocumentSize"</span>: 189345,
+    <span class="s2">"ItemId"</span>: <span class="s2">"ed25ed9b-062b-4e10-a055-6fb024fe53b2"</span>,
+    <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>The <code>POST /api/v1/assignments/{id}/document</code> endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Assignment&#39; entity in the database.</p>
+<h3 id='http-request-42'>HTTP Request</h3>
+<p><code>POST /api/v1/assignments/{id}/document</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Assignment&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='get-api-v1-assignments-id-documents-documentid'>GET /api/v1/assignments/{id}/documents/{documentId}</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request GET <span class="s1">'https://{subdomain}.invenias.com/api/v1/assignments/40c04603-650a-4bda-82bc-b242e0df9c7b/documents/ed25ed9b-062b-4e10-a055-6fb024fe53b2'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.</p>
+</blockquote>
+
+<p>The <code>GET /api/v1/assignments/{id}/documents/{documentId}</code> endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Assignment’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.</p>
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+<h3 id='http-request-43'>HTTP Request</h3>
+<p><code>GET /api/v1/Assignments/{id}/documents/{documentId}</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Assignment&#39; entity.</td>
+</tr>
+<tr>
+<td>documentid</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Document&#39; entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-programmes-id-documents-list'>POST /api/v1/programmes/{id}/documents/list</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/programmes/a2adc7f7-973a-4751-99bd-c9ce7ed3c504/documents/list'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+--data-raw <span class="s1">'{
+    "Select": [
+        "AttachmentName",
+        "DocumentTypeDisplayText",
+        "CreatedBy",
+        "DocumentExtension"
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"Items"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"AttachmentName"</span>: <span class="s2">"Talent_Mapping.xlsx"</span>,
+            <span class="s2">"DocumentExtension"</span>: <span class="s2">"xlsx"</span>,
+            <span class="s2">"ItemId"</span>: <span class="s2">"27569250-5c88-4d19-9d31-e02d46a403a7"</span>,
+            <span class="s2">"ItemType"</span>: <span class="s2">"Documents"</span>,
+            <span class="s2">"CreatedBy"</span>: <span class="s2">"Glen Chamberlain"</span>,
+            <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+        <span class="o">}</span>...
+    <span class="o">]</span>...
+<span class="o">}</span>
+</code></pre>
+
+<p>The POST /api/v1/programmes/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single <code>Programme</code> entity in the database.</p>
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+<h3 id='http-request-44'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/programmes/{id}/documents/list</code></p>
+
+<p><i>Table 1. Parameters Summary</i></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Programme&#39; entity.</td>
+</tr>
+<tr>
+<td>Skip (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Bypass a specified number of search results then return the remaining results.</td>
+</tr>
+<tr>
+<td>Take (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageSize (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the number of search results to return.</td>
+</tr>
+<tr>
+<td>PageIndex (optional)</td>
+<td>0</td>
+<td>Integer</td>
+<td>Specify the PageIndex property to determine the index of the currently displayed page.</td>
+</tr>
+<tr>
+<td>UsePaging (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>ReturnTotalCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the response.</td>
+</tr>
+<tr>
+<td>ReturnTotalDatabaseItemCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the total number of items in the database.</td>
+</tr>
+<tr>
+<td>ReturnUniqueValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns an object containing an array of unique values queried from a given field (or values returned from an expression).</td>
+</tr>
+<tr>
+<td>Select (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Specify an array of column names to be returned in the response.</td>
+</tr>
+<tr>
+<td>Filter (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Filter items by column names and values.</td>
+</tr>
+<tr>
+<td>CategoryFilter (optional)</td>
+<td>[Record]</td>
+<td>String</td>
+<td>Filter items by relationally linked categories.</td>
+</tr>
+<tr>
+<td>Sort (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Sort an array of items to sort by.</td>
+</tr>
+<tr>
+<td>Group (optional)</td>
+<td>[List]</td>
+<td>Array</td>
+<td>Group results together by a column in the array.</td>
+</tr>
+<tr>
+<td>FormFactor (optional)</td>
+<td>Any</td>
+<td>String</td>
+<td>Filter the items by the application used to create them</td>
+</tr>
+<tr>
+<td>DisplayViewId (optional)</td>
+<td>00000000-0000-0000-0000-000000000000</td>
+<td>String</td>
+<td>Predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application.</td>
+</tr>
+<tr>
+<td>RequireGroupCount (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IsFirstLoad (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeAdditionalValues (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td><u>Some</u> list endpoints contain a nested array of columns named <code>AdditionalValues</code>, this parameter can be used to specify if they should be visible in the response body</td>
+</tr>
+<tr>
+<td>UseLookUpViewDefinition (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>IncludeDisplayViews (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays the details of the predefined arrays of columns based upon &#39;views&#39; created in the Invenias Desktop application for this entity.</td>
+</tr>
+<tr>
+<td>IncludeAvailableColumns (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Displays all of the column names available in the list for the entity.</td>
+</tr>
+<tr>
+<td>IncludeCategories (optional)</td>
+<td>true</td>
+<td>Boolean</td>
+<td>Returns the category lists and categories enabled for the entity.</td>
+</tr>
+</tbody></table>
+<h2 id='post-api-v1-programmes-id-document'>POST /api/v1/programmes/{id}/document</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/api/v1/programmes/a2adc7f7-973a-4751-99bd-c9ce7ed3c504/document'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+--form <span class="s1">'file=@"/C:/Users/glen.chamberlain/Documents/Talent_Mapping.xlsx"'</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"AttachmentName"</span>: <span class="s2">"Talent_Mapping.xlsx"</span>,
+    <span class="s2">"DocumentExtension"</span>: <span class="s2">"application/xlsx"</span>,
+    <span class="s2">"DocumentSize"</span>: 234123,
+    <span class="s2">"ItemId"</span>: <span class="s2">"27569250-5c88-4d19-9d31-e02d46a403a7"</span>,
+    <span class="s2">"OffLimitsStatus"</span>: <span class="s2">"Off"</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>The <code>POST /api/v1/programmes/{id}/document</code> endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Programme&#39; entity in the database.</p>
+<h2 id='get-api-v1-programmes-id-documents-documentid'>GET /api/v1/programmes/{id}/documents/{documentId}</h2>
+<blockquote>
+<p>Example (cURL)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request GET <span class="s1">'https://{subdomain}.invenias.com/api/v1/programmes/40c04603-650a-4bda-82bc-b242e0df9c7b/documents/27569250-5c88-4d19-9d31-e02d46a403a7'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer {token}'</span>
+</code></pre>
+
+<blockquote>
+<p>The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.</p>
+</blockquote>
+
+<p>The <code>GET /api/v1/programmes/{id}/documents/{documentId}</code> endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Programme’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.</p>
+
+<aside class="notice">
+    Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
+</aside>
+<h3 id='http-request-45'>HTTP Request</h3>
+<p><code>GET /api/v1/programmes/{id}/documents/{documentId}</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Programme&#39; entity.</td>
+</tr>
+<tr>
+<td>documentid</td>
+<td>[required]</td>
+<td>String</td>
+<td>Specify the unique identifier for &#39;Document&#39; entity.</td>
+</tr>
+</tbody></table>
 <h1 id='faq'>FAQ</h1><h2 id='frequently-asked-questions'>Frequently asked questions</h2>
 <p>This section provides answers to common questions from both developers and customers:</p>
 <h3 id='what-is-an-api'>What is an API?</h3>
 <p>An application programming interface (API) is a set of routines, protocols, and tools for building software applications.</p>
 <h3 id='what-is-the-rate-limit-of-the-api'>What is the rate limit of the API?</h3>
-<p>We use a fixed-window rate-limiting strategy, up to <code>3000</code> API calls can be made at any interval within a 5-minute window. For more information on rate limits please see <a href="https://bullhorn.github.io/invenias-api-docs/#rate-limiting">here</a>.</p>
+<p>We use a fixed-window rate limiting strategy you can make up to <code>3000</code> api calls at any interval within a 5 minute window. For more information on rate limits please see <a href="https://bullhorn.github.io/invenias-api-docs/#rate-limiting">here</a>.</p>
 <h3 id='will-you-make-changes-to-your-api-that-will-leave-my-integration-unusable'>Will, you make changes to your API that will leave my integration unusable?</h3>
 <p>Whenever we make a change to the API we try to do so in an additive way that won&#39;t break existing integrations. However, occasionally things can change in a way that isn&#39;t backward compatible. In this event, communication will be provided.</p>
 <h3 id='can-you-help-us-with-the-coding'>Can you help us with the coding?</h3>
-<p>REST is an industry standard that is not dependant on any programming language or technology apart from HTTP. Our support team may not be able to help you with your coding problems as they are not aware of all the possible ways to implement a web service client and have limited knowledge about your platform architecture or technology stack. Therefore, Invenias may not be able to guarantee and support your code.</p>
+<p>REST is an industry standard that is not dependent on any programming language or technology apart from HTTP. Our support team may not help you with your coding problems as they are not aware of all the ways to implement a web service client and have limited knowledge about your platform architecture or technology stack. Therefore, Invenias may not guarantee and support your code.</p>
 <h3 id='how-do-i-filter-lists'>How do I filter lists?</h3>
 <p>Yes, it&#39;s possible to leverage both comparison and logical operators to filter lists. You can find more information <a href="https://bullhorn.github.io/invenias-api-docs/#using-lists">here</a>.</p>
 <h3 id='can-i-get-a-sandbox-environment-to-develop-in'>Can I get a sandbox environment to develop in?</h3>
@@ -4783,7 +6423,7 @@ Please note, each Professional User will have both a Person and User type entity
     <li>The request is missing authentication information, or the Authorization header provided could not be validated.</li>
 </ul></p>
 
-<p>Please review every single piece of text in the request, ensuring that there are no typos in the endpoint, headers (name and values), and body. If you copied and pasted any part of your API request, pay extra attention that they don&#39;t include any mistakes or random characters that could be causing an issue.</p>
+<p>Please review every single piece of text in the request, ensuring that there are no typos in the endpoint, headers (name and values), and body. If you copied and pasted any part of your API request, pay extra attention that they don’t include any mistakes or random characters that could cause an issue.</p>
 
 <aside class="warning">
 If this response is accompanied by the message "invalid_client" the 'Content-Type' header is incorrect or is missing from the request. Please ensure the 'Content-Type' header is declared in your request and the value is set to 'application/x-www-form-urlencoded'.
@@ -4796,42 +6436,42 @@ If this response is accompanied by the message "invalid_client" the 'Content-Typ
     <li>The user account has been disabled.</li>
     <li>The token has expired.</li>
     <li>The license has been removed from the user account.</li>
-    <li>The user accounts permission group has been changed and it&#39;s no longer in the &#39;System Administrator&#39; group.</li>
+    <li>The user accounts permission group has been changed, and it’s no longer in the ‘System Administrator’ group.</li>
     <li>The tenant&#39;s database has been pushed from our production environment to another environment to be worked on (e.g. Merging databases, data cleansing, etc...) by an SI Partner or our Professional Services team and all tokens have been invalidated.</li>
     <li>The user account has been disabled by our BTO team due to exceeding 9000 429 responses within a 5 minute period. Please check your logs for 429 responses. Please note, in this event, the primary contact of the Invenias customer will be notified of this action.</li>
 </ul></p>
 <h2 id='forbidden-403-response-code'>Forbidden (403) Response Code</h2>
-<p>The <code>403</code> error status code indicates the server understood the request but refuses to authorize it.</p>
+<p>The <code>403</code> error status code shows the server understood the request but refuses to authorize it.</p>
 
-<p>If authentication credentials were provided in the request, the server considers them insufficient to grant access. For example, a user might be trying to delete entities and the credentials being passed on the API request are for a user account without the appropriate permissions to do so.</p>
+<p>If authentication credentials were provided in the request, the server considers them insufficient to grant access. For example, a user might try to delete entities and the credentials being passed on the API request are for a user account without the permissions to do so.</p>
 
 <p>Another reason this status code might be returned is in case the user did not request an API access token with the correct permissions.</p>
 
 <p>To fix the API call for those two situations, make sure that the credentials you are using have the access level required by the endpoint, or that the access token has the correct permissions.</p>
 
-<p>Please note, if you are receiving <code>404</code> or <code>403</code> response codes from our servers there&#39;s a chance the Application has expired. In this event please see <a href="https://bullhorn.github.io/invenias-api-docs/#renewing-an-application">here</a> for more information on what to do. If you&#39;re unsure if your Application has expired or not please email our support team using support@invenias.com and they will be able to check for you.</p>
+<p>Please note, if you are receiving <code>404</code> or <code>403</code> response codes from our servers, there’s a chance the Application has expired. In this event please see <a href="https://bullhorn.github.io/invenias-api-docs/#renewing-an-application">here</a> for more information on what to do. If you’re unsure if your application has expired or not please email our support team using support@invenias.com and they will check for you.</p>
 <h2 id='not-found-404-response-code'>Not Found (404) Response Code</h2>
-<p>The <code>404</code> error status code indicates that the REST API can&#39;t map the client&#39;s URI to a resource but may be available in the future. ... This status code is used when our server does not wish to reveal exactly why the request has been refused, or when no other response is applicable.</p>
+<p>The <code>404</code> error status code indicates that the REST API can’t map the client’s URI to a resource, but may be available in the future. ... This status code is used when our server does not wish to reveal exactly why the request has been refused, or when no other response applies.</p>
 
-<p>Please note, if you are receiving <code>404</code> or <code>403</code> response codes from our servers there&#39;s a chance the Application has expired. In this event please see <a href="https://bullhorn.github.io/invenias-api-docs/#renewing-an-application">here</a> for more information on what to do. If you&#39;re unsure if your Application has expired or not please email our support team using support@invenias.com and they will be able to check for you.</p>
+<p>Please note, if you are receiving <code>404</code> or <code>403</code> response codes from our servers, there’s a chance the Application has expired. In this event please see <a href="https://bullhorn.github.io/invenias-api-docs/#renewing-an-application">here</a> for more information on what to do. If you’re unsure if your application has expired or not, please email our support team using support@invenias.com and they will check for you.</p>
 <h2 id='internal-server-error-500-response-code'>Internal Server Error (500) Response Code</h2>
-<p>The <code>500</code> Internal Server Error server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.</p>
+<p>The <code>500</code> Internal Server Error server error response code shows that the server encountered an unexpected condition that prevented it from fulfilling the request.</p>
 
-<p>Please note, the database may have data management policies enabled on the entity types you&#39;re trying to work with. Please see <a href="https://bullhorn.github.io/invenias-api-docs/#data-management">here</a> for more information on data management policies.</p>
+<p>Please note, the database may have data management policies enabled on the entity types you’re trying to work with. Please see <a href="https://bullhorn.github.io/invenias-api-docs/#data-management">here</a> for more information on data management policies.</p>
 <h2 id='service-unavailable-503-response-code'>Service Unavailable (503) Response Code</h2>
 <p>The <code>503</code> error always occurs when our servers can’t deliver the requested resources at the time the client requests them. 
 Usually, this is due to a database upgrade and is accompanied by the following comment in the response body &quot;Tenant is in Maintenance Mode - Upgrade in progress&quot;.</p>
 
 <p>Other causes of <code>503</code> errors:
 <ul>
-    <li>The server is overloaded, meaning that is it receiving more requests than it can handle. This is why it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks as well as web applications or the content management system being incorrectly programmed.</li>
-    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may result in an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a &#39;Service Unavailable&#39; message.</li>
+    <li>The server is overloaded, meaning that is it receiving more requests than it can handle. Therefore, it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks and web applications, or the content management system being incorrectly programmed.</li>
+    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may cause an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a ‘Service Unavailable’ message.</li>
 </ul></p>
 
-<p>In summary, <code>503</code> errors are sometimes unavoidable, it&#39;s good practice to add logic to handle them in your Application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.</p>
+<p>In summary, <code>503</code> errors are sometimes unavoidable, it&#39;s good practice to add logic to handle them in your application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.</p>
 
 <aside class="notice">
-Please note, database upgrades are always scheduled outside of our customer's typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers then the database upgrade will be scheduled to run on a weekend to minimize disruption.
+Please note, database upgrades run outside of our customer’s typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers, then the database upgrade will run on a weekend to minimize disruption.
 </aside>
 
       </div>
