@@ -29,9 +29,36 @@ The REST API follows the specifications and conventions of the JavaScript Object
 <li>[http://en.wikipedia.org/wiki/JSON](http://en.wikipedia.org/wiki/JSON)</li>
 </ul>
 
-# Creating an API Application
-## POST /api/v1/thirdpartyapplications
+# Authorization Flows
+## Which Flow Should I Use?
+The Invenias API uses the OAuth 2.0 Authorization Framework, which supports several flows (or grants). Flows are ways of retrieving an Access Token. Deciding which is suited for your use case depends mostly on your application type, but other parameters will also influence the decision (e.g. The level of trust for the client, the experience you want your users to have etc).
 
+## OAuth 2.0 terminology
+
+Term | Description
+--------- | -----------
+Resource Owner | Entity that can grant access to a protected resource. Typically, this is the end-user.
+Client | Application requesting access to a protected resource on behalf of the Resource Owner.
+Authorization Server | Server that authenticates the Resource Owner and issues Access Tokens after getting proper authorization.
+User Agent | Agent used by the Resource Owner to interact with the Client (e.g. a browser or a native application).
+
+## Is the Client the Resource Owner?
+The first decision point is about whether the party that requires access to resources is a machine. With machine-to-machine authorization, the Client is also the Resource Owner, not requiring end-user authorization. An example is a cron job that uses an API to import information to a database. In this example, the cron job is the Client and the Resource Owner since it holds the Client ID and Client Secret and uses them to get an Access Token from the Authorization Server.
+
+If this case matches your needs, then to learn how this flow works and how to implement it.
+
+## Is the Client a web app executing on the server?
+If the Client is a regular web app executing on a server, then the Authorization Code Flow is the flow you should use. Using this, the Client can retrieve an Access Token and, optionally, a Refresh Token. It’s considered the safest choice since the Access Token is passed directly to the web server hosting the Client, without going through the user’s web browser and risking exposure.
+
+If this case matches your needs, then to learn how this flow works and how to implement it.
+
+## Is the Client absolutely trusted with user credentials?
+This decision may result in the Resource Owner Password Credentials Grant. In this flow, the end-user is asked to fill in credentials (username/password), typically using an interactive form. This information is sent to the backend and from there to Invenias. It is therefore imperative that the Client is absolutely trusted with this information.
+
+This grant should only be used when redirect-based flows (like the Authorization Code Flow) are not possible. If this is your case, then to learn about how this flow works and how to implement it.
+
+# Creating an Application that Supports Resource Owner Authorization Flow
+## POST /api/v1/thirdpartyapplications
 
 > Example Response (JSON)
 
@@ -59,7 +86,7 @@ Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need 
 
 After Swagger returns you an `api_key`, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the `client_id` and the `client_secret`. 
 
-From here, you will need to choose the flow type that your application requires. There’s some documentation available [here](https://auth0.com/docs/flows) to help.
+From here, you will need to choose the flow type that your application requires.
 
 <aside class="notice">
 An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
@@ -72,8 +99,53 @@ Parameter | Default | Description
 --------- | ------- | -----------
 id | [required] | How long the Application is valid for: `OneYear`, `TwoYears`, or `FiveYears`.
 Name | [required] | The friendly name of your Application.
-FlowType | `ResourceOwner` | The OAuth 2,0 Authorization flow: This can be either `ResourceOwner` or `Code`.
-ReplyURL (Optional)| | The post-login URL to redirect to your Application.
+FlowType | `ResourceOwner` | The OAuth 2.0 Authorization flow.
+
+# Creating an Application that Supports Code Authorization Flow
+## POST /api/v1/thirdpartyapplications
+
+> Example Response (JSON)
+
+
+```shell
+{
+  "ClientId": "{clientid}",
+  "ClientSecret": "{clientsecret}",
+  "ExpiresOn": "2026-10-14T15:04:19.7003133+00:00",
+  "IsEnabled": true,
+  "Name": "MyApplication",
+  "ReplyUrl": " https://invenias.com",
+  "FlowType": "Code"
+}
+
+```
+> Please note, this is the only time you’ll get the client_id and client_secret - please store these securely, as you won’t be able to retrieve these again.
+
+To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger.
+
+<aside class="notice">
+Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
+</aside>
+
+Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. 
+
+After Swagger returns you an `api_key`, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the `client_id` and the `client_secret`. 
+
+From here, you will need to choose the flow type that your application requires.
+
+<aside class="notice">
+An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/thirdpartyapplications`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | How long the Application is valid for: `OneYear`, `TwoYears`, or `FiveYears`.
+Name | [required] | The friendly name of your Application.
+FlowType | `Code` | The OAuth 2.0 Authorization flow.
+ReplyURL| [required] | The post-login URL to redirect to your Application.
 
 # Renewing an Application
 ## POST /api/v1/thirdpartyapplications/{id}/renew
@@ -115,7 +187,7 @@ An `api_key` will be valid for 3 minutes before expiring. You can clear this fie
 </aside>
 
 <aside class="warning">
-Please note, when renewing your application we will issue a new client_secret, please remember you update this on your application or you cannot authenticate.
+Please note, when renewing your application we will issue a new client_secret. Please remember to update this on your application or you cannot authenticate.
 </aside>
 
 ### HTTP Request
@@ -127,7 +199,19 @@ id | [required] | This is the unique identifier for the expired application you 
 expiration | [required] | The time you wish the renew the application for: `OneYear`, `TwoYears`, or `FiveYears`.
 
 # Authentication
-## POST /identity/connect/token
+The Invenias API uses the OAuth 2.0 standard for authentication.
+
+Every API integration has a `client_id` and `client_secret`, which are used when authenticating along with valid user credentials. The Invenias API supports the following grant types for authenticating:
+
+<ul>
+<li>Password (ResourceOwner)</li>
+<li>Authorization Code (Code)</li>
+<li>Refresh Token (Code)</li>
+</ul>
+
+Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.
+
+## Resource Owner Flow
 
 > To authorize, use this code:
 
@@ -143,7 +227,6 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
 --data-urlencode 'username={username}'
 ```
 
-
 > Example Response (JSON)
 
 
@@ -154,20 +237,6 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
     "token_type": "Bearer"
 }
 ```
-
-The Invenias API uses the OAuth 2.0 standard for authentication.
-
-Every API integration has a `client_id` and `client_secret`, which are used when authenticating along with valid user credentials. The Invenias API supports the following grant types for authenticating:
-
-<ul>
-<li>Password (ResourceOwner)</li>
-<li>Authorization Code (Code)</li>
-<li>Refresh Token</li>
-</ul>
-
-Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.
-
-Here’s an example of authenticating when using the password grant type:
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/identity/connect/token`
@@ -183,7 +252,63 @@ scope | openid profile api email | Scope is a mechanism in OAuth 2.0 to limit an
 
 You will need to use this token to authenticate when using all endpoints using the Authorization header using the format “Authorization: {type} {credentials}”, where the type is your `token_type` and the credentials are your `access_token`.
 
+<aside class="notice">
+A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
+
+Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application’s access if needed.
+</aside>
+
+### Unauthorized requests
+If a client request contains an invalid `bearer_token`, the server returns response status 401 (unauthorized). For more information on HTTP status codes, see [here](https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes).
+
+## Code Authorization Flow
+
+The Authorization Code grant type is used by confidential and public clients to exchange an authorization code for an access token.
+After the user returns to the client via the redirect URL, the application will get the authorization code from the URL and use it to request an access token.
+
+### How it works
+
+<img src="images\codeflow.png" alt="X-Request-Quota-Remaining" class="inline"/>
+<i>Figure 1. Code Authorization Flow</i>
+
+<ol>
+	<li>The user clicks Login within the regular web application.</li>
+	<li>Your application redirects the user to the Invenias Authorization Server /identity/connect/authorize endpoint).</li>
+	<li>The Invenias Authorization Server redirects the user to the login and authorization prompt.</li>
+	<li>The user authenticates using the default Identify Provider.</li>
+	<li>The Invenias Authorization Server redirects the user back to the application with an authorization code, which is good for one use.</li>
+	<li>Your application sends this code to the Invenias Authorization Server (identity/connect/token endpoint) along with the application's Client ID and Client Secret.</li>
+	<li>The Invenias Authorization Server verifies the code, Client ID, and Client Secret.</li>
+	<li>The Invenias Authorization Server responds with an ID Token and Access Token (and optionally, a Refresh Token).</li>
+	<li>Your application can use the Access Token to call an API to access information about the user.</li>
+	<li>The API responds with requested data.</li>
+</ol>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/identity/connect/authorize?response_type=code&client_id={clientId}&state={state} &scope=openid api profile offline_access&redirect_uri={replyurl}`
+
+Parameter | Default | Description
+--------- | ------- | -----------
+response_type | `code` | Grant Type.
+client_id | [required] | This is the unique identifier for your application.
+state (optional) |  | The 'state' parameter preserves some state objects set by the client in the Authorization request and makes it available to the client in the response.
+scope | openid api profile offline_access | Scope is a mechanism in OAuth 2.0 to limit an application's access.
+redirect_uri |  | The post-login URL to redirect to your Application.
+
+<aside class="notice">In the response there is a header named ‘Location’, you will need to redirect the end user to this URL via your application were they will be prompted to sign in via their chosen Identity Provider.</aside>
+
 Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the additional features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.
+
+### Get an Access Token
+Once the Invenias User has successfully signed in via an Identity Provider it will add the authentication response, including a id_token, access_token, refresh_token, refresh_token_expires_on and expires_in (if authentication was successful) to the response body of the Reply URL.
+
+Name | Description
+--------- | -----------
+id_token | Also referred to as a ‘token hint’ the id_token can be used to end a user session and revoking the current access_token.
+access_token | Access tokens are used in token-based authentication to allow an application to access an API.
+expires_in | The period of time before the access_token is invalidated.
+refresh_token | A refresh token allows an application to obtain a new access token without prompting the user.
+refresh_token_expires_on | The date and time when the refresh token.
 
 <aside class="notice">
 A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
@@ -193,14 +318,59 @@ Tokens have a short expiration time ensuring that it forces applications to refr
 When an access token expires, the application can use the refresh token to get a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
 </aside>
 
-### Unauthorized requests
-If a client request contains an invalid `bearer_token`, the server returns response status 401 (unauthorized). For more information on HTTP status codes, see [here](https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes).
+# Refresh Tokens (Code Flow Only)
 
-### Identifying if an OAuth token has expired
+> To get a new access_token using a refresh_token, use this code:
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/identity/connect/token' \
+--header 'Authorization: Bearer Bearer {token}' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=refresh_token' \
+--data-urlencode 'client_id={clientid}' \
+--data-urlencode 'client_secret={clientsecret}' \
+--data-urlencode 'refresh_token={refreshtoken}'
+
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "id_token": "{newhint}",
+    "access_token": "{newtoken}",
+    "expires_in": 86400,
+    "token_type": "Bearer",
+    "refresh_token": "{refreshtoken}",
+    "refresh_token_expires_on": "2031-10-11T13:20:01.2551196+00:00"
+}
+
+```
+
+When access tokens expire or become invalid but the application still needs to access a protected resource, the application faces the problem of getting a new access token without forcing the user to once again grant permission. To solve this problem, OAuth 2.0 introduced an artifact called a refresh token. A refresh token allows an application to obtain a new access token without prompting the user.
+
+## Obtaining Refresh Tokens
+A refresh token can be requested by an application as part of the process of obtaining an access token. Many authorization servers implement the refresh token request mechanism defined in the OpenID Connect specification. In this case, an application must include the offline_access scope when initiating a request for an authorization code. After the user successfully authenticates and grants consent for the application to access the protected resource, the application will receive an authorization code that can be exchanged at the token endpoint for both an access and a refresh token.
+
+## Using Refresh Tokens
+
+When a new access token is needed, the application can make a POST request back to the token endpoint https://{subdomain}.invenias.com/identity/connect/token using a grant type of refresh_token (web applications need to include a client secret).
+While refresh tokens are often long-lived, the authorization server can invalidate them. Some of the reasons a refresh token may no longer be valid include:
+<ul>
+    <li>the authorization server has revoked the refresh token.</li>
+    <li>the user has revoked their consent for authorization.</li>
+    <li>the refresh token has expired.</li>
+    <li>the user changes their password.</li> 
+    <li>the authentication policy for the resource has changed (e.g., originally the resource only used usernames and passwords, but now it requires MFA).</li>
+</ul>
+
+Because refresh tokens have the potential for a long lifetime, developers should ensure that strict storage requirements are in place to keep them from being leaked. For example, on web applications, refresh tokens should only leave the backend when being sent to the authorization server, and the backend should be secure. The client secret should be protected in a similar fashion. Mobile applications do not require a client secret, but they should still be sure to store refresh tokens somewhere only the client application can access.
+
+# Identifying when an OAuth token has expired
 
 There are two common approaches adopted by web developers to identify when an OAuth token has expired:
 
-<b> Token Refresh Handling: Method 1 </b>
+### Token Refresh Handling: Method 1
 
 Upon receiving a valid `access_token`, `expires_in value`, `refresh_token`, etc., clients can process this by storing an expiration time as a local variable and checking it on each request. You can do this using the following steps:
 
@@ -214,7 +384,7 @@ When checking the time, be sure you are (at the same time), for example, using t
 
 Besides receiving a new `access_token`, you may receive a new `refresh_token` with an expiration time further in the future. If you receive this, store the new refresh_token to extend the life of your session.
 
-<b>Token Refresh Handling: Method 2</b>
+### Token Refresh Handling: Method 2
 
 Another method of handling token refresh is performing a manual refresh after receiving an invalid token error. We can do this with the previous approach or by itself.
 
@@ -2596,7 +2766,7 @@ Name | Description
 [POST /api/v1/people/{id}/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-documents-list) | Returns a list of `Document` entities in the database that are relationally linked to a single `Person` entity.
 [POST /api/v1/people/{id}/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-document) | Adds a single document to Azure Blob Storage and relationally link it to a single `Person` entity.
 [GET /api/v1/people/{id}/documents/{documentId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-id-documents-documentid) | Downloads a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Person` entity.
-[POST /api/v1/people/{id}/documents/{documentId}/defaultCv] (https://bullhorn.github.io/invenias-api-docs/post-api-v1-people-id-documents-documentid-defaultcv) | Flags a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Person` entity as the `Default` Curriculum Vitae.
+[POST /api/v1/people/{id}/documents/{documentId}/defaultCv] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-documents-documentid-defaultcv) | Flags a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Person` entity as the `Default` Curriculum Vitae.
 [POST /api/v1/companies/{id}/documents/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-documents-list) | Returns a list of `Document` entities in the database that are relationally linked to a single `Company` entity.
 [POST /api/v1/companies/{id}/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-document) | Adds a single document to Azure Blob Storage and relationally link it to a single `Company` entity.
 [GET /api/v1/companies/{id}/documents/{documentId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-id-documents-documentid) | Downloads a single `Document` entity from Azure Blob Storage that is relationally linked to a single `Company` entity.
