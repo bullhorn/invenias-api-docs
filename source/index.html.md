@@ -360,6 +360,7 @@ While refresh tokens are often long-lived, the authorization server can invalida
     <li>the authorization server has revoked the refresh token.</li>
     <li>the user has revoked their consent for authorization.</li>
     <li>the refresh token has expired.</li>
+    <li>the user changes their password.</li> 
     <li>the authentication policy for the resource has changed (e.g., originally the resource only used usernames and passwords, but now it requires MFA).</li>
 </ul>
 
