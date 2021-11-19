@@ -314,10 +314,38 @@
               </ul>
           </li>
           <li>
-            <a href="#creating-an-api-application" class="toc-h1 toc-link" data-title="Creating an API Application">Creating an API Application</a>
+            <a href="#authorization-flows" class="toc-h1 toc-link" data-title="Authorization Flows">Authorization Flows</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#which-flow-should-i-use" class="toc-h2 toc-link" data-title="Which Flow Should I Use?">Which Flow Should I Use?</a>
+                  </li>
+                  <li>
+                    <a href="#oauth-2-0-terminology" class="toc-h2 toc-link" data-title="OAuth 2.0 terminology">OAuth 2.0 terminology</a>
+                  </li>
+                  <li>
+                    <a href="#is-the-client-the-resource-owner" class="toc-h2 toc-link" data-title="Is the Client the Resource Owner?">Is the Client the Resource Owner?</a>
+                  </li>
+                  <li>
+                    <a href="#is-the-client-a-web-app-executing-on-the-server" class="toc-h2 toc-link" data-title="Is the Client a web app executing on the server?">Is the Client a web app executing on the server?</a>
+                  </li>
+                  <li>
+                    <a href="#is-the-client-absolutely-trusted-with-user-credentials" class="toc-h2 toc-link" data-title="Is the Client absolutely trusted with user credentials?">Is the Client absolutely trusted with user credentials?</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#creating-an-application-that-supports-resource-owner-authorization-flow" class="toc-h1 toc-link" data-title="Creating an Application that Supports Resource Owner Authorization Flow">Creating an Application that Supports Resource Owner Authorization Flow</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#post-api-v1-thirdpartyapplications" class="toc-h2 toc-link" data-title="POST /api/v1/thirdpartyapplications">POST /api/v1/thirdpartyapplications</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#creating-an-application-that-supports-code-authorization-flow" class="toc-h1 toc-link" data-title="Creating an Application that Supports Code Authorization Flow">Creating an Application that Supports Code Authorization Flow</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-api-v1-thirdpartyapplications-2" class="toc-h2 toc-link" data-title="POST /api/v1/thirdpartyapplications">POST /api/v1/thirdpartyapplications</a>
                   </li>
               </ul>
           </li>
@@ -333,7 +361,32 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#post-identity-connect-token" class="toc-h2 toc-link" data-title="POST /identity/connect/token">POST /identity/connect/token</a>
+                    <a href="#resource-owner-flow" class="toc-h2 toc-link" data-title="Resource Owner Flow">Resource Owner Flow</a>
+                  </li>
+                  <li>
+                    <a href="#code-authorization-flow" class="toc-h2 toc-link" data-title="Code Authorization Flow">Code Authorization Flow</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#refresh-tokens-code-flow-only" class="toc-h1 toc-link" data-title="Refresh Tokens (Code Flow Only)">Refresh Tokens (Code Flow Only)</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#obtaining-refresh-tokens" class="toc-h2 toc-link" data-title="Obtaining Refresh Tokens">Obtaining Refresh Tokens</a>
+                  </li>
+                  <li>
+                    <a href="#using-refresh-tokens" class="toc-h2 toc-link" data-title="Using Refresh Tokens">Using Refresh Tokens</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#identifying-when-an-oauth-token-has-expired" class="toc-h1 toc-link" data-title="Identifying when an OAuth token has expired">Identifying when an OAuth token has expired</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#token-refresh-handling-method-1" class="toc-h2 toc-link" data-title="Token Refresh Handling: Method 1">Token Refresh Handling: Method 1</a>
+                  </li>
+                  <li>
+                    <a href="#token-refresh-handling-method-2" class="toc-h2 toc-link" data-title="Token Refresh Handling: Method 2">Token Refresh Handling: Method 2</a>
                   </li>
               </ul>
           </li>
@@ -600,7 +653,45 @@
 <li><a href="http://www.json.org">http://www.json.org</a></li>
 <li><a href="http://en.wikipedia.org/wiki/JSON">http://en.wikipedia.org/wiki/JSON</a></li>
 </ul></p>
-<h1 id='creating-an-api-application'>Creating an API Application</h1><h2 id='post-api-v1-thirdpartyapplications'>POST /api/v1/thirdpartyapplications</h2>
+<h1 id='authorization-flows'>Authorization Flows</h1><h2 id='which-flow-should-i-use'>Which Flow Should I Use?</h2>
+<p>The Invenias API uses the OAuth 2.0 Authorization Framework, which supports several flows (or grants). Flows are ways of retrieving an Access Token. Deciding which is suited for your use case depends mostly on your application type, but other parameters will also influence the decision (e.g. The level of trust for the client, the experience you want your users to have etc).</p>
+<h2 id='oauth-2-0-terminology'>OAuth 2.0 terminology</h2>
+<table><thead>
+<tr>
+<th>Term</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Resource Owner</td>
+<td>Entity that can grant access to a protected resource. Typically, this is the end-user.</td>
+</tr>
+<tr>
+<td>Client</td>
+<td>Application requesting access to a protected resource on behalf of the Resource Owner.</td>
+</tr>
+<tr>
+<td>Authorization Server</td>
+<td>Server that authenticates the Resource Owner and issues Access Tokens after getting proper authorization.</td>
+</tr>
+<tr>
+<td>User Agent</td>
+<td>Agent used by the Resource Owner to interact with the Client (e.g. a browser or a native application).</td>
+</tr>
+</tbody></table>
+<h2 id='is-the-client-the-resource-owner'>Is the Client the Resource Owner?</h2>
+<p>The first decision point is about whether the party that requires access to resources is a machine. With machine-to-machine authorization, the Client is also the Resource Owner, not requiring end-user authorization. An example is a cron job that uses an API to import information to a database. In this example, the cron job is the Client and the Resource Owner since it holds the Client ID and Client Secret and uses them to get an Access Token from the Authorization Server.</p>
+
+<p>If this case matches your needs, then to learn how this flow works and how to implement it.</p>
+<h2 id='is-the-client-a-web-app-executing-on-the-server'>Is the Client a web app executing on the server?</h2>
+<p>If the Client is a regular web app executing on a server, then the Authorization Code Flow is the flow you should use. Using this, the Client can retrieve an Access Token and, optionally, a Refresh Token. It’s considered the safest choice since the Access Token is passed directly to the web server hosting the Client, without going through the user’s web browser and risking exposure.</p>
+
+<p>If this case matches your needs, then to learn how this flow works and how to implement it.</p>
+<h2 id='is-the-client-absolutely-trusted-with-user-credentials'>Is the Client absolutely trusted with user credentials?</h2>
+<p>This decision may result in the Resource Owner Password Credentials Grant. In this flow, the end-user is asked to fill in credentials (username/password), typically using an interactive form. This information is sent to the backend and from there to Invenias. It is therefore imperative that the Client is absolutely trusted with this information.</p>
+
+<p>This grant should only be used when redirect-based flows (like the Authorization Code Flow) are not possible. If this is your case, then to learn about how this flow works and how to implement it.</p>
+<h1 id='creating-an-application-that-supports-resource-owner-authorization-flow'>Creating an Application that Supports Resource Owner Authorization Flow</h1><h2 id='post-api-v1-thirdpartyapplications'>POST /api/v1/thirdpartyapplications</h2>
 <blockquote>
 <p>Example Response (JSON)</p>
 </blockquote>
@@ -629,7 +720,7 @@ Please note, you must have a licensed Invenias User Account and be in the ‘Sys
 
 <p>After Swagger returns you an <code>api_key</code>, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the <code>client_id</code> and the <code>client_secret</code>. </p>
 
-<p>From here, you will need to choose the flow type that your application requires. There’s some documentation available <a href="https://auth0.com/docs/flows">here</a> to help.</p>
+<p>From here, you will need to choose the flow type that your application requires.</p>
 
 <aside class="notice">
 An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
@@ -657,11 +748,72 @@ An `api_key` will be valid for 3 minutes before expiring. You can clear this fie
 <tr>
 <td>FlowType</td>
 <td><code>ResourceOwner</code></td>
-<td>The OAuth 2,0 Authorization flow: This can be either <code>ResourceOwner</code> or <code>Code</code>.</td>
+<td>The OAuth 2.0 Authorization flow.</td>
+</tr>
+</tbody></table>
+<h1 id='creating-an-application-that-supports-code-authorization-flow'>Creating an Application that Supports Code Authorization Flow</h1><h2 id='post-api-v1-thirdpartyapplications-2'>POST /api/v1/thirdpartyapplications</h2>
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"ClientId"</span>: <span class="s2">"{clientid}"</span>,
+  <span class="s2">"ClientSecret"</span>: <span class="s2">"{clientsecret}"</span>,
+  <span class="s2">"ExpiresOn"</span>: <span class="s2">"2026-10-14T15:04:19.7003133+00:00"</span>,
+  <span class="s2">"IsEnabled"</span>: <span class="nb">true</span>,
+  <span class="s2">"Name"</span>: <span class="s2">"MyApplication"</span>,
+  <span class="s2">"ReplyUrl"</span>: <span class="s2">" https://invenias.com"</span>,
+  <span class="s2">"FlowType"</span>: <span class="s2">"Code"</span>
+<span class="o">}</span>
+
+</code></pre>
+
+<blockquote>
+<p>Please note, this is the only time you’ll get the client_id and client_secret - please store these securely, as you won’t be able to retrieve these again.</p>
+</blockquote>
+
+<p>To create a new integration, use the <code>POST /api/v1/thirdpartyapplications</code> endpoint using Swagger.</p>
+
+<aside class="notice">
+Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
+</aside>
+
+<p>Before you can use the <code>POST /api/v1/thirdpartyapplications</code> endpoint, you need to enter an <code>api_key</code> in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the <code>api_key</code> field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. </p>
+
+<p>After Swagger returns you an <code>api_key</code>, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the <code>client_id</code> and the <code>client_secret</code>. </p>
+
+<p>From here, you will need to choose the flow type that your application requires.</p>
+
+<aside class="notice">
+An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+</aside>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/api/v1/thirdpartyapplications</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>[required]</td>
+<td>How long the Application is valid for: <code>OneYear</code>, <code>TwoYears</code>, or <code>FiveYears</code>.</td>
 </tr>
 <tr>
-<td>ReplyURL (Optional)</td>
-<td></td>
+<td>Name</td>
+<td>[required]</td>
+<td>The friendly name of your Application.</td>
+</tr>
+<tr>
+<td>FlowType</td>
+<td><code>Code</code></td>
+<td>The OAuth 2.0 Authorization flow.</td>
+</tr>
+<tr>
+<td>ReplyURL</td>
+<td>[required]</td>
 <td>The post-login URL to redirect to your Application.</td>
 </tr>
 </tbody></table>
@@ -706,9 +858,9 @@ An `api_key` will be valid for 3 minutes before expiring. You can clear this fie
 </aside>
 
 <aside class="warning">
-Please note, when renewing your application we will issue a new client_secret, please remember you update this on your application or you cannot authenticate.
+Please note, when renewing your application we will issue a new client_secret. Please remember to update this on your application or you cannot authenticate.
 </aside>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/thirdpartyapplications/{client_id}/renew?expiration=FiveYears</code></p>
 
 <table><thead>
@@ -729,7 +881,19 @@ Please note, when renewing your application we will issue a new client_secret, p
 <td>The time you wish the renew the application for: <code>OneYear</code>, <code>TwoYears</code>, or <code>FiveYears</code>.</td>
 </tr>
 </tbody></table>
-<h1 id='authentication'>Authentication</h1><h2 id='post-identity-connect-token'>POST /identity/connect/token</h2>
+<h1 id='authentication'>Authentication</h1>
+<p>The Invenias API uses the OAuth 2.0 standard for authentication.</p>
+
+<p>Every API integration has a <code>client_id</code> and <code>client_secret</code>, which are used when authenticating along with valid user credentials. The Invenias API supports the following grant types for authenticating:</p>
+
+<ul>
+<li>Password (ResourceOwner)</li>
+<li>Authorization Code (Code)</li>
+<li>Refresh Token (Code)</li>
+</ul>
+
+<p>Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.</p>
+<h2 id='resource-owner-flow'>Resource Owner Flow</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
@@ -753,21 +917,7 @@ Please note, when renewing your application we will issue a new client_secret, p
     <span class="s2">"token_type"</span>: <span class="s2">"Bearer"</span>
 <span class="o">}</span>
 </code></pre>
-
-<p>The Invenias API uses the OAuth 2.0 standard for authentication.</p>
-
-<p>Every API integration has a <code>client_id</code> and <code>client_secret</code>, which are used when authenticating along with valid user credentials. The Invenias API supports the following grant types for authenticating:</p>
-
-<ul>
-<li>Password (ResourceOwner)</li>
-<li>Authorization Code (Code)</li>
-<li>Refresh Token</li>
-</ul>
-
-<p>Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.</p>
-
-<p>Here’s an example of authenticating when using the password grant type:</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/identity/connect/token</code></p>
 
 <table><thead>
@@ -811,7 +961,102 @@ Please note, when renewing your application we will issue a new client_secret, p
 
 <p>You will need to use this token to authenticate when using all endpoints using the Authorization header using the format “Authorization: {type} {credentials}”, where the type is your <code>token_type</code> and the credentials are your <code>access_token</code>.</p>
 
+<aside class="notice">
+A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
+
+Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application’s access if needed.
+</aside>
+<h3 id='unauthorized-requests'>Unauthorized requests</h3>
+<p>If a client request contains an invalid <code>bearer_token</code>, the server returns response status 401 (unauthorized). For more information on HTTP status codes, see <a href="https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes">here</a>.</p>
+<h2 id='code-authorization-flow'>Code Authorization Flow</h2>
+<p>The Authorization Code grant type is used by confidential and public clients to exchange an authorization code for an access token.
+After the user returns to the client via the redirect URL, the application will get the authorization code from the URL and use it to request an access token.</p>
+<h3 id='how-it-works'>How it works</h3>
+<p><img src="images\codeflow.png" alt="X-Request-Quota-Remaining" class="inline"/>
+<i>Figure 1. Code Authorization Flow</i></p>
+
+<ol>
+    <li>The user clicks Login within the regular web application.</li>
+    <li>Your application redirects the user to the Invenias Authorization Server /identity/connect/authorize endpoint).</li>
+    <li>The Invenias Authorization Server redirects the user to the login and authorization prompt.</li>
+    <li>The user authenticates using the default Identify Provider.</li>
+    <li>The Invenias Authorization Server redirects the user back to the application with an authorization code, which is good for one use.</li>
+    <li>Your application sends this code to the Invenias Authorization Server (identity/connect/token endpoint) along with the application's Client ID and Client Secret.</li>
+    <li>The Invenias Authorization Server verifies the code, Client ID, and Client Secret.</li>
+    <li>The Invenias Authorization Server responds with an ID Token and Access Token (and optionally, a Refresh Token).</li>
+    <li>Your application can use the Access Token to call an API to access information about the user.</li>
+    <li>The API responds with requested data.</li>
+</ol>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>https://{subdomain}.invenias.com/identity/connect/authorize?response_type=code&amp;client_id={clientId}&amp;state={state} &amp;scope=openid api profile offline_access&amp;redirect_uri={replyurl}</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>response_type</td>
+<td><code>code</code></td>
+<td>Grant Type.</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>[required]</td>
+<td>This is the unique identifier for your application.</td>
+</tr>
+<tr>
+<td>state (optional)</td>
+<td></td>
+<td>The &#39;state&#39; parameter preserves some state objects set by the client in the Authorization request and makes it available to the client in the response.</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>openid api profile offline_access</td>
+<td>Scope is a mechanism in OAuth 2.0 to limit an application&#39;s access.</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td></td>
+<td>The post-login URL to redirect to your Application.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">In the response there is a header named ‘Location’, you will need to redirect the end user to this URL via your application were they will be prompted to sign in via their chosen Identity Provider.</aside>
+
 <p>Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the additional features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.</p>
+<h3 id='get-an-access-token'>Get an Access Token</h3>
+<p>Once the Invenias User has successfully signed in via an Identity Provider it will add the authentication response, including a id_token, access_token, refresh_token, refresh_token_expires_on and expires_in (if authentication was successful) to the response body of the Reply URL.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id_token</td>
+<td>Also referred to as a ‘token hint’ the id_token can be used to end a user session and revoking the current access_token.</td>
+</tr>
+<tr>
+<td>access_token</td>
+<td>Access tokens are used in token-based authentication to allow an application to access an API.</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>The period of time before the access_token is invalidated.</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>A refresh token allows an application to obtain a new access token without prompting the user.</td>
+</tr>
+<tr>
+<td>refresh_token_expires_on</td>
+<td>The date and time when the refresh token.</td>
+</tr>
+</tbody></table>
 
 <aside class="notice">
 A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
@@ -820,13 +1065,52 @@ Tokens have a short expiration time ensuring that it forces applications to refr
 
 When an access token expires, the application can use the refresh token to get a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
 </aside>
-<h3 id='unauthorized-requests'>Unauthorized requests</h3>
-<p>If a client request contains an invalid <code>bearer_token</code>, the server returns response status 401 (unauthorized). For more information on HTTP status codes, see <a href="https://bullhorn.github.io/invenias-api-docs/#http-response-status-codes">here</a>.</p>
-<h3 id='identifying-if-an-oauth-token-has-expired'>Identifying if an OAuth token has expired</h3>
+<h1 id='refresh-tokens-code-flow-only'>Refresh Tokens (Code Flow Only)</h1>
+<blockquote>
+<p>To get a new access_token using a refresh_token, use this code:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --location --request POST <span class="s1">'https://{subdomain}.invenias.com/identity/connect/token'</span> <span class="se">\</span>
+--header <span class="s1">'Authorization: Bearer Bearer {token}'</span> <span class="se">\</span>
+--header <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+--data-urlencode <span class="s1">'grant_type=refresh_token'</span> <span class="se">\</span>
+--data-urlencode <span class="s1">'client_id={clientid}'</span> <span class="se">\</span>
+--data-urlencode <span class="s1">'client_secret={clientsecret}'</span> <span class="se">\</span>
+--data-urlencode <span class="s1">'refresh_token={refreshtoken}'</span>
+
+</code></pre>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+    <span class="s2">"id_token"</span>: <span class="s2">"{newhint}"</span>,
+    <span class="s2">"access_token"</span>: <span class="s2">"{newtoken}"</span>,
+    <span class="s2">"expires_in"</span>: 86400,
+    <span class="s2">"token_type"</span>: <span class="s2">"Bearer"</span>,
+    <span class="s2">"refresh_token"</span>: <span class="s2">"{refreshtoken}"</span>,
+    <span class="s2">"refresh_token_expires_on"</span>: <span class="s2">"2031-10-11T13:20:01.2551196+00:00"</span>
+<span class="o">}</span>
+
+</code></pre>
+
+<p>When access tokens expire or become invalid but the application still needs to access a protected resource, the application faces the problem of getting a new access token without forcing the user to once again grant permission. To solve this problem, OAuth 2.0 introduced an artifact called a refresh token. A refresh token allows an application to obtain a new access token without prompting the user.</p>
+<h2 id='obtaining-refresh-tokens'>Obtaining Refresh Tokens</h2>
+<p>A refresh token can be requested by an application as part of the process of obtaining an access token. Many authorization servers implement the refresh token request mechanism defined in the OpenID Connect specification. In this case, an application must include the offline_access scope when initiating a request for an authorization code. After the user successfully authenticates and grants consent for the application to access the protected resource, the application will receive an authorization code that can be exchanged at the token endpoint for both an access and a refresh token.</p>
+<h2 id='using-refresh-tokens'>Using Refresh Tokens</h2>
+<p>When a new access token is needed, the application can make a POST request back to the token endpoint https://{subdomain}.invenias.com/identity/connect/token using a grant type of refresh_token (web applications need to include a client secret).
+While refresh tokens are often long-lived, the authorization server can invalidate them. Some of the reasons a refresh token may no longer be valid include:
+<ul>
+    <li>the authorization server has revoked the refresh token.</li>
+    <li>the user has revoked their consent for authorization.</li>
+    <li>the refresh token has expired.</li>
+    <li>the user changes their password.</li> 
+    <li>the authentication policy for the resource has changed (e.g., originally the resource only used usernames and passwords, but now it requires MFA).</li>
+</ul></p>
+
+<p>Because refresh tokens have the potential for a long lifetime, developers should ensure that strict storage requirements are in place to keep them from being leaked. For example, on web applications, refresh tokens should only leave the backend when being sent to the authorization server, and the backend should be secure. The client secret should be protected in a similar fashion. Mobile applications do not require a client secret, but they should still be sure to store refresh tokens somewhere only the client application can access.</p>
+<h1 id='identifying-when-an-oauth-token-has-expired'>Identifying when an OAuth token has expired</h1>
 <p>There are two common approaches adopted by web developers to identify when an OAuth token has expired:</p>
-
-<p><b> Token Refresh Handling: Method 1 </b></p>
-
+<h3 id='token-refresh-handling-method-1'>Token Refresh Handling: Method 1</h3>
 <p>Upon receiving a valid <code>access_token</code>, <code>expires_in value</code>, <code>refresh_token</code>, etc., clients can process this by storing an expiration time as a local variable and checking it on each request. You can do this using the following steps:</p>
 
 <ol>
@@ -838,9 +1122,7 @@ When an access token expires, the application can use the refresh token to get a
 <p>When checking the time, be sure you are (at the same time), for example, using the same timezone by converting all times to epoch or UTC timezone.</p>
 
 <p>Besides receiving a new <code>access_token</code>, you may receive a new <code>refresh_token</code> with an expiration time further in the future. If you receive this, store the new refresh_token to extend the life of your session.</p>
-
-<p><b>Token Refresh Handling: Method 2</b></p>
-
+<h3 id='token-refresh-handling-method-2'>Token Refresh Handling: Method 2</h3>
 <p>Another method of handling token refresh is performing a manual refresh after receiving an invalid token error. We can do this with the previous approach or by itself.</p>
 
 <p>If you attempt to use an expired access_token and you get an invalid token error, perform a token refresh. Since different services can use different error codes for expired tokens, you can either keep track of the code for each service, or an easy way to refresh tokens across services is to perform a single refresh upon encountering a 401 error. </p>
@@ -1762,7 +2044,7 @@ Please note, data management policies are not available for the Progra
 </code></pre>
 
 <p>This endpoint will display any data management polices applied to this entity type.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/datamanagement/people/rules</code></p>
 <h2 id='get-api-v1-datamanagement-companies-rules'>GET /api/v1/datamanagement/companies/rules</h2>
 <blockquote>
@@ -1803,7 +2085,7 @@ Please note, data management policies are not available for the Progra
 </code></pre>
 
 <p>This endpoint will display any data management polices applied to this entity type.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/datamanagement/companies/rules</code></p>
 <h2 id='get-api-v1-datamanagement-assignment-rules'>GET /api/v1/datamanagement/assignment/rules</h2>
 <blockquote>
@@ -1854,7 +2136,7 @@ Please note, data management policies are not available for the Progra
 </code></pre>
 
 <p>This endpoint will display any data management polices applied to this entity type.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/datamanagement/assignment/rules</code></p>
 <h1 id='settings'>Settings</h1><h2 id='get-api-v1-settings-key'>GET /api/v1/settings/{key}</h2>
 <blockquote>
@@ -1931,7 +2213,7 @@ Please note, data management policies are not available for the Progra
 </blockquote>
 
 <p>The Invenias system has many default and customizable enumerations. When designing an integration, it may be necessary to know the values of the items in a collection for any enumeration. The GET /api/v1/settings/{key} endpoint will return the items for any enumeration name defined in the <code>{key}</code>.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/settings/{key}</code></p>
 
 <table><thead>
@@ -2064,7 +2346,7 @@ Please note, data management policies are not available for the Progra
 </code></pre>
 
 <p>The GET/api/v1/countries endpoint will get a list of all of the country codes and names supported by the Invenias systems.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/countries</code></p>
 
 <aside class="warning">
@@ -2122,7 +2404,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 </code></pre>
 
 <p>This endpoint can get the names of all the Lookup Lists in the database.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/lookuplists/list</code></p>
 
 <table><thead>
@@ -2330,7 +2612,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 </code></pre>
 
 <p>This endpoint will get the values within a specific Lookup List.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list</code></p>
 
 <table><thead>
@@ -2521,7 +2803,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
 </code></pre>
 
 <p>This endpoint can create new entries on a specific Lookup List.</p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-13'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list</code></p>
 
 <table><thead>
@@ -2618,7 +2900,7 @@ The Invenias systems use the USPS standard for country names. When adding entrie
     <li>PersonEmailAddress2</li>
     <li>PersonEmailAddress3</li>
 </ul></p>
-<h3 id='http-request-12'>HTTP Request</h3>
+<h3 id='http-request-14'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/duplicates/people?request.personName=John%20Doe&amp;request.emailAddress=someemailaddress%2Bdemo%40gmail.com&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -2700,7 +2982,7 @@ Please note, it may be optional to pass a value on both the ‘request.personNam
 </code></pre>
 
 <p>The GET /api/v1/duplicates/companies endpoint flags potentially existing ‘Company’ type entities based upon the search terms passed via the <code>request.companyName</code> parameter.</p>
-<h3 id='http-request-13'>HTTP Request</h3>
+<h3 id='http-request-15'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -2777,7 +3059,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 </code></pre>
 
 <p>This endpoint allows you to pass a search term to get a list of entities where the <code>PersonName</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-14'>HTTP Request</h3>
+<h3 id='http-request-16'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v2/quicksearch/people?request.searchTerm=John&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -2847,7 +3129,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 </code></pre>
 
 <p>This endpoint allows you to pass a search term to get a list of entities where the <code>DisplayName</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-15'>HTTP Request</h3>
+<h3 id='http-request-17'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/quicksearch/companies?request.searchTerm=Inv&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -2905,7 +3187,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 </code></pre>
 
 <p>This endpoint allows you to pass a search term to get a list of entities where the <code>DisplayName</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-16'>HTTP Request</h3>
+<h3 id='http-request-18'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/quicksearch/educationalorganisations?request.searchTerm=Aca&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -2963,7 +3245,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 </code></pre>
 
 <p>This endpoint allows you to pass a search term to get a list of entities where the <code>CompanyName</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-17'>HTTP Request</h3>
+<h3 id='http-request-19'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/quicksearch/assignments?request.searchTerm=Vice&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -3031,7 +3313,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 </code></pre>
 
 <p>This endpoint allows you to pass a search term to get a list of entities where the <code>DisplayName</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-18'>HTTP Request</h3>
+<h3 id='http-request-20'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/quicksearch/programmes?request.searchTerm=Net&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -3106,7 +3388,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 <aside class="notice">
 Please note, each Professional User will have both a Person and User type entity. This endpoint specifically returns information related to their Person entity.
 </aside>
-<h3 id='http-request-19'>HTTP Request</h3>
+<h3 id='http-request-21'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/quicksearch/quicksearch/professionalusers?request.searchTerm=Jane&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -3163,7 +3445,7 @@ Please note, each Professional User will have both a Person and User type entity
 <aside class="notice">
 Please note, the definition of a Client User is a Person type entity who has been added to the 'Client' team in one or more Assignment Type entities, the Invenias Client feature is enabled on the tenant and at least one Assignment has been shared with them.
 </aside>
-<h3 id='http-request-20'>HTTP Request</h3>
+<h3 id='http-request-22'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/quicksearch/clientusers?request.searchTerm=Jane&amp;request.pageIndex=0&amp;request.pageSize=10</code></p>
 
 <table><thead>
@@ -3259,7 +3541,7 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 <aside class="notice">
 Please note, each Professional User will have both a person and User type entity. This endpoint will return information related to both the Person and user entities.
 </aside>
-<h3 id='http-request-21'>HTTP Request</h3>
+<h3 id='http-request-23'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/users?request.searchTerm=Jane</code></p>
 
 <table><thead>
@@ -3473,7 +3755,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter People type entities to get a list of entities where the <code>DisplayFileAs</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-22'>HTTP Request</h3>
+<h3 id='http-request-24'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/people?request.searchTerm=John</code></p>
 
 <table><thead>
@@ -3676,7 +3958,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter company type entities to get a list of entities where the <code>FileAs</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-23'>HTTP Request</h3>
+<h3 id='http-request-25'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/companies?request.searchTerm=Old</code></p>
 
 <table><thead>
@@ -3870,7 +4152,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter Company type entities to get a list of entities flagged as a &#39;Place of Study&#39; where the <code>FileAs</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-24'>HTTP Request</h3>
+<h3 id='http-request-26'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/educationalorganisations?request.searchTerm=Aca</code></p>
 
 <table><thead>
@@ -4075,7 +4357,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter Assignment type entities to get a list of entities where the <code>FileAs</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-25'>HTTP Request</h3>
+<h3 id='http-request-27'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/assignments?request.searchTerm=Head</code></p>
 
 <table><thead>
@@ -4290,7 +4572,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter programme type entities to get a list of entities where the <code>Name</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-26'>HTTP Request</h3>
+<h3 id='http-request-28'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/programmes?request.searchTerm=Network</code></p>
 
 <table><thead>
@@ -4488,7 +4770,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter document type entities to get a list of entities where the <code>AttachmentName</code> or <code>Creator</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-27'>HTTP Request</h3>
+<h3 id='http-request-29'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/documents?request.searchTerm=Jane</code></p>
 
 <table><thead>
@@ -4670,7 +4952,7 @@ Please note, each Professional User will have both a person and User type entity
 </code></pre>
 
 <p>This endpoint allows you to pass a search term and select, group, and filter Record Management Group entities to get a list of entities where the <code>FileAs</code> string matches <b>OR</b> partially matches the search term.</p>
-<h3 id='http-request-28'>HTTP Request</h3>
+<h3 id='http-request-30'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/search/recordmanagementgroupentries?request.searchTerm=London</code></p>
 
 <table><thead>
@@ -4862,7 +5144,7 @@ Please note, each Professional User will have both a person and User type entity
 <td>Downloads a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Person</code> entity.</td>
 </tr>
 <tr>
-<td><a href="https://bullhorn.github.io/invenias-api-docs/post-api-v1-people-id-documents-documentid-defaultcv">POST /api/v1/people/{id}/documents/{documentId}/defaultCv</a></td>
+<td><a href="https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-documents-documentid-defaultcv">POST /api/v1/people/{id}/documents/{documentId}/defaultCv</a></td>
 <td>Flags a single <code>Document</code> entity from Azure Blob Storage that is relationally linked to a single <code>Person</code> entity as the <code>Default</code> Curriculum Vitae.</td>
 </tr>
 <tr>
@@ -4955,7 +5237,7 @@ Please note, each Professional User will have both a person and User type entity
 <aside class="notice">
     Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 </aside>
-<h3 id='http-request-29'>HTTP Request</h3>
+<h3 id='http-request-31'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/documents/list</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5118,7 +5400,7 @@ Please note, each Professional User will have both a person and User type entity
 <aside class="notice">
     Please note, when deleting a 'Document' entity, it will also delete any relations that exist between it and other core entities.
 </aside>
-<h3 id='http-request-30'>HTTP Request</h3>
+<h3 id='http-request-32'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/documents/{id}</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5165,7 +5447,7 @@ Please note, the PUT method uses the request URI to supply a changed version of 
     <li>Tagging a document as a &#39;default&#39; Curriculum Vitae.</li>
     <li>Tagging the document as &#39;Published&#39;. </li>
 </ul></p>
-<h3 id='http-request-31'>HTTP Request</h3>
+<h3 id='http-request-33'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/documents/{id}</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5216,7 +5498,7 @@ Please note, the PUT method uses the request URI to supply a changed version of 
 <aside class="notice">
 Please note, when deleting a ‘Document’ entity, it will also delete any relations that exist between it and other core entities.
 </aside>
-<h3 id='http-request-32'>HTTP Request</h3>
+<h3 id='http-request-34'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/documents/bulkDelete</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5247,7 +5529,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 </blockquote>
 
 <p>The PUT /api/v1/documents/{id}/rename allows you to rename the name of a single &#39;Document&#39; entity.</p>
-<h3 id='http-request-33'>HTTP Request</h3>
+<h3 id='http-request-35'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/documents/{id}/rename</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5317,7 +5599,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 </aside>
-<h3 id='http-request-34'>HTTP Request</h3>
+<h3 id='http-request-36'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/people/{id}/documents/list</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5491,7 +5773,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 </code></pre>
 
 <p>The POST /api/v1/people/{id}/document endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Person&#39; entity in the database.</p>
-<h3 id='http-request-35'>HTTP Request</h3>
+<h3 id='http-request-37'>HTTP Request</h3>
 <p><code>POST /api/v1/people/{id}/document</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5528,7 +5810,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
 </aside>
-<h3 id='http-request-36'>HTTP Request</h3>
+<h3 id='http-request-38'>HTTP Request</h3>
 <p><code>GET /api/v1/people/{id}/documents/{documentId}</code></p>
 
 <table><thead>
@@ -5569,7 +5851,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, this endpoint will <strong>not</strong> parse the document and write the contents to the 'CV/Resume' tab within the 'Summary' pane in the 'Person' entities record.
 </aside>
-<h3 id='http-request-37'>HTTP Request</h3>
+<h3 id='http-request-39'>HTTP Request</h3>
 <p><code>POST /api/v1/people/{id}/documents/{documentId}/defaultCv</code></p>
 
 <table><thead>
@@ -5633,7 +5915,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 </aside>
-<h3 id='http-request-38'>HTTP Request</h3>
+<h3 id='http-request-40'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/companies/{id}/documents/list</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5807,7 +6089,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 </code></pre>
 
 <p>The <code>POST /api/v1/companies/{id}/document</code> endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Company&#39; entity in the database.</p>
-<h3 id='http-request-39'>HTTP Request</h3>
+<h3 id='http-request-41'>HTTP Request</h3>
 <p><code>POST /api/v1/companies/{id}/document</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -5844,7 +6126,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
 </aside>
-<h3 id='http-request-40'>HTTP Request</h3>
+<h3 id='http-request-42'>HTTP Request</h3>
 <p><code>GET /api/v1/companies/{id}/documents/{documentId}</code></p>
 
 <table><thead>
@@ -5908,7 +6190,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 </aside>
-<h3 id='http-request-41'>HTTP Request</h3>
+<h3 id='http-request-43'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/assignments/{id}/documents/list</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -6082,7 +6364,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 </code></pre>
 
 <p>The <code>POST /api/v1/assignments/{id}/document</code> endpoint will add a document to Azure Blob Storage and relationally link it to a single &#39;Assignment&#39; entity in the database.</p>
-<h3 id='http-request-42'>HTTP Request</h3>
+<h3 id='http-request-44'>HTTP Request</h3>
 <p><code>POST /api/v1/assignments/{id}/document</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -6119,7 +6401,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
 </aside>
-<h3 id='http-request-43'>HTTP Request</h3>
+<h3 id='http-request-45'>HTTP Request</h3>
 <p><code>GET /api/v1/Assignments/{id}/documents/{documentId}</code></p>
 
 <table><thead>
@@ -6182,7 +6464,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 </aside>
-<h3 id='http-request-44'>HTTP Request</h3>
+<h3 id='http-request-46'>HTTP Request</h3>
 <p><code>https://{subdomain}.invenias.com/api/v1/programmes/{id}/documents/list</code></p>
 
 <p><i>Table 1. Parameters Summary</i></p>
@@ -6373,7 +6655,7 @@ Please note, when deleting a ‘Document’ entity, it will also delete any rela
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
 </aside>
-<h3 id='http-request-45'>HTTP Request</h3>
+<h3 id='http-request-47'>HTTP Request</h3>
 <p><code>GET /api/v1/programmes/{id}/documents/{documentId}</code></p>
 
 <table><thead>
