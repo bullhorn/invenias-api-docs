@@ -78,7 +78,7 @@ This grant should only be used when redirect-based flows (like the Authorization
 To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator' permission group to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
 </aside>
 
 Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
@@ -122,7 +122,7 @@ FlowType | `ResourceOwner` | The OAuth 2.0 Authorization flow.
 To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator' permission group to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
 </aside>
 
 Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
@@ -132,7 +132,7 @@ After Swagger returns you an `api_key`, you can then call the POST /api/v1/third
 From here, you will need to choose the flow type that your application requires.
 
 <aside class="notice">
-An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+An api_key will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
 </aside>
 
 ### HTTP Request
@@ -172,7 +172,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/thirdpar
 To renew an expired application, use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator' permission group to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
 </aside>
 
 Before you can use the `POST /api/v1/thirdpartyapplications/{id}/renew` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
@@ -292,7 +292,7 @@ state (optional) |  | The 'state' parameter preserves some state objects set by 
 scope | openid api profile offline_access | Scope is a mechanism in OAuth 2.0 to limit an application's access.
 redirect_uri |  | The post-login URL to redirect to your Application.
 
-<aside class="notice">In the response there is a header named ‘Location', you will need to redirect the end user to this URL via your application were they will be prompted to sign in via their chosen Identity Provider.</aside>
+<aside class="notice">In the response there is a header named 'Location', you will need to redirect the end user to this URL via your application were they will be prompted to sign in via their chosen Identity Provider.</aside>
 
 Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the additional features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.
 
@@ -301,7 +301,7 @@ Once the Invenias User has successfully signed in via an Identity Provider it wi
 
 Name | Description
 --------- | -----------
-id_token | Also referred to as a ‘token hint' the id_token can be used to end a user session and revoking the current access_token.
+id_token | Also referred to as a 'token hint' the id_token can be used to end a user session and revoking the current access_token.
 access_token | Access tokens are used in token-based authentication to allow an application to access an API.
 expires_in | The period of time before the access_token is invalidated.
 refresh_token | A refresh token allows an application to obtain a new access token without prompting the user.
@@ -512,10 +512,10 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 Select allows you to specify an array of column names to be returned in the response.
 
-If you do not specify an array of column names in the request body, the response will return the columns visible in the ‘default' global display view for the entity you're requesting.
+If you do not specify an array of column names in the request body, the response will return the columns visible in the 'default' global display view for the entity you're requesting.
 
 <aside class="notice">
-Please note, for each item where there is ‘null' data for a specified column, it will not return this column in the response to those items.
+Please note, for each item where there is 'null' data for a specified column, it will not return this column in the response to those items.
 </aside>
 
 ## Pagination
@@ -1537,7 +1537,7 @@ request | [required] | String | The request model used to create a new value in 
 ## PUT /api/v1/lookuplists/{id}/entries/{itemId}
 
 # Duplicates
-The Invenias REST API has two endpoints available to help flag ‘People' and ‘Company' type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
+The Invenias REST API has two endpoints available to help flag 'People' and 'Company' type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
 
 ## GET /api/v1/duplicates/people
 > Example (cURL)
@@ -1590,12 +1590,12 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
     }...
 ]
 ```
-The GET /api/v1/duplicates/people endpoint flags potentially existing ‘People' type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
+The GET /api/v1/duplicates/people endpoint flags potentially existing 'People' type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
 
-For performance, it's <strong>strongly</strong> advised to pass the simplest search term possible via the ‘request.personName'. The reason for this is that it will split the search term using the spaces as delimiters and parameters in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query, the longer it will take to return a response.
+For performance, it's <strong>strongly</strong> advised to pass the simplest search term possible via the 'request.personName'. The reason for this is that it will split the search term using the spaces as delimiters and parameters in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query, the longer it will take to return a response.
 
 ### Name Components
-This endpoint does not comparatively reference all the naming component fields for ‘People' type entities. Please do not include salutations, suffixes, and prefixes in the ‘request.personName' parameter. For a full list of the naming components leveraged by this endpoint, please see below:
+This endpoint does not comparatively reference all the naming component fields for 'People' type entities. Please do not include salutations, suffixes, and prefixes in the 'request.personName' parameter. For a full list of the naming components leveraged by this endpoint, please see below:
 <ul>
     <li>PersonFirstName</li>
     <li>PersonMiddleName</li>
@@ -1605,7 +1605,7 @@ This endpoint does not comparatively reference all the naming component fields f
 </ul>
 
 ### Email Address
-This endpoint does not comparatively reference all the email fields for ‘People' type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint, please see below:
+This endpoint does not comparatively reference all the email fields for 'People' type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint, please see below:
 <ul>
     <li>PersonEmailAddress1</li>
     <li>PersonEmailAddress2</li>
@@ -1623,7 +1623,7 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 <aside class="notice">
-Please note, it may be optional to pass a value on both the ‘request.personName' and ‘request.emailAddress' parameters individually, however; you must input a value into at least one of them to make a successful request.
+Please note, it may be optional to pass a value on both the 'request.personName' and 'request.emailAddress' parameters individually, however; you must input a value into at least one of them to make a successful request.
 </aside>
 
 ## GET /api/v1/duplicates/companies
@@ -1671,7 +1671,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
     }
 ]
 ```
-The GET /api/v1/duplicates/companies endpoint flags potentially existing ‘Company' type entities based upon the search terms passed via the `request.companyName` parameter.
+The GET /api/v1/duplicates/companies endpoint flags potentially existing 'Company' type entities based upon the search terms passed via the `request.companyName` parameter.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&request.pageIndex=0&request.pageSize=10`
@@ -2696,7 +2696,7 @@ curl --location --request POST 'https://iddgc.miginvenias.com/api/v1/documents/b
 The POST /api/v1/documents/bulkDelete endpoints allows you delete many `Document` entities in a single requests.
 
 <aside class="notice">
-Please note, when deleting a ‘Document' entity, it will also delete any relations that exist between it and other core entities.
+Please note, when deleting a 'Document' entity, it will also delete any relations that exist between it and other core entities.
 </aside>
 
 ### HTTP Request
@@ -2767,12 +2767,12 @@ curl --location --request POST 'https://subdomain.invenias.com/api/v1/people/e20
 }
 ```
 
-The POST /api/v1/people/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single ‘Person' entity in the database.
+The POST /api/v1/people/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single 'Person' entity in the database.
 
 Amongst others, we can leverage this endpoint for the following purposes:
 <ul>
     <li>Identifying expired documents.</li>
-    <li>Searching for documents tagged as ‘default' Curriculum Vitae's.</li>
+    <li>Searching for documents tagged as 'default' Curriculum Vitae's.</li>
     <li>Searching for documents with specific 'Document Types'.</li>
 </ul>
 
@@ -2833,7 +2833,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/ed
 
 > The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/people/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Person' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/people/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Person' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -2967,7 +2967,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies
 
 > The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/companies/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Company' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/companies/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Company' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -3076,7 +3076,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignmen
 
 > The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/assignments/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Assignment' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/assignments/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Assignment' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -3175,7 +3175,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programme
 
 > The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/programmes/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Programme' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/programmes/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Programme' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -4842,7 +4842,7 @@ Please note, if you're considering at developing an integration that creates peo
 Invenias uses a resume parsing tool named Sovren to provide document parsing to end-users of Invenias applications.
 
 A resume parser is a piece of software that can read, understand, and classify all the data on a resume, just like a human can–but much faster.
-It's possible for API integrations to leverage Sovren to create and/or update ‘Person' entities in Invenias by parsing a source document and ingesting the structured output. However, there is no quick and easy way to create a person by parsing a document. Depending upon the type of information you wish to use, it may require validation across several areas.
+It's possible for API integrations to leverage Sovren to create and/or update 'Person' entities in Invenias by parsing a source document and ingesting the structured output. However, there is no quick and easy way to create a person by parsing a document. Depending upon the type of information you wish to use, it may require validation across several areas.
 
 You will need to determine exactly what information you wish to capture in an Invenias record to know which endpoints you're going to need to use.
 When planning your integration, please consider:
@@ -5030,10 +5030,10 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullpars
 
 This endpoint allows the creation of a `Person` type entity.
 
-Please note, if you set the value for the parameter named ‘SaveParsedDocumentAsDefault’ to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the ‘CV/RESUME’ tab in the Person profile pane. This will make the text content of the document searchable when using the ‘Advanced Search’ feature for `Person` type entities in Invenias Professional application.
+Please note, if you set the value for the parameter named 'SaveParsedDocumentAsDefault’ to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the 'CV/RESUME’ tab in the Person profile pane. This will make the text content of the document searchable when using the 'Advanced Search’ feature for `Person` type entities in Invenias Professional application.
 
 <aside class="warning">
-Please note, to create (or update) a new Person type entity, you must include the ‘NameComponents’ array in the request body.
+Please note, to create (or update) a new Person type entity, you must include the 'NameComponents’ array in the request body.
 </aside>
 
 ### HTTP Request
@@ -5072,10 +5072,10 @@ curl --location --request PUT 'https://{subdomain}invenias.com/api/v2/fullparse/
 ```
 This endpoint allows you to replace a representation of the target `Person` type entity with the request payload.
 
-Please note, if you set the value for the parameter named ‘SaveParsedDocumentAsDefault’ to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the ‘CV/RESUME’ tab replacing the content in the Person profile pane. This will make the text content of the document searchable when using the ‘Advanced Search’ feature for `Person` type entities in Invenias Professional application.
+Please note, if you set the value for the parameter named 'SaveParsedDocumentAsDefault’ to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the 'CV/RESUME’ tab replacing the content in the Person profile pane. This will make the text content of the document searchable when using the 'Advanced Search’ feature for `Person` type entities in Invenias Professional application.
 
 <aside class="warning">
-Please note, to create (or update) a new Person type entity, you must include the ‘NameComponents’ array in the request body or not.
+Please note, to create (or update) a new Person type entity, you must include the 'NameComponents’ array in the request body or not.
 </aside>
 
 ### HTTP Request
@@ -5136,7 +5136,7 @@ The `401` Unauthorized status code is returned when the API request is missing a
     <li>The user account has been disabled.</li>
     <li>The token has expired.</li>
     <li>The license has been removed from the user account.</li>
-    <li>The user accounts permission group has been changed, and it's no longer in the ‘System Administrator' group.</li>
+    <li>The user accounts permission group has been changed, and it's no longer in the 'System Administrator' group.</li>
     <li>The tenant's database has been pushed from our production environment to another environment to be worked on (e.g. Merging databases, data cleansing, etc...) by an SI Partner or our Professional Services team and all tokens have been invalidated.</li>
     <li>The user account has been disabled by our BTO team due to exceeding 9000 429 responses within a 5 minute period. Please check your logs for 429 responses. Please note, in this event, the primary contact of the Invenias customer will be notified of this action.</li>
 </ul>
@@ -5170,7 +5170,7 @@ Usually, this is due to a database upgrade and is accompanied by the following c
 Other causes of `503` errors:
 <ul>
     <li>The server is overloaded, meaning that is it receiving more requests than it can handle. Therefore, it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks and web applications, or the content management system being incorrectly programmed.</li>
-    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may cause an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a ‘Service Unavailable' message.</li>
+    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may cause an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a 'Service Unavailable' message.</li>
 </ul>
 
 In summary, `503` errors are sometimes unavoidable, it's good practice to add logic to handle them in your application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.
