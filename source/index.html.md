@@ -48,7 +48,7 @@ The first decision point is about whether the party that requires access to reso
 If this case matches your needs, then to learn how this flow works and how to implement it.
 
 ## Is the Client a web app executing on the server?
-If the Client is a regular web app executing on a server, then the Authorization Code Flow is the flow you should use. Using this, the Client can retrieve an Access Token and, optionally, a Refresh Token. It’s considered the safest choice since the Access Token is passed directly to the web server hosting the Client, without going through the user’s web browser and risking exposure.
+If the Client is a regular web app executing on a server, then the Authorization Code Flow is the flow you should use. Using this, the Client can retrieve an Access Token and, optionally, a Refresh Token. It's considered the safest choice since the Access Token is passed directly to the web server hosting the Client, without going through the user's web browser and risking exposure.
 
 If this case matches your needs, then to learn how this flow works and how to implement it.
 
@@ -70,19 +70,18 @@ This grant should only be used when redirect-based flows (like the Authorization
   "ExpiresOn": "2022-05-12T15:52:47.2298517+00:00",
   "IsEnabled": true,
   "Name": "Documentation Test",
-  "ReplyUrl": "https://example.com",
   "FlowType": "ResourceOwner"
 }
 ```
-> Please note, this is the only time you’ll get the client_id and client_secret - please store these securely, as you won’t be able to retrieve these again.
+> Please note, this is the only time you'll get the client_id and client_secret - please store these securely, as you won't be able to retrieve these again.
 
 To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
 </aside>
 
-Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. 
+Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
 
 After Swagger returns you an `api_key`, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the `client_id` and the `client_secret`. 
 
@@ -117,24 +116,23 @@ FlowType | `ResourceOwner` | The OAuth 2.0 Authorization flow.
   "ReplyUrl": " https://invenias.com",
   "FlowType": "Code"
 }
-
 ```
-> Please note, this is the only time you’ll get the client_id and client_secret - please store these securely, as you won’t be able to retrieve these again.
+> Please note, this is the only time you'll get the client_id and client_secret - please store these securely, as you won't be able to retrieve these again.
 
 To create a new integration, use the `POST /api/v1/thirdpartyapplications` endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
 </aside>
 
-Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. 
+Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
 
 After Swagger returns you an `api_key`, you can then call the POST /api/v1/thirdpartyapplications endpoint to generate the `client_id` and the `client_secret`. 
 
 From here, you will need to choose the flow type that your application requires.
 
 <aside class="notice">
-An `api_key` will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
+An api_key will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
 </aside>
 
 ### HTTP Request
@@ -166,7 +164,6 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/thirdpar
   "ExpiresOn": "2026-05-18T13:34:16.9289531+00:00",
   "IsEnabled": true,
   "Name": "Documentation Test",
-  "ReplyUrl": "https://example.com",
   "FlowType": "ResourceOwner"
 }
 ```
@@ -175,10 +172,10 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/thirdpar
 To renew an expired application, use the POST /api/v1/thirdpartyapplications/{id}/renew endpoint using Swagger.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the ‘System Administrator’ permission group to perform this operation.
+Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
 </aside>
 
-Before you can use the `POST /api/v1/thirdpartyapplications/{id}/renew` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you’re not already logged in. 
+Before you can use the `POST /api/v1/thirdpartyapplications/{id}/renew` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
 
 After Swagger returns you an 'api_key', you can then call the `POST /api/v1/thirdpartyapplications/{id}/renew` endpoint to renew the expired application.
 
@@ -209,7 +206,7 @@ Every API integration has a `client_id` and `client_secret`, which are used when
 <li>Refresh Token (Code)</li>
 </ul>
 
-Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user’s credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.
+Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user's credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.
 
 ## Resource Owner Flow
 
@@ -255,7 +252,7 @@ You will need to use this token to authenticate when using all endpoints using t
 <aside class="notice">
 A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
 
-Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application’s access if needed.
+Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application's access if needed.
 </aside>
 
 ### Unauthorized requests
@@ -295,7 +292,7 @@ state (optional) |  | The 'state' parameter preserves some state objects set by 
 scope | openid api profile offline_access | Scope is a mechanism in OAuth 2.0 to limit an application's access.
 redirect_uri |  | The post-login URL to redirect to your Application.
 
-<aside class="notice">In the response there is a header named ‘Location’, you will need to redirect the end user to this URL via your application were they will be prompted to sign in via their chosen Identity Provider.</aside>
+<aside class="notice">In the response there is a header named 'Location', you will need to redirect the end user to this URL via your application were they will be prompted to sign in via their chosen Identity Provider.</aside>
 
 Integrations using the Authorization Code grant type use a redirect URL to direct users to the Invenias login screen as part of the authentication process, requiring initial user interaction to trigger the integration. As part of Invenias X, one of the additional features is Single Sign-On, as we allow customers to configure multiple Identity Providers for their users. Users can authenticate with the API using any of the enabled Identity Providers.
 
@@ -304,7 +301,7 @@ Once the Invenias User has successfully signed in via an Identity Provider it wi
 
 Name | Description
 --------- | -----------
-id_token | Also referred to as a ‘token hint’ the id_token can be used to end a user session and revoking the current access_token.
+id_token | Also referred to as a 'token hint' the id_token can be used to end a user session and revoking the current access_token.
 access_token | Access tokens are used in token-based authentication to allow an application to access an API.
 expires_in | The period of time before the access_token is invalidated.
 refresh_token | A refresh token allows an application to obtain a new access token without prompting the user.
@@ -313,9 +310,9 @@ refresh_token_expires_on | The date and time when the refresh token.
 <aside class="notice">
 A token is valid for 24 hours, only. It is not possible for the expiration period for tokens to be extended.
 
-Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application’s access if needed.
+Tokens have a short expiration time ensuring that it forces applications to refresh them, giving the service a chance to revoke an application's access if needed.
 
-When an access token expires, the application can use the refresh token to get a new access token. It can do this behind the scenes, and without the user’s involvement so that it’s a seamless process to the user. However, this will require additional code to perform this function.
+When an access token expires, the application can use the refresh token to get a new access token. It can do this behind the scenes, and without the user's involvement so that it's a seamless process to the user. However, this will require additional code to perform this function.
 </aside>
 
 # Refresh Tokens (Code Flow Only)
@@ -344,13 +341,12 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
     "refresh_token": "{refreshtoken}",
     "refresh_token_expires_on": "2031-10-11T13:20:01.2551196+00:00"
 }
-
 ```
 
 When access tokens expire or become invalid but the application still needs to access a protected resource, the application faces the problem of getting a new access token without forcing the user to once again grant permission. To solve this problem, OAuth 2.0 introduced an artifact called a refresh token. A refresh token allows an application to obtain a new access token without prompting the user.
 
 ## Obtaining Refresh Tokens
-A refresh token can be requested by an application as part of the process of obtaining an access token. Many authorization servers implement the refresh token request mechanism defined in the OpenID Connect specification. In this case, an application must include the offline_access scope when initiating a request for an authorization code. After the user successfully authenticates and grants consent for the application to access the protected resource, the application will receive an authorization code that can be exchanged at the token endpoint for both an access and a refresh token.
+A refresh token can be requested by an application as part of the process of obtaining an access token. Many authorization servers implement the refresh token request mechanism defined in the OpenID Connect specification. In this case, an application must include the `offline_access` scope when initiating a request for an authorization code. After the user successfully authenticates and grants consent for the application to access the protected resource, the application will receive an authorization code that can be exchanged at the token endpoint for both an access and a refresh token.
 
 ## Using Refresh Tokens
 
@@ -425,7 +421,7 @@ Code | Name | Description
 ---- | ---- | -----------
 400 | Bad Request | The server could not understand the request due to invalid syntax.
 401 | Unauthorized | Although the HTTP standard specifies “unauthorized”, semantically this response means “unauthenticated”. The client must authenticate itself to get the requested response.
-403 | Forbidden | The client does not have access rights to the content; It is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client’s identity is known to the server.
+403 | Forbidden | The client does not have access rights to the content; It is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client's identity is known to the server.
 404 | Not Found | The server can not find the requested resource. This can also mean that the endpoint is valid, but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one because of its frequent occurrence on the web.
 405 | Method Not Allowed | The request method is known by the server but has been disabled and cannot be used.
 406 | Not Acceptable | This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content that conforms to the criteria given by the user agent.
@@ -446,7 +442,7 @@ Code | Name | Description
 # Using Lists
 There are many list endpoints available for Invenias core entities that applications can use.
 
-It’s possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+It's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
 
 <aside class="notice">
 Please note, there is a row limit of <b>1000</b> rows per call when using a list endpoint.
@@ -516,10 +512,10 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 Select allows you to specify an array of column names to be returned in the response.
 
-If you do not specify an array of column names in the request body, the response will return the columns visible in the ‘default’ global display view for the entity you’re requesting.
+If you do not specify an array of column names in the request body, the response will return the columns visible in the 'default' global display view for the entity you're requesting.
 
 <aside class="notice">
-Please note, for each item where there is ‘null’ data for a specified column, it will not return this column in the response to those items.
+Please note, for each item where there is 'null' data for a specified column, it will not return this column in the response to those items.
 </aside>
 
 ## Pagination
@@ -1008,7 +1004,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 Sort An array of objects to sort by, using the following format {"Selector":"ColumnName","Desc": true}.
 
 # Data Management
-Data management policies are used to ensure that an organization’s data and information assets are managed consistently and used properly. Invenias provides functionality allowing our customers to apply policies to any numbers of fields (within a pre-defined list) to core entities, allowing them to either make filling them in a `preferred` or `compulsory` task. 
+Data management policies are used to ensure that an organization's data and information assets are managed consistently and used properly. Invenias provides functionality allowing our customers to apply policies to any numbers of fields (within a pre-defined list) to core entities, allowing them to either make filling them in a `preferred` or `compulsory` task. 
 
 If one or more fields within an entity are marked as `compulsory` you cannot update the entity (or create a new one) unless you populate the compulsory field(s) via the most applicable method(s).
 
@@ -1418,31 +1414,6 @@ This endpoint can get the names of all the Lookup Lists in the database.
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/lookuplists/list`
 
-Parameter | Default | Type | Description
---------- | ------- | ---- | -----------
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
-
 ## POST /api/v1/lookuplists/{id}/entries/list
 > Example (cURL)
 
@@ -1513,28 +1484,6 @@ This endpoint will get the values within a specific Lookup List.
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for a Lookup List.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/lookuplists/{id}/entries
 > Request Model Example (JSON)
@@ -1588,7 +1537,7 @@ request | [required] | String | The request model used to create a new value in 
 ## PUT /api/v1/lookuplists/{id}/entries/{itemId}
 
 # Duplicates
-The Invenias REST API has two endpoints available to help flag ‘People’ and ‘Company’ type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
+The Invenias REST API has two endpoints available to help flag 'People' and 'Company' type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
 
 ## GET /api/v1/duplicates/people
 > Example (cURL)
@@ -1641,12 +1590,12 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
     }...
 ]
 ```
-The GET /api/v1/duplicates/people endpoint flags potentially existing ‘People’ type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
+The GET /api/v1/duplicates/people endpoint flags potentially existing 'People' type entities based upon the search terms passed via the `request.personName` and `request.emailAddress` parameters.
 
-For performance, it’s <strong>strongly</strong> advised to pass the simplest search term possible via the ‘request.personName’. The reason for this is that it will split the search term using the spaces as delimiters and parameters in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query, the longer it will take to return a response.
+For performance, it's <strong>strongly</strong> advised to pass the simplest search term possible via the 'request.personName'. The reason for this is that it will split the search term using the spaces as delimiters and parameters in every conceivable permutation for comparison. The more parameters that are created and comparatively references in the server-side query, the longer it will take to return a response.
 
 ### Name Components
-This endpoint does not comparatively reference all the naming component fields for ‘People’ type entities. Please do not include salutations, suffixes, and prefixes in the ‘request.personName’ parameter. For a full list of the naming components leveraged by this endpoint, please see below:
+This endpoint does not comparatively reference all the naming component fields for 'People' type entities. Please do not include salutations, suffixes, and prefixes in the 'request.personName' parameter. For a full list of the naming components leveraged by this endpoint, please see below:
 <ul>
     <li>PersonFirstName</li>
     <li>PersonMiddleName</li>
@@ -1656,7 +1605,7 @@ This endpoint does not comparatively reference all the naming component fields f
 </ul>
 
 ### Email Address
-This endpoint does not comparatively reference all the email fields for ‘People’ type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint, please see below:
+This endpoint does not comparatively reference all the email fields for 'People' type entities. It does not reference the custom email address fields. For a full list of the email address fields leveraged by this endpoint, please see below:
 <ul>
     <li>PersonEmailAddress1</li>
     <li>PersonEmailAddress2</li>
@@ -1674,7 +1623,7 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 <aside class="notice">
-Please note, it may be optional to pass a value on both the ‘request.personName’ and ‘request.emailAddress’ parameters individually, however; you must input a value into at least one of them to make a successful request.
+Please note, it may be optional to pass a value on both the 'request.personName' and 'request.emailAddress' parameters individually, however; you must input a value into at least one of them to make a successful request.
 </aside>
 
 ## GET /api/v1/duplicates/companies
@@ -1722,7 +1671,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
     }
 ]
 ```
-The GET /api/v1/duplicates/companies endpoint flags potentially existing ‘Company’ type entities based upon the search terms passed via the `request.companyName` parameter.
+The GET /api/v1/duplicates/companies endpoint flags potentially existing 'Company' type entities based upon the search terms passed via the `request.companyName` parameter.
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&request.pageIndex=0&request.pageSize=10`
@@ -2158,28 +2107,6 @@ Please note, each Professional User will have both a person and User type entity
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/people
 
@@ -2254,28 +2181,6 @@ Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
 extendedSearch (optional) | true | Boolean | Specify if you wish to extend the search to the Person entities default Position entities `Job Title`.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/companies
 
@@ -2332,29 +2237,6 @@ This endpoint allows you to pass a search term and select, group, and filter com
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
-
 
 ## POST /api/v1/search/educationalorganisations
 > Example (cURL)
@@ -2407,28 +2289,6 @@ This endpoint allows you to pass a search term and select, group, and filter Com
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/assignments
 > Example (cURL)
@@ -2492,28 +2352,6 @@ This endpoint allows you to pass a search term and select, group, and filter Ass
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/programmes
 
@@ -2588,28 +2426,6 @@ This endpoint allows you to pass a search term and select, group, and filter pro
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/documents
 
@@ -2667,28 +2483,6 @@ This endpoint allows you to pass a search term and select, group, and filter doc
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/search/recordmanagementgroupentries
 
@@ -2730,28 +2524,6 @@ This endpoint allows you to pass a search term and select, group, and filter Rec
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 # Documents
 <i>Table 1. Documents Summery</i>
@@ -2834,33 +2606,6 @@ Amongst other things this endpoint can be leveraged for the following purposes:
 
 ### HTTP Request
 `https://{subdomain}.invenias.com/api/v1/documents/list`
-
-<i>Table 1. Parameters Summary</i>
-
-Parameter | Default | Type | Description
---------- | ------- | ---- | -----------
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## DELETE /api/v1/documents/{id}
 
@@ -2951,7 +2696,7 @@ curl --location --request POST 'https://iddgc.miginvenias.com/api/v1/documents/b
 The POST /api/v1/documents/bulkDelete endpoints allows you delete many `Document` entities in a single requests.
 
 <aside class="notice">
-Please note, when deleting a ‘Document’ entity, it will also delete any relations that exist between it and other core entities.
+Please note, when deleting a 'Document' entity, it will also delete any relations that exist between it and other core entities.
 </aside>
 
 ### HTTP Request
@@ -3022,12 +2767,12 @@ curl --location --request POST 'https://subdomain.invenias.com/api/v1/people/e20
 }
 ```
 
-The POST /api/v1/people/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single ‘Person’ entity in the database.
+The POST /api/v1/people/{id}/documents/list endpoint will return a list of Document Type entities relationally linked to a single 'Person' entity in the database.
 
 Amongst others, we can leverage this endpoint for the following purposes:
 <ul>
     <li>Identifying expired documents.</li>
-    <li>Searching for documents tagged as ‘default’ Curriculum Vitae’s.</li>
+    <li>Searching for documents tagged as 'default' Curriculum Vitae's.</li>
     <li>Searching for documents with specific 'Document Types'.</li>
 </ul>
 
@@ -3043,28 +2788,6 @@ Amongst others, we can leverage this endpoint for the following purposes:
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for 'Person' entity.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/people/{id}/document
 
@@ -3108,9 +2831,9 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/ed
 --header 'Authorization: Bearer {token}'
 ```
 
-> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/people/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Person’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/people/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Person' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -3199,28 +2922,6 @@ The POST /api/v1/companies/{id}/documents/list endpoint will return a list of Do
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for 'Company' entity.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/companies/{id}/document
 
@@ -3264,9 +2965,9 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies
 --header 'Authorization: Bearer {token}'
 ```
 
-> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/companies/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Company’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/companies/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Company' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -3330,28 +3031,6 @@ The POST /api/v1/assignments/{id}/documents/list endpoint will return a list of 
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for 'Assignment' entity.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/assignments/{id}/document
 
@@ -3395,9 +3074,9 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignmen
 --header 'Authorization: Bearer {token}'
 ```
 
-> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/assignments/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Assignment’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/assignments/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Assignment' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -3460,28 +3139,6 @@ The POST /api/v1/programmes/{id}/documents/list endpoint will return a list of D
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for 'Programme' entity.
-Skip (optional) | 0 | Integer | Bypass a specified number of search results then return the remaining results.
-Take (optional) | 0 | Integer | Specify the number of search results to return.
-PageSize (optional) | 0 | Integer | Specify the number of search results to return.
-PageIndex (optional) | 0 | Integer | Specify the PageIndex property to determine the index of the currently displayed page.
-UsePaging (optional) | true | Boolean | 
-ReturnTotalCount (optional) | true | Boolean | Displays the total number of items in the response.
-ReturnTotalDatabaseItemCount (optional) | true | Boolean | Displays the total number of items in the database.
-ReturnUniqueValues (optional) | true | Boolean | Returns an object containing an array of unique values queried from a given field (or values returned from an expression).
-Select (optional) | [List] | Array | Specify an array of column names to be returned in the response.
-Filter (optional) | [List] | Array | Filter items by column names and values.
-CategoryFilter (optional) | [Record] | String | Filter items by relationally linked categories.
-Sort (optional) | [List] | Array | Sort an array of items to sort by.
-Group (optional) | [List] | Array | Group results together by a column in the array.
-FormFactor (optional) | Any | String | Filter the items by the application used to create them 
-DisplayViewId (optional) | 00000000-0000-0000-0000-000000000000 | String | Predefined arrays of columns based upon 'views' created in the Invenias Desktop application.
-RequireGroupCount (optional) | true | Boolean | 
-IsFirstLoad (optional) | true | Boolean | 
-IncludeAdditionalValues (optional) | true | Boolean | <u>Some</u> list endpoints contain a nested array of columns named `AdditionalValues`, this parameter can be used to specify if they should be visible in the response body
-UseLookUpViewDefinition (optional) | true | Boolean | 
-IncludeDisplayViews (optional) | true | Boolean | Displays the details of the predefined arrays of columns based upon 'views' created in the Invenias Desktop application for this entity.
-IncludeAvailableColumns (optional) | true | Boolean | Displays all of the column names available in the list for the entity.
-IncludeCategories (optional) | true | Boolean | Returns the category lists and categories enabled for the entity.
 
 ## POST /api/v1/programmes/{id}/document
 
@@ -3516,9 +3173,9 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programme
 --header 'Authorization: Bearer {token}'
 ```
 
-> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents’ original file extension to the filename when saving the content of the response body.
+> The response body will return the document in binary format. You can serialize binary back to its original file format by appending the documents' original file extension to the filename when saving the content of the response body.
 
-The `GET /api/v1/programmes/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single ‘Programme’ entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
+The `GET /api/v1/programmes/{id}/documents/{documentId}` endpoint will retrieve the binary representation of the specified document from Azure Blob Storage that is relationally link it to a single 'Programme' entity in the database. If there is over one version of the specified document, the endpoint will return the latest iteration.
 
 <aside class="notice">
     Please note, we convert documents that are uploaded to Invenias systems to binary. This is standard industry practice. A binary file is usually very much smaller than a text file that contains an equivalent amount of data leading to faster download times.
@@ -3531,6 +3188,1904 @@ Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for 'Programme' entity.
 documentid | [required] | String | Specify the unique identifier for 'Document' entity.
+
+# Categories
+Invenias uses parent-child hierarchies to categorise core entities (e.g., People, Companies, Assignments, Programmes, etc…) within category lists. We can see a category list as a container for one or many category levels related to a class or division of people or things regarded as having shared characteristics (e.g., Industry, Position Function, Position Level, etc…).
+
+<img src="images\categoriesparentchild.png" alt="X-Request-Quota-Remaining" class="inline"/>
+<br><i>Figure 1. Invenias Professional – Category List modal.</i>
+<br></br>
+
+Please note, the number of category lists allowed in Invenias is only limited only by the resources available in the database. This means that it's workable to have thousands of category lists; however, this is not advised as it would be unrealistic for end-users of our products to be categorizing records across this many data points.
+
+Parent-child hierarchies have an unusual way of storing the hierarchy in the sense that they have a variable depth.
+
+In the parent-child pattern, the hierarchy is not defined by columns in the table of the original data source. The hierarchy is based on a structure where each node of the hierarchy is related to the key to its parent node. For example, Figure 2 shows the first few rows of a parent-child hierarchy that defines an Industry structure for Assignments.
+
+<img src="images\categoriesparentchildflat.png" alt="X-Request-Quota-Remaining" class="inline"/>
+<br><i>Figure 2. Invenias Professional – Category List modal.</i>
+<br></br>
+
+The full expansion of the parent-child hierarchy in this example requires four levels. Figure 3 shows that there is one column for each level of the hierarchy. The number of columns required depends on the data, so it is possible to add additional levels to accommodate for future changes in the data.
+
+<img src="images\categoriesparentchildpivot.png" alt="X-Request-Quota-Remaining" class="inline"/>
+<br><i>Figure 3. Example of a flattened hierarchy where each level of the original parent-child hierarchy is stored in a separate column.</i>
+<br></br>
+
+<i>Table 1. Category Endpoints Summary</i>
+
+Name | Description
+---- | -----------
+[POST /api/v1/categorylists]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-categorylists) | Used to create a new Category List.
+[POST /api/v1/categorylists/{categoryListId}/entries]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-categorylists-categoryListId-entries) | Used to create a new category within any given Category List
+[POST /api/v1/categorylists/{id}/entries/list]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-categorylists-id-entries-list) | Returns a list of all the categories that exist within a specific Category List.
+[GET /api/v1/categorylists/{categoryListId}/entries/{entryId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categorylists-categoryListId-entries-entryId) | Returns the details for a specific Category List entry within the specified Category List.
+[DELETE /api/v1/categorylists/{categoryListId}/entries/{entryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-categorylists-categoryListId-entries-entryId) | Used to delete a category within a specific Category List.
+[GET /api/v1/categorylists/{id}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categorylists-id) | Returns the details related to a specified Category List.
+[GET /api/v1/categories/jobpostings]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-jobpostings) | Returns a list of all the Category Lists enabled for `Advertisement` entities (Including Categories).
+[GET /api/v1/jobpostings/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-jobpostings-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Advertisement` entity.
+[POST /api/v1/jobpostings/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-jobpostings-id-categories) | Used to relationally link a specific `Advertisement` entity with one or more categories.
+[GET /api/v1/jobpostings/{id}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-jobpostings-id-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to an `Advertisement` entity.
+[DELETE /api/v1/jobpostings/{id}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-jobpostings-id-categories-categoryListEntryId) | This endpoint is used to remove the relationship between an `Advertisement` and a Category List entry.
+[GET /api/v1/categories/assignments]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-assignments) | Returns a list of all the Category Lists enabled for `Assignment` entities (Including Categories).
+[POST /api/v1/assignments/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-categories) | Used to relationally link a specific `Assignment` entity with one or more categories.
+[GET /api/v1/assignments/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Assignment` entity.
+[GET /api/v1/assignments/{assignmentId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-assignmentId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to an `Assignment` entity.
+[DELETE /api/v1/assignments/{assignmentId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-assignments-assignmentId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between an `Assignment` and a Category List entry.
+[GET /api/v1/categories/companies]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-companies) | Returns a list of all the Category Lists enabled for `Company` entities (Including Categories).
+[POST /api/v1/companies/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-categories) | Used to relationally link a specific `Company` entity with one or more categories.
+[GET /api/v1/companies/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Company` entity.
+[GET /api/v1/companies/{companyId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-personId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to a `Company` entity.
+[DELETE /api/v1/companies/{companyId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-companies-companyId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between a `Company` and a Category List entry.
+[GET /api/v1/categories/people]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-people) | Returns a list of all the Category Lists enabled for `Person` entities (Including Categories).
+[POST /api/v1/people/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-categories) | Used to relationally link a specific `Person` entity with one or more categories.
+[GET /api/v1/people/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Person` entity.
+[GET /api/v1/people/{personId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-personId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to a `Person` entity.
+[DELETE /api/v1/people/{personId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-people-personId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between a `Person` and a Category List entry.
+[GET /api/v1/categories/programmes]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-programmes) | Returns a list of all the Category Lists enabled for Programme entities (Including Categories).
+[POST /api/v1/programmes/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-programmes-id-categories) | Used to relationally link a specific `Programme` entity with one or more categories.
+[GET /api/v1/programmes/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-programmes-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Programme` entity.
+[GET /api/v1/programmes/{programmeId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-programmes-programmeId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to a `Programme` entity.
+[DELETE /api/v1/programmes/{programmeId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-programmes-programmeId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between a `Programme` and a Category List entry.
+[GET /api/v1/categories/assignments/{assignmentsId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-assignments-assignmentsId) | Returns a list of Category Lists & Categories relationally linked to a specific `Assignment` entity.
+[GET /api/v1/categories/companies/{companyId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-companies-companyId) | Returns a list of Category Lists & Categories relationally linked to a specific `Company` entity.
+[GET /api/v1/categories/people/{personId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-people-personId) | Returns a list of Category Lists & Categories relationally linked to a specific `Person` entity.
+[GET /api/v1/categories/programmes/{programmesId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-programmes-programmesId) | Returns a list of Category Lists & Categories relationally linked to a specific `Programme` entity.
+
+## POST /api/v1/categorylists
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/categorylists' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "OptionalId": "106435bf-939a-43d7-a6b9-ea408f97bb78"
+  "FileAs": "ICB",
+  "OrderIndex": 0,
+  "ShowDataColumns": true,
+  "IsPeopleEnabled": true,
+  "IsCompaniesEnabled": true,
+  "IsAssignmentsEnabled": true,
+  "IsAdvertisementsEnabled": true
+}'
+
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "106435bf-939a-43d7-a6b9-ea408f97bb78",
+    "CategoryName": "ICB",
+    "OrderIndex": 0,
+    "ShowDataColumns": true
+}
+```
+
+This endpoint is used to create a new Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categorylists`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+OptionalId (Optional) |  | String | Used to define the unique identifier for the new Category List.
+FileAs | [required] | String | Used to define the name of the Category List.
+OrderIndex (Optional) | | Integer | This specifies the ordinal position of the Category List as it will appear in Invenias systems. 
+ShowDataColumns (Optional) | | Boolean | Used to enable/disable the timestamp feature in categories within the specified Category List.
+IsPeopleEnabled | [required] | Boolean | Used to define if the Category List should be visible in `Person` entities within Invenias systems.
+IsCompaniesEnabled | [required] | Boolean | Used to define if the Category List should be visible in `Company` entities within Invenias systems.
+IsAssigmentsEnabled | [required] | Boolean | Used to define if the Category List should be visible in `Assignment` entities within Invenias systems.
+IsAdvertisementsEnabled | [required] | Boolean | Used to define if the Category List should be visible in `Advertisement` entities within Invenias systems.
+
+
+## POST /api/v1/categorylists/{categoryListId}/entries
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "OptionalId": "9af48b85-5d7b-4e92-ad1b-4c1497a5ea0a",
+  "CategoryName": "0001 Oil & Gas"
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "9af48b85-5d7b-4e92-ad1b-4c1497a5ea0a",
+    "CategoryName": "0001 Oil & Gas",
+    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "CategoryDisplayName": "0001 Oil & Gas"
+}
+```
+
+This endpoint is used to create Categories within an existing Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categorylists/{categoryListId}/entries`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+categoryListId | [required] | String | The unique identitfier for the desired Category List.
+
+## POST /api/v1/categorylists/{id}/entries/list
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries/list' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "PageSize":1000,
+   "PageIndex":0,
+   "Select":[
+      "Id",
+      "ParentListEntryId",
+      "FileAs"
+   ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "FileAs": "Central African Republic",
+            "ItemType": "CategoryListEntries",
+            "ParentListEntryId": {
+                "Id": "3e0127b5-97fd-4e4b-acd2-b463130804ad"
+            },
+            "ItemId": "6b79bb1f-5119-4470-99ec-01ca75932e57",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "FileAs": "Austria",
+            "ItemType": "CategoryListEntries",
+            "ParentListEntryId": {
+                "Id": "9a157512-de16-4c5b-856c-1b091eb49129"
+            },
+            "ItemId": "1b4ad1c1-9f32-47da-90cc-022ee32fad95",
+            "OffLimitsStatus": "Off"
+        }…
+}
+```
+
+This endpoint will return a list of categories within any given Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categorylists/{id}/entries/list`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identitfier for the desired Category List.
+
+## GET /api/v1/categorylists/{categoryListId}/entries/{entryId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries/0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
+    "CategoryName": "Caribbean",
+    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "ParentListEntryId": "fd19a131-57d1-423a-b5d7-aa9b602e0d70",
+    "CategoryDisplayName": "Caribbean"
+}
+```
+
+This endpoint will return the details for a specific Category List entry within the specified Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categorylists/{categoryListId}/entries/{entryId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+categoryListId | [required] | String | The unique identitfier for the desired Category List.
+entryId | [required] | String | The unique identifier for the desired Category List entry.
+
+## DELETE /api/v1/categorylists/{categoryListId}/entries/{entryId}
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries/0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d' \
+--header 'Authorization: Bearer {token}'
+
+```
+
+> Please note, a successful request will return a 204 response code.
+
+This endpoint will return details related to the specified Category List.
+
+<aside class="notice">
+Please note, you can only delete a Category List entry is it's not relationally linked to one or more core entity types (e.g., People, Assignments, Companies, Programmes, etc…). If you wish to delete a Category List entry that is relationally linked to core entity types, you will need to delete all the relations before using this endpoint to delete a Category List entry.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categorylists/{categoryListId}/entries/{entryId}` 
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+categoryListId | [required] | String | The unique identitfier for the desired Category List.
+entryId | [required] | String | The unique identifier for the desired Category List entry.
+
+## GET /api/v1/categorylists/{id}
+> Example (cURL)
+
+```shell
+Example (cURL)
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+This endpoint is used to delete a Category List entry within the specified Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categorylists/{id}`
+ 
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identitfier for the desired Category List.
+
+## GET /api/v1/categories/jobpostings
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/advertisements' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "fd19a131-57d1-423a-b5d7-aa9b602e0d70",
+                    "CategoryName": "AMERICAS",
+                    "Children": [
+                        {
+                            "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
+                            "CategoryName": "Caribbean",
+                            "Children": [
+                                {
+                                    "Id": "0880ff5b-4121-4d99-bc85-64241382669f",
+                                    "CategoryName": "Anguilla",
+                                    "Children": []
+                                }…
+                            ]
+                        }
+                    ]
+                }
+                
+        }
+    ]
+}
+```
+This endpoint will return a list of all the Category Lists and their categories that are enabled on the `Advertisements` entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/advertisements`
+
+## GET /api/v1/jobpostings/{id}/categories
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+                    "CategoryName": "United Kingdom",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "United Kingdom"
+                }
+            ]
+        },
+        {
+            "Id": "106435bf-939a-43d7-a6b9-ea408f97bb78",
+            "CategoryName": "ICB",
+            "OrderIndex": 0,
+            "ShowDataColumns": true,
+            "Categories": []
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category entries that have been relationally linked to a specific `Advertisement`. 
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/jobpostings/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Advertisement` entity.
+
+## POST /api/v1/jobpostings/{id}/categories
+> Example (cURL) - Linking a single Category List entry to an `Advertisement` record.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ItemReferences": [
+    {
+      "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688"
+    }
+  ]
+}'
+```
+
+> Example (cURL) - Linking multiple Category List entries to an `Advertisement` record.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ItemReferences": [
+        {
+            "Id": "6bcb23ec-13b5-455f-986f-727065e9f4c4"
+        },
+        {
+            "Id": "cca86cf6-9fe8-489b-989f-96fea863822c"
+        }
+    ]
+}'
+```
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to relationally link a specific `Advertisement` entity with one or more categories.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/jobpostings/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Advertisement` entity.
+
+
+## GET /api/v1/jobpostings/{id}/categories/{categoryListId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+Example Response (JSON)
+{
+    "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "CategoryName": "Location",
+    "AssociatedColour": "#FFD9D8",
+    "ShowDataColumns": true,
+    "Categories": [
+        {
+            "Id": "6bcb23ec-13b5-455f-986f-727065e9f4c4",
+            "CategoryName": "Finland",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "Finland"
+        },
+        {
+            "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688",
+            "CategoryName": "France",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "France"
+        },
+        {
+            "Id": "cca86cf6-9fe8-489b-989f-96fea863822c",
+            "CategoryName": "Germany",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "Germany"
+        },
+        {
+            "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+            "CategoryName": "United Kingdom",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "United Kingdom"
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category List entries that are relationally linked to an `Advertisement` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/jobpostings/{id}/categories/{categoryListId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Advertisement` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List.
+
+## DELETE /api/v1/jobpostings/{id}/categories/{categoryListEntryId}
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to remove the relationship between an `Advertisement` and a Category List entry.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/jobpostings/{id}/categories/{categoryListEntryId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Advertisement` entity.
+categoryListEntryId | [required] | String | The unique identifier for the desired Category List entry.
+
+## GET /api/v1/categories/assignments
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/assignments' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "fd19a131-57d1-423a-b5d7-aa9b602e0d70",
+                    "CategoryName": "AMERICAS",
+                    "Children": [
+                        {
+                            "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
+                            "CategoryName": "Caribbean",
+                            "Children": [
+                                {
+                                    "Id": "0880ff5b-4121-4d99-bc85-64241382669f",
+                                    "CategoryName": "Anguilla",
+                                    "Children": []
+                                }…
+                            ]
+                        }
+                    ]
+                }
+                
+        }
+    ]
+}
+```
+This endpoint will return a list of all the Category Lists and their categories that are enabled on the `Assignments` entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/assignments`
+
+## POST /api/v1/assignments/{id}/categories
+> Example (cURL) - Linking a single Category List entry to an `Assignment` record.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ItemReferences": [
+    {
+      "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688"
+    }
+  ]
+}'
+
+```
+
+> Example (cURL) - Linking multiple Category List entries to an `Assignment` record.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ItemReferences": [
+        {
+            "Id": "6bcb23ec-13b5-455f-986f-727065e9f4c4"
+        },
+        {
+            "Id": "cca86cf6-9fe8-489b-989f-96fea863822c"
+        }
+    ]
+}'
+
+```
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to relationally link a specific `Assignment` entity with one or more categories.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Assignment` entity.
+
+## GET /api/v1/assignments/{id}/categories
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignments/ca866e18-6c8f-47b0-a76a-0dd29d498e6b/categories' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688",
+                    "CategoryName": "France",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "France"
+                }
+            ]
+        },
+        {
+            "Id": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+            "CategoryName": "Industry",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 1,
+            "ShowDataColumns": false,
+            "Categories": []
+        },
+        {
+            "Id": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+            "CategoryName": "Position Function",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 2,
+            "ShowDataColumns": false,
+            "Categories": []
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category entries that have been relationally linked to a specific `Assignment`. 
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Assignment` entity.
+
+## GET /api/v1/assignments/{assignmentId}/categories/{categoryListId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignments/ca866e18-6c8f-47b0-a76a-0dd29d498e6b/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "CategoryName": "Location",
+    "AssociatedColour": "#FFD9D8",
+    "ShowDataColumns": true,
+    "Categories": [
+        {
+            "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688",
+            "CategoryName": "France",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "France"
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category List entries that are relationally linked to an `Assignment` entity by Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/categories/{categoryListId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+assignmentId | [required] | String | The unique identifier for the desired `Assignment` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List.
+
+## DELETE /api/v1/assignments/{assignmentId}/categories/{categoryListEntryId}
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/assignments/ca866e18-6c8f-47b0-a76a-0dd29d498e6b/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to remove the relationship between an `Assignment` and a Category List entry.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{assignmentId}/categories/{categoryListEntryId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+assignmentId | [required] | String | The unique identifier for the desired `Assignment` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List entry.
+
+## GET /api/v1/categories/companies
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/companies' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "fd19a131-57d1-423a-b5d7-aa9b602e0d70",
+                    "CategoryName": "AMERICAS",
+                    "Children": [
+                        {
+                            "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
+                            "CategoryName": "Caribbean",
+                            "Children": [
+                                {
+                                    "Id": "0880ff5b-4121-4d99-bc85-64241382669f",
+                                    "CategoryName": "Anguilla",
+                                    "Children": []
+                                }…
+                            ]
+                        }
+                    ]
+                }
+                
+        }
+    ]
+}
+```
+
+This endpoint will return a list of all the Category Lists and their categories that are enabled on the `Company` entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/companies`
+
+## POST /api/v1/companies/{id}/categories
+> Example (cURL) - Linking a single Category List entry to a `Company` entity.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ItemReferences": [
+    {
+      "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688"
+    }
+  ]
+}'
+
+```
+
+> Example (cURL) - Linking multiple Category List entries to a `Company` entity.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ItemReferences": [
+        {
+            "Id": "6bcb23ec-13b5-455f-986f-727065e9f4c4"
+        },
+        {
+            "Id": "cca86cf6-9fe8-489b-989f-96fea863822c"
+        }
+    ]
+}'
+
+```
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to relationally link a specific `Company` entity with one or more categories.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Company` entity.
+
+## GET /api/v1/companies/{id}/categories
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/c6bd6734-fc2f-4088-bbcd-8c038e549c01/categories' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+            "CategoryName": "Industry",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 1,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "ed36bebc-bd61-462c-8407-194b60a3804d",
+                    "CategoryName": "Investment Banking",
+                    "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                    "ParentListEntryId": "7c2aaf54-2ba0-402c-814c-ac3c7195de46",
+                    "CategoryDisplayName": "Investment Banking"
+                }
+            ]
+        },
+        {
+            "Id": "5378859c-3346-433f-a8b1-46e74bcd88c6",
+            "CategoryName": "Marketing",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 7,
+            "ShowDataColumns": false,
+            "Categories": []
+        }…
+    ]
+}
+```
+
+This endpoint returns a list on Category List entries that have been relationally linked to a specific `Company` entity. 
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Company` entity.
+
+## GET /api/v1/companies/{companyId}/categories/{categoryListId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/c6bd6734-fc2f-4088-bbcd-8c038e549c01/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "CategoryName": "Location",
+    "AssociatedColour": "#FFD9D8",
+    "ShowDataColumns": true,
+    "Categories": [
+        {
+            "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+            "CategoryName": "United Kingdom",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "United Kingdom"
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category List entries that are relationally linked to an `Company` entity by Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{companyId}/categories/{categoryListId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+companyId | [required] | String | The unique identifier for the desired `Company` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List.
+
+## DELETE /api/v1/companies/{companyId}/categories/{categoryListEntryId}
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/companies/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to remove the relationship between an `Company` entity and a Category List entry.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{CompanyId}/categories/{categoryListEntryId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+companyId | [required] | String | The unique identifier for the desired `Company` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List entry.
+
+## GET /api/v1/categories/people
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/people' \
+--header 'Authorization: Bearer {token}'
+
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "fd19a131-57d1-423a-b5d7-aa9b602e0d70",
+                    "CategoryName": "AMERICAS",
+                    "Children": [
+                        {
+                            "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
+                            "CategoryName": "Caribbean",
+                            "Children": [
+                                {
+                                    "Id": "0880ff5b-4121-4d99-bc85-64241382669f",
+                                    "CategoryName": "Anguilla",
+                                    "Children": []
+                                }…
+                            ]
+                        }
+                    ]
+                }
+                
+        }
+    ]
+}
+```
+
+This endpoint will return a list of all the Category Lists and their categories that are enabled on the `Person` entity type.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/people`
+
+## POST /api/v1/people/{id}/categories
+> Example (cURL) - Linking a single Category List entry to a `Person` entity.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ItemReferences": [
+    {
+      "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688"
+    }
+  ]
+}'
+```
+
+> Example (cURL) - Linking multiple Category List entries to a `Person` entity.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ItemReferences": [
+        {
+            "Id": "6bcb23ec-13b5-455f-986f-727065e9f4c4"
+        },
+        {
+            "Id": "cca86cf6-9fe8-489b-989f-96fea863822c"
+        }
+    ]
+}'
+```
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to relationally link a specific `Person` entity with one or more categories.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Person` entity.
+
+## GET /api/v1/people/{id}/categories
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/eb4cb3e4-baee-40ba-b312-847694a685bd/categories' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+                    "CategoryName": "United Kingdom",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "United Kingdom"
+                }
+            ]
+        },
+        {
+            "Id": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+            "CategoryName": "Industry",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 1,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "adc6af6a-37da-49b3-a3b6-7864be2bcb71",
+                    "CategoryName": "Banking",
+                    "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                    "ParentListEntryId": "7c2aaf54-2ba0-402c-814c-ac3c7195de46",
+                    "CategoryDisplayName": "Banking"
+                },
+                {
+                    "Id": "2336f985-f26d-47b4-9037-29bad14fda5a",
+                    "CategoryName": "Oil & Gas",
+                    "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                    "ParentListEntryId": "55b6f1ba-a777-4ff3-bb63-010feb341a5f",
+                    "CategoryDisplayName": "Oil & Gas"
+                }
+            ]
+        },
+        {
+            "Id": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+            "CategoryName": "Position Function",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 2,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "f3e7b3de-9651-46f1-bc24-b9ef2981be31",
+                    "CategoryName": "Executive",
+                    "CategoryListId": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+                    "CategoryDisplayName": "Executive"
+                }
+            ]
+        },
+        {
+            "Id": "1d44368f-475e-433c-942b-109da0ab74af",
+            "CategoryName": "Position Level",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 3,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "6ab13256-8a17-4b61-85d6-eafd85d12707",
+                    "CategoryName": "3 Senior Management",
+                    "CategoryListId": "1d44368f-475e-433c-942b-109da0ab74af",
+                    "CategoryDisplayName": "3 Senior Management"
+                }
+            ]
+        },
+        {
+            "Id": "89826ae3-1755-4fad-aaf5-dc029e532717",
+            "CategoryName": "Language",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 4,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "ead32d85-1018-4a89-a1ea-ba4be6b1b550",
+                    "CategoryName": "English",
+                    "CategoryListId": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                    "SovrenCode": "en",
+                    "CategoryDisplayName": "English"
+                },
+                {
+                    "Id": "5a8b39f1-6618-4b1c-b3c5-ee44cea3992e",
+                    "CategoryName": "French",
+                    "CategoryListId": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                    "SovrenCode": "fr",
+                    "CategoryDisplayName": "French"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This endpoint returns a list on Category List entries that have been relationally linked to a specific `Person` entity. 
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Person` entity.
+
+## GET /api/v1/people/{personId}/categories/{categoryListId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/eb4cb3e4-baee-40ba-b312-847694a685bd/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "CategoryName": "Location",
+    "AssociatedColour": "#FFD9D8",
+    "ShowDataColumns": true,
+    "Categories": [
+        {
+            "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+            "CategoryName": "United Kingdom",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "United Kingdom"
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category List entries that are relationally linked to an `Person` entity by Category List.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{personId}/categories/{categoryListId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+personId | [required] | String | The unique identifier for the desired `Person` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List.
+
+## DELETE /api/v1/people/{personId}/categories/{categoryListEntryId}
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/people/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to remove the relationship between an `Person` entity and a Category List entry.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{PeopleId}/categories/{categoryListEntryId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+personId | [required] | String | The unique identifier for the desired `Person` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List entry.
+
+## GET /api/v1/categories/programmes
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/programmes' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "fd19a131-57d1-423a-b5d7-aa9b602e0d70",
+                    "CategoryName": "AMERICAS",
+                    "Children": [
+                        {
+                            "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
+                            "CategoryName": "Caribbean",
+                            "Children": [
+                                {
+                                    "Id": "0880ff5b-4121-4d99-bc85-64241382669f",
+                                    "CategoryName": "Anguilla",
+                                    "Children": []
+                                }…
+                            ]
+                        }
+                    ]
+                }
+                
+        }
+    ]
+}
+```
+
+This endpoint will return a list of all the Category Lists and their categories that are enabled on the `Programme` entity type.
+
+## POST /api/v1/programmes/{id}/categories
+> Example (cURL) - Linking a single Category List entry to a `Person` entity.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ItemReferences": [
+    {
+      "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688"
+    }
+  ]
+}'
+```
+
+> Example (cURL) - Linking multiple Category List entries to a `Person` entity.
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/9abed357-8915-4b90-8553-d86866af2078/categories' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ItemReferences": [
+        {
+            "Id": "6bcb23ec-13b5-455f-986f-727065e9f4c4"
+        },
+        {
+            "Id": "cca86cf6-9fe8-489b-989f-96fea863822c"
+        }
+    ]
+}'
+```
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to relationally link a specific `Programme` entity with one or more categories.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/programmes/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Programme` entity.
+
+## GET /api/v1/programmes/{id}/categories
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programme/8f537861-7709-4ef2-bbec-68db11b19ade/categories' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688",
+                    "CategoryName": "France",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "France"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This endpoint returns a list on Category List entries that have been relationally linked to a specific `Programme` entity. 
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/programmes/{id}/categories`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the desired `Programme` entity.
+
+## GET /api/v1/programmes/{programmeId}/categories/{categoryListId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programmes/8f537861-7709-4ef2-bbec-68db11b19ade/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+    "CategoryName": "Location",
+    "AssociatedColour": "#FFD9D8",
+    "ShowDataColumns": true,
+    "Categories": [
+        {
+            "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+            "CategoryName": "United Kingdom",
+            "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+            "CategoryDisplayName": "United Kingdom"
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category List entries that are relationally linked to an `Programme` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/programmes/{id}/categories/{categoryListId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+programmeId | [required] | String | The unique identifier for the desired `Programme` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List.
+
+## DELETE /api/v1/programmes/{personId}/categories/{categoryListEntryId}
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/programmes/8f537861-7709-4ef2-bbec-68db11b19ade/categories/62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, a successful request will return a 200-response code.
+
+This endpoint is used to remove the relationship between an `Programme` entity and a Category List entry.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/programmes/{programmeId}/categories/{categoryListEntryId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+programmeId | [required] | String | The unique identifier for the desired `Programme` entity.
+categoryListId | [required] | String | The unique identifier for the desired Category List entry.
+
+## GET /api/v1/categories/assignments/{assignmentsId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/assignments/{assignmentsId}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 0,
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688",
+                    "CategoryName": "France",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "France"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category Lists & Categories relationally linked to a specific `Assignment` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/assignments/{assignmentsId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+assignmentsId | [required] | String | The unique identifier for the desired `Assignment` entity.
+
+## GET /api/v1/categories/companies/{companyId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/companies/{companyId}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 0,
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+                    "CategoryName": "United Kingdom",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "United Kingdom"
+                }
+            ]
+        },
+        {
+            "Id": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+            "CategoryName": "Industry",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 3,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "ed36bebc-bd61-462c-8407-194b60a3804d",
+                    "CategoryName": "Investment Banking",
+                    "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                    "ParentListEntryId": "7c2aaf54-2ba0-402c-814c-ac3c7195de46",
+                    "CategoryDisplayName": "Investment Banking"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category Lists & Categories relationally linked to a specific `Company` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/companies/{companyId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+companyId | [required] | String | The unique identifier for the desired `Company` entity.
+
+## GET /api/v1/categories/people/{personId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/people/{personId}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 0,
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+                    "CategoryName": "United Kingdom",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "United Kingdom"
+                }
+            ]
+        },
+        {
+            "Id": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+            "CategoryName": "Industry",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 3,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "adc6af6a-37da-49b3-a3b6-7864be2bcb71",
+                    "CategoryName": "Banking",
+                    "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                    "ParentListEntryId": "7c2aaf54-2ba0-402c-814c-ac3c7195de46",
+                    "CategoryDisplayName": "Banking"
+                },
+                {
+                    "Id": "2336f985-f26d-47b4-9037-29bad14fda5a",
+                    "CategoryName": "Oil & Gas",
+                    "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                    "ParentListEntryId": "55b6f1ba-a777-4ff3-bb63-010feb341a5f",
+                    "CategoryDisplayName": "Oil & Gas"
+                }
+            ]
+        },
+        {
+            "Id": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+            "CategoryName": "Position Function",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 4,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "f3e7b3de-9651-46f1-bc24-b9ef2981be31",
+                    "CategoryName": "Executive",
+                    "CategoryListId": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+                    "CategoryDisplayName": "Executive"
+                }
+            ]
+        },
+        {
+            "Id": "1d44368f-475e-433c-942b-109da0ab74af",
+            "CategoryName": "Position Level",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 5,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "6ab13256-8a17-4b61-85d6-eafd85d12707",
+                    "CategoryName": "3 Senior Management",
+                    "CategoryListId": "1d44368f-475e-433c-942b-109da0ab74af",
+                    "CategoryDisplayName": "3 Senior Management"
+                }
+            ]
+        },
+        {
+            "Id": "89826ae3-1755-4fad-aaf5-dc029e532717",
+            "CategoryName": "Language",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 6,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "a040349d-f437-4fe7-8c5b-f2c205a8f6a8",
+                    "CategoryName": "Chinese",
+                    "CategoryListId": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                    "SovrenCode": "zh",
+                    "CategoryDisplayName": "Chinese"
+                },
+                {
+                    "Id": "ead32d85-1018-4a89-a1ea-ba4be6b1b550",
+                    "CategoryName": "English",
+                    "CategoryListId": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                    "SovrenCode": "en",
+                    "CategoryDisplayName": "English"
+                },
+                {
+                    "Id": "5a8b39f1-6618-4b1c-b3c5-ee44cea3992e",
+                    "CategoryName": "French",
+                    "CategoryListId": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                    "SovrenCode": "fr",
+                    "CategoryDisplayName": "French"
+                }
+            ]
+        },
+        {
+            "Id": "8b409448-5457-4e57-a695-88aee1e78842",
+            "CategoryName": "Loc Pref/Rating",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 20,
+            "ShowDataColumns": false,
+            "Categories": [
+                {
+                    "Id": "f42c79c2-4ea7-4bca-8896-14de4d318281",
+                    "CategoryName": "01 A",
+                    "CategoryListId": "8b409448-5457-4e57-a695-88aee1e78842",
+                    "ParentListEntryId": "00a19e0f-c363-49af-b39d-bbfadae02141",
+                    "CategoryDisplayName": "01 A"
+                },
+                {
+                    "Id": "34f5b5fa-81c7-4a65-a31d-6c4a34665e6a",
+                    "CategoryName": "Zurich",
+                    "CategoryListId": "8b409448-5457-4e57-a695-88aee1e78842",
+                    "ParentListEntryId": "775d5951-946d-45f9-925e-34455a3eddc3",
+                    "CategoryDisplayName": "Zurich"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category Lists & Categories relationally linked to a specific `Person` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/people/{personId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+personId | [required] | String | The unique identifier for the desired `Person` entity.
+
+## GET /api/v1/categories/programmes/{programmesId}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/programmes/{programmesId}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Lists": [
+        {
+            "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+            "CategoryName": "Location",
+            "AssociatedColour": "#FFD9D8",
+            "OrderIndex": 0,
+            "ShowDataColumns": true,
+            "Categories": [
+                {
+                    "Id": "bc2f78c6-232d-42ed-9871-b3830fa0d688",
+                    "CategoryName": "France",
+                    "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                    "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                    "CategoryDisplayName": "France"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This endpoint returns a list of Category Lists & Categories relationally linked to a specific `Programme` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/categories/programmes/{programmesId}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+programmesId | [required] | String | The unique identifier for the desired `Programme` entity.
+
+# Parsing
+Parsing
+Please note, if you're considering at developing an integration that creates people in bulk using these endpoints, you must not exceed the maximum number of concurrent requests. For more information, please refer to this article on the Sovren website, [https://docs.sovren.com/Documentation/ResumeParser#batch-parsing-concurrency](https://docs.sovren.com/Documentation/ResumeParser#batch-parsing-concurrency).
+
+Invenias uses a resume parsing tool named Sovren to provide document parsing to end-users of Invenias applications.
+
+A resume parser is a piece of software that can read, understand, and classify all the data on a resume, just like a human can–but much faster.
+It's possible for API integrations to leverage Sovren to create and/or update 'Person' entities in Invenias by parsing a source document and ingesting the structured output. However, there is no quick and easy way to create a person by parsing a document. Depending upon the type of information you wish to use, it may require validation across several areas.
+
+You will need to determine exactly what information you wish to capture in an Invenias record to know which endpoints you're going to need to use.
+When planning your integration, please consider:
+<ul>
+<li>What information do you want to leverage?</li>
+<ul>
+<li>Person Name (e.g. Prefix, Title, First name, Family name, Maiden name, Nickname etc).</li>
+<li>Contact Details (e.g. Mobile phone, Home Telephone, Email adressess etc).</li> 
+<li>Employment History</li>
+<li>Education</li>
+<li>Categories</li>
+</ul>
+<li>Does the person already exist?</li>
+<ul>
+<li>If yes, which one should need to be updated?</li> 
+<li>If not, you will need to create a new Person Record.</li>
+</ul>
+<li>Do the Companies for their positions already exist?</li>
+<ul> 
+<li>If yes, which one do you want to link to the position(s) that have been found?</li> 
+<li>If not, you will need to create a Company Record to link the person and position(s) to.</li>
+</ul>
+<li>Do the Places of Study already exist?</li>
+<ul> 
+<li>If yes, which one(s) do you want to link the qualification(s) found?</li> 
+<li>If not, you will need to create a Company Record to link the person and qualification(s) too.</li>
+</ul>
+<li>Do the Categories already exist?</li> 
+<ul>
+<li>If yes, which one(s) do you want to link to categories?</li>
+<ul><li>In which Category Lists do the categories exist?</li></ul>
+<li>If not, you will need to either create the new categories in an existing category list OR create a new list and the new categories depending on the most applicable scenario</li>
+</ul>
+</ul>
+</br>
+<img src="images\parsingworkflow.png" alt="X-Request-Quota-Remaining" class="inline"/>
+<br><i>Figure 1. Simple workflow example.</i>
+<br></br>
+<i>Table 1. Parsing Endpoints Summary</i>
+
+Name | Description
+---- | -----------
+[POST /api/v2/fullparse/document] (https://bullhorn.github.io/invenias-api-docs/#post-api-v2-fullparse-document) | This endpoint converts the document, mapping the results into a structured format that an API integration can easily consume.
+[GET /api/v2/fullparse/{id}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v2-fullparse-id) | This endpoint will return the parsed document output from Sovren.
+[POST /api/v2/fullparse/create] (https://bullhorn.github.io/invenias-api-docs/#post-api-v2-fullparse-create) | This endpoint allows the creation of a `Person` type entity.
+[PUT /api/v2/fullparse/create] (https://bullhorn.github.io/invenias-api-docs/#put-api-v2-fullparse-create) | This endpoint allows you to replace a representation of the target `Person` type entity with the request payload.
+
+## POST /api/v2/fullparse/document
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullparse/document' \
+--header 'Authorization: Bearer {token} \
+--form 'file=@/C:/Users/glen.chamberlain/Downloads/JaneDoeCV.pdf'
+```
+
+> Example Response (JSON)
+
+```shell
+"cfc4a973-8c12-4fa1-9a01-39e6eb9c0843"
+```
+This endpoint converts the document, mapping the results into a structured format that an API integration can easily consume.
+
+<aside class="notice">Please note, this endpoint will return a unique identifier for the parsed document. You will need to use the GET https://{subdomain}.invenias.com/api/v2/fullparse/{id} endpoint to get the results.</aside>
+
+### HTTP Request
+`POST /api/v2/fullparse/document`
+
+## GET /api/v2/fullparse/{id}
+> Example (cURL)
+
+```shell
+curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/fullparse/6418f819-7620-4ede-81a4-c8395519846d' \
+--header 'Authorization: Bearer {token}'
+
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "DocumentId": "cfc4a973-8c12-4fa1-9a01-39e6eb9c0843",
+    "Person": {
+        "NameComponents": {
+            "FullName": "Jane Doe",
+            "FamilyName": "Doe",
+            "FirstName": "Jane"
+        },
+        "Position": {
+            "JobTitle": "Technical Operations Engineer",
+            "Description": "United Kingdom",
+            "StartDate": "2020-02-01T00:00:00",
+            "Company": {
+                "CompanyName": "Microsoft",
+                "Location": {
+                    "AddressComponents": {
+                        "FullAddress": "",
+                        "Street": "",
+                        "TownCity": "",
+                        "County": "",
+                        "Postcode": "",
+                        "Country": ""
+                    }
+                }
+            },
+            "IsDefault": false,
+            "PositionStatus": {
+                "Value": 0
+            }
+        },
+        "Location": {},
+        "EmailAddresses": [
+            {
+                "IsPersonal": false,
+                "IsBusiness": false,
+                "IsVisibleAsDefault": true,
+                "FieldName": "Email1Address",
+                "DisplayTitle": "Email",
+                "ItemValue": "jdoe123@gmail.com"
+            }
+        ]…
+    }
+```
+
+This endpoint will return the parsed document output from Sovren.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v2/fullparse/{id}`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+id | [required] | String | The unique identifier for the parsed document.
+
+## POST /api/v2/fullparse/create
+> Example (cURL)
+
+```shell
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullparse/create' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "Person": {
+        "Owner": {
+            "Id": "a9504f72-4f20-4d4a-a8d1-1a18ed571c9d",
+            "DisplayTitle": "Glen Chamberlain"
+        },
+        "DefaultPosition": {},
+        "IsCandidate": true,
+        "NameComponents": {
+            "FamilyName": "Jane",
+            "FirstName": "Doe",
+            "MiddleName": "",
+            "Suffix": "",
+            "Title": "",
+            "Nickname": "",
+            "MaidenName": ""
+        },
+        "HomeAddress": {
+            "Street": "38 Market Place",
+            "TownCity": "Reading",
+            "County": "Berkshire",
+            "Postcode": "RG1 2DE",
+            "Country": "UNITED KINGDOM"
+        },
+        "EmailAddresses": [
+            {
+                "IsPersonal": true,
+                "FieldName": "Email1Address",
+                "DisplayTitle": "Email",
+                "ItemValue": "jdoe123@gmail.com"
+            }
+        ]
+    },
+    "DocumentId": "cfc4a973-8c12-4fa1-9a01-39e6eb9c0843",
+    "SaveParsedDocumentAsDefaultCv": true
+}'
+
+```
+
+> Example Response (JSON)
+
+```shell
+"7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc"
+```
+
+This endpoint allows the creation of a `Person` type entity.
+
+Please note, if you set the value for the parameter named 'SaveParsedDocumentAsDefault' to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the 'CV/RESUME' tab in the Person profile pane. This will make the text content of the document searchable when using the 'Advanced Search' feature for `Person` type entities in Invenias Professional application.
+
+<aside class="warning">
+Please note, to create (or update) a new Person type entity, you must include the 'NameComponents' array in the request body.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v2/fullparse/create`
+
+## PUT /api/v2/fullparse/create
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}invenias.com/api/v2/fullparse/create?personId=7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc&updateAllContactItems=true' \
+--header 'Authorization: Bearer {token}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+
+   "Person":{
+      "NameComponents":{
+         "FamilyName":"Doe",
+         "FirstName":"Jane",
+         "MiddleName":"",
+         "Suffix":"",
+         "Title":"Ms",
+         "Nickname":"",
+         "MaidenName":""
+      }
+   },
+   "DocumentId":"b6d3f059-5ce5-4c7b-92d7-a33a32bac699",
+   "SaveParsedDocumentAsDefaultCv":true
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+"7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc"
+```
+This endpoint allows you to replace a representation of the target `Person` type entity with the request payload.
+
+Please note, if you set the value for the parameter named 'SaveParsedDocumentAsDefault' to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the 'CV/RESUME' tab replacing the content in the Person profile pane. This will make the text content of the document searchable when using the 'Advanced Search' feature for `Person` type entities in Invenias Professional application.
+
+<aside class="warning">
+Please note, to create (or update) a new Person type entity, you must include the 'NameComponents' array in the request body or not.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v2/fullparse/create?personId=7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc&updateAllContactItems=true`
+
+Parameter | Default | Type | Description
+--------- | ------- | ---- | -----------
+personId | [required] | String | The unique identifier for the `Person` type entity you wish to update.
+updateAllContactItems | [required] | Boolean | This should always be set to `true` regardless of whether you're updating the contact details for the `Person` type entity.
+
 
 # FAQ
 ## Frequently asked questions
@@ -3567,7 +5122,7 @@ A `400` status code means that the server could not process an API request due t
     <li>The request is missing authentication information, or the Authorization header provided could not be validated.</li>
 </ul>
 
-Please review every single piece of text in the request, ensuring that there are no typos in the endpoint, headers (name and values), and body. If you copied and pasted any part of your API request, pay extra attention that they don’t include any mistakes or random characters that could cause an issue.
+Please review every single piece of text in the request, ensuring that there are no typos in the endpoint, headers (name and values), and body. If you copied and pasted any part of your API request, pay extra attention that they don't include any mistakes or random characters that could cause an issue.
 
 <aside class="warning">
 If this response is accompanied by the message "invalid_client" the 'Content-Type' header is incorrect or is missing from the request. Please ensure the 'Content-Type' header is declared in your request and the value is set to 'application/x-www-form-urlencoded'.
@@ -3581,7 +5136,7 @@ The `401` Unauthorized status code is returned when the API request is missing a
     <li>The user account has been disabled.</li>
     <li>The token has expired.</li>
     <li>The license has been removed from the user account.</li>
-    <li>The user accounts permission group has been changed, and it’s no longer in the ‘System Administrator’ group.</li>
+    <li>The user accounts permission group has been changed, and it's no longer in the 'System Administrator' group.</li>
     <li>The tenant's database has been pushed from our production environment to another environment to be worked on (e.g. Merging databases, data cleansing, etc...) by an SI Partner or our Professional Services team and all tokens have been invalidated.</li>
     <li>The user account has been disabled by our BTO team due to exceeding 9000 429 responses within a 5 minute period. Please check your logs for 429 responses. Please note, in this event, the primary contact of the Invenias customer will be notified of this action.</li>
 </ul>
@@ -3595,31 +5150,31 @@ Another reason this status code might be returned is in case the user did not re
 
 To fix the API call for those two situations, make sure that the credentials you are using have the access level required by the endpoint, or that the access token has the correct permissions.
 
-Please note, if you are receiving `404` or `403` response codes from our servers, there’s a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you’re unsure if your application has expired or not please email our support team using support@invenias.com and they will check for you.
+Please note, if you are receiving `404` or `403` response codes from our servers, there's a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you're unsure if your application has expired or not please email our support team using support@invenias.com and they will check for you.
 
 ## Not Found (404) Response Code
-The `404` error status code indicates that the REST API can’t map the client’s URI to a resource, but may be available in the future. ... This status code is used when our server does not wish to reveal exactly why the request has been refused, or when no other response applies.
+The `404` error status code indicates that the REST API can't map the client's URI to a resource, but may be available in the future. ... This status code is used when our server does not wish to reveal exactly why the request has been refused, or when no other response applies.
 
-Please note, if you are receiving `404` or `403` response codes from our servers, there’s a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you’re unsure if your application has expired or not, please email our support team using support@invenias.com and they will check for you.
+Please note, if you are receiving `404` or `403` response codes from our servers, there's a chance the Application has expired. In this event please see [here](https://bullhorn.github.io/invenias-api-docs/#renewing-an-application) for more information on what to do. If you're unsure if your application has expired or not, please email our support team using support@invenias.com and they will check for you.
 
 ## Internal Server Error (500) Response Code
 The `500` Internal Server Error server error response code shows that the server encountered an unexpected condition that prevented it from fulfilling the request.
 
-Please note, the database may have data management policies enabled on the entity types you’re trying to work with. Please see [here](https://bullhorn.github.io/invenias-api-docs/#data-management) for more information on data management policies.
+Please note, the database may have data management policies enabled on the entity types you're trying to work with. Please see [here](https://bullhorn.github.io/invenias-api-docs/#data-management) for more information on data management policies.
 
 ## Service Unavailable (503) Response Code
 
-The `503` error always occurs when our servers can’t deliver the requested resources at the time the client requests them. 
+The `503` error always occurs when our servers can't deliver the requested resources at the time the client requests them. 
 Usually, this is due to a database upgrade and is accompanied by the following comment in the response body "Tenant is in Maintenance Mode - Upgrade in progress".
 
 Other causes of `503` errors:
 <ul>
     <li>The server is overloaded, meaning that is it receiving more requests than it can handle. Therefore, it responds with the error message. There are many reasons for an overload to occur: often an unexpected increase in traffic is the cause. Other possible reasons are malware/spam attacks and web applications, or the content management system being incorrectly programmed.</li>
-    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may cause an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a ‘Service Unavailable’ message.</li>
+    <li>In rare cases, an incorrect DNS server configuration on the client-side (computer or router) may cause an HTTP 503 error message. The selected DNS server itself might temporarily have problems, which then results in the HTTP request showing a 'Service Unavailable' message.</li>
 </ul>
 
 In summary, `503` errors are sometimes unavoidable, it's good practice to add logic to handle them in your application should it encounter one. This could be simple as displaying a notification to the end-users (if applicable) and polling an endpoint every 10 minutes until it receives a successful response.
 
 <aside class="notice">
-Please note, database upgrades run outside of our customer’s typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers, then the database upgrade will run on a weekend to minimize disruption.
+Please note, database upgrades run outside of our customer's typical working hours and typically take under an hour to complete. If the customer has Geo-replicas of the primary database in one or more additional data centers, then the database upgrade will run on a weekend to minimize disruption.
 </aside>
