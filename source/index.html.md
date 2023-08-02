@@ -3177,7 +3177,7 @@ Get the next five upcoming `Appointment` journal entities scheduled to take plac
 ## GET /api/v1/appointments/{id}
 > Example (cURL)
 ```shell
-curl --location --request GET 'https://atlasexecutivesearch.miginvenias.com/api/v1/appointments/{id}' \
+curl --location --request GET 'https://atlasexecutivesearch.invenias.com/api/v1/appointments/{id}' \
 --header 'Authorization: Bearer {token}'
 ```
 
@@ -3269,7 +3269,7 @@ id | [required] | Specify the unique identifier for the desired `Appointment` jo
 ## PUT /api/v1/appointments/{id}
 > Example (cURL)
 ```shell
-curl --location --request PUT 'https://{subdomain}.miginvenias.com/api/v1/appointments/{id}' \
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/appointments/{id}' \
 --header 'Authorization: Bearer {token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -3644,7 +3644,7 @@ id | [required] | Specify the unique identifier for the desired `Sent Document` 
 ## PUT /api/v1/sentdocuments/{id}
 > Example (cURL)
 ```shell
-curl --location --request PUT 'https://atlasexecutivesearch.miginvenias.com/api/v1/sentdocuments/a1df0675-c6eb-4dc0-a0be-beff3c07d7b8' \
+curl --location --request PUT 'https://atlasexecutivesearch.invenias.com/api/v1/sentdocuments/a1df0675-c6eb-4dc0-a0be-beff3c07d7b8' \
 --header 'Authorization: Bearer {token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -3877,7 +3877,7 @@ Used to create an `Email` journal entity in the database.
 ## GET /api/v1/emails/{id}
 > Example (cURL)
 ```shell
-curl --location --request GET 'https://atlasexecutivesearch.miginvenias.com/api/v1/emails/{id}' \
+curl --location --request GET 'https://atlasexecutivesearch.invenias.com/api/v1/emails/{id}' \
 --header 'Authorization: Bearer {token}'
 ```
 
@@ -8049,7 +8049,7 @@ request | [required] | The request model used to declare which values to change 
 ## POST /api/v1/documents/bulkDelete
 > Example (cURL)
 ```shell
-curl --location --request POST 'https://{subdomain}.miginvenias.com/api/v1/documents/bulkDelete' \
+curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/documents/bulkDelete' \
 --header 'Authorization: Bearer {token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
