@@ -125,11 +125,7 @@ FlowType | `ResourceOwner` | The OAuth 2.0 Authorization flow.
 To set up a new integration, launch a `POST /api/v1/thirdpartyapplications` request through the Swagger interface. It's noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.
 
 <aside class="notice">
-<<<<<<< Updated upstream
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
-=======
 Kindly observe that you must possess a licensed Invenias User Account and be a member of the 'System Administrator' permission group to execute this operation.
->>>>>>> Stashed changes
 </aside>
 
 Prior to utilizing the `POST /api/v1/thirdpartyapplications` endpoint, it is necessary to input an `api_key` into the designated field at the upper right-hand corner of the Swagger page. Achieve this by double-clicking the `api_key` field, which will consequently generate the key. If you're not already logged in, this action will trigger a login prompt.
@@ -8576,34 +8572,6 @@ Name | Description
 [GET /api/v1/categories/jobpostings]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-jobpostings) | Returns a list of all the Category Lists enabled for `Advertisement` entities (Including Categories).
 [GET /api/v1/jobpostings/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-jobpostings-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Advertisement` entity.
 [POST /api/v1/jobpostings/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-jobpostings-id-categories) | Used to relationally link a specific `Advertisement` entity with one or more categories.
-<<<<<<< Updated upstream
-[GET /api/v1/jobpostings/{id}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-jobpostings-id-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to an `Advertisement` entity.
-[DELETE /api/v1/jobpostings/{id}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-jobpostings-id-categories-categoryListEntryId) | This endpoint is used to remove the relationship between an `Advertisement` and a Category List entry.
-[GET /api/v1/categories/assignments]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-assignments) | Returns a list of all the Category Lists enabled for `Assignment` entities (Including Categories).
-[POST /api/v1/assignments/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-categories) | Used to relationally link a specific `Assignment` entity with one or more categories.
-[GET /api/v1/assignments/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Assignment` entity.
-[GET /api/v1/assignments/{assignmentId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-assignmentId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to an `Assignment` entity.
-[DELETE /api/v1/assignments/{assignmentId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-assignments-assignmentId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between an `Assignment` and a Category List entry.
-[GET /api/v1/categories/companies]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-companies) | Returns a list of all the Category Lists enabled for `Company` entities (Including Categories).
-[POST /api/v1/companies/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-categories) | Used to relationally link a specific `Company` entity with one or more categories.
-[GET /api/v1/companies/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Company` entity.
-[GET /api/v1/companies/{companyId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-personId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to a `Company` entity.
-[DELETE /api/v1/companies/{companyId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-companies-companyId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between a `Company` and a Category List entry.
-[GET /api/v1/categories/people]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-people) | Returns a list of all the Category Lists enabled for `Person` entities (Including Categories).
-[POST /api/v1/people/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-id-categories) | Used to relationally link a specific `Person` entity with one or more categories.
-[GET /api/v1/people/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Person` entity.
-[GET /api/v1/people/{personId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-personId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to a `Person` entity.
-[DELETE /api/v1/people/{personId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-people-personId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between a `Person` and a Category List entry.
-[GET /api/v1/categories/programmes]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-programmes) | Returns a list of all the Category Lists enabled for Programme entities (Including Categories).
-[POST /api/v1/programmes/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-programmes-id-categories) | Used to relationally link a specific `Programme` entity with one or more categories.
-[GET /api/v1/programmes/{id}/categories]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-programmes-id-categories) | Returns a list on Category List entries that have been relationally linked to a specific `Programme` entity.
-[GET /api/v1/programmes/{programmeId}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-programmes-programmeId-categories-categoryListId) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to a `Programme` entity.
-[DELETE /api/v1/programmes/{programmeId}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-programmes-programmeId-categories-categoryListEntryId) | This endpoint is used to remove the relationship between a `Programme` and a Category List entry.
-[GET /api/v1/categories/assignments/{assignmentsId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-assignments-assignmentsId) | Returns a list of Category Lists & Categories relationally linked to a specific `Assignment` entity.
-[GET /api/v1/categories/companies/{companyId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-companies-companyId) | Returns a list of Category Lists & Categories relationally linked to a specific `Company` entity.
-[GET /api/v1/categories/people/{personId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-people-personId) | Returns a list of Category Lists & Categories relationally linked to a specific `Person` entity.
-[GET /api/v1/categories/programmes/{programmesId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-programmes-programmesId) | Returns a list of Category Lists & Categories relationally linked to a specific `Programme` entity.
-=======
 [GET /api/v1/jobpostings/{id}/categories/{categoryListId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-jobpostings-id-categories-categorylistid) | This endpoint returns a list of Category List entries within a specific list where they're relationally linked to an `Advertisement` entity.
 [DELETE /api/v1/jobpostings/{id}/categories/{categoryListEntryId}]  (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-jobpostings-id-categories-categorylistentryid) | This endpoint is used to remove the relationship between an `Advertisement` and a Category List entry.
 [GET /api/v1/categories/assignments]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-assignments) | Returns a list of all the Category Lists enabled for `Assignment` entities (Including Categories).
@@ -8630,7 +8598,6 @@ Name | Description
 [GET /api/v1/categories/companies/{companyId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-companies-companyid) | Returns a list of Category Lists & Categories relationally linked to a specific `Company` entity.
 [GET /api/v1/categories/people/{personId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-people-personid) | Returns a list of Category Lists & Categories relationally linked to a specific `Person` entity.
 [GET /api/v1/categories/programmes/{programmesId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-programmes-programmesid) | Returns a list of Category Lists & Categories relationally linked to a specific `Programme` entity.
->>>>>>> Stashed changes
 
 ## POST /api/v1/categorylists
 > Example (cURL)
@@ -10156,16 +10123,11 @@ Please note, if you're considering developing an integration that creates people
 
 Invenias utilizes Sovren, a resume parsing tool, to provide document parsing services to end-users of Invenias applications.
 
-<<<<<<< Updated upstream
-A resume parser is a piece of software that can read, understand, and classify all the data on a resume, just like a human can–but much faster.
-It's possible for API integrations to leverage Sovren to create and/or update 'Person' entities in Invenias by parsing a source document and ingesting the structured output. However, there is no quick and easy way to create a person by parsing a document. Depending upon the type of information you wish to use, it may require validation across several areas.
-=======
 A resume parser is a powerful software that can read, comprehend, and categorize all the data on a resume, just like a human can, but much faster.
 
 It's possible for API integrations to leverage Sovren to create and/or update 'Person' entities in Invenias by parsing a source document and ingesting the structured output. However, creating a person by parsing a document is not a quick and easy task and may require validation across multiple areas.
 
 When planning your integration, please consider the following aspects:
->>>>>>> Stashed changes
 
 <ul>
 <li>What information do you want to leverage?</li>
