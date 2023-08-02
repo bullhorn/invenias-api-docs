@@ -1591,11 +1591,7 @@ id | [required] | String | Specify the unique identifier for the Lookup List.
 itemId | [required] | String | Specify the unique identifier for the Lookup List entry you wish to change.
 
 # Duplicates
-<<<<<<< Updated upstream
-The Invenias REST API has two endpoints available to help flag 'People' and 'Company' type entities that <i>may</i> already exist within the database. By utilizing these endpoints, it will help maintain the integrity of the data in the database, allowing the developer to either resolve updates to an existing entity or create a new one entirely.
-=======
 The Invenias REST API provides two essential endpoints to facilitate the flagging of 'People' and 'Company' type entities that <i>may</i> already exist within the database. By leveraging these endpoints, developers can effectively preserve the data's integrity, empowering them to handle updates to existing entities or create entirely new ones based on the context. This feature ensures seamless data management and reduces the risk of duplicate records, enhancing the overall reliability and accuracy of the database.
->>>>>>> Stashed changes
 
 ## GET /api/v1/duplicates/people
 > Example (cURL)
