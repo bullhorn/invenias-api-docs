@@ -80,7 +80,7 @@ This grant should only be used when redirect-based flows (like the Authorization
 
 > Please note, this is the only time you'll get the client_id and client_secret - please store these securely, as you won't be able to retrieve these again.
 
-To set up a new integration, launch a `POST /api/v1/thirdpartyapplications` request through the Swagger interface. It's noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.
+To set up a new integration, make a `POST /api/v1/thirdpartyapplications` request through the Swagger interface. It's noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.
 
 <aside class="notice">
 Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
@@ -122,7 +122,7 @@ FlowType | `ResourceOwner` | The OAuth 2.0 Authorization flow.
 
 > Please note, this is the only time you'll get the client_id and client_secret - please store these securely, as you won't be able to retrieve these again.
 
-To set up a new integration, launch a `POST /api/v1/thirdpartyapplications` request through the Swagger interface. It's noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.
+To set up a new integration, make a `POST /api/v1/thirdpartyapplications` request through the Swagger interface. It's noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.
 
 <aside class="notice">
 Kindly observe that you must possess a licensed Invenias User Account and be a member of the 'System Administrator' permission group to execute this operation.
@@ -131,8 +131,6 @@ Kindly observe that you must possess a licensed Invenias User Account and be a m
 Prior to utilizing the `POST /api/v1/thirdpartyapplications` endpoint, it is necessary to input an `api_key` into the designated field at the upper right-hand corner of the Swagger page. Achieve this by double-clicking the `api_key` field, which will consequently generate the key. If you're not already logged in, this action will trigger a login prompt.
 
 Upon receipt of an `api_key` from Swagger, you're eligible to call the POST /api/v1/thirdpartyapplications endpoint to generate both the `client_id` and `client_secret`.
-
-Subsequently, you'll need to select the flow type that best suits your application's requirements.
 
 <aside class="notice">
 An api_key will be valid for 3 minutes before expiring. You can clear this field and double click it again to generate a new one to gain access for another 3 minutes.
@@ -338,7 +336,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
 }
 ```
 
-In situations where access tokens expire or become invalid, and the application requires continued access to protected resources without re-prompting the user for permission, OAuth 2.0 offers a solution through a mechanism known as a refresh token. This invaluable artifact enables applications to obtain a new access token seamlessly, avoiding the need for user intervention or re-authorization. By employing refresh tokens, OAuth 2.0 enhances the user experience while maintaining security and efficient access to protected resources.
+In situations where access tokens expire or become invalid, and the application requires continued access to protected resources without re-prompting the user for permission, OAuth 2.0 offers a solution through a mechanism known as a refresh token. The refresh token enables applications to obtain a new access token seamlessly, avoiding the need for user intervention or re-authorization. By employing refresh tokens, OAuth 2.0 enhances the user experience while maintaining security and efficient access to protected resources.
 
 ## Obtaining Refresh Tokens
 A refresh token can be obtained by an application during the process of acquiring an access token. The refresh token request mechanism is commonly implemented by various authorization servers, following the guidelines outlined in the OpenID Connect specification. To initiate this process, the application must include the `offline_access` scope when requesting an authorization code.
@@ -6365,6 +6363,10 @@ id | [required] | Specify the unique identifier for the desired `Task` journal e
 
 
 # Companies
+Invenias features several main entities, and the Company entity holds a pivotal role among them. A `Company` within Invenias can assume multiple roles, such as being a partner, supplier, client, place of study, or an employer. Its versatile nature allows it to foster connections with various other entities, including `Assignment`, `Education`, `Locations`, `People`, `Employment`, and more, through relational links.
+
+By encompassing a diverse range of roles and fostering relationships with other entities, the Company entity serves as a central hub for managing and tracking crucial information within the Invenias system.
+
 <i>Table 1. Company Endpoints Summary</i>
 
 Name | Description
@@ -7697,6 +7699,15 @@ Parameter | Default | Description
 --------- | ------- | -----------
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 external | [required] | Specify if you wish to update the internal or external 'Overview' for the desired `Company` entity.
+
+<!-- # People
+Within the Invenias platform, the `People` entity stands as one of the core pillars among four primary entities. A person in this context can embody multiple roles, serving as a Partner, Supplier, Client, Referee, Source, and/or a Candidate.
+
+The `People` entity thrives on establishing meaningful connections and associations across a wide spectrum of data. Through relational links, it dynamically connects with other entities such as Assignments, Education, Locations, fellow `People`, and Employment, among numerous other relationship types.
+
+By encompassing such diverse roles and facilitating a network of relationships, the `People` entity plays a crucial role in the Invenias system, empowering comprehensive management and insightful analysis of data related to individuals and their affiliations.
+
+<p><i>Table 1. People Endpoint Summary</i></p> -->
 
 # Images
 Invenias applications allow their end-users to add, replace and remove images from `Company` and `People` entities. The following endpoints can be leveraged to read, replace and add images to the aforementiond entities.
