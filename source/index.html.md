@@ -2903,7 +2903,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/appointm
   "IsReminderSet": true,
   "ReminderMinutesBeforeStart": 10,
   "Location": "Unit 1, Davidson House, Reading RG1 3EY",
-  "LocationDisplayName": "Carluccio'\''s Reading",
+  "LocationDisplayName": "Carluccio's Reading",
   "LocationWebAddress": "",
   "HasAttachments": false,
   "IsMeeting": false,
@@ -3281,7 +3281,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/appointme
     "IsReminderSet": true,
     "ReminderMinutesBeforeStart": 10,
     "Location": "Bondi Green - London",
-    "LocationDisplayName": "404 Canal Side Walk, 2 Bishop'\''s Bridge Rd, London W2 1DG",
+    "LocationDisplayName": "404 Canal Side Walk, 2 Bishop's Bridge Rd, London W2 1DG",
     "LocationWebAddress": "",
     "HasAttachments": false,
     "IsMeeting": false,
@@ -4631,7 +4631,7 @@ curl --location 'https://{subdomain}.invenias.com/api/v1/interviews' \
   "InterviewerName": "Janet Davis",
   "StartDate": "2023-08-01T13:00:04.188Z",
   "EndDate": "2023-08-01T13:30:04.188Z",
-  "Location": "Carluccio'\''s, Unit 1, Davidson House, Reading RG1 3EY",
+  "Location": "Carluccio's, Unit 1, Davidson House, Reading RG1 3EY",
   "IsClientInterview": true,
   "IsConsultantInterview": false,
   "InterviewActionDate": "2023-07-31T13:03:04.188Z",
@@ -7720,11 +7720,11 @@ Please note, when an image is uploaded to an Invenias database the original file
 
 Name | Description
 ---- | -----------
-[POST /api/v1/companies/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#GET-api-v1-companies-id-recordpicture) | Allows you to upload and link an image to a given `Company` entity.
+[POST /api/v1/companies/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#POST-api-v1-companies-id-recordpicture) | Allows you to upload and link an image to a given `Company` entity.
 [GET /api/v1/companies/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#GET-api-v1-companies-id-recordpicture) | Returns a list of URL's for an image linked to a given `Company` entity.
 [PUT /api/v1/companies/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-companies-id-recordpicture) | Allows you to replace an image liked to a given `Company` entity.
 [DELETE /api/v1/companies/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-companies-id-recordpicture) | Allows you to delete an image liked to a given `Company` entity.
-[POST /api/v1/people/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#GET-api-v1-people-id-recordpicture) | Allows you to upload and link an image to a given `People` entity.
+[POST /api/v1/people/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#POST-api-v1-people-id-recordpicture) | Allows you to upload and link an image to a given `People` entity.
 [GET /api/v1/people/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#GET-api-v1-people-id-recordpicture) | Returns a list of URL's for an image linked to a given `People` entity.
 [PUT /api/v1/people/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-people-id-recordpicture) | Allows you to replace an image liked to a given `People` entity.
 [DELETE /api/v1/people/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-people-id-recordpicture) | Allows you to delete an image liked to a given `People` entity.
@@ -10380,7 +10380,7 @@ This section provides answers to common questions from both developers and custo
 An Application Programming Interface (API) encompasses a collection of routines, protocols, and tools meticulously designed to facilitate the development of software applications. APIs serve as indispensable building blocks that empower developers to seamlessly interact with various software components and systems, enabling the creation of robust and innovative applications.
 
 ### What is the rate limit of the API?
-We use a fixed-window rate limiting strategy you can make up to `3000` api calls at any interval within a 5 minute window. For more information on rate limits please see [here](https://bullhorn.github.io/invenias-api-docs/#rate-limiting).
+For information on rate limits please see [here](https://bullhorn.github.io/invenias-api-docs/#rate-limiting).
 
 ### Will, you make changes to your API that will leave my integration unusable?
 At Invenias, our goal is to introduce API changes in an additive manner, ensuring existing integrations remain unaffected. We prioritize maintaining backward compatibility to minimize disruptions. However, we acknowledge that occasional situations may arise where changes could impact existing integrations. In such cases, rest assured that we will promptly communicate any necessary adjustments to facilitate a smooth transition. Our commitment is to keep you informed and supported throughout the process.
