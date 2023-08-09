@@ -67,6 +67,7 @@ This grant should only be used when redirect-based flows (like the Authorization
 ## POST /api/v1/thirdpartyapplications
 
 > Example Response (JSON)
+
 ```shell
 {
   "ClientId": "your_client_id",
@@ -107,7 +108,9 @@ FlowType | `ResourceOwner` | The OAuth 2.0 Authorization flow.
 
 # Creating an Application that Supports Code Authorization Flow
 ## POST /api/v1/thirdpartyapplications
+
 > Example Response (JSON)
+
 ```shell
 {
   "ClientId": "{clientid}",
@@ -148,13 +151,16 @@ ReplyURL| [required] | The post-login URL to redirect to your Application.
 
 # Renewing an Application
 ## POST /api/v1/thirdpartyapplications/{id}/renew
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/thirdpartyapplications/363bde35-aec3-4ec7-9d33-9befdb7f0220/renew?expiration=FiveYears' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
   "ClientId": "your_client_id",
@@ -208,7 +214,9 @@ Every API integration has a `client_id` and `client_secret`, which are used when
 Integrations using the Password grant type require a username and password to be posted as part of the authentication request instead of showing the Invenias login screen. As the user's credentials are password directly to Invenias without going via the login screen, only a user account using the Invenias Identity Provider can authenticate.
 
 ## Resource Owner Flow
+
 > To authorize, use this code:
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/identity/connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -222,6 +230,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "access_token": "{token}",
@@ -321,10 +330,10 @@ curl --location --request POST 'https://{subdomain}.invenias.com/identity/connec
 --data-urlencode 'client_id={clientid}' \
 --data-urlencode 'client_secret={clientsecret}' \
 --data-urlencode 'refresh_token={refreshtoken}'
-
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "id_token": "{newhint}",
@@ -485,7 +494,9 @@ IncludeCategories (optional) | true | Boolean | Returns the category lists and c
 
 
 ## Select
+
 > Select Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -501,6 +512,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -527,7 +539,9 @@ Please note, for each item where there is 'null' data for a specified column, it
 </aside>
 
 ## Pagination
+
 > Pagination Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -551,6 +565,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -588,6 +603,7 @@ If you wish to get all the records in a list and wish to know how many requests 
 ## Group
 
 > Group Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -605,6 +621,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Groups": [
@@ -622,9 +639,11 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 A group is several things that are located, gathered, or classified together.
 
 A column in an array can leveraged to group results together.
+
 ## Count
 
 > Count Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -641,6 +660,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -668,7 +688,9 @@ ReturnTotalCount and ReturnTotalDatabaseItemCount are boolean parameters that al
 
 
 ## Comparison Operators
+
 > Comparison Operator Example: 'in' (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -692,6 +714,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -711,6 +734,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 }
 ```
 > Comparison Operator Example: 'isnull' (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -730,6 +754,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -748,6 +773,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 }
 ```
 > Comparison Operator Example: 'contains' (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -775,6 +801,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Groups": [
@@ -824,7 +851,9 @@ All comparison operators above require 3 inputs as described above (property, op
 </aside>
 
 ## Logical Operators
+
 > Logical Operator Example: 'and' (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -855,6 +884,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
         "Items": [
@@ -888,6 +918,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Logical Operator Example: 'or' (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -921,6 +952,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Groups": [
@@ -957,7 +989,9 @@ Please note, the 'not' operator is not supported.
 </aside>
 
 ## Sort
+
 > Sort Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
 --header 'Content-Type: application/json' \
@@ -973,6 +1007,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -1006,6 +1041,7 @@ Sort An array of objects to sort by, using the following format {"Selector":"Col
 </ul>
 
 ## Requesting a Backup
+
 > To request a backup, use this code:
 
 ```shell
@@ -1016,6 +1052,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/backupre
   "Reason": "API Integration Project: Our web developer would like to analyse the database schema and objects for a data warehousing tool we are building."
 }'
 ```
+
 > Please note, successful requests will return a 204 No Content response code.
 
 To initiate a backup request, simply call the endpoint https://{subdomain}.invenias.com/api/v1/backuprequests and provide a clear explanation of why you need the backup.
@@ -1051,7 +1088,9 @@ Please note, data management policies are not available for the Progra
 </aside>
 
 ## GET /api/v1/datamanagement/people/rules
+
 > Sort Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanagement/people/rules' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1059,6 +1098,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanag
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Fields": [
@@ -1091,7 +1131,9 @@ This endpoint will display any data management polices applied to this entity ty
 `https://{subdomain}.invenias.com/api/v1/datamanagement/people/rules`
 
 ## GET /api/v1/datamanagement/companies/rules
+
 > Sort Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanagement/companies/rules' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1099,6 +1141,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanag
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Fields": [
@@ -1130,7 +1173,9 @@ This endpoint will display any data management polices applied to this entity ty
 `https://{subdomain}.invenias.com/api/v1/datamanagement/companies/rules`
 
 ## GET /api/v1/datamanagement/assignment/rules
+
 > Sort Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanagement/assignment/rules' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1138,6 +1183,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/datamanag
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Fields": [
@@ -1180,7 +1226,9 @@ This endpoint will display any data management polices applied to this entity ty
 
 # Settings
 ## GET /api/v1/settings/{key}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/settings/AssignmentCandidateStatus' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1188,6 +1236,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/settings/
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "SettingName": "AssignmentCandidateStatus",
@@ -1337,7 +1386,9 @@ key | [required] | The display name of the enumeration.
 </ul>
 
 ## GET/api/v1/countries
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/countries' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1345,6 +1396,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/countries
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -1385,7 +1437,9 @@ A Lookup List serves as a collection of values that are either utilized or recom
 
 
 ## POST /api/v1/lookuplists/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookuplists/list' \
 --header 'Content-Type: application/json' \
@@ -1394,6 +1448,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookupli
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -1437,7 +1492,9 @@ This endpoint can get the names of all the Lookup Lists in the database.
 `https://{subdomain}.invenias.com/api/v1/lookuplists/list`
 
 ## POST /api/v1/lookuplists/{id}/entries/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/list' \
 --header 'Content-Type: application/json' \
@@ -1446,6 +1503,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookupli
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -1506,7 +1564,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for a Lookup List.
 
 ## POST /api/v1/lookuplists/{id}/entries
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries' \
 --header 'Content-Type: application/json' \
@@ -1517,6 +1577,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/lookupli
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -1545,7 +1606,9 @@ id | [required] | String | Specify the unique identifier for the Lookup List.
 request | [required] | String | The request model used to create a new value in the Lookup List.
 
 ## PUT /api/v1/lookuplists/{id}/entries/{itemId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/lookuplists/{id}/entries/{itemId}' \
 --header 'Authorization: Bearer {token}' \
@@ -1556,6 +1619,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/lookuplis
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -1588,7 +1652,9 @@ itemId | [required] | String | Specify the unique identifier for the Lookup List
 The Invenias REST API provides two essential endpoints to facilitate the flagging of 'People' and 'Company' type entities that <i>may</i> already exist within the database. By leveraging these endpoints, developers can effectively preserve the data's integrity, empowering them to handle updates to existing entities or create entirely new ones based on the context. This feature ensures seamless data management and reduces the risk of duplicate records, enhancing the overall reliability and accuracy of the database.
 
 ## GET /api/v1/duplicates/people
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicates/people?request.personName=John%20Doe&request.emailAddress=someemailaddress@gmail.com&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1596,6 +1662,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1673,7 +1740,9 @@ Please note, it may be optional to pass a value on both the 'request.personName'
 </aside>
 
 ## GET /api/v1/duplicates/companies
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicates/companies?request.companyName=Invenias&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -1681,6 +1750,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/duplicate
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1734,7 +1804,9 @@ The key distinction between the 'Quick Search' and 'Search' endpoints is that th
 </aside>
 
 ## GET /api/v2/quicksearch/people
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/quicksearch/people?request.searchTerm=John&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -1742,6 +1814,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1787,7 +1860,9 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 ## GET /api/v1/quicksearch/companies
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/companies?request.searchTerm=Inv&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -1795,6 +1870,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1833,7 +1909,9 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 ## GET /api/v1/quicksearch/educationalorganisations
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/educationalorganisations?request.searchTerm=Aca&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -1841,6 +1919,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1872,7 +1951,9 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 ## GET /api/v1/quicksearch/assignments
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/assignments?request.searchTerm=Vice&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -1880,6 +1961,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1911,7 +1993,9 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 ## GET /api/v1/quicksearch/programmes
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/programmes?request.searchTerm=Net&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -1919,6 +2003,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -1961,7 +2046,9 @@ request.pageSize (optional) | | Specify the number of search results to return.
 
 
 ## GET /api/v1/quicksearch/professionalusers
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/professionalusers?request.searchTerm=Jane&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -1969,6 +2056,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
   {
@@ -2017,7 +2105,9 @@ request.pageIndex (optional) | | Specify the PageIndex property to determine the
 request.pageSize (optional) | | Specify the number of search results to return.
 
 ## GET /api/v1/quicksearch/clientusers
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksearch/clientusers?request.searchTerm=Jane&request.pageIndex=0&request.pageSize=10' \
 --header 'Content-Type: application/json' \
@@ -2025,6 +2115,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/quicksear
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
   {
@@ -2066,7 +2157,9 @@ The 'Quick Search' and 'Search' endpoints differ significantly in functionality.
 </aside>
 
 ## POST /api/v1/search/users
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/users?request.searchTerm=Jane' \
 --header 'Content-Type: application/json' \
@@ -2087,6 +2180,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/u
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2131,7 +2225,9 @@ Parameter | Default | Type | Description
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
 
 ## POST /api/v1/search/people
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/people?request.searchTerm=Jane' \
 --header 'Content-Type: application/json' \
@@ -2166,6 +2262,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/p
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2203,6 +2300,7 @@ extendedSearch (optional) | true | Boolean | Specify if you wish to extend the s
 ## POST /api/v1/search/companies
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/companies?request.searchTerm=Old' \
 --header 'Content-Type: application/json' \
@@ -2224,6 +2322,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/c
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2255,7 +2354,9 @@ Parameter | Default | Type | Description
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
 
 ## POST /api/v1/search/educationalorganisations
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/educationalorganisations?request.searchTerm=Aca' \
 --header 'Content-Type: application/json' \
@@ -2264,6 +2365,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/e
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2304,7 +2406,9 @@ Parameter | Default | Type | Description
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
 
 ## POST /api/v1/search/assignments
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/assignments?request.searchTerm=Head' \
 --header 'Authorization: Bearer {token}' \
@@ -2322,6 +2426,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/a
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2365,7 +2470,9 @@ Parameter | Default | Type | Description
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
 
 ## POST /api/v1/search/programmes
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/programmes?request.searchTerm=Network' \
 --header 'Authorization: Bearer {token}' \
@@ -2382,6 +2489,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/p
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2436,7 +2544,9 @@ Parameter | Default | Type | Description
 request.searchTerm | [required] | String | Specify the desired search term for the query to be executed on the server.
 
 ## POST /api/v1/search/documents
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/documents?request.searchTerm=Jane' \
 --header 'Authorization: Bearer {token}' \
@@ -2459,6 +2569,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/search/d
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2492,6 +2603,7 @@ request.searchTerm | [required] | String | Specify the desired search term for t
 ## POST /api/v1/search/recordmanagementgroupentries
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/recordmanagementgroupentries?request.searchTerm=London' \
 --header 'Authorization: Bearer {token}' \
@@ -2500,6 +2612,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/recordma
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
   "Items": [
@@ -2739,7 +2852,9 @@ These endpoints are designed to capture and log relevant data in the database wi
 </table>
 
 ## POST /api/v1/journal/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/journal/list' \
 --header 'Authorization: Bearer {token}' \
@@ -2771,6 +2886,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/journal/
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -2887,7 +3003,9 @@ Used to retrieve a list of global `Journal` entities in the database.
 `https://{subdomain}.invenias.com/api/v1/journal/list`
 
 ## POST /api/v1/appointments
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/appointments' \
 --header 'Authorization: Bearer {token}' \
@@ -2931,6 +3049,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/appointm
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "778571c8-40a7-4c3c-adeb-2ebec32bce5b",
@@ -3016,7 +3135,9 @@ Furthermore, it is essential to understand that this functionality is specifical
 `https://{subdomain}.invenias.com/api/v1/appoinments`
 
 ## POST /api/v1/appointments/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/appointments/list' \
 --header 'Authorization: Bearer {token}' \
@@ -3048,6 +3169,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/appointm
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -3130,13 +3252,16 @@ Get a list of `Appointment` journal entities in the database.
 `https://{subdomain}.invenias.com/api/v1/appointments/list`
 
 ## GET /api/v1/appointments/upcoming
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/appointments/upcoming' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -3173,13 +3298,16 @@ Get the next five upcoming `Appointment` journal entities scheduled to take plac
 `https://{subdomain}.invenias.com/api/v1/appointments/upcoming`
 
 ## GET /api/v1/appointments/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://atlasexecutivesearch.invenias.com/api/v1/appointments/{id}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b7eba2cf-8633-44ec-88c0-a387790c27d6",
@@ -3265,7 +3393,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Appointment` journal entity.
 
 ## PUT /api/v1/appointments/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/appointments/{id}' \
 --header 'Authorization: Bearer {token}' \
@@ -3316,6 +3446,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/appointme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b7eba2cf-8633-44ec-88c0-a387790c27d6",
@@ -3401,7 +3532,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Appointment` journal entity.
 
 ## DELETE /api/v1/appointments/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/appointments/{id}' \
 --header 'Authorization: Bearer {token}'
@@ -3422,7 +3555,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Appointment` journal entity.
 
 ## POST /api/v1/sentdocuments
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/sentdocuments' \
 --header 'Authorization: Bearer {token}' \
@@ -3468,6 +3603,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/sentdocu
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a1df0675-c6eb-4dc0-a0be-beff3c07d7b8",
@@ -3549,13 +3685,16 @@ It is essential to understand that this functionality is specifically designed f
 `https://{subdomain}.invenias.com/api/v1/sentdocuments`
 
 ## GET /api/v1/sentdocuments/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/sentdocuments/{id}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a1df0675-c6eb-4dc0-a0be-beff3c07d7b8",
@@ -3640,7 +3779,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Sent Document` journal entity.
 
 ## PUT /api/v1/sentdocuments/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://atlasexecutivesearch.invenias.com/api/v1/sentdocuments/a1df0675-c6eb-4dc0-a0be-beff3c07d7b8' \
 --header 'Authorization: Bearer {token}' \
@@ -3689,6 +3830,7 @@ curl --location --request PUT 'https://atlasexecutivesearch.invenias.com/api/v1/
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a1df0675-c6eb-4dc0-a0be-beff3c07d7b8",
@@ -3773,7 +3915,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Sent Document` journal entity.
 
 ## DELETE /api/v1/sentdocuments/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/sentdocuments/{id}' \
 --header 'Authorization: Bearer {token}'
@@ -3793,7 +3937,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Sent Document` journal entity.
 
 ## POST /api/v1/emails
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/emails' \
 --header 'Authorization: Bearer {token}' \
@@ -3829,6 +3975,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/emails' 
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Recipients": [
@@ -3873,13 +4020,16 @@ Used to create an `Email` journal entity in the database.
 `https://{subdomain}.invenias.com/api/v1/emails`
 
 ## GET /api/v1/emails/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://atlasexecutivesearch.invenias.com/api/v1/emails/{id}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "7ec655e7-0e92-4ad4-a1da-e299f75d5601",
@@ -3939,7 +4089,9 @@ id | [required] | Specify the unique identifier for the desired `Email` journal 
 
 
 ## PUT /api/v1/emails/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/emails/{id}' \
 --header 'Authorization: Bearer {token}' \
@@ -3978,6 +4130,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/emails/{i
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "7ec655e7-0e92-4ad4-a1da-e299f75d5601",
@@ -4036,7 +4189,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Email` journal entity.
 
 ## DELETE /api/v1/emails/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/emails/{id}' \
 --header 'Authorization: Bearer {token}'
@@ -4056,7 +4211,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Email` journal entity.
 
 ## POST /api/v1/feedback
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/feedback' \
 --header 'Authorization: Bearer {token}' \
@@ -4089,6 +4246,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/feedback
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "21c3c2d5-1541-4a14-96d9-722dceeb2d94",
@@ -4159,7 +4317,9 @@ Used to create an `Feedback` journal entity for any given `Person` entity in the
 
 
 ## POST /api/v1/feedback/{id}/comments
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/feedback' \
 --header 'Authorization: Bearer {token}' \
@@ -4177,6 +4337,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/feedback
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a7028388-986e-47df-a2d8-2e3bd6bcf723",
@@ -4223,13 +4384,16 @@ id | [required] | Specify the unique identifier for the desired `Feedback` journ
 IsPublished (optional) | false | Specify whether the feedback comment should be visible on the Invenias Client web application to Client Users.
 
 ## GET /api/v1/feedback/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/feedback/8e3ade0d-e6cf-4ee8-9d9e-5905c9c3d20d' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "8e3ade0d-e6cf-4ee8-9d9e-5905c9c3d20d",
@@ -4325,13 +4489,16 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Feedback` journal entity you wish to view.
 
 ## GET /api/v1/feedback/{id}/comments/{commentId}
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/feedback/d5344478-4f69-4c42-ba61-f1b99b8565d0/comments/29edd66d-5ccd-44d8-9a3b-c7b2a15a906f' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "29edd66d-5ccd-44d8-9a3b-c7b2a15a906f",
@@ -4378,7 +4545,9 @@ id | [required] | Specify the unique identifier for the desired `Feedback` journ
 commentId | [required] | Please provide the specific unique identifier for the desired `Feedback` comment you wish to retrieve.
 
 ## PUT /api/v1/feedback/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/feedback/5db66c7c-58ea-4f99-8a2d-fd48173d8815' \
 --header 'Content-Type: application/json' \
@@ -4411,6 +4580,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/feedback/
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "5db66c7c-58ea-4f99-8a2d-fd48173d8815",
@@ -4517,7 +4687,9 @@ Parameter | Default | Description
 id | [required] | Please provide the unique identifier for the desired `Feedback` journal entity that you wish to replace.
 
 ## PUT /api/v1/feedback/{id}/comments/{commentId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/feedback/5db66c7c-58ea-4f99-8a2d-fd48173d8815/comments/29edd66d-5ccd-44d8-9a3b-c7b2a15a906f' \
 --header 'Content-Type: application/json' \
@@ -4532,6 +4704,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/feedback/
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "29edd66d-5ccd-44d8-9a3b-c7b2a15a906f",
@@ -4578,7 +4751,9 @@ id | [required] | Specify the unique identifier for the desired `Feedback` journ
 commentId | [required] | Please provide the specific unique identifier for the desired `Feedback` comment you wish to replace.
 
 ## DELETE /api/v1/feedback/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/feedback/5db66c7c-58ea-4f99-8a2d-fd48173d8815' \
 --header 'Authorization: Bearer {token}'
@@ -4598,7 +4773,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Feedback` journal entity.
 
 ## DELETE /api/v1/feedback/{id}/comments/{commentId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/feedback/97e0aed9-056f-4c35-8aec-a134a0a4340e/comments/20def46e-5ce0-4dae-b071-5a6de453033b' \
 --header 'Authorization: Bearer {token}'
@@ -4619,7 +4796,9 @@ id | [required] | Specify the unique identifier for the desired `Feedback` journ
 commentId | [required] | To permanently delete the desired `Feedback` comment, please provide the specific unique identifier associated with it.
 
 ## POST /api/v1/interviews
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/interviews' \
 --header 'Content-Type: application/json' \
@@ -4678,6 +4857,7 @@ curl --location 'https://{subdomain}.invenias.com/api/v1/interviews' \
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b6e3c189-89bb-4f36-8dd6-ba55ad4c6d68",
@@ -4772,13 +4952,16 @@ This endpoint is specifically designed for creating the `Interview` journal enti
 `https://{subdomain}.invenias.com/api/v1/interviews`
 
 ## GET /api/v1/interviews/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/interviews/b6e3c189-89bb-4f36-8dd6-ba55ad4c6d68' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b6e3c189-89bb-4f36-8dd6-ba55ad4c6d68",
@@ -4875,7 +5058,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Interview` journal entity.
 
 ## PUT /api/v1/interviews/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/interviews/b6e3c189-89bb-4f36-8dd6-ba55ad4c6d68' \
 --header 'Content-Type: application/json' \
@@ -4934,6 +5119,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/interview
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b6e3c189-89bb-4f36-8dd6-ba55ad4c6d68",
@@ -5030,7 +5216,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Interview` journal entity.
 
 ## DELETE /api/v1/interviews/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/interviews/b6e3c189-89bb-4f36-8dd6-ba55ad4c6d68' \
 --header 'Authorization: Bearer {token}'
@@ -5050,7 +5238,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Interview` journal entity.
 
 ## POST /api/v1/notes
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/notes' \
 --header 'Content-Type: application/json' \
@@ -5082,6 +5272,7 @@ curl --location 'https://{subdomain}.invenias.com/api/v1/notes' \
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e4bf65c6-43cb-4626-b389-1f81eee3f91d",
@@ -5142,13 +5333,16 @@ Employed for the establishment of a `Note` journal entity.
 `https://{subdomain}.invenias.com/api/v1/note`
 
 ## GET /api/v1/notes/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/notes/e4bf65c6-43cb-4626-b389-1f81eee3f91d' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e4bf65c6-43cb-4626-b389-1f81eee3f91d",
@@ -5215,7 +5409,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Note` journal entity.
 
 ## PUT /api/v1/notes/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/notes/e4bf65c6-43cb-4626-b389-1f81eee3f91d' \
 --header 'Content-Type: application/json' \
@@ -5240,6 +5436,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/notes/e4b
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e4bf65c6-43cb-4626-b389-1f81eee3f91d",
@@ -5294,7 +5491,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Note` journal entity.
 
 ## DELETE /api/v1/notes/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/notes/e4bf65c6-43cb-4626-b389-1f81eee3f91d' \
 --header 'Authorization: Bearer {token}'
@@ -5314,7 +5513,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Note` journal entity.
 
 ## POST /api/v1/telephones
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/telephones' \
 --header 'Content-Type: application/json' \
@@ -5346,6 +5547,7 @@ curl --location 'https://{subdomain}.invenias.com/api/v1/telephones' \
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "4da3ffd0-a0bc-41b0-bcc8-0ff62e2fbc2d",
@@ -5406,13 +5608,16 @@ Used to create an `Phone Call` entity.
 `https://{subdomain}.invenias.com/api/v1/telephones`
 
 ## GET /api/v1/telephones/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/telephones/4da3ffd0-a0bc-41b0-bcc8-0ff62e2fbc2d' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "4da3ffd0-a0bc-41b0-bcc8-0ff62e2fbc2d",
@@ -5479,7 +5684,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Telephone` journal entity.
 
 ## PUT /api/v1/telephones/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/telephones/4da3ffd0-a0bc-41b0-bcc8-0ff62e2fbc2d' \
 --header 'Content-Type: application/json' \
@@ -5507,6 +5714,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/telephone
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "4da3ffd0-a0bc-41b0-bcc8-0ff62e2fbc2d",
@@ -5568,7 +5776,9 @@ id | [required] | Specify the unique identifier for the desired `Telephone` jour
 
 
 ## DELETE /api/v1/telephones/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/telephones/4da3ffd0-a0bc-41b0-bcc8-0ff62e2fbc2d' \
 --header 'Authorization: Bearer {token}'
@@ -5588,7 +5798,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Telephone` journal entity.
 
 ## POST /api/v1/sentcurriculumvitaes
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/sentcurriculumvitaes' \
 --header 'Content-Type: application/json' \
@@ -5646,6 +5858,7 @@ curl --location 'https://{subdomain}.invenias.com/api/v1/sentcurriculumvitaes' \
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b1065c18-3ea0-4327-a639-d3e223454059",
@@ -5735,13 +5948,16 @@ Employed for the creation of a `Send CV` journal entity.
 `https://{subdomain}.invenias.com/api/v1/sentcurriculumvitaes`
 
 ## GET /api/v1/sentcurriculumvitaes/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/sentcurriculumvitaes/b1065c18-3ea0-4327-a639-d3e223454059' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b1065c18-3ea0-4327-a639-d3e223454059",
@@ -5837,7 +6053,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Send CV` journal entity.
 
 ## PUT /api/v1/sentcurriculumvitaes/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/sentcurriculumvitaes/b1065c18-3ea0-4327-a639-d3e223454059' \
 --header 'Content-Type: application/json' \
@@ -5895,6 +6113,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/sentcurri
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "b1065c18-3ea0-4327-a639-d3e223454059",
@@ -5991,7 +6210,9 @@ id | [required] | Specify the unique identifier for the desired `Send CV` journa
 
 
 ## DELETE /api/v1/sentcurriculumvitaes/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/sentcurriculumvitaes/b1065c18-3ea0-4327-a639-d3e223454059' \
 --header 'Authorization: Bearer {token}'
@@ -6011,7 +6232,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Send CV` journal entity.
 
 ## POST /api/v1/tasks
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/tasks' \
 --header 'Content-Type: application/json' \
@@ -6051,6 +6274,7 @@ curl --location 'https://{subdomain}.invenias.com/api/v1/tasks' \
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b",
@@ -6121,13 +6345,16 @@ Employed to establish a `Task` journal entity.
 `https://{subdomain}.invenias.com/api/v1/tasks`
 
 ## GET /api/v1/tasks/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/tasks/a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b",
@@ -6204,13 +6431,16 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Task` journal entity.
 
 ## GET /api/v1/tasks/upcoming
+
 > Example (cURL)
+
 ```shell
 curl --location 'https://{subdomain}.invenias.com/api/v1/tasks/upcoming' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -6230,7 +6460,9 @@ Retrieve a collection of future-due `Task` journal entities that are scheduled f
 `https://{subdomain}.invenias.com/api/v1/tasks/upcoming`
 
 ## PUT /api/v1/tasks/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/tasks/a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b' \
 --header 'Content-Type: application/json' \
@@ -6268,6 +6500,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/tasks/a1a
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b",
@@ -6342,7 +6575,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Task` journal entity.
 
 ## DELETE /api/v1/tasks/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/tasks/a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b' \
 --header 'Authorization: Bearer {Token}'
@@ -6398,7 +6633,9 @@ Name | Description
 [PUT /api/v1/companies/{id}/profile] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-companies-id-profile) | Allows you to populate 'Overview' field for the given `Company` entity using either HTML or Plain Text.
 
 ## POST /api/v1/companies/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/list' \
 --header 'Authorization: Bearer {token}' \
@@ -6424,6 +6661,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -6464,7 +6702,9 @@ This endpoint will return a list of `Company` type entities in the tenant databa
 
 
 ## POST /api/v1/companies
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies' \
 --header 'Authorization: Bearer {token}' \
@@ -6673,13 +6913,16 @@ setting value it will or will not get formatted before saving).</li>
 </ul>
 
 ## GET /api/v1/companies/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/009aadae-218e-4b4f-bc84-fd8551646cc1' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "009aadae-218e-4b4f-bc84-fd8551646cc1",
@@ -6774,7 +7017,9 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 
 
 ## PUT /api/v2/companies/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/companies/{id}' \
 --header 'Authorization: Bearer {token}' \
@@ -6798,6 +7043,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/companies
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "15b22477-90dc-4d41-8a39-e88cee7e1a79",
@@ -6848,7 +7094,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## DELETE /api/v1/companies/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/companies/{id}' \
 --header 'Authorization: Bearer {token}'
@@ -6872,7 +7120,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## PUT /api/v1/companies/bulkdelete
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/companies/bulkdelete' \
 --header 'Authorization: Bearer {token}' \
@@ -6906,7 +7156,9 @@ Parameter | Default | Description
 ids | [required] | Specify the unique identifiers for the `Company` entities you wish to delete.
 
 ## POST /api/v1/companies/{id}/students/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/students/list' \
 --header 'Authorization: Bearer {token}' \
@@ -6915,6 +7167,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -6954,7 +7207,9 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 
 
 ## POST /api/v1/companies/{id}/people/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/people/list' \
 --header 'Authorization: Bearer {token}' \
@@ -6969,6 +7224,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -7013,7 +7269,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## POST /api/v1/companies/{id}/bulkremovepeople
+
 > Example (cURL)
+
 ```shell
 curl --location -g --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/bulkremovepeople' \
 --header 'Authorization: Bearer {token}' \
@@ -7047,7 +7305,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## POST /api/v1/companies/{id}/currentpeople/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/currentpeople/list' \
 --header 'Authorization: Bearer {token}' \
@@ -7062,6 +7322,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -7106,7 +7367,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity
 
 ## POST /api/v1/companies/{id}/clientassignments/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/clientassignments/list' \
 --header 'Authorization: Bearer {token}' \
@@ -7121,6 +7384,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -7159,7 +7423,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity
 
 ## POST /api/v1/companies/{id}/programmes/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/programmes/list' \
 --header 'Authorization: Bearer {token}' \
@@ -7174,6 +7440,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -7212,13 +7479,16 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## GET /api/v1/companies/{id}/programmes/{programmeId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/{id}/programmes/{programmeId}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Programme": {
@@ -7360,7 +7630,9 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 programmeId | [required] | Specify the unique identifier for the releated `Programme` entity.
 
 ## DELETE /api/v1/companies/{id}/programmes/{programmeId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/companies/{id}/programmes/{programmeId}' \
 --header 'Authorization: Bearer {token}'
@@ -7381,7 +7653,9 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 programmeId | [required] | Specify the unique identifier for the releated `Programme` entity.
 
 ## POST /api/v1/companies/{id}/companies
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/companies' \
 --header 'Authorization: Bearer {token}' \
@@ -7421,7 +7695,9 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 
 
 ## PUT /api/v1/companies/{id}/companies
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/companies/{id}/companies' \
 --header 'Authorization: Bearer {token}' \
@@ -7448,7 +7724,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## POST /api/v1/companies/{id}/relations/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/relations/list' \
 --header 'Authorization: Bearer {token}' \
@@ -7463,6 +7741,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -7491,7 +7770,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## POST /api/v1/companies/{id}/bulkremovecompanies
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/bulkremovecompanies' \
 --header 'Authorization: Bearer {token}' \
@@ -7520,7 +7801,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## POST /api/v1/companies/{id}/externalid1
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/externalId1?externalId1=e354ef4d-052d-4e90-8c8d-52c31e780061' \
 --header 'Authorization: Bearer {token}'
@@ -7541,7 +7824,9 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 externalId1 | [required] | Specify the external identifier for the desired `Company` entity.
 
 ## DELETE /api/v1/companies/{id}/externalid1
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/companies/{id}/externalId1' \
 --header 'Authorization: Bearer {token}'
@@ -7558,21 +7843,24 @@ Allows you to delete an unique external identifier for the Invenias `Company` en
 
 Parameter | Default | Description
 --------- | ------- | -----------
-id | [required] | Specify the unique identifier for the desired `Company` entity.
+id | [required] | Specify the\n> Example (cURL) unique identifier for the desired `Company` entity.
 
 ## GET /api/v1/companies/{id}/notepad
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/{id}/notepad' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a5037d6a-795d-4b86-83ce-b16cb11e6c14",
     "Text": "Ipsum Lorem\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi.  Integer at feugiat tortor.",
-    "Html": "\r\n<h1>Ipsum Lorem</h1><p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
+    "Html": "\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
 }
 ```
 
@@ -7592,14 +7880,16 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## PUT /api/v1/companies/{id}/notepad
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/{id}/notepad' \
 --header 'Authorization: Bearer {token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "Html": "
-<h1>Ipsum Lorem</h1><p>
+<p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>
 <li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>
 <li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>
@@ -7609,11 +7899,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eg
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a5037d6a-795d-4b86-83ce-b16cb11e6c14",
     "Text": "Ipsum Lorem\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.Phasellus varius ligula sit amet ante elementum.Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.\r\nMaecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.",
-    "Html": "\r\n<h1>Ipsum Lorem</h1><p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
+    "Html": "\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
 }
 ```
 
@@ -7629,18 +7920,21 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 
 ## GET /api/v1/companies/{id}/profile
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/{id}/profile?external=false' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "a5037d6a-795d-4b86-83ce-b16cb11e6c14",
     "Text": "Ipsum Lorem\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi.  Integer at feugiat tortor.",
-    "Html": "\r\n<h1>Ipsum Lorem</h1><p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
+    "Html": "\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
 }
 ```
 
@@ -7661,14 +7955,16 @@ id | [required] | Specify the unique identifier for the desired `Company` entity
 external | [required] | Specify if you wish to get the internal or external 'Overview' for the desired `Company` entity.
 
 ## PUT /api/v1/companies/{id}/profile
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/companies/{id}/profile?external=false' \
 --header 'Authorization: Bearer {token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "Html": "
-<h1>Ipsum Lorem</h1><p>
+<p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>
 <li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>
 <li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>
@@ -7680,11 +7976,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eg
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "831e1be9-42f9-4479-8643-6b75014f1299",
     "Text": "Ipsum Lorem\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.Phasellus varius ligula sit amet ante elementum.Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.\r\nMaecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.",
-    "Html": "\r\n<h1>Ipsum Lorem</h1><p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
+    "Html": "\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nunc eget nisi euismod, ac tristique dolor luctus. Praesent consequat euismod tortor semper volutpat. Praesent in dui a lectus bibendum elementum. Etiam facilisis interdum erat, ut pretium leo condimentum eget. Integer maximus gravida nibh in posuere. Sed rhoncus pharetra est, ac consectetur nisl ultrices sed. Quisque in porttitor ligula. Nulla facilisi. Morbi rhoncus sem id accumsan finibus. <br></br>Vivamus pharetra ex id dictum tristique. Sed scelerisque finibus tempor. Maecenas eu luctus neque, eget congue leo. Vivamus sollicitudin malesuada scelerisque. Curabitur erat massa, tincidunt ut congue vitae, tempus sit amet orci. Vivamus varius dolor lobortis, rhoncus dui a, viverra eros. Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</p><ul>\r\n<li>Phasellus varius <strong>ligula</strong> sit amet ante elementum.</li>\r\n<li>Ut tellus ante, gravida quis lectus et, malesuada auctor metus. Aenean a tincidunt mauris.</li>\r\n<li>Morbi pharetra posuere orci. Nulla facilisi. Nulla quis nunc nisl.</li>\r\n</ul>\r\n\r\n<p><i>Maecenas molestie tristique lacus, a mattis mi tempor a. Nunc ex nisi, aliquet sed bibendum vel, varius sit amet tortor. Integer at feugiat tortor.</i></p>"
 }
 ```
 
@@ -7730,7 +8027,9 @@ Name | Description
 [DELETE /api/v1/people/{id}/recordpicture] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-people-id-recordpicture) | Allows you to delete an image liked to a given `People` entity.
 
 ## POST /api/v1/companies/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}' \
@@ -7748,13 +8047,16 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `Company` entity you wish to upload and link an image to.
 
 ## GET /api/v1/companies/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -7791,7 +8093,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `Company` entity you to get the image for.
 
 ## PUT /api/v1/companies/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/companies/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}' \
@@ -7809,7 +8113,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `Company` entity you wish to replace/update the image for.
 
 ## DELETE /api/v1/companies/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/companies/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}'
@@ -7826,7 +8132,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `Company` entity you wish to delete the image for.
 
 ## POST /api/v1/people/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}' \
@@ -7844,13 +8152,16 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `People` entity you wish to upload and link an image to.
 
 ## GET /api/v1/people/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 [
     {
@@ -7881,7 +8192,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `People` entity you to get the image for.
 
 ## PUT /api/v1/people/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/people/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}' \
@@ -7899,7 +8212,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for the `People` entity you wish to replace/update the image for.
 
 ## DELETE /api/v1/people/{id}/recordpicture
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/people/{id}/recordpicture' \
 --header 'Authorization: Bearer {token}'
@@ -7941,7 +8256,9 @@ Name | Description
 
 
 ## POST /api/v1/documents/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/documents/list' \
 --header 'Content-Type: application/json' \
@@ -7962,6 +8279,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/document
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -7996,7 +8314,9 @@ Amongst other things this endpoint can be leveraged for the following purposes:
 `https://{subdomain}.invenias.com/api/v1/documents/list`
 
 ## DELETE /api/v1/documents/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/documents/92582db4-5a10-47c2-94d3-59ced071d8a2' \
 --header 'Authorization: Bearer {token}'
@@ -8020,7 +8340,9 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the document entity you wish to delete.
 
 ## PUT /api/v1/documents/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/documents/35351a78-40f0-463f-8912-1ebdd347644e' \
 --header 'Authorization: Bearer {token}' \
@@ -8058,7 +8380,9 @@ id | [required] | Specify the unique identifier for the document entity you wish
 request | [required] | The request model used to declare which values to change in the requested resource.
 
 ## POST /api/v1/documents/bulkDelete
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/documents/bulkDelete' \
 --header 'Authorization: Bearer {token}' \
@@ -8095,6 +8419,7 @@ ids | [required] | Specify the unique identifiers for the 'Document' entities yo
 ## PUT /api/v1/documents/{id}/rename
 
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/documents/a548424c-2ad9-4531-ac00-41f5b4fa3332/rename?documentName=John%20Doe%20Curriculum%20Vitae' \
 --header 'Authorization: Bearer {token}'
@@ -8117,6 +8442,7 @@ documentName | [required] | Specify the new name for the 'Document' entity.
 ## POST /api/v1/people/{id}/documents/list
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://subdomain.invenias.com/api/v1/people/e2082622-9357-4130-aec8-c7a546906050/documents/list' \
 --header 'Authorization: Bearer {token}' \
@@ -8132,6 +8458,7 @@ curl --location --request POST 'https://subdomain.invenias.com/api/v1/people/e20
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -8173,6 +8500,7 @@ id | [required] | String | Specify the unique identifier for 'Person' entity.
 ## POST /api/v1/people/{id}/document
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/e2082622-9357-4130-aec8-c7a546906050/document' \
 --header 'Authorization: Bearer {token}' \
@@ -8180,6 +8508,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/e
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "AttachmentName": "Jane_Doe_CV.pdf",
@@ -8204,6 +8533,7 @@ id | [required] | String | Specify the unique identifier for 'Person' entity.
 ## GET /api/v1/people/{id}/documents/{documentId}
 
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/ed7c8fb4-495c-4f2a-a6a9-72b518c61da5/documents/b735c164-646a-4965-81b3-4d028989b828' \
 --header 'Authorization: Bearer {token}'
@@ -8228,6 +8558,7 @@ documentid | [required] | String | Specify the unique identifier for 'Document' 
 ## POST /api/v1/people/{id}/documents/{documentId}/defaultCv
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/ed7c8fb4-495c-4f2a-a6a9-72b518c61da5/documents/b735c164-646a-4965-81b3-4d028989b828/defaultCv' \
 --header 'Authorization: Bearer {token}'
@@ -8252,6 +8583,7 @@ documentid | [required] | String | Specify the unique identifier for 'Document' 
 ## POST /api/v1/companies/{id}/documents/list
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/list' \
 --header 'Authorization: Bearer {token}' \
@@ -8267,6 +8599,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -8301,6 +8634,7 @@ id | [required] | String | Specify the unique identifier for 'Company' entity.
 ## POST /api/v1/companies/{id}/document
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/document' \
 --header 'Authorization: Bearer {token}' \
@@ -8308,6 +8642,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "AttachmentName": "INVACM180821.pdf",
@@ -8332,6 +8667,7 @@ id | [required] | String | Specify the unique identifier for 'Company' entity.
 ## GET /api/v1/companies/{id}/documents/{documentId}
 
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/7901923e-deb6-4cbb-8742-b2587414796e' \
 --header 'Authorization: Bearer {token}'
@@ -8354,7 +8690,9 @@ id | [required] | String | Specify the unique identifier for 'Company' entity.
 documentid | [required] | String | Specify the unique identifier for 'Document' entity.
 
 ## POST /api/v1/assignments/{id}/documents/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/7bc5b01f-c36a-4828-bea5-e3af7f5882e1/documents/list' \
 --header 'Authorization: Bearer {token}' \
@@ -8370,6 +8708,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -8404,6 +8743,7 @@ id | [required] | String | Specify the unique identifier for 'Assignment' entity
 ## POST /api/v1/assignments/{id}/document
 
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/40c04603-650a-4bda-82bc-b242e0df9c7b/document' \
 --header 'Authorization: Bearer {token}' \
@@ -8411,6 +8751,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "AttachmentName": "A000002_Brief.pdf",
@@ -8433,7 +8774,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for 'Assignment' entity.
 
 ## GET /api/v1/assignments/{id}/documents/{documentId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignments/40c04603-650a-4bda-82bc-b242e0df9c7b/documents/ed25ed9b-062b-4e10-a055-6fb024fe53b2' \
 --header 'Authorization: Bearer {token}'
@@ -8456,7 +8799,9 @@ id | [required] | String | Specify the unique identifier for 'Assignment' entity
 documentid | [required] | String | Specify the unique identifier for 'Document' entity.
 
 ## POST /api/v1/programmes/{id}/documents/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/a2adc7f7-973a-4751-99bd-c9ce7ed3c504/documents/list' \
 --header 'Authorization: Bearer {token}' \
@@ -8472,6 +8817,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programm
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -8503,7 +8849,9 @@ Parameter | Default | Type | Description
 id | [required] | String | Specify the unique identifier for 'Programme' entity.
 
 ## POST /api/v1/programmes/{id}/document
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/a2adc7f7-973a-4751-99bd-c9ce7ed3c504/document' \
 --header 'Authorization: Bearer {token}' \
@@ -8511,6 +8859,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programm
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "AttachmentName": "Talent_Mapping.xlsx",
@@ -8526,6 +8875,7 @@ The `POST /api/v1/programmes/{id}/document` endpoint will add a document to Azur
 ## GET /api/v1/programmes/{id}/documents/{documentId}
 
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programmes/40c04603-650a-4bda-82bc-b242e0df9c7b/documents/27569250-5c88-4d19-9d31-e02d46a403a7' \
 --header 'Authorization: Bearer {token}'
@@ -8611,7 +8961,9 @@ Name | Description
 [GET /api/v1/categories/programmes/{programmesId}]  (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-categories-programmes-programmesid) | Returns a list of Category Lists & Categories relationally linked to a specific `Programme` entity.
 
 ## POST /api/v1/categorylists
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/categorylists' \
 --header 'Authorization: Bearer {token}' \
@@ -8630,6 +8982,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/category
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "106435bf-939a-43d7-a6b9-ea408f97bb78",
@@ -8657,7 +9010,9 @@ IsAdvertisementsEnabled | [required] | Boolean | Used to define if the Category 
 
 
 ## POST /api/v1/categorylists/{categoryListId}/entries
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries' \
 --header 'Authorization: Bearer {token}' \
@@ -8669,6 +9024,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/category
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "9af48b85-5d7b-4e92-ad1b-4c1497a5ea0a",
@@ -8688,7 +9044,9 @@ Parameter | Default | Type | Description
 categoryListId | [required] | String | The unique identitfier for the desired Category List.
 
 ## POST /api/v1/categorylists/{id}/entries/list
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries/list' \
 --header 'Authorization: Bearer {token}' \
@@ -8705,6 +9063,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/category
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Items": [
@@ -8739,13 +9098,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identitfier for the desired Category List.
 
 ## GET /api/v1/categorylists/{categoryListId}/entries/{entryId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries/0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d",
@@ -8767,7 +9129,9 @@ categoryListId | [required] | String | The unique identitfier for the desired Ca
 entryId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## DELETE /api/v1/categorylists/{categoryListId}/entries/{entryId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e/entries/0d88ac7f-a7f2-4b46-bbcf-ad3e46fe1e8d' \
 --header 'Authorization: Bearer {token}'
@@ -8790,9 +9154,10 @@ categoryListId | [required] | String | The unique identitfier for the desired Ca
 entryId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## GET /api/v1/categorylists/{id}
+
 > Example (cURL)
+
 ```shell
-Example (cURL)
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categorylists/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
 ```
@@ -8808,13 +9173,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identitfier for the desired Category List.
 
 ## GET /api/v1/categories/jobpostings
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/advertisements' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -8852,13 +9220,16 @@ This endpoint will return a list of all the Category Lists and their categories 
 `https://{subdomain}.invenias.com/api/v1/categories/advertisements`
 
 ## GET /api/v1/jobpostings/{id}/categories
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -8898,6 +9269,7 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Advertisement` entity.
 
 ## POST /api/v1/jobpostings/{id}/categories
+
 > Example (cURL) - Linking a single Category List entry to an `Advertisement` record.
 
 ```shell
@@ -8914,6 +9286,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/jobposti
 ```
 
 > Example (cURL) - Linking multiple Category List entries to an `Advertisement` record.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -8943,13 +9316,16 @@ id | [required] | String | The unique identifier for the desired `Advertisement`
 
 
 ## GET /api/v1/jobpostings/{id}/categories/{categoryListId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
@@ -9000,7 +9376,9 @@ id | [required] | String | The unique identifier for the desired `Advertisement`
 categoryListId | [required] | String | The unique identifier for the desired Category List.
 
 ## DELETE /api/v1/jobpostings/{id}/categories/{categoryListEntryId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/jobpostings/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
@@ -9019,13 +9397,16 @@ id | [required] | String | The unique identifier for the desired `Advertisement`
 categoryListEntryId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## GET /api/v1/categories/assignments
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/assignments' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9063,7 +9444,9 @@ This endpoint will return a list of all the Category Lists and their categories 
 `https://{subdomain}.invenias.com/api/v1/categories/assignments`
 
 ## POST /api/v1/assignments/{id}/categories
+
 > Example (cURL) - Linking a single Category List entry to an `Assignment` record.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9079,6 +9462,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignme
 ```
 
 > Example (cURL) - Linking multiple Category List entries to an `Assignment` record.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/assignments/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9107,13 +9491,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Assignment` entity.
 
 ## GET /api/v1/assignments/{id}/categories
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignments/ca866e18-6c8f-47b0-a76a-0dd29d498e6b/categories' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9162,13 +9549,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Assignment` entity.
 
 ## GET /api/v1/assignments/{assignmentId}/categories/{categoryListId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/assignments/ca866e18-6c8f-47b0-a76a-0dd29d498e6b/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
@@ -9198,7 +9588,9 @@ assignmentId | [required] | String | The unique identifier for the desired `Assi
 categoryListId | [required] | String | The unique identifier for the desired Category List.
 
 ## DELETE /api/v1/assignments/{assignmentId}/categories/{categoryListEntryId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/assignments/ca866e18-6c8f-47b0-a76a-0dd29d498e6b/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
@@ -9217,13 +9609,16 @@ assignmentId | [required] | String | The unique identifier for the desired `Assi
 categoryListId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## GET /api/v1/categories/companies
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/companies' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9262,7 +9657,9 @@ This endpoint will return a list of all the Category Lists and their categories 
 `https://{subdomain}.invenias.com/api/v1/categories/companies`
 
 ## POST /api/v1/companies/{id}/categories
+
 > Example (cURL) - Linking a single Category List entry to a `Company` entity.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9278,6 +9675,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companie
 ```
 
 > Example (cURL) - Linking multiple Category List entries to a `Company` entity.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/companies/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9306,13 +9704,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Company` entity.
 
 ## GET /api/v1/companies/{id}/categories
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/c6bd6734-fc2f-4088-bbcd-8c038e549c01/categories' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9354,13 +9755,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Company` entity.
 
 ## GET /api/v1/companies/{companyId}/categories/{categoryListId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/companies/c6bd6734-fc2f-4088-bbcd-8c038e549c01/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
@@ -9392,6 +9796,7 @@ categoryListId | [required] | String | The unique identifier for the desired Cat
 ## DELETE /api/v1/companies/{companyId}/categories/{categoryListEntryId}
 
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/companies/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
@@ -9409,7 +9814,9 @@ companyId | [required] | String | The unique identifier for the desired `Company
 categoryListId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## GET /api/v1/categories/people
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/people' \
 --header 'Authorization: Bearer {token}'
@@ -9417,6 +9824,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categorie
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9455,7 +9863,9 @@ This endpoint will return a list of all the Category Lists and their categories 
 `https://{subdomain}.invenias.com/api/v1/categories/people`
 
 ## POST /api/v1/people/{id}/categories
+
 > Example (cURL) - Linking a single Category List entry to a `Person` entity.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9470,6 +9880,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/9
 ```
 
 > Example (cURL) - Linking multiple Category List entries to a `Person` entity.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9485,6 +9896,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/people/9
     ]
 }'
 ```
+
 > Please note, a successful request will return a 200-response code.
 
 This endpoint is used to relationally link a specific `Person` entity with one or more categories.
@@ -9497,13 +9909,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Person` entity.
 
 ## GET /api/v1/people/{id}/categories
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/eb4cb3e4-baee-40ba-b312-847694a685bd/categories' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9612,13 +10027,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Person` entity.
 
 ## GET /api/v1/people/{personId}/categories/{categoryListId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/people/eb4cb3e4-baee-40ba-b312-847694a685bd/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
@@ -9650,6 +10068,7 @@ categoryListId | [required] | String | The unique identifier for the desired Cat
 ## DELETE /api/v1/people/{personId}/categories/{categoryListEntryId}
 
 > Example (cURL)
+
 ```shell
 curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/people/9abed357-8915-4b90-8553-d86866af2078/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
@@ -9668,13 +10087,16 @@ personId | [required] | String | The unique identifier for the desired `Person` 
 categoryListId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## GET /api/v1/categories/programmes
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/programmes' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9710,7 +10132,9 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categorie
 This endpoint will return a list of all the Category Lists and their categories that are enabled on the `Programme` entity type.
 
 ## POST /api/v1/programmes/{id}/categories
+
 > Example (cURL) - Linking a single Category List entry to a `Person` entity.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9725,6 +10149,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programm
 ```
 
 > Example (cURL) - Linking multiple Category List entries to a `Person` entity.
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programmes/9abed357-8915-4b90-8553-d86866af2078/categories' \
 --header 'Authorization: Bearer {token}' \
@@ -9740,6 +10165,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v1/programm
     ]
 }'
 ```
+
 > Please note, a successful request will return a 200-response code.
 
 This endpoint is used to relationally link a specific `Programme` entity with one or more categories.
@@ -9752,13 +10178,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Programme` entity.
 
 ## GET /api/v1/programmes/{id}/categories
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programme/8f537861-7709-4ef2-bbec-68db11b19ade/categories' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9791,13 +10220,16 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the desired `Programme` entity.
 
 ## GET /api/v1/programmes/{programmeId}/categories/{categoryListId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/programmes/8f537861-7709-4ef2-bbec-68db11b19ade/categories/e5db1242-a7c0-447a-9540-0cd5a899c96e' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
@@ -9827,6 +10259,7 @@ programmeId | [required] | String | The unique identifier for the desired `Progr
 categoryListId | [required] | String | The unique identifier for the desired Category List.
 
 ## DELETE /api/v1/programmes/{personId}/categories/{categoryListEntryId}
+
 > Example (cURL)
 
 ```shell
@@ -9847,13 +10280,16 @@ programmeId | [required] | String | The unique identifier for the desired `Progr
 categoryListId | [required] | String | The unique identifier for the desired Category List entry.
 
 ## GET /api/v1/categories/assignments/{assignmentsId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/assignments/{assignmentsId}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9887,13 +10323,16 @@ Parameter | Default | Type | Description
 assignmentsId | [required] | String | The unique identifier for the desired `Assignment` entity.
 
 ## GET /api/v1/categories/companies/{companyId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/companies/{companyId}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -9943,13 +10382,16 @@ Parameter | Default | Type | Description
 companyId | [required] | String | The unique identifier for the desired `Company` entity.
 
 ## GET /api/v1/categories/people/{personId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/people/{personId}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -10089,13 +10531,16 @@ Parameter | Default | Type | Description
 personId | [required] | String | The unique identifier for the desired `Person` entity.
 
 ## GET /api/v1/categories/programmes/{programmesId}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v1/categories/programmes/{programmesId}' \
 --header 'Authorization: Bearer {token}'
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "Lists": [
@@ -10185,7 +10630,9 @@ Name | Description
 [PUT /api/v2/fullparse/create] (https://bullhorn.github.io/invenias-api-docs/#put-api-v2-fullparse-create) | This endpoint allows you to replace a representation of the target `Person` type entity with the request payload.
 
 ## POST /api/v2/fullparse/document
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullparse/document' \
 --header 'Authorization: Bearer {token} \
@@ -10193,6 +10640,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullpars
 ```
 
 > Example Response (JSON)
+
 ```shell
 "cfc4a973-8c12-4fa1-9a01-39e6eb9c0843"
 ```
@@ -10204,7 +10652,9 @@ This endpoint converts the document, mapping the results into a structured forma
 `POST /api/v2/fullparse/document`
 
 ## GET /api/v2/fullparse/{id}
+
 > Example (cURL)
+
 ```shell
 curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/fullparse/6418f819-7620-4ede-81a4-c8395519846d' \
 --header 'Authorization: Bearer {token}'
@@ -10212,6 +10662,7 @@ curl --location --request GET 'https://{subdomain}.invenias.com/api/v2/fullparse
 ```
 
 > Example Response (JSON)
+
 ```shell
 {
     "DocumentId": "cfc4a973-8c12-4fa1-9a01-39e6eb9c0843",
@@ -10267,7 +10718,9 @@ Parameter | Default | Type | Description
 id | [required] | String | The unique identifier for the parsed document.
 
 ## POST /api/v2/fullparse/create
+
 > Example (cURL)
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullparse/create' \
 --header 'Authorization: Bearer {token}' \
@@ -10311,6 +10764,7 @@ curl --location --request POST 'https://{subdomain}.invenias.com/api/v2/fullpars
 ```
 
 > Example Response (JSON)
+
 ```shell
 "7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc"
 ```
@@ -10329,6 +10783,7 @@ Please note, to create (or update) a new Person type entity, you must include th
 ## PUT /api/v2/fullparse/create
 
 > Example (cURL)
+
 ```shell
 curl --location --request PUT 'https://{subdomain}invenias.com/api/v2/fullparse/create?personId=7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc&updateAllContactItems=true' \
 --header 'Authorization: Bearer {token}' \
@@ -10352,9 +10807,11 @@ curl --location --request PUT 'https://{subdomain}invenias.com/api/v2/fullparse/
 ```
 
 > Example Response (JSON)
+
 ```shell
 "7621f4ed-34fd-435a-a3a1-5e5b6f2c8ecc"
 ```
+
 This endpoint allows you to replace a representation of the target `Person` type entity with the request payload.
 
 Please note, if you set the value for the parameter named 'SaveParsedDocumentAsDefault' to `true` in the request body it will save the parsed source to the `Person` type entities record and flag it as the `Default` CV and write the contents to the 'CV/RESUME' tab replacing the content in the Person profile pane. This will make the text content of the document searchable when using the 'Advanced Search' feature for `Person` type entities in Invenias Professional application.
