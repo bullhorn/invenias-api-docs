@@ -63,7 +63,7 @@ This decision may result in the Resource Owner Password Credentials Grant. In th
 
 This grant should only be used when redirect-based flows (like the Authorization Code Flow) are not possible. If this is your case, then to learn about how this flow works and how to implement it.
 
-# Creating an Application that Supports Resource Owner Authorization Flow
+# Creating an Application that Supports Resource Owner Password Credentials (ROPC) Flow
 ## POST /api/v1/thirdpartyapplications
 
 > Example Response (JSON)
@@ -84,7 +84,7 @@ This grant should only be used when redirect-based flows (like the Authorization
 To set up a new integration, make a `POST /api/v1/thirdpartyapplications` request through the Swagger interface. It's noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
+When implementing the Resource Owner Password Credentials (ROPC) flow, it is advisable to use a unique Invenias user account. This strategy helps attribute the activity to the third-party application rather than an individual user. To ensure you are not billed for an additional license, append '-api' to the end of the local part of your email address. For example, your email could be formatted as 'username-api@bullhorn.com'. Remember, this is a guideline for formatting; adjust as necessary to fit your specific email structure. The new user account must be licensed, enabled, and belong to the 'System Administrator' permission group.
 </aside>
 
 Before you can use the `POST /api/v1/thirdpartyapplications` endpoint, you need to enter an `api_key` in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the `api_key` field, which will generate one automatically. This will prompt you to log in if you're not already logged in. 
