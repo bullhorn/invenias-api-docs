@@ -334,7 +334,7 @@
               </ul>
           </li>
           <li>
-            <a href="#creating-an-application-that-supports-resource-owner-authorization-flow" class="toc-h1 toc-link" data-title="Creating an Application that Supports Resource Owner Authorization Flow">Creating an Application that Supports Resource Owner Authorization Flow</a>
+            <a href="#creating-an-application-that-supports-resource-owner-password-credentials-ropc-flow" class="toc-h1 toc-link" data-title="Creating an Application that Supports Resource Owner Password Credentials (ROPC) Flow">Creating an Application that Supports Resource Owner Password Credentials (ROPC) Flow</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#post-api-v1-thirdpartyapplications" class="toc-h2 toc-link" data-title="POST /api/v1/thirdpartyapplications">POST /api/v1/thirdpartyapplications</a>
@@ -1081,7 +1081,7 @@ If you are uncertain about whether the customers you are working with have an ex
 <p>This decision may result in the Resource Owner Password Credentials Grant. In this flow, the end-user is asked to fill in credentials (username/password), typically using an interactive form. This information is sent to the backend and from there to Invenias. It is therefore imperative that the Client is absolutely trusted with this information.</p>
 
 <p>This grant should only be used when redirect-based flows (like the Authorization Code Flow) are not possible. If this is your case, then to learn about how this flow works and how to implement it.</p>
-<h1 id='creating-an-application-that-supports-resource-owner-authorization-flow'>Creating an Application that Supports Resource Owner Authorization Flow</h1><h2 id='post-api-v1-thirdpartyapplications'>POST /api/v1/thirdpartyapplications</h2>
+<h1 id='creating-an-application-that-supports-resource-owner-password-credentials-ropc-flow'>Creating an Application that Supports Resource Owner Password Credentials (ROPC) Flow</h1><h2 id='post-api-v1-thirdpartyapplications'>POST /api/v1/thirdpartyapplications</h2>
 <blockquote>
 <p>Example Response (JSON)</p>
 </blockquote>
@@ -1102,7 +1102,7 @@ If you are uncertain about whether the customers you are working with have an ex
 <p>To set up a new integration, make a <code>POST /api/v1/thirdpartyapplications</code> request through the Swagger interface. It&#39;s noteworthy that multiple third-party applications can be registered. For each additional application needed, just repeat the registration procedure.</p>
 
 <aside class="notice">
-Please note, you must have a licensed Invenias User Account and be in the 'System Administrator' permission group to perform this operation.
+When implementing the Resource Owner Password Credentials (ROPC) flow, it is advisable to use a unique Invenias user account. This strategy helps attribute the activity to the third-party application rather than an individual user. To ensure you are not billed for an additional license, append '-api' to the end of the local part of your email address. For example, your email could be formatted as 'username-api@bullhorn.com'. Remember, this is a guideline for formatting; adjust as necessary to fit your specific email structure. The new user account must be licensed, enabled, and belong to the 'System Administrator' permission group.
 </aside>
 
 <p>Before you can use the <code>POST /api/v1/thirdpartyapplications</code> endpoint, you need to enter an <code>api_key</code> in the field at the top right-hand corner of the Swagger page. To do this, simply double click into the <code>api_key</code> field, which will generate one automatically. This will prompt you to log in if you&#39;re not already logged in. </p>
