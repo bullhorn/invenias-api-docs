@@ -322,6 +322,7 @@ When an access token expires, the application can use the refresh token to get a
 # Refresh Tokens (Code Flow Only)
 
 > To get a new access_token using a refresh_token, use this code:
+
 ```shell
 curl --location --request POST 'https://{subdomain}.invenias.com/identity/connect/token' \
 --header 'Authorization: Bearer Bearer {token}' \
@@ -6566,7 +6567,7 @@ curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/tasks/a1a
 Enables the update of the selected `Task` journal entity representation using the data from the request payload.
 
 ### HTTP Request
-`https://{subdomain}.invenias.com/api/v1/tasks/a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b`
+`https://{subdomain}.invenias.com/api/v1/tasks/{id}`
 
 <i>Table 1. Parameters Summary</i>
 
@@ -6579,7 +6580,7 @@ id | [required] | Specify the unique identifier for the desired `Task` journal e
 > Example (cURL)
 
 ```shell
-curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/tasks/a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b' \
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/tasks/{id}' \
 --header 'Authorization: Bearer {Token}'
 ```
 
@@ -6588,13 +6589,3064 @@ curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/tasks/
 Facilitates the permanent removal of any chosen `Task` journal entity.
 
 ### HTTP Request
-`https://{subdomain}.invenias.com/api/v1/tasks/a1ab1b5f-d421-43d2-a5d4-8c0a7d87cc7b`
+`https://{subdomain}.invenias.com/api/v1/tasks/{id}`
 
 <i>Table 1. Parameters Summary</i>
 
 Parameter | Default | Description
 --------- | ------- | -----------
 id | [required] | Specify the unique identifier for the desired `Task` journal entity.
+
+# Assignments
+Invenias features several main entities, and the `Assignment` entity holds a pivotal role among them. An `Assignment` within Invenias is essentially a search or job where you can build out lists for Candidates, Target Companies, Team Members, Milestones, Billing Events, Scoring Criteria and Client Teams by creating relationships with other item types such as People, Users, and Companies.
+
+Its versatile nature allows it to foster connections with various other entities, including `People`, `Companies`, and `Users`, through relational links. By encompassing a diverse range of roles and fostering relationships with other entities, the Assignments entity serves as a central hub for managing and tracking crucial information within the Invenias system.
+
+<i>Table 1. Assignments Endpoints Summary</i>
+
+Name |Description
+---- |-----------
+[POST /api/v1/assignments/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-list) | Returns a list of `Assignment` entities in the database.
+[POST /api/v1/assignments/{id}/journal/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-journal-list) | Returns a lists of `Journal` items relationally linked to any given `Assignment`.
+[POST /api/v1/assignments/{id}/teammembers/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-teammembers-list) | Returns a lists of `Team Member` items relationally linked to any given `Assignment`.
+[POST /api/v1/assignments/{id}/clients/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-clients-list) | Returns a lists of `People` items relationally linked to any given `Assignment` as client contacts.
+[POST /api/v1/assignments/{id}/primarycontacts/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-primarycontacts-list) | Returns a lists of `People` items relationally linked to any given `Assignment` as client contacts with the primary contact role.
+[POST /api/v1/assignment] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignment) | Creates an `Assignment` entity in the tenant database.
+[GET /api/v1/assignments/{id}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id) | Returns information about any given `Assignment` entity in the database.
+[PUT /api/v1/assignments/{id}] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-assignments-id) | Replace the representation of a target `Assignment` entity.
+[PATCH /api/v1/assignments/{id}] (https://bullhorn.github.io/invenias-api-docs/#patch-api-v1-assignments-id) | Update one or more fields of a target `Assignment` entity.
+[DELETE /api/v1/assignments/{id}] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-assignments-id) | Deletes any given `Assignment` entity in the database.
+[PUT /api/v1/assignments/bulkdelete] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-assignments-bulkdelete) | Deletes many `Assignment` entities in the database.
+[POST /api/v1/assignments/{id}/candidates/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-candidates-list) | Returns a list of `People` entities relationally linked to any given `Assignment` entity in a candidate context.
+[POST /api/v1/assignments/{id}/candidates] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-candidates) | This endpoint will create a `Candidate` type relationship between a single `Person` entity and a given `Assignment` entity.
+[POST /api/v1/assignments/{id}/bulkcandidates/copy] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-bulkcandidates-copy) | This endpoint enables the duplication of multiple Candidate entities from one `Assignment` entity to another. It also offers the option to transfer associated data, including Candidate Progress notes, Progress Status, Fit to Profile assessments, Internal Comments, and Candidate group details.
+[PUT /api/v1/assignments/{id}/bulkcandidates/changeprogressstatus] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-assignments-id-bulkcandidates-changeprogressstatus) | This endpoint can be used to update the Progress Status of multiple Candidates within a specified `Assignment` entity to a designated value.
+[PUT /api/v1/assignments/{id}/bulkcandidates/remove] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-assignments-id-bulkcandidates-remove) | This endpoint allows the permanent removal of multiple Candidate entities from the specified `Assignment` entity.
+[GET /api/v1/assignments/{id}/candidates/{itemId}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id-candidates-itemid) | This endpoint retrieves detailed information for a specified Candidate entity within a given `Assignment`, including the relationship owner, nane components, progress status, progress notes, and more.
+[PUT /api/v1/assignments/{id}/candidates/{itemId}] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-assignments-id-candidates-itemid) | This endpoint updates the representation of a specified Candidate entity within a given `Assignment` using the PUT method.
+[PATCH /api/v1/assignments/{assignmentId}/candidates/{candidateId}] (https://bullhorn.github.io/invenias-api-docs/#patch-api-v1-assignments-assignmentid-candidates-candidateid) | This endpoint enables the partial update of one or more fields within the specified Candidate type entity using the PATCH method for the specified `Assignment` entity relation end. Refer to the table below for the list of updatable fields.
+[DELETE /api/v1/assignments/{id}/candidates/{itemId}] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-assignments-id-candidates-itemid) | This endpoint permanently severs the relationship between a Person entity as a Candidate and the specified Assignment entity.
+[POST /api/v1/assignments/{id}/milestones] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-assignments-id-milestones) | This endpoint is used to create and relationally link a `Milestone` to a given `Assignment` entity.
+[GET /api/v1/assignments/{id}/milestones] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-assignments-id-milestones) | This endpoint will return a list of `Milestone` type entites relationally linked to the given `Assignment` entity.
+[put /api/v1/assignments/milestones] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-assignments-milestones) | This endpoint replaces the representation of the specified `Milestone` entity using the PUT method.
+[PATCH /api/v1/assignments/milestones/{id}] (https://bullhorn.github.io/invenias-api-docs/#patch-api-v1-assignments-milestones-id) | This endpoint enables the partial update of one or more fields within the specified `Milestone` entity using the PATCH method Refer to the table below for the list of updatable fields.
+[DELETE /api/v1/assignments/{id}/milestones/{milestoneId}] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-assignments-id-milestones-milestoneid) | This endpoint will `permanently` delete the relationship between the given `Assignment` entity and the `Milestone` entity.
+
+
+## POST /api/v1/assignments/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "PageSize": 1000,
+    "PageIndex": 0,
+    "UsePaging": true,
+    "ReturnTotalCount": true,
+    "IsFirstLoad": true,
+    "select": [
+        "FileAs",
+        "CompanyDisplayName",
+        "CompanyId",
+        "EngagementType_lookup",
+        "Status_lookup",
+        "AssignmentReferenceNumber"
+    ],
+    "Sort": [
+        {
+            "Selector": "AssignmentReferenceNumber",
+            "Desc": false
+        }
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "AssignmentReferenceNumber": "A000001",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "CompanyId": {
+                "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Senior Associate",
+            "ItemType": "Assignments",
+            "Status_lookup": "Active",
+            "ItemId": "ca866e18-6c8f-47b0-a76a-0dd29d498e6b",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000002",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "CompanyId": {
+                "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Head of Sales & Marketing",
+            "ItemType": "Assignments",
+            "Status_lookup": "Placement",
+            "ItemId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000003",
+            "CompanyDisplayName": "Bradford & Bingley",
+            "CompanyId": {
+                "Id": "6470e605-4e5c-49c5-838a-ec86c9bf3690"
+            },
+            "EngagementType_lookup": "Contingent",
+            "FileAs": "Associate Contract",
+            "ItemType": "Assignments",
+            "Status_lookup": "Placement",
+            "ItemId": "824f5c81-04bf-4fb1-83fe-42db31d8c8d1",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000004",
+            "CompanyDisplayName": "Deutsche Bank",
+            "CompanyId": {
+                "Id": "5d2c28b5-032b-4e17-ac9c-a8bfa2d94dff"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Head of Marketing, EMEA",
+            "ItemType": "Assignments",
+            "Status_lookup": "Completed",
+            "ItemId": "ed25ed9b-062b-4e10-a055-6fb024fe53b2",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000005",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "CompanyId": {
+                "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Chief Executive Officer",
+            "ItemType": "Assignments",
+            "Status_lookup": "Placement",
+            "ItemId": "fcbe553f-c239-4c4d-9568-8c092f1ecd7f",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000006",
+            "CompanyDisplayName": "Abbey\"National",
+            "CompanyId": {
+                "Id": "17dc922f-8f02-4281-92a9-dfefc9735633"
+            },
+            "FileAs": "SVP Sales",
+            "ItemType": "Assignments",
+            "Status_lookup": "Active",
+            "ItemId": "73894d3c-54d3-4d9b-b85c-8e7aaa418318",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000007",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "CompanyId": {
+                "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Senior Associate",
+            "ItemType": "Assignments",
+            "Status_lookup": "Placement",
+            "ItemId": "895c93a8-5938-461c-bf5e-902e0d673c4b",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000008",
+            "CompanyDisplayName": "Santander",
+            "CompanyId": {
+                "Id": "995d7d60-bc49-4a31-91d6-7acfe9bb47b3"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Head of Sales & Marketing",
+            "ItemType": "Assignments",
+            "Status_lookup": "Active",
+            "ItemId": "bbd2c96c-00bc-4ef9-aae7-9ec88b9d80cd",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000009",
+            "CompanyDisplayName": "Santander",
+            "CompanyId": {
+                "Id": "995d7d60-bc49-4a31-91d6-7acfe9bb47b3"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Analyst",
+            "ItemType": "Assignments",
+            "Status_lookup": "Offer",
+            "ItemId": "40c04603-650a-4bda-82bc-b242e0df9c7b",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "AssignmentReferenceNumber": "A000010",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "CompanyId": {
+                "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+            },
+            "EngagementType_lookup": "Retained",
+            "FileAs": "Associate",
+            "ItemType": "Assignments",
+            "Status_lookup": "Active",
+            "ItemId": "360fd531-dbef-45db-b948-b6c19f536b81",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+
+This endpoint will return a list of `Assignment` type entities in the tenant database.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## POST /api/v1/assignments/{id}/journal/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/journal/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "PageSize": 1000,
+    "PageIndex": 0,
+    "UsePaging": true,
+    "ReturnTotalCount": true,
+    "IsFirstLoad": true,
+    "select": [
+        "ActionSubject",
+        "ActionType",
+        "FromBy",
+        "ToWith",
+        "Notes"
+    ],
+    "Sort": [
+        {
+            "Selector": "DateCreated",
+            "Desc": true
+        }
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "ActionSubject": "Interview - Head of Sales & Marketing",
+            "ActionType": {
+                "Id": "e5027095-b87c-4de0-94b0-26a24d6885d8",
+                "ItemDisplayText": "1st Interview"
+            },
+            "DateCreated": "2023-07-31T14:00:03.8363911+00:00",
+            "FromBy": "Candidate: Annabella Rose Thomas (Anna)",
+            "ItemType": "Interviews",
+            "Notes": "",
+            "ToWith": "Interviewer: Janet Davis",
+            "ItemId": "e33ef3e3-cc3a-483b-b670-aa169f6af938",
+            "Image": "Interview",
+            "RelationName": "AssignmentToInterview",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "DateCreated": "2022-09-29T15:58:11.7916156+01:00",
+            "FromBy": "Glen R Chamberlain",
+            "ItemType": "Appointments",
+            "Notes": "",
+            "ToWith": "Annie Jenkins",
+            "ItemId": "b145badd-b300-4df2-9a59-83742e42debd",
+            "Image": "Appointment",
+            "RelationName": "AssignmentToAppointment",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "DateCreated": "2022-09-29T15:57:52.5329262+01:00",
+            "FromBy": "Glen R Chamberlain",
+            "ItemType": "Appointments",
+            "Notes": "",
+            "ToWith": "Annie Jenkins",
+            "ItemId": "833e334e-0659-4054-b5d8-8111ea7f4791",
+            "Image": "Appointment",
+            "RelationName": "AssignmentToAppointment",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ActionSubject": " ",
+            "ActionType": {
+                "Id": "d0fcfe12-6b7c-49fd-ba19-775a7c0eed9c",
+                "ItemDisplayText": "Assignment - Key Technical Expertise"
+            },
+            "DateCreated": "2018-09-07T07:19:18.417+00:00",
+            "FromBy": "Glen R Chamberlain",
+            "ItemType": "Notes",
+            "Notes": "Sed augue urna, porttitor varius risus vitae, semper sagittis enim. Suspendisse efficitur, magna at malesuada luctus, tellus ex efficitur magna, eu efficitur lorem ipsum a erat. Cras blandit libero convallis feugiat placerat.\r\nFusce vulputate arcu neque, ut dignissim diam rutrum eget. Nulla lectus nisl, efficitur non elit sed, hendrerit imperdiet justo.\r\nDonec erat risus, cursus commodo risus ut, venenatis mollis lectus. Ut sit amet ultrices sapien.\r\nNulla sed ligula pretium, tempor mauris eu, porta tellus. Etiam facilisis id diam id maximus. Maecenas ac tempus ante, ut tincidunt mauris.\r\nNam vel mauris mollis, fringilla ipsum at, condimentum ipsum. Praesent in sem elementum odio pharetra mollis quis ac orci.\r\nVestibulum porta dolor dolor, eget lobortis metus pulvinar at. Sed ex magna, aliquet et egestas eu, pharetra eu orci.",
+            "ItemId": "f4a8e1bd-2efa-491d-8a26-ac8cca3e4830",
+            "Image": "Note",
+            "RelationName": "AssignmentToNote",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "ActionSubject": " ",
+            "ActionType": {
+                "Id": "c33714d8-e4c7-49f9-86fc-91433ef2cc83",
+                "ItemDisplayText": "Assignment - Key Personal Competencies"
+            },
+            "DateCreated": "2018-09-07T07:18:23.2+00:00",
+            "FromBy": "Glen R Chamberlain",
+            "ItemType": "Notes",
+            "Notes": "Morbi blandit sagittis est, at rutrum urna laoreet sed. Nunc quis elementum turpis. \r\nDonec gravida sapien et odio accumsan, egestas malesuada augue semper. \r\nOrci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. \r\nProin id ligula sollicitudin, ultrices arcu in, euismod massa. Integer metus nisl, eleifend eu ornare vitae, aliquam sed metus. Etiam et porta felis.\r\nPraesent dapibus feugiat pharetra. Donec vitae libero facilisis, hendrerit ipsum ac, porta neque. Suspendisse potenti. Etiam porta lacus ut est interdum sollicitudin. Vivamus egestas facilisis viverra.",
+            "ItemId": "838db663-1a32-4511-b936-e20a831ee990",
+            "Image": "Note",
+            "RelationName": "AssignmentToNote",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+
+This endpoint will return a list of `Journal Item` type entities in the tenant database that are relationally linked to any given `Assignment` entity.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/journal/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## POST /api/v1/assignments/{id}/teammembers/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/teammembers/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "PageSize": 1000,
+    "PageIndex": 0,
+    "UsePaging": true,
+    "ReturnTotalCount": true,
+    "IsFirstLoad": true,
+    "select": [
+        "FullName",
+        "Roles_lookup",
+        "FeeAllocation",
+        "IsForecastOwner"
+    ],
+    "Sort": [
+        {
+            "Selector": "DateCreated",
+            "Desc": true
+        }
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "DateCreated": "2018-04-25T12:01:18.327+00:00",
+            "FeeAllocation": "0,0,25",
+            "FullName": "Sally Andrews",
+            "IsForecastOwner": false,
+            "ItemType": "TeamMembers",
+            "Roles_lookup": "Lead Consultant",
+            "ItemId": "a5db8a63-eb36-40ba-8395-46cdf83fc603",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "DateCreated": "2016-12-12T09:49:24.32+00:00",
+            "FeeAllocation": "0,25,0",
+            "FullName": "Peter Jenkins",
+            "IsForecastOwner": false,
+            "ItemType": "TeamMembers",
+            "Roles_lookup": "Resourcing Contact; Researcher",
+            "ItemId": "49e72be3-a661-4db9-9644-7da8b7d94919",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "DateCreated": "2016-12-09T11:02:02.41+00:00",
+            "FeeAllocation": "50,0,0",
+            "FullName": "Glen R Chamberlain",
+            "IsForecastOwner": true,
+            "ItemType": "TeamMembers",
+            "Roles_lookup": "Consultant",
+            "ItemId": "9ed703d6-09f0-4cb1-8c6d-3be59667cdaf",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}   
+```
+
+This endpoint will return a list of `Team Member` type entities in the tenant database that are relationally linked to any given `Assignment` entity.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/teammembers/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## POST /api/v1/assignments/{id}/clients/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/clients/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "PageSize": 1000,
+    "PageIndex": 0,
+    "UsePaging": true,
+    "ReturnTotalCount": true,
+    "IsFirstLoad": true,
+    "select": [
+        "PersonItemId",
+        "Role",
+        "Comments",
+        "CompanyDisplayName",
+        "PositionJobTitle",
+        "DisplayFileAs"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "DisplayFileAs": "Kimberly Patel",
+            "ItemType": "AssignmentClients",
+            "PersonItemId": {
+                "Id": "d4569bc6-bb1b-49c9-bc52-d2678f08125f"
+            },
+            "PositionJobTitle": "Associate",
+            "Role": [
+                {
+                    "Id": "f6f7111b-1486-4eca-ad25-d3a177ef0e76",
+                    "ItemDisplayText": "Other Contact"
+                }
+            ],
+            "ItemId": "2f438e1f-c576-45b0-9126-1af06598e732",
+            "RelationName": "AssignmentToAssignmentClient",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "CompanyDisplayName": "Manulife Financial",
+            "DisplayFileAs": "Nancy Robinson",
+            "ItemType": "AssignmentClients",
+            "PersonItemId": {
+                "Id": "017f8988-936f-401d-9125-610d0929bb7b"
+            },
+            "PositionJobTitle": "Head of Sales & Marketing",
+            "ItemId": "f36565f6-d722-410f-9075-32ed352713ab",
+            "RelationName": "AssignmentToAssignmentClient",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "CompanyDisplayName": "Abbey\"National",
+            "DisplayFileAs": "Glen Chamberlain",
+            "ItemType": "AssignmentClients",
+            "PersonItemId": {
+                "Id": "b2a847a7-fd77-4acc-998e-2c14c5c25c13"
+            },
+            "PositionJobTitle": "fggfg",
+            "ItemId": "29078ed1-f34c-4419-88ea-3e4d3aa6898d",
+            "RelationName": "AssignmentToAssignmentClient",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "Comments": "Vestibulum scelerisque nunc vitae auctor iaculis. Integer lacinia lorem libero, sit amet mollis nisl venenatis in.",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "DisplayFileAs": "Professor Michael Richardson Richardson Richardson Richardson",
+            "ItemType": "AssignmentClients",
+            "PersonItemId": {
+                "Id": "904d913e-c2dd-4b5d-9c0d-699aaf03dc58"
+            },
+            "PositionJobTitle": "Director Cash Management Sales",
+            "Role": [
+                {
+                    "Id": "1beb9979-34d2-4376-810e-6ae475b22288",
+                    "ItemDisplayText": "Billing Contact"
+                }
+            ],
+            "ItemId": "0250ebff-a284-4810-b655-46cf6d30dcd5",
+            "RelationName": "AssignmentToAssignmentClient",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "Comments": "Nunc facilisis nulla a elit pharetra convallis. Sed sollicitudin lectus urna. Ut pulvinar luctus enim ut pulvinar.",
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "DisplayFileAs": "Janet Davis",
+            "ItemType": "AssignmentClients",
+            "PersonItemId": {
+                "Id": "e3617a59-2cd1-4eea-974d-aaa9ad4742ab"
+            },
+            "PositionJobTitle": "Chief Executive Officer",
+            "Role": [
+                {
+                    "Id": "fabab362-4a75-404e-8981-50eeca5e4f43",
+                    "ItemDisplayText": "Resourcing Contact"
+                },
+                {
+                    "Id": "5f8e8b95-7495-47ff-ba0c-196944d420a4",
+                    "ItemDisplayText": "Sponsor"
+                },
+                {
+                    "Id": "a942c212-2818-44a3-8c94-7562f602a5df",
+                    "ItemDisplayText": "Executive Contact"
+                },
+                {
+                    "Id": "4e3b1fa4-ac27-4a31-8e63-7c9a1cae6760",
+                    "ItemDisplayText": "Primary Contact"
+                }
+            ],
+            "ItemId": "f43051b5-101f-4d77-bd42-cfbb0cb17d82",
+            "RelationName": "AssignmentToAssignmentClient",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+
+This endpoint will return a list of `Client` type entities in the tenant database that are relationally linked to any given `Assignment` entity.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/clients/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## POST /api/v1/assignments/{id}/primarycontacts/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/primarycontacts/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: {token}' \
+--data '{
+    "PageSize": 1000,
+    "PageIndex": 0,
+    "UsePaging": true,
+    "ReturnTotalCount": true,
+    "IsFirstLoad": true,
+    "select": [
+        "PersonItemId",
+        "CompanyDisplayName",
+        "PositionJobTitle",
+        "DisplayFileAs"
+    ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "CompanyDisplayName": "Lloyds Banking Group",
+            "DisplayFileAs": "Janet Davis",
+            "ItemType": "People",
+            "PositionJobTitle": "Chief Executive Officer",
+            "ItemId": "e3617a59-2cd1-4eea-974d-aaa9ad4742ab",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+
+This endpoint retrieves a list of `Client` entities from the tenant database. These Client entities are associated with any `Assignment` entity where they hold the Primary Contact role, as specified in the system preferences of the Invenias Desktop Application.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/primarycontacts/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## POST /api/v1/assignment
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignment' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "OptionalId": "664018a5-d9fa-4d10-9c94-c4339e5ac226",
+    "PermanentPackages": [],
+    "NonExecPackages": [],
+    "InterimRates": [],
+    "DefaultLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244"
+    },
+    "AssignmentName": "Head of Sales & Marketing",
+    "EngagementType": {
+        "Id": "5d81e1e3-eb07-4328-a287-1bf2c9dc2ec6"
+    },
+    "EmploymentType": "Permanent",
+    "AssignmentStatus": {
+        "Id": "a9d5ebc1-8414-402f-aab0-79e175d5ec55"
+    },
+    "InternalComments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo quam tortor, in mollis sem tempus sed. In hac habitasse platea dictumst. Praesent suscipit tortor nec lacus pulvinar imperdiet. Vivamus aliquet est justo, luctus aliquet odio facilisis eu.",
+    "InternalRef": "b2bcb414-c65e-4e70-ad00-05a28ff7f817",
+    "ExternalRef": "J00009",
+    "BillingLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244"
+    },
+    "WeightingId": "f4e606f8-e3a9-4840-a887-105a4e2b27d0",
+    "Company": {
+        "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+    },
+    "BillingCurrency": {
+        "Id": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+    },
+    "Departments": [],
+    "PaymentTerms": "21 days",
+    "Milestones": [],
+    "ForecastDate": "2024-08-01",
+    "AssignmentValueManualMode": false,
+    "CandidateExpensesPaid": true,
+    "TotalFeeManualMode": false,
+    "PositionsCount": 1,
+    "ClientNoticePeriod": "c9d6d7c1-40e1-44f6-b824-063d761c7cf8",
+    "CandidateNoticePeriod": "b444a3b0-a76d-4e72-ba8f-f76cb7fb3467",
+    "Benefits": "Quisque sollicitudin ac erat nec ornare. Nullam at neque quis sapien vehicula dictum sed ut eros. Ut rutrum nunc ut velit accumsan, sed viverra libero feugiat.",
+    "BillablePackage": 250000,
+    "BillablePackageCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "FeeType": 1,
+    "FeePercentage": 18,
+    "AssignmentValue": 45000,
+    "AssignmentValueCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "TotalFee": 45000,
+    "TotalFeeCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Notes": "Curabitur iaculis, dolor quis tempus molestie, massa elit auctor mauris, at eleifend quam velit tristique felis. Vivamus vel felis quis nulla porta posuere id faucibus libero.",
+    "FeeAllocationsLocked": false
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "664018a5-d9fa-4d10-9c94-c4339e5ac226",
+    "EntityDetails": {
+        "DateCreated": "2024-07-08T13:38:07.8745928+00:00",
+        "DateModified": "2024-07-08T13:38:07.8745928+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "RecordManagementDetails": {
+        "Owners": [],
+        "Groups": [
+            {
+                "Id": "8542c690-55f8-4d3e-b504-0646fa8c2bee",
+                "ItemDisplayText": "Team B",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "0726e379-8040-4efd-b953-65b38d4e4262",
+                "ItemDisplayText": "General Search",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "a24f1f31-e45b-49b6-8aa8-a23f16b6d6ed",
+                "ItemDisplayText": "Business Unit A",
+                "ItemType": "RecordManagementGroupListEntries"
+            }
+        ],
+        "Organisations": [
+            {
+                "Id": "fd64e2d1-22dc-430f-8475-e768659053da",
+                "ItemDisplayText": "Internal Dev Database - Glen Chamberlain",
+                "ItemType": "Companies"
+            }
+        ]
+    },
+    "AssignmentNumber": "A000000 (AQAS-754102)",
+    "DefaultCurrency": {
+        "Id": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+        "ItemDisplayText": "EUR",
+        "ItemType": "Currencies"
+    },
+    "IsForecast": true,
+    "Manager1Role": "04f4e459-81b2-4587-a18f-7da2a9af6fdb",
+    "Manager2Role": "f306c1f6-56f6-4850-afbe-648319057c84",
+    "PrimaryContactsRole": "4e3b1fa4-ac27-4a31-8e63-7c9a1cae6760",
+    "SecondaryContactsRole": "f6f7111b-1486-4eca-ad25-d3a177ef0e76",
+    "BillingContactsRole": "1beb9979-34d2-4376-810e-6ae475b22288",
+    "PermanentPackages": [],
+    "NonExecPackages": [],
+    "InterimRates": [],
+    "IsSharingSettingsAssigned": false,
+    "IsShared": false,
+    "AssignmentName": "Head of Sales & Marketing",
+    "EngagementType": {
+        "Id": "5d81e1e3-eb07-4328-a287-1bf2c9dc2ec6",
+        "DisplayTitle": "Engagement Type",
+        "ItemDisplayText": "Retained",
+        "ItemType": "LookupListEntries"
+    },
+    "EmploymentType": "Permanent",
+    "AssignmentStatus": {
+        "Id": "a9d5ebc1-8414-402f-aab0-79e175d5ec55",
+        "DisplayTitle": "Assignment Status",
+        "ItemDisplayText": "Forecasted",
+        "ItemType": "LookupListEntries"
+    },
+    "InternalComments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo quam tortor, in mollis sem tempus sed. In hac habitasse platea dictumst. Praesent suscipit tortor nec lacus pulvinar imperdiet. Vivamus aliquet est justo, luctus aliquet odio facilisis eu.",
+    "InternalRef": "b2bcb414-c65e-4e70-ad00-05a28ff7f817",
+    "ExternalRef": "J00009",
+    "AdditionalCompanies": [],
+    "BillingLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244",
+        "ItemDisplayText": "Head Office, Gresham Street",
+        "ItemType": "Locations"
+    },
+    "WeightingId": "f4e606f8-e3a9-4840-a887-105a4e2b27d0",
+    "IsLiveItem": false,
+    "IsFavourite": false,
+    "Company": {
+        "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01",
+        "ItemDisplayText": "Lloyds Banking Group",
+        "ItemType": "Companies"
+    },
+    "Clients": [],
+    "BillingContacts": [],
+    "PrimaryContacts": [],
+    "SecondaryContacts": [],
+    "TeamMembers": {
+        "Managers1": [],
+        "Managers2": []
+    },
+    "BillingCurrency": {
+        "Id": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+        "ItemDisplayText": "EUR",
+        "ItemType": "Currencies"
+    },
+    "Departments": [],
+    "Weighting": 25.0,
+    "PaymentTerms": "21 days",
+    "Milestones": [],
+    "IsContractSessionBased": false,
+    "ForecastDate": "2024-08-01T00:00:00+00:00",
+    "AssignmentValueManualMode": false,
+    "CandidateExpensesPaid": true,
+    "TotalFeeManualMode": false,
+    "PositionsCount": 1,
+    "ClientNoticePeriod": "c9d6d7c1-40e1-44f6-b824-063d761c7cf8",
+    "CandidateNoticePeriod": "b444a3b0-a76d-4e72-ba8f-f76cb7fb3467",
+    "Benefits": "Quisque sollicitudin ac erat nec ornare. Nullam at neque quis sapien vehicula dictum sed ut eros. Ut rutrum nunc ut velit accumsan, sed viverra libero feugiat.",
+    "BillablePackage": 250000.0,
+    "BillablePackageCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "FeeType": 1,
+    "FeePercentage": 18.0,
+    "AssignmentValue": 45000.0,
+    "AssignmentValueCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "TotalFee": 45000.0,
+    "TotalFeeCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Notes": "Curabitur iaculis, dolor quis tempus molestie, massa elit auctor mauris, at eleifend quam velit tristique felis. Vivamus vel felis quis nulla porta posuere id faucibus libero.",
+    "FeeAllocationsLocked": false
+}
+```
+
+Creates an `Assignment` entity in the tenant database.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignment`
+
+## GET /api/v1/assignments/{id}
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}' \
+--header 'Authorization: {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+    "EntityDetails": {
+        "DateCreated": "2016-12-09T10:44:54.583+00:00",
+        "DateModified": "2023-10-31T13:07:50.7480038+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "Links": [],
+    "IsPublished": false,
+    "Categories": {
+        "Lists": [
+            {
+                "Id": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                "CategoryName": "Location",
+                "AssociatedColour": "#FFD9D8",
+                "OrderIndex": 0,
+                "ShowDataColumns": true,
+                "Categories": [
+                    {
+                        "Id": "62e2cb36-df4e-496f-a0dd-31d2cc2fd8d7",
+                        "CategoryName": "United Kingdom",
+                        "CategoryListId": "e5db1242-a7c0-447a-9540-0cd5a899c96e",
+                        "ParentListEntryId": "9a157512-de16-4c5b-856c-1b091eb49129",
+                        "CategoryDisplayName": "United Kingdom"
+                    }
+                ]
+            },
+            {
+                "Id": "106435bf-939a-43d7-a6b9-ea408f97bb78",
+                "CategoryName": "ICB",
+                "OrderIndex": 1,
+                "ShowDataColumns": true,
+                "Categories": []
+            },
+            {
+                "Id": "b86762cb-a559-4b41-bdab-e1f2edb509f5",
+                "CategoryName": "ICB2",
+                "OrderIndex": 2,
+                "ShowDataColumns": true,
+                "Categories": []
+            },
+            {
+                "Id": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                "CategoryName": "Industry",
+                "AssociatedColour": "#FFD9D8",
+                "OrderIndex": 3,
+                "ShowDataColumns": false,
+                "Categories": [
+                    {
+                        "Id": "ed36bebc-bd61-462c-8407-194b60a3804d",
+                        "CategoryName": "Investment Banking",
+                        "CategoryListId": "32ad222b-ad9f-40c8-9499-d0bc46036723",
+                        "ParentListEntryId": "7c2aaf54-2ba0-402c-814c-ac3c7195de46",
+                        "CategoryDisplayName": "Investment Banking"
+                    }
+                ]
+            },
+            {
+                "Id": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+                "CategoryName": "Position Function",
+                "AssociatedColour": "#FFD9D8",
+                "OrderIndex": 4,
+                "ShowDataColumns": false,
+                "Categories": [
+                    {
+                        "Id": "39aab3c3-b479-4999-b1ab-959f83b51fc5",
+                        "CategoryName": "Marketing",
+                        "CategoryListId": "2bc966ed-ce7e-4c42-9da7-4cf975bbd3f4",
+                        "CategoryDisplayName": "Marketing"
+                    }
+                ]
+            },
+            {
+                "Id": "1d44368f-475e-433c-942b-109da0ab74af",
+                "CategoryName": "Position Level",
+                "AssociatedColour": "#FFD9D8",
+                "OrderIndex": 5,
+                "ShowDataColumns": false,
+                "Categories": [
+                    {
+                        "Id": "ff9555d9-2ba8-4ea1-a16f-a04892472102",
+                        "CategoryName": "2 VP / Director",
+                        "CategoryListId": "1d44368f-475e-433c-942b-109da0ab74af",
+                        "CategoryDisplayName": "2 VP / Director"
+                    }
+                ]
+            },
+            {
+                "Id": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                "CategoryName": "Language",
+                "AssociatedColour": "#FFD9D8",
+                "OrderIndex": 6,
+                "ShowDataColumns": false,
+                "Categories": [
+                    {
+                        "Id": "ead32d85-1018-4a89-a1ea-ba4be6b1b550",
+                        "CategoryName": "English",
+                        "CategoryListId": "89826ae3-1755-4fad-aaf5-dc029e532717",
+                        "SovrenCode": "en",
+                        "CategoryDisplayName": "English"
+                    }
+                ]
+            },
+            {
+                "Id": "ac84a236-9e12-4a05-aa0e-448f3323fc70",
+                "CategoryName": "Off Limits",
+                "AssociatedColour": "#FFD9D8",
+                "OrderIndex": 19,
+                "ShowDataColumns": true,
+                "Categories": []
+            }
+        ]
+    },
+    "RecordManagementDetails": {
+        "Owners": [
+            {
+                "FileAs": "Glen Chamberlain",
+                "UserId": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "PersonId": "a9504f72-4f20-4d4a-a8d1-1a18ed571c9d"
+            }
+        ],
+        "Groups": [
+            {
+                "Id": "8542c690-55f8-4d3e-b504-0646fa8c2bee",
+                "ItemDisplayText": "Team B",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "dd6ac140-f3b0-4797-abf1-666e65eba3df",
+                "ItemDisplayText": "EMEA",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "a24f1f31-e45b-49b6-8aa8-a23f16b6d6ed",
+                "ItemDisplayText": "Business Unit A",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "42a49e74-02b3-42c8-9c71-ad314b34e5eb",
+                "ItemDisplayText": "Practive Area A",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "f8bfeeaa-8e7b-49f0-9091-b970d9fae241",
+                "ItemDisplayText": "Practice Area B",
+                "ItemType": "RecordManagementGroupListEntries"
+            }
+        ],
+        "Organisations": []
+    },
+    "CompanyRecordPictures": [],
+    "NextMilestone": {
+        "Id": "24398740-048d-4b50-89a2-e0eaf08fd02c",
+        "ItemDisplayText": "Client Briefing",
+        "IsComplete": false,
+        "StartDate": "2018-02-12T00:00:00+00:00",
+        "TargetDate": "2018-02-19T00:00:00+00:00",
+        "DaysLeft": -2331,
+        "TimeToNextMilestoneLabel": "333 week(s)",
+        "OverdueStatus": "Overdue"
+    },
+    "AssignmentNumber": "A000002 (AVNV-060725)",
+    "DefaultCurrency": {
+        "Id": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+        "ItemDisplayText": "EUR",
+        "ItemType": "Currencies"
+    },
+    "IsForecast": false,
+    "Manager1Role": "04f4e459-81b2-4587-a18f-7da2a9af6fdb",
+    "Manager2Role": "f306c1f6-56f6-4850-afbe-648319057c84",
+    "PrimaryContactsRole": "4e3b1fa4-ac27-4a31-8e63-7c9a1cae6760",
+    "SecondaryContactsRole": "f6f7111b-1486-4eca-ad25-d3a177ef0e76",
+    "BillingContactsRole": "1beb9979-34d2-4376-810e-6ae475b22288",
+    "PermanentPackages": [
+        {
+            "Id": "c2cb1c9a-04b9-4ad7-afce-c9bc36e6a884",
+            "SettingId": "d8eeb5b0-8d4e-4d43-9c29-4aa6cfb78ff5",
+            "PackageName": "Basic Salary",
+            "AmountFrom": 120000.0,
+            "AmountTo": 150000.0,
+            "Currency": {
+                "Id": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+                "ItemDisplayText": "GBP",
+                "ItemType": "Currencies"
+            },
+            "Period": {
+                "Value": 4,
+                "ItemDisplayText": "PerAnnum"
+            },
+            "OrderIndex": 0
+        },
+        {
+            "Id": "2e97f40f-6107-4d67-b5bd-0cdd9e4b5fc3",
+            "SettingId": "1fdb4eee-a74e-4c27-b0c1-6c985273dacd",
+            "PackageName": "Bonus",
+            "AmountFrom": 18000.0,
+            "AmountTo": 22500.0,
+            "Currency": {
+                "Id": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+                "ItemDisplayText": "GBP",
+                "ItemType": "Currencies"
+            },
+            "Period": {
+                "Value": 4,
+                "ItemDisplayText": "PerAnnum"
+            },
+            "OrderIndex": 1
+        },
+        {
+            "Id": "aaf7c52f-5ddf-4ba8-b92d-e1dedff2b3b9",
+            "SettingId": "41117067-5676-4aad-ab3d-9ea72fbb52da",
+            "PackageName": "Car Allowance",
+            "Currency": {
+                "Id": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+                "ItemDisplayText": "GBP",
+                "ItemType": "Currencies"
+            },
+            "Period": {
+                "Value": 4,
+                "ItemDisplayText": "PerAnnum"
+            },
+            "Notes": "Proin ac ullamcorper massa. Nam ultricies aliquet purus, vel placerat ex dapibus id.",
+            "OrderIndex": 3
+        }
+    ],
+    "NonExecPackages": [],
+    "InterimRates": [],
+    "IsSharingSettingsAssigned": true,
+    "IsShared": true,
+    "DefaultLocation": {
+        "LocationId": "de0eb247-dc28-4797-a852-d8ab3ba22244",
+        "EntityDetails": {
+            "DateCreated": "2016-12-09T11:12:16.847+00:00",
+            "DateModified": "2022-09-16T14:15:27.2937506+01:00",
+            "CreatedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "ModifiedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        },
+        "LocationName": "Head Office, Gresham Street",
+        "AddressComponents": {
+            "FullAddress": "29 Gresham Street\r\nLondon\r\nLondon\r\nEC2V 8HN\r\nUNITED KINGDOM",
+            "Street": "29 Gresham Street",
+            "TownCity": "London",
+            "County": "London",
+            "Postcode": "EC2V 8HN",
+            "Country": "UNITED KINGDOM"
+        },
+        "Default": true,
+        "EmailAddresses": [
+            {
+                "IsPersonal": false,
+                "IsBusiness": false,
+                "FieldName": "Email1Address",
+                "DisplayTitle": "Email",
+                "ItemValue": "info@lloydsbank.com"
+            }
+        ],
+        "PhoneNumbers": [
+            {
+                "IsPrimary": false,
+                "FormattedValue": "+44 (20) 7626 1780",
+                "PhoneNumberComponents": {
+                    "Area": "20",
+                    "CountryCode": "44",
+                    "Local": "7626 1780",
+                    "Country": "United Kingdom",
+                    "PhoneCode": "44"
+                },
+                "IsVisibleAsDefault": false,
+                "FieldName": "BusinessPhone",
+                "DisplayTitle": "Business Tel",
+                "ItemValue": "+44207626 1780"
+            },
+            {
+                "IsPrimary": false,
+                "FormattedValue": "+44 (20) 7626 1788",
+                "PhoneNumberComponents": {
+                    "Area": "20",
+                    "CountryCode": "44",
+                    "Local": "7626 1788",
+                    "Country": "United Kingdom",
+                    "PhoneCode": "44"
+                },
+                "IsVisibleAsDefault": false,
+                "FieldName": "BusinessFax",
+                "DisplayTitle": "Business Fax",
+                "ItemValue": "+44207626 1788"
+            }
+        ]
+    },
+    "AssignmentName": "Head of Sales & Marketing",
+    "EngagementType": {
+        "Id": "5d81e1e3-eb07-4328-a287-1bf2c9dc2ec6",
+        "DisplayTitle": "Engagement Type",
+        "ItemDisplayText": "Retained",
+        "ItemType": "LookupListEntries"
+    },
+    "EmploymentType": "Permanent",
+    "AssignmentStatus": {
+        "Id": "3775f6d6-af16-45c3-bfa5-3e28d6fde30d",
+        "DisplayTitle": "Assignment Status",
+        "ItemDisplayText": "Placement",
+        "ItemType": "LookupListEntries"
+    },
+    "InternalComments": "Lloyds Banking Group plc is a major British financial institution formed through the acquisition of HBOS by Lloyds TSB in 2009. The Group's history stems from the founding of the Bank of Scotland in 1695 by the Parliament of Scotland before the Act of Union, which is the second oldest bank in the United Kingdom. The Group's headquarters is located at 25 Gresham Street in the City of London and its registered office is on The Mound in Edinburgh. Lloyds Banking Group's activities are organised into: Retail Banking (including Mortgages and Sole Traders); Commercial; Life, Pensions & Insurance; and Wealth & International. Lloyds' has extensive overseas operations in the US, Europe, the Middle East and Asia.",
+    "InternalRef": "Ref.45006",
+    "AdditionalCompanies": [
+        {
+            "Id": "0212e33f-ae05-49cb-bd41-f7e15aa9b9d4",
+            "ItemDisplayText": "T. Rowe Price",
+            "ItemType": "Companies"
+        }
+    ],
+    "BillingLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244",
+        "ItemDisplayText": "Head Office, Gresham Street",
+        "ItemType": "Locations"
+    },
+    "WeightingId": "38bc76ec-092d-4a54-8c8b-d6052e814303",
+    "IsLiveItem": false,
+    "IsFavourite": false,
+    "Company": {
+        "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01",
+        "ItemDisplayText": "Lloyds Banking Group",
+        "ItemType": "Companies"
+    },
+    "Clients": [
+        {
+            "Id": "2f438e1f-c576-45b0-9126-1af06598e732",
+            "ItemDisplayText": "AssignmentClientItem",
+            "ItemType": "AssignmentClients"
+        },
+        {
+            "Id": "f36565f6-d722-410f-9075-32ed352713ab",
+            "ItemDisplayText": "AssignmentClientItem",
+            "ItemType": "AssignmentClients"
+        },
+        {
+            "Id": "29078ed1-f34c-4419-88ea-3e4d3aa6898d",
+            "ItemDisplayText": "AssignmentClientItem",
+            "ItemType": "AssignmentClients"
+        },
+        {
+            "Id": "f43051b5-101f-4d77-bd42-cfbb0cb17d82",
+            "ItemDisplayText": "AssignmentClientItem",
+            "ItemType": "AssignmentClients"
+        }
+    ],
+    "BillingContacts": [],
+    "PrimaryContacts": [
+        {
+            "Id": "e3617a59-2cd1-4eea-974d-aaa9ad4742ab",
+            "ItemDisplayText": "Janet Davis",
+            "ItemType": "People"
+        }
+    ],
+    "SecondaryContacts": [
+        {
+            "Id": "d4569bc6-bb1b-49c9-bc52-d2678f08125f",
+            "ItemDisplayText": "Kimberly Patel",
+            "ItemType": "People"
+        }
+    ],
+    "TeamMembers": {
+        "Managers1": [],
+        "Managers2": []
+    },
+    "BillingCurrency": {
+        "Id": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+        "ItemDisplayText": "GBP",
+        "ItemType": "Currencies"
+    },
+    "Departments": [
+        {
+            "Id": "088cdb1c-594a-4289-b120-1af49557e62b",
+            "ItemDisplayText": "Marketing",
+            "ItemType": "Departments"
+        }
+    ],
+    "Weighting": 75.0,
+    "PaymentTerms": "28 days",
+    "Milestones": [
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "1f9c4867-efe5-4f68-8766-0bdae65a7aa5",
+            "ItemDisplayText": "Billing Event",
+            "TargetDate": "2018-02-02T00:00:00+00:00",
+            "DateCompleted": "2018-09-12T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": true,
+            "OrderIndex": 13,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": false,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "BillingNote": "Morbi velit enim, rhoncus id tempor in, venenatis ornare massa.",
+            "ItemId": "b7d3a902-2064-4c93-99b8-1f8d30191606",
+            "ItemDisplayText": "Placement",
+            "Duration": 0,
+            "StartDate": "2018-06-04T00:00:00+00:00",
+            "TargetDate": "2018-06-04T00:00:00+00:00",
+            "DateCompleted": "2017-05-15T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 10,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "BillingNote": "Donec gravida nunc ut ipsum congue laoreet.",
+            "ItemId": "4aabbcd1-eedc-412f-85a7-2c7a8b035733",
+            "ItemDisplayText": "Shortlist",
+            "Duration": 0,
+            "StartDate": "2018-04-30T00:00:00+00:00",
+            "TargetDate": "2018-05-04T00:00:00+00:00",
+            "DateCompleted": "2017-04-13T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 7,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "BillingNote": "Vivamus tincidunt nisl vel nibh egestas posuere.",
+            "ItemId": "4db3643e-09a9-46ac-ab4e-3f18bee7c302",
+            "ItemDisplayText": "Credit: 9992828jdjdkd",
+            "Duration": 0,
+            "StartDate": "2018-04-23T00:00:00+00:00",
+            "TargetDate": "2018-04-30T00:00:00+00:00",
+            "DateCompleted": "2017-04-03T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 6,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 1,
+            "BillingNote": "Aliquam lacinia augue vitae turpis mollis ultricies.",
+            "ItemId": "611a3490-a903-4fec-9182-711b02af3ab1",
+            "ItemDisplayText": "Shortlist Sign Off",
+            "Duration": 0,
+            "StartDate": "2018-05-06T00:00:00+00:00",
+            "TargetDate": "2018-05-01T00:00:00+00:00",
+            "DateCompleted": "2018-04-26T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": true,
+            "OrderIndex": 8,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": true,
+            "IsPaid": true,
+            "BillingAmount": 8000.0,
+            "BillingAmountWeighting": 100.0,
+            "BillingDate": "2018-04-09T00:00:00+00:00",
+            "PaymentDate": "2018-04-26T00:00:00+00:00",
+            "IsMilestone": true,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "e2957ff0-e5ee-490c-874a-713985362f37",
+            "ItemDisplayText": "Billing Event",
+            "TargetDate": "2018-01-01T00:00:00+00:00",
+            "DateCompleted": "2018-09-12T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": true,
+            "OrderIndex": 12,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": false,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 1,
+            "BillingNote": "Maecenas ut urna eu libero accumsan vestibulum.",
+            "ItemId": "aad41170-3c46-4307-99be-75d5dc57a39b",
+            "ItemDisplayText": "Candidate Started",
+            "Duration": 0,
+            "StartDate": "2018-07-02T00:00:00+00:00",
+            "TargetDate": "2018-07-30T00:00:00+00:00",
+            "DateCompleted": "2018-04-26T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": true,
+            "IsComplete": true,
+            "OrderIndex": 11,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": true,
+            "IsPaid": true,
+            "BillingAmount": 5000.0,
+            "BillingAmountWeighting": 100.0,
+            "BillingDate": "2018-05-26T00:00:00+00:00",
+            "PaymentDate": "2018-04-26T00:00:00+00:00",
+            "IsMilestone": true,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "BillingNote": "Sed ullamcorper mi in maximus ultricies.",
+            "ItemId": "b52d40db-7589-4a91-a421-89ce71f31f38",
+            "ItemDisplayText": "Booking: 55527282",
+            "Duration": 0,
+            "StartDate": "2018-04-16T00:00:00+00:00",
+            "TargetDate": "2018-04-23T00:00:00+00:00",
+            "DateCompleted": "2017-04-10T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 5,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "69e62e83-f37d-4fb8-96d2-aeab64ba1249",
+            "ItemDisplayText": "Job Description Agreed",
+            "StartDate": "2018-03-05T00:00:00+00:00",
+            "TargetDate": "2018-03-19T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 3,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "BillingNote": "Donec pretium dapibus velit, non aliquam sem ultrices sed.",
+            "ItemId": "f65fd1ee-0496-433b-af4e-b8d3aa5c43ef",
+            "ItemDisplayText": "Client Interviews",
+            "Duration": 0,
+            "StartDate": "2018-05-13T00:00:00+00:00",
+            "TargetDate": "2018-05-21T00:00:00+00:00",
+            "DateCompleted": "2017-05-03T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 9,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "256e56ad-9ad8-4bb8-a1c2-d04bdc47aa35",
+            "ItemDisplayText": "Proposal",
+            "Duration": 0,
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": true,
+            "OrderIndex": 1,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 1,
+            "BillingNote": "Ut posuere molestie eleifend. ",
+            "ItemId": "21d6809c-aa6e-4b19-9804-d319b7a56a14",
+            "ItemDisplayText": "Signed Order / Retainer",
+            "Duration": 0,
+            "StartDate": "2018-03-26T00:00:00+00:00",
+            "TargetDate": "2018-03-26T00:00:00+00:00",
+            "DateCompleted": "2018-11-01T00:00:00+00:00",
+            "IsStartMilestone": true,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 4,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": true,
+            "IsPaid": true,
+            "BillingAmount": 10312.5,
+            "BillingAmountWeighting": 100.0,
+            "BillingDate": "2016-12-09T00:00:00+00:00",
+            "PaymentDate": "2016-11-11T00:00:00+00:00",
+            "IsMilestone": true,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 1,
+            "ItemId": "8a557431-108a-4433-be57-db3584a80764",
+            "ItemDisplayText": "Retainer",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 14,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "BillingAmount": 30000.0,
+            "IsMilestone": false,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "24398740-048d-4b50-89a2-e0eaf08fd02c",
+            "ItemDisplayText": "Client Briefing",
+            "StartDate": "2018-02-12T00:00:00+00:00",
+            "TargetDate": "2018-02-19T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 2,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false
+        }
+    ],
+    "IsContractSessionBased": false,
+    "ForecastDate": "2017-03-31T00:00:00+00:00",
+    "AssignmentValueManualMode": true,
+    "CandidateExpensesPaid": false,
+    "PositionsCount": 2,
+    "PurchaseOrder": "12076655 -bg",
+    "Benefits": "Pellentesque ac tincidunt neque. Proin tincidunt, nunc ac ultrices varius, nunc elit viverra quam, eu vestibulum ante tortor id urna.",
+    "BillablePackage": 150000.0,
+    "BillablePackageCurrency": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+    "FeeType": 1,
+    "FeePercentage": 27.5,
+    "AssignmentValue": 82500.0,
+    "AssignmentValueCurrency": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+    "TotalFee": 41250.0,
+    "TotalFeeCurrency": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+    "Websites": [],
+    "FeeAllocationsLocked": false
+}
+```
+
+This endpoint will return information about any given `Assignment` entity in the tenant database.
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `Assignment` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## PUT /api/v1/assignments/{id}
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/{id}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "DefaultLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244"
+    },
+    "Owner": {
+        "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+    },
+    "AssignmentName": "Head of Sales & Marketing",
+    "EngagementType": {
+        "Id": "5d81e1e3-eb07-4328-a287-1bf2c9dc2ec6"
+    },
+    "EmploymentType": "Permanent",
+    "AssignmentStatus": {
+        "Id": "12a6b6f2-f121-47d4-870c-2c93fee84a71"
+    },
+    "InternalComments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo quam tortor, in mollis sem tempus sed. In hac habitasse platea dictumst. Praesent suscipit tortor nec lacus pulvinar imperdiet. Vivamus aliquet est justo, luctus aliquet odio facilisis eu.",
+    "InternalRef": "b2bcb414-c65e-4e70-ad00-05a28ff7f817",
+    "ExternalRef": "J00009",
+    "BillingLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244"
+    },
+    "WeightingId": "7419b159-6f0b-4476-b2ac-1e6dce3df4b7",
+    "IsLiveItem": false,
+    "IsFavourite": false,
+    "Company": {
+        "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01"
+    },
+    "Clients": [
+        {
+            "Id": "e3617a59-2cd1-4eea-974d-aaa9ad4742ab"
+        },
+        {
+            "Id": "ee59f046-f04c-4965-9bb9-d19810d89113"
+        }
+    ],
+    "PaymentTerms": "21 days",
+    "IsContractSessionBased": false,
+    "ForecastDate": "2024-08-01T00:00:00+00:00",
+    "AssignmentValueManualMode": false,
+    "CandidateExpensesPaid": true,
+    "TotalFeeManualMode": false,
+    "PositionsCount": 1,
+    "PurchaseOrder": "12076522",
+    "ClientNoticePeriod": "c9d6d7c1-40e1-44f6-b824-063d761c7cf8",
+    "CandidateNoticePeriod": "b444a3b0-a76d-4e72-ba8f-f76cb7fb3467",
+    "Benefits": "Quisque sollicitudin ac erat nec ornare. Nullam at neque quis sapien vehicula dictum sed ut eros. Ut rutrum nunc ut velit accumsan, sed viverra libero feugiat.",
+    "BillablePackage": 250000.0,
+    "BillablePackageCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "FeeType": 1,
+    "FeePercentage": 18.0,
+    "AssignmentValue": 45000.0,
+    "AssignmentValueCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "TotalFee": 45000.0,
+    "TotalFeeCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Notes": "Curabitur iaculis, dolor quis tempus molestie, massa elit auctor mauris, at eleifend quam velit tristique felis. Vivamus vel felis quis nulla porta posuere id faucibus libero.",
+    "FeeAllocationsLocked": false
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "664018a5-d9fa-4d10-9c94-c4339e5ac226",
+    "EntityDetails": {
+        "DateCreated": "2024-07-08T13:38:07.8745928+00:00",
+        "DateModified": "2024-07-08T15:31:28.0683735+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "Links": [],
+    "Categories": {
+        "Lists": []
+    },
+    "RecordManagementDetails": {
+        "Owners": [],
+        "Groups": [
+            {
+                "Id": "8542c690-55f8-4d3e-b504-0646fa8c2bee",
+                "ItemDisplayText": "Team B",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "0726e379-8040-4efd-b953-65b38d4e4262",
+                "ItemDisplayText": "General Search",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "a24f1f31-e45b-49b6-8aa8-a23f16b6d6ed",
+                "ItemDisplayText": "Business Unit A",
+                "ItemType": "RecordManagementGroupListEntries"
+            }
+        ],
+        "Organisations": []
+    },
+    "CompanyRecordPictures": [],
+    "AssignmentNumber": "A000029 (AQAS-754102)",
+    "DefaultCurrency": {
+        "Id": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+        "ItemDisplayText": "EUR",
+        "ItemType": "Currencies"
+    },
+    "IsForecast": true,
+    "Manager1Role": "04f4e459-81b2-4587-a18f-7da2a9af6fdb",
+    "Manager2Role": "f306c1f6-56f6-4850-afbe-648319057c84",
+    "PrimaryContactsRole": "4e3b1fa4-ac27-4a31-8e63-7c9a1cae6760",
+    "SecondaryContactsRole": "f6f7111b-1486-4eca-ad25-d3a177ef0e76",
+    "BillingContactsRole": "1beb9979-34d2-4376-810e-6ae475b22288",
+    "PermanentPackages": [],
+    "NonExecPackages": [],
+    "InterimRates": [],
+    "IsSharingSettingsAssigned": false,
+    "IsShared": false,
+    "DefaultLocation": {
+        "LocationId": "de0eb247-dc28-4797-a852-d8ab3ba22244",
+        "EntityDetails": {
+            "DateCreated": "2016-12-09T11:12:16.847+00:00",
+            "DateModified": "2022-09-16T14:15:27.2937506+01:00",
+            "CreatedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "ModifiedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        },
+        "LocationName": "Head Office, Gresham Street",
+        "AddressComponents": {
+            "FullAddress": "29 Gresham Street\r\nLondon\r\nLondon\r\nEC2V 8HN\r\nUNITED KINGDOM",
+            "Street": "29 Gresham Street",
+            "TownCity": "London",
+            "County": "London",
+            "Postcode": "EC2V 8HN",
+            "Country": "UNITED KINGDOM"
+        },
+        "Default": true,
+        "EmailAddresses": [
+            {
+                "IsPersonal": false,
+                "IsBusiness": false,
+                "FieldName": "Email1Address",
+                "DisplayTitle": "Email",
+                "ItemValue": "info@lloydsbank.com"
+            }
+        ],
+        "PhoneNumbers": [
+            {
+                "IsPrimary": false,
+                "FormattedValue": "+44 (20) 7626 1780",
+                "PhoneNumberComponents": {
+                    "Area": "20",
+                    "CountryCode": "44",
+                    "Local": "7626 1780",
+                    "Country": "United Kingdom",
+                    "PhoneCode": "44"
+                },
+                "IsVisibleAsDefault": false,
+                "FieldName": "BusinessPhone",
+                "DisplayTitle": "Business Tel",
+                "ItemValue": "+44207626 1780"
+            },
+            {
+                "IsPrimary": false,
+                "FormattedValue": "+44 (20) 7626 1788",
+                "PhoneNumberComponents": {
+                    "Area": "20",
+                    "CountryCode": "44",
+                    "Local": "7626 1788",
+                    "Country": "United Kingdom",
+                    "PhoneCode": "44"
+                },
+                "IsVisibleAsDefault": false,
+                "FieldName": "BusinessFax",
+                "DisplayTitle": "Business Fax",
+                "ItemValue": "+44207626 1788"
+            }
+        ]
+    },
+    "AssignmentName": "Head of Sales & Marketing",
+    "EngagementType": {
+        "Id": "5d81e1e3-eb07-4328-a287-1bf2c9dc2ec6",
+        "DisplayTitle": "Engagement Type",
+        "ItemDisplayText": "Retained",
+        "ItemType": "LookupListEntries"
+    },
+    "EmploymentType": "Permanent",
+    "AssignmentStatus": {
+        "Id": "12a6b6f2-f121-47d4-870c-2c93fee84a71",
+        "DisplayTitle": "Assignment Status",
+        "ItemDisplayText": "Active",
+        "ItemType": "LookupListEntries"
+    },
+    "InternalComments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo quam tortor, in mollis sem tempus sed. In hac habitasse platea dictumst. Praesent suscipit tortor nec lacus pulvinar imperdiet. Vivamus aliquet est justo, luctus aliquet odio facilisis eu.",
+    "InternalRef": "b2bcb414-c65e-4e70-ad00-05a28ff7f817",
+    "ExternalRef": "J00009",
+    "AdditionalCompanies": [],
+    "BillingLocation": {
+        "Id": "de0eb247-dc28-4797-a852-d8ab3ba22244",
+        "ItemDisplayText": "Head Office, Gresham Street",
+        "ItemType": "Locations"
+    },
+    "WeightingId": "7419b159-6f0b-4476-b2ac-1e6dce3df4b7",
+    "IsLiveItem": false,
+    "IsFavourite": false,
+    "Company": {
+        "Id": "c6bd6734-fc2f-4088-bbcd-8c038e549c01",
+        "ItemDisplayText": "Lloyds Banking Group",
+        "ItemType": "Companies"
+    },
+    "Clients": [],
+    "BillingContacts": [],
+    "PrimaryContacts": [],
+    "SecondaryContacts": [],
+    "TeamMembers": {
+        "Managers1": [],
+        "Managers2": []
+    },
+    "BillingCurrency": {
+        "Id": "3a0e9471-35e2-462f-86dd-f4b08dc70708",
+        "ItemDisplayText": "EUR",
+        "ItemType": "Currencies"
+    },
+    "Departments": [],
+    "Weighting": 50.0,
+    "PaymentTerms": "21 days",
+    "Milestones": [],
+    "IsContractSessionBased": false,
+    "ForecastDate": "2024-08-01T00:00:00+00:00",
+    "AssignmentValueManualMode": false,
+    "CandidateExpensesPaid": true,
+    "TotalFeeManualMode": false,
+    "PositionsCount": 1,
+    "PurchaseOrder": "12076522",
+    "ClientNoticePeriod": "c9d6d7c1-40e1-44f6-b824-063d761c7cf8",
+    "CandidateNoticePeriod": "b444a3b0-a76d-4e72-ba8f-f76cb7fb3467",
+    "Benefits": "Quisque sollicitudin ac erat nec ornare. Nullam at neque quis sapien vehicula dictum sed ut eros. Ut rutrum nunc ut velit accumsan, sed viverra libero feugiat.",
+    "BillablePackage": 250000.0,
+    "BillablePackageCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "FeeType": 1,
+    "FeePercentage": 18.0,
+    "AssignmentValue": 45000.0,
+    "AssignmentValueCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "TotalFee": 45000.0,
+    "TotalFeeCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Notes": "Curabitur iaculis, dolor quis tempus molestie, massa elit auctor mauris, at eleifend quam velit tristique felis. Vivamus vel felis quis nulla porta posuere id faucibus libero.",
+    "Websites": [],
+    "FeeAllocationsLocked": false
+}
+```
+
+This endpoint allows you to replace a representation of the target `Assignment` entity with the request payload.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `Assignment` entity.
+
+
+## PATCH /api/v1/assignments/{id}
+
+> Example (cURL)
+
+```shell
+curl --location --globoff --request PATCH 'https://{subdomain}.invenias.com/api/v1/assignment/{id}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Fields": {
+        "AssignmentValue": 43200,
+        "AssignmentValueCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+        "BillablePackage": 120000,
+        "BillablePackageCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+        "FeePercentage": 18,
+        "FeeType": 2,
+        "PositionsCount" : 2
+    }
+}'
+```
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint enables the partial update of one or more fields within the specified `Assignment` entity using the PATCH method. Refer to the table below for the list of updatable fields.
+
+<p><i>Table 1. Patchable Field Summary</i></p>
+
+Name |  Type | Nullable
+---- |  ---- | --------
+InternalRef | nvarchar(50) | TRUE
+ExternalRef | nvarchar(50) | TRUE
+InternalComments | nvarchar(max) | TRUE
+Status | FK uniqueidentifier | TRUE
+PositionsCount | integer | TRUE
+NonExecChecked | boolean | TRUE
+ContractChecked | boolean | TRUE
+PermanentChecked | boolean | TRUE
+EngagementType | FK uniqueidentifier | TRUE
+Benefits | nvarchar(max) | TRUE
+Notes | nvarchar(max) | TRUE
+TotalFee | float | TRUE
+TotalFeeCurrency | FK uniqueidentifier | TRUE
+TotalFeeManualMode | boolean | TRUE
+FeeType | integer | FALSE
+FeePercentage | float | TRUE
+CandidateNoticePeriod | FK uniqueidentifier | TRUE
+ClientNoticePeriod | FK uniqueidentifier | TRUE
+Duration | float | TRUE
+Weighting | float | TRUE
+WeightingId | FK uniqueidentifier | TRUE
+ForecastDate | datetime | TRUE
+FeeAllocationsLocked | boolean | TRUE
+ContractSessionMode | boolean | TRUE
+NumberOfSessions | integer | TRUE
+BillablePackage | float | TRUE
+BillablePackageCurrency | FK uniqueidentifier | TRUE
+PaymentTerms | nvarchar(max) | TRUE
+PurchaseOrder | nvarchar(max) | TRUE
+BillingCurrency | FK uniqueidentifier | TRUE
+AssignmentValue | float | TRUE
+AssignmentValueCurrency | FK uniqueidentifier | TRUE
+AssignmentValueManualMode | boolean | TRUE
+AverageMargin | float | TRUE
+AverageMarginCurrency | FK uniqueidentifier | TRUE
+AverageMarginPeriod | integer | TRUE
+CandidateExpensesPaid | boolean | TRUE
+ExternalId1 | nvarchar(max) | TRUE
+ExternalId2 | nvarchar(max) | TRUE
+ExternalId3 | nvarchar(max) | TRUE
+LinkedIn | nvarchar(max) | TRUE
+WebPage | nvarchar(max) | TRUE
+Twitter | nvarchar(max) | TRUE
+Facebook | nvarchar(max) | TRUE
+XING | nvarchar(max) | TRUE
+BoardEx | nvarchar(max) | TRUE
+BoardExRCM | nvarchar(max) | TRUE
+BlueSteps | nvarchar(max) | TRUE
+Broadbean | nvarchar(max) | TRUE
+Idibu | nvarchar(max) | TRUE
+LostReason | FK uniqueidentifier | TRUE
+SessionLength | integer | TRUE
+OwnerId | FK uniqueidentifier | FALSE
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}`
+
+
+<i>Table 2. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `Assignment` entity.
+
+
+## DELETE /api/v1/assignments/{id}
+
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/assignment/{id}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The DELETE /api/v1/people/{id} endpoint is used to `permanently` delete a single `Assignment` entity per request.
+
+<aside class="notice">
+    Please note, when deleting a 'Assignment' entity, it will also delete any relations that exist between it and other core entities.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignment/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `Assignment` entity.
+
+
+## PUT /api/v1/assignments/bulkdelete
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/bulkdelete' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: {token}' \
+--data '{
+    "ItemReferences": [
+        {
+            "Id": "904d913e-c2dd-4b5d-9c0d-699aaf03dc58"
+        },
+        {
+            "Id": "06ee9193-a64f-4ab9-93a3-df9e03feba3c"
+        }
+    ]
+}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The POST /api/v1/assignments/bulkdelete endpoint is used to `permanently` delete more than one `Assignment` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/bulkdelete`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+ids | [required] | Specify the unique identifiers for the `Assignment` entities you wish to delete.
+
+
+## POST /api/v1/assignments/{id}/candidates/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/3f5007c4-3a76-42c0-af75-21e05a7fdeed/candidates/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "PageSize": 1000,
+    "PageIndex": 0,
+    "UsePaging": true,
+    "ReturnTotalCount": true,
+    "IsFirstLoad": true,
+    "select": [
+        "ItemId",
+        "Relation_recordnotes",
+        "Relation_fittoprofile",
+        "RecordStatus",
+        "CompanyDisplayName",
+        "PositionJobTitle",
+        "DisplayFileAs"
+    ],
+    "IncludeAdditionalValues": false
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "CompanyDisplayName": "Sberbank",
+            "DisplayFileAs": "Karen Thompson",
+            "ItemType": "People",
+            "PositionJobTitle": "Head of Sales & Marketing",
+            "RecordStatus": "Money (R1)",
+            "Relation_fittoprofile": "In eu neque ultricies, lobortis ante a, tincidunt sapien. Proin consequat urna id magna commodo suscipit a non libero. Cras at erat eget elit lobortis elementum. Mauris vel quam tempor, malesuada odio at, pharetra nisi. ",
+            "Relation_recordnotes": "Recieved Application via Candidate Portal 09/12/2016 - In process of reviewing Candidates CV",
+            "ItemId": "1f7fd32a-3e72-4c07-ae39-07e073097601",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "CompanyDisplayName": "Internal Dev Database - Glen Chamberlain",
+            "DisplayFileAs": "Glen R. Chamberlain",
+            "ItemType": "People",
+            "PositionJobTitle": "Consultant==",
+            "RecordStatus": "Application",
+            "Relation_recordnotes": "-CB",
+            "ItemId": "a9504f72-4f20-4d4a-a8d1-1a18ed571c9d",
+            "OffLimitsStatus": "Off"
+        }
+    ]
+}
+```
+
+This endpoint will return a list of `Candiate` type entities in the tenant database that are relationally linked to any given `Assignment` entity.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id)/candidates/list`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+## POST /api/v1/assignments/{id}/candidates
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/candidates' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+  "Candidate": {
+    "Id": "801781aa-fbc8-442e-ade9-08be4bd24acc"
+  },
+  "RecordStatus": {
+    "Id": "ce1caa3c-c0a9-480b-963e-5bbd2198d6fc"
+  },
+  "FitToProfile": "Curabitur quis tincidunt nibh, quis varius mauris.",
+  "InternalComments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "ProgressNotes": "Maecenas faucibus sem nisl, eu bibendum nisl sodales ac.",
+  "Owner": {
+    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+  }
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Candidate": {
+        "Id": "801781aa-fbc8-442e-ade9-08be4bd24acc",
+        "NameComponents": {
+            "FullName": "Jane Doe",
+            "FamilyName": "Doe",
+            "FirstName": "Jane"
+        },
+        "Company": {
+            "Id": "fd64e2d1-22dc-430f-8475-e768659053da",
+            "ItemDisplayText": "Invenias by Bullhorn",
+            "ItemType": "Companies"
+        },
+        "IsProfessionalUser": true
+    },
+    "EntityDetails": {
+        "DateCreated": "2024-07-22T12:58:30.6295193+00:00",
+        "DateModified": "2024-07-22T12:58:30.6295193+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "RecordStatus": {
+        "Id": "ce1caa3c-c0a9-480b-963e-5bbd2198d6fc",
+        "DisplayTitle": "Application",
+        "ItemDisplayText": "Application",
+        "ItemType": "LookupListEntries"
+    },
+    "FitToProfile": "Curabitur quis tincidunt nibh, quis varius mauris.",
+    "InternalComments": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "ProgressNotes": "Maecenas faucibus sem nisl, eu bibendum nisl sodales ac."
+}
+```
+
+This endpoint will create a `Candidate` type relationship between a single `Person` entity and a given `Assignment` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/candidates`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## POST /api/v1/assignments/{id}/bulkcandidates/copy
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/bulkcandidates/Copy' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "Candidates": [
+        {
+            "Id": "1f7fd32a-3e72-4c07-ae39-07e073097601"
+        },
+        {
+            "Id": "8756b50e-d6f1-42c5-8a14-1d4c7d727233"
+        },
+        {
+            "Id": "017f8988-936f-401d-9125-610d0929bb7b"
+        }
+    ],
+    "SourceAssignment": {
+        "Id": "3f5007c4-3a76-42c0-af75-21e05a7fdeed"
+    },
+    "CopyProgressStatus": true,
+    "CopyProgressNotes": true,
+    "CopyFitToProfile": true,
+    "CopyInternalComments": true,
+    "CopyCandidateGroup": true
+}'
+```
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint enables the duplication of multiple Candidate entities from one `Assignment` entity to another. It also offers the option to transfer associated data, including Candidate Progress notes, Progress Status, Fit to Profile assessments, Internal Comments, and Candidate group details.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/bulkcandidates/Copy`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity you wish to copy the candidate data to.
+
+
+## PUT /api/v1/assignments/{id}/bulkcandidates/changeprogressstatus
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/bulkcandidates/changeprogressstatus' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+  "Candidates": [
+        {
+            "Id": "1f7fd32a-3e72-4c07-ae39-07e073097601"
+        },
+        {
+            "Id": "8756b50e-d6f1-42c5-8a14-1d4c7d727233"
+        },
+        {
+            "Id": "017f8988-936f-401d-9125-610d0929bb7b"
+        }
+  ],
+  "ProgressStatus": {
+    "Id": "4ec45745-2094-4ba3-8a11-11bb3fc1ae58"
+  }
+}'
+```
+
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint can be used to update the Progress Status of multiple Candidates within a specified `Assignment` entity to a designated value.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/bulkcandidates/changeprogressstatus`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## PUT /api/v1/assignments/{id}/bulkcandidates/remove
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/bulkcandidates/remove' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+  "ItemReferences": [
+        {
+            "Id": "1f7fd32a-3e72-4c07-ae39-07e073097601"
+        },
+        {
+            "Id": "8756b50e-d6f1-42c5-8a14-1d4c7d727233"
+        },
+        {
+            "Id": "017f8988-936f-401d-9125-610d0929bb7b"
+        }
+  ]
+}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+This endpoint allows the permanent removal of multiple Candidate entities from the specified `Assignment` entity.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/bulkcandidates/remove`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+ItemReferences | [required] | Specify the unique identifier for the given Candidate type entities you wish to be removed from the given `Assignment` entity.
+
+
+## GET /api/v1/assignments/{id}/candidates/{itemId}
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/candidates/{itemid}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Candidate": {
+        "Id": "eb4cb3e4-baee-40ba-b312-847694a685bd",
+        "NameComponents": {
+            "FullName": "Annabella Rose Thomas (Anna)",
+            "FamilyName": "Thomas",
+            "FirstName": "Annabella",
+            "MiddleName": "Rose",
+            "Suffix": "",
+            "Title": "",
+            "Nickname": "Anna",
+            "MaidenName": ""
+        },
+        "JobTitle": "Chief\"Officer",
+        "Company": {
+            "Id": "17dc922f-8f02-4281-92a9-dfefc9735633",
+            "ItemDisplayText": "Abbey\"National",
+            "ItemType": "Companies"
+        },
+        "IsProfessionalUser": false
+    },
+    "EntityDetails": {
+        "DateCreated": "2016-12-09T10:45:51.443+00:00",
+        "DateModified": "2024-07-16T13:08:29.8178015+01:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "CandidateStatusGroup": {
+        "Id": "2b6ae4b9-83fe-4d81-8582-5cc4fd6bc44c",
+        "DisplayTitle": "b) Research & Development Profiles",
+        "ItemDisplayText": "b) Research & Development Profiles",
+        "ItemType": "LookupListEntries"
+    },
+    "RecordStatus": {
+        "Id": "fd69e1ef-530b-40a0-8216-7769325ee981",
+        "DisplayTitle": "7. Shortlisted",
+        "ItemDisplayText": "7. Shortlisted",
+        "ItemType": "LookupListEntries"
+    },
+    "FitToProfile": "Quisque tellus felis, ultrices non consequat eu, rhoncus et orci. In consequat lectus ac lectus pretium finibus. In hac habitasse platea dictumst.\r\nVestibulum ullamcorper blandit purus quis dictum. Nulla quis metus porttitor tortor lobortis feugiat.",
+    "InternalComments": "Nunc sit amet ullamcorper augue. Nullam tincidunt justo at egestas efficitur. Etiam semper mauris non nisi hendrerit, eget mollis orci tincidunt.",
+    "ProgressNotes": "Cras auctor elementum enim, a eleifend nulla fringilla facilisis. In hac habitasse platea dictumst. Nulla vitae erat rutrum, euismod ligula sed, dignissim risus. Donec et mauris porttitor, rutrum nisi a, venenatis mauris. \n\nMauris a nulla sed ante tincidunt pellentesque vulputate a nibh. Sed rutrum enim non tempor iaculis."
+}
+```
+
+This endpoint retrieves detailed information for a specified Candidate entity within a given `Assignment`, including the relationship owner, nane components, progress status, progress notes, and more.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/candidates/{itemid}`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+itemId | [required] | Specify the unique identifier for the given Candidate type entity.
+
+
+## PUT /api/v1/assignments/{id}/candidates/{itemId}
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/candidates/{itemId}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+  "RecordStatus": {
+    "Id": "6b8ed05c-546f-45bf-bc32-e0178d447c19"
+  },
+  "FitToProfile": "uisque tellus felis, ultrices non consequat eu, rhoncus et orci. In consequat lectus ac lectus pretium finibus. In hac habitasse platea dictumst.\r\nVestibulum ullamcorper blandit purus quis dictum. Nulla quis metus porttitor tortor lobortis feugiat.",
+  "InternalComments": "Nunc sit amet ullamcorper augue. Nullam tincidunt justo at egestas efficitur. Etiam semper mauris non nisi hendrerit, eget mollis orci tincidunt.",
+  "ProgressNotes": "Cras auctor elementum enim, a eleifend nulla fringilla facilisis. In hac habitasse platea dictumst. Nulla vitae erat rutrum, euismod ligula sed, dignissim risus. Donec et mauris porttitor, rutrum nisi a, venenatis mauris. \n\nMauris a nulla sed ante tincidunt pellentesque vulputate a nibh. Sed rutrum enim non tempor iaculis.",
+  "Owner": {
+    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+  }
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Candidate": {
+        "Id": "eb4cb3e4-baee-40ba-b312-847694a685bd",
+        "NameComponents": {
+            "FullName": "Annabella Rose Thomas (Anna)",
+            "FamilyName": "Thomas",
+            "FirstName": "Annabella",
+            "MiddleName": "Rose",
+            "Suffix": "",
+            "Title": "",
+            "Nickname": "Anna",
+            "MaidenName": ""
+        },
+        "JobTitle": "Chief\"Officer",
+        "Company": {
+            "Id": "17dc922f-8f02-4281-92a9-dfefc9735633",
+            "ItemDisplayText": "Abbey\"National",
+            "ItemType": "Companies"
+        },
+        "IsProfessionalUser": false
+    },
+    "EntityDetails": {
+        "DateCreated": "2016-12-09T10:45:51.443+00:00",
+        "DateModified": "2024-07-23T10:00:58.6926296+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "CandidateStatusGroup": {
+        "Id": "2b6ae4b9-83fe-4d81-8582-5cc4fd6bc44c",
+        "DisplayTitle": "b) Research & Development Profiles",
+        "ItemDisplayText": "b) Research & Development Profiles",
+        "ItemType": "LookupListEntries"
+    },
+    "RecordStatus": {
+        "Id": "6b8ed05c-546f-45bf-bc32-e0178d447c19",
+        "DisplayTitle": "9a. Offer Pending",
+        "ItemDisplayText": "9a. Offer Pending",
+        "ItemType": "LookupListEntries"
+    },
+    "FitToProfile": "uisque tellus felis, ultrices non consequat eu, rhoncus et orci. In consequat lectus ac lectus pretium finibus. In hac habitasse platea dictumst.\r\nVestibulum ullamcorper blandit purus quis dictum. Nulla quis metus porttitor tortor lobortis feugiat.",
+    "InternalComments": "Nunc sit amet ullamcorper augue. Nullam tincidunt justo at egestas efficitur. Etiam semper mauris non nisi hendrerit, eget mollis orci tincidunt.",
+    "ProgressNotes": "Cras auctor elementum enim, a eleifend nulla fringilla facilisis. In hac habitasse platea dictumst. Nulla vitae erat rutrum, euismod ligula sed, dignissim risus. Donec et mauris porttitor, rutrum nisi a, venenatis mauris. \n\nMauris a nulla sed ante tincidunt pellentesque vulputate a nibh. Sed rutrum enim non tempor iaculis."
+}
+```
+
+This endpoint updates the representation of a specified Candidate entity within a given `Assignment` using the PUT method. For updating only one or a few fields, consider using the PATCH method to avoid nullifying existing data not included in the request model.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/candidates/{itemid}`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+itemId | [required] | Specify the unique identifier for the given Candidate type entity.
+
+
+## PATCH /api/v1/assignments/{assignmentId}/candidates/{candidateId}
+
+> Example (cURL)
+
+```shell
+curl --location --request PATCH 'https://{subdomain}.invenias.com/api/v1/assignments/{assignmentId}/candidates/{candidateId}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "Fields": {
+        "RecordNotes": "Nullam sed urna vitae sem sodales consectetur eget et nisl. Proin at feugiat tortor. Nulla eleifend cursus ex vitae tincidunt."
+    }
+}'
+```
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint enables the partial update of one or more fields within the specified Candidate type entity using the PATCH method for the specified `Assignment` entity relation end. Refer to the table below for the list of updatable fields.
+
+<p><i>Table 1. Patchable Field Summary</i></p>
+
+Name | Type | Nullable
+---- | ---- | --------
+RecordStatus | FK uniqueidentifier | FALSE
+PinItem | bit | FALSE
+RecordNotes | nvarchar(max) | TRUE
+FitToProfile | nvarchar(max) | TRUE
+InternalComments | nvarchar(max) | TRUE
+RowColor | nvarchar(max) | TRUE
+CandidateGroup | FK uniqueidentifier | TRUE
+PublishCVAllowed | bit | TRUE
+ClientFeedback | nvarchar(max) | TRUE
+OwnerId | FK uniqueidentifier | FALSE
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{assignmentId}/candidates/{candidateId}`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+assignmentId | [required] | Specify the unique identifier for the given `Assignment`entity.
+candidateId | [required] | Specify the unique identifier for the given Candidate type entity.
+model | [required] | Specify the field and respective valuse to update for the Candidate type entity.
+
+
+## DELETE /api/v1/assignments/{assignmentId}/candidates/{candidateId}
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/assignments/{assignmentId}/candidates/{candidateId}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+This endpoint permanently severs the relationship between a Person entity as a Candidate and the specified Assignment entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{assignmentId}/candidates/{candidateId}`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+assignmentId | [required] | Specify the unique identifier for the given `Assignment`entity.
+candidateId | [required] | Specify the unique identifier for the given Candidate type entity.
+
+
+## POST /api/v1/assignments/{id}/milestones
+
+> Adding a Milestone to an Assignment Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+  "OptionalId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4347",
+  "BillingNote": "This is the milestone '\''Note'\''.",
+  "ItemDisplayText": "The name of the Milestone",
+  "StartDate": "2024-07-23T08:06:22.556Z",
+  "TargetDate": "2024-07-28T08:06:22.556Z",
+  "DateCompleted": "",
+  "IsStartMilestone": true,
+  "IsFinishMilestone": false,
+  "IsComplete": false,
+  "IsMilestone": true,
+  "IsBillingEvent": false,
+  "Owner": {
+    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+  }
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+    "InvoiceBillingEventOrderIndex": 0,
+    "BillingNote": "This is the milestone 'Note'.",
+    "ItemId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4347",
+    "ItemDisplayText": "The name of the Milestone",
+    "StartDate": "2024-07-23T00:00:00+00:00",
+    "TargetDate": "2024-07-28T00:00:00+00:00",
+    "IsStartMilestone": true,
+    "IsFinishMilestone": false,
+    "IsComplete": false,
+    "OrderIndex": 16,
+    "PredecessorId": {
+        "ItemType": "AssignmentMilestones"
+    },
+    "IsBilled": false,
+    "IsPaid": false,
+    "IsMilestone": true,
+    "IsBillingEvent": false,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+}
+```
+
+> Adding a Billing Event to an Assignment Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "OptionalId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4348",
+    "BillingNote": "This is a Billing Event '\''Note'\''.",
+    "ItemDisplayText": "The name of the Billing Event",
+    "StartDate": "2024-07-00:00:00",
+    "TargetDate": "2024-07-18T00:00:00",
+    "DateCompleted": "2024-07-16T00:00:00",
+    "IsComplete": false,
+    "IsStartMilestone": false,
+    "IsFinishMilestone": false,
+    "IsBilled": true,
+    "IsPaid": false,
+    "BillingAmount": 25000,
+    "BillingAmountWeighting": 75,
+    "BillingDate": "2024-07-18T00:00:00",
+    "PaymentDate": "",
+    "IsMilestone": false,
+    "IsBillingEvent": true,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Owner": {
+        "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+    }
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+    "InvoiceBillingEventOrderIndex": 0,
+    "BillingNote": "This is a Billing Event 'Note'.",
+    "ItemId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4348",
+    "ItemDisplayText": "The name of the Billing Event",
+    "TargetDate": "2024-07-18T00:00:00+00:00",
+    "DateCompleted": "2024-07-16T00:00:00+00:00",
+    "IsStartMilestone": false,
+    "IsFinishMilestone": false,
+    "IsComplete": false,
+    "OrderIndex": 17,
+    "PredecessorId": {
+        "ItemType": "AssignmentMilestones"
+    },
+    "IsBilled": true,
+    "IsPaid": false,
+    "BillingAmount": 25000.0,
+    "BillingAmountWeighting": 75.0,
+    "BillingDate": "2024-07-18T00:00:00+00:00",
+    "IsMilestone": false,
+    "IsBillingEvent": true,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+}
+```
+
+> Adding a Billing Event Milestone to an Assignment Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "OptionalId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4349",
+    "BillingNote": "This is a Billing Event Milestone '\''Note'\''.",
+    "ItemDisplayText": "The name of the Billing Event Milestone",
+    "StartDate": "2024-07-21T00:00:00",
+    "TargetDate": "2024-07-30T00:00:00",
+    "DateCompleted": "",
+    "IsComplete": false,
+    "IsStartMilestone": false,
+    "IsFinishMilestone": true,
+    "IsBilled": false,
+    "IsPaid": false,
+    "BillingAmount": 25000,
+    "BillingAmountWeighting": 50,
+    "BillingDate": "",
+    "PaymentDate": "",
+    "IsMilestone": true,
+    "IsBillingEvent": true,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Owner": {
+        "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+    }
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+    "InvoiceBillingEventOrderIndex": 0,
+    "BillingNote": "This is a Billing Event Milestone 'Note'.",
+    "ItemId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4349",
+    "ItemDisplayText": "The name of the Billing Event Milestone",
+    "StartDate": "2024-07-21T00:00:00+00:00",
+    "TargetDate": "2024-07-30T00:00:00+00:00",
+    "IsStartMilestone": false,
+    "IsFinishMilestone": true,
+    "IsComplete": false,
+    "OrderIndex": 18,
+    "PredecessorId": {
+        "ItemType": "AssignmentMilestones"
+    },
+    "IsBilled": false,
+    "IsPaid": false,
+    "BillingAmount": 25000.0,
+    "BillingAmountWeighting": 50.0,
+    "IsMilestone": true,
+    "IsBillingEvent": true,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96"
+}
+```
+
+Milestones in Invenias are used to mark key events and dates during the search process. A milestone can serve as a simple milestone, a billing event, or both. The choice of request model determines the outcome:
+
+- Creating a milestone that appears only in the `Milestones` tab of the Invenias client application.
+- Creating a milestone that is also a billing event, appearing in both the `Milestones` and `Billing` tabs (Desktop Client Only).
+- Creating a billing event that appears only in the `Billing` tab (Desktop Client Only) when viewing a specified Assignment entity in the Invenias client application.
+
+<aside class="notice">
+    Billing features are not enabled by default on an Invenias tenant. To utilize this feature for tracking billing, it must be activated by an Invenias user with 'System Administrator' privileges within the 'System Settings' of the Invenias Desktop application.
+</aside>
+
+
+<p><i>Table 1. Field Summary</i></p>
+
+| Name                    | Type                  | Description                                                                                                                                                              |
+|-------------------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| OptionalId              | FK uniqueidentifier   | Allows you to optionally declare the unique identifier for the entity in the Invenias Database.                                                                           |
+| BillingNote             | nvarchar(max)         | Used to add additional context about the milestone/billing event.                                                                                                         |
+| ItemDisplayText         | nvarchar(250)         | The name of the milestone/billing event as you want it displayed in Invenias client applications.                                                                         |
+| StartDate               | datetime              | Used to define the date planned to start the tasks related to the milestone.                                                                                              |
+| TargetDate              | datetime              | In the context of a milestone, this is where to add the date that you predict it will be completed; for billing, this acts as the Due Date.                               |
+| DateCompleted           | datetime              | Used to define the date a milestone is completed.                                                                                                                         |
+| IsStartMilestone        | boolean               | Used to define which milestone is considered the point that work on a search begins.                                                                                      |
+| IsFinishMilestone       | boolean               | Used to define which milestone is considered the point that work on a search ends.                                                                                        |
+| IsComplete              | boolean               | Used to indicate if a milestone has been completed; in the context of a billing event, it indicates if the billing event is ready to bill.                                |
+| IsBilled                | boolean               | Used to indicate if a billing event has been billed.                                                                                                                      |
+| IsPaid                  | boolean               | Used to indicate if a billing event has been paid.                                                                                                                        |
+| BillingAmount           | float                 | Used within the context of a billing event to specify the amount to be billed.                                                                                            |
+| BillingAmountWeighting  | float                 | Used to weight the probability that a billing event will be ready to bill, billed, or paid on or before the defined due date.                                             |
+| BillingDate             | datetime              | Used to indicate the date a billing event was billed.                                                                                                                     |
+| PaymentDate             | datetime              | Used to indicate the date a billing event was paid.                                                                                                                       |
+| IsMilestone             | boolean               | Used to indicate if it should appear under the `Milestone` tab within an `Assignment` entity.                                                                             |
+| IsBillingEvent          | boolean               | Used to indicate if it's a Billing Event; also determines if it is visible in the `Billing` tab within an `Assignment` entity.                                            |
+| BillingAmountCurrency   | FK uniqueidentifier   | Used to indicate the local billing currency of a Billing Event.                                                                                                           |
+| Owner                   | FK uniqueidentifier   | The unique identifier of the user who is the owner of a milestone and/or billing event.                                                                                   |
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones`
+
+<i>Table 2. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+assignmentId | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## GET /api/v1/assignments/{id}/milestones
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Milestones": [
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "1f9c4867-efe5-4f68-8766-0bdae65a7aa5",
+            "ItemDisplayText": "Billing Event",
+            "TargetDate": "2018-02-02T00:00:00+00:00",
+            "DateCompleted": "2018-09-12T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": true,
+            "OrderIndex": 13,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": false,
+            "IsBillingEvent": true,
+            "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "BillingNote": "Donec pretium dapibus velit, non aliquam sem ultrices sed.",
+            "ItemId": "f65fd1ee-0496-433b-af4e-b8d3aa5c43ef",
+            "ItemDisplayText": "Client Interviews",
+            "Duration": 0,
+            "StartDate": "2018-05-13T00:00:00+00:00",
+            "TargetDate": "2018-05-21T00:00:00+00:00",
+            "DateCompleted": "2017-05-03T00:00:00+00:00",
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": false,
+            "OrderIndex": 9,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false,
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        },
+        {
+            "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+            "InvoiceBillingEventOrderIndex": 0,
+            "ItemId": "256e56ad-9ad8-4bb8-a1c2-d04bdc47aa35",
+            "ItemDisplayText": "Proposal",
+            "Duration": 0,
+            "IsStartMilestone": false,
+            "IsFinishMilestone": false,
+            "IsComplete": true,
+            "OrderIndex": 1,
+            "PredecessorId": {
+                "ItemType": "AssignmentMilestones"
+            },
+            "IsBilled": false,
+            "IsPaid": false,
+            "IsMilestone": true,
+            "IsBillingEvent": false,
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        }
+    ]
+}
+```
+
+This endpoint will return a list of `Milestone` type entites relationally linked to the given `Assignment` entity.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Assignment`entity.
+
+
+## PUT /api/v1/assignments/milestones
+
+> Example (cURL)
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/assignments/milestones' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: {token}' \
+--data '{
+    "AssignmentId" : "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+    "ItemId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4348",
+    "BillingNote": "This is a Billing Event '\''Note'\''.",
+    "ItemDisplayText": "The name of the Billing Event",
+    "StartDate": "2024-07-00:00:00",
+    "TargetDate": "2024-07-18T00:00:00",
+    "DateCompleted": "2024-07-16T00:00:00",
+    "IsComplete": false,
+    "IsStartMilestone": false,
+    "IsFinishMilestone": false,
+    "IsBilled": true,
+    "IsPaid": false,
+    "BillingAmount": 25000,
+    "BillingAmountWeighting": 100,
+    "BillingDate": "2024-07-18T00:00:00",
+    "PaymentDate": "",
+    "IsMilestone": false,
+    "IsBillingEvent": true,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Owner": {
+        "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+    }
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "AssignmentId": "3f5007c4-3a76-42c0-af75-21e05a7fdeed",
+    "InvoiceBillingEventOrderIndex": 0,
+    "BillingNote": "This is a Billing Event 'Note'.",
+    "ItemId": "3c15c9d3-9e92-4d6f-bccf-6ab04fcd4348",
+    "ItemDisplayText": "The name of the Billing Event",
+    "TargetDate": "2024-07-18T00:00:00+00:00",
+    "DateCompleted": "2024-07-16T00:00:00+00:00",
+    "IsStartMilestone": false,
+    "IsFinishMilestone": false,
+    "IsComplete": false,
+    "PredecessorId": {
+        "ItemType": "AssignmentMilestones"
+    },
+    "IsBilled": true,
+    "IsPaid": false,
+    "BillingAmount": 25000.0,
+    "BillingAmountWeighting": 100.0,
+    "BillingDate": "2024-07-18T00:00:00+00:00",
+    "IsMilestone": false,
+    "IsBillingEvent": true,
+    "BillingAmountCurrency": "cd9f9511-81e6-4fc8-b731-1c5149d6ff96",
+    "Owner": {
+        "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+    }
+}
+```
+
+This endpoint replaces the representation of the specified `Milestone` relationaly linked to an `Assignment` entity using the PUT method.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/milestones`
+
+## PATCH /api/v1/assignments/milestones/{id}
+
+> Example (cURL)
+
+```shell
+curl --location --request PATCH 'https://{subdomain}.invenias.com/api/v1/assignments/milestones/{id}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "Fields": {
+        "BillingAmountWeighting": "75"
+    }
+}'
+```
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint enables the partial update of one or more fields within the specified `Milestone` entity using the PATCH method Refer to the table below for the list of updatable fields.
+
+<p><i>Table 1. Patchable Field Summary</i></p>
+
+Name | Type | Nullable
+---- | ---- | --------
+FileAs | nvarchar (250) | FALSE
+StartDate | datetime | TRUE
+TargetDate | datetime | TRUE
+DateCompleted | datetime | TRUE
+Duration | integer | TRUE
+IsStartMilestone | boolean | FALSE
+IsFinishMilestone | boolean | FALSE
+IsComplete | boolean | FALSE
+IsBillingEvent | boolean | FALSE
+IsMilestone | boolean | FALSE
+IsBilled | boolean | FALSE
+IsPaid | boolean | FALSE
+BillingAmount | float | TRUE
+BillingAmountWeighting | float | TRUE
+BillingAmountCurrency | FK uniqueidentifier | TRUE
+BillingNote | nvarchar (max) | TRUE
+BillingDate | datetime | TRUE
+PaymentDate | datetime | TRUE
+OwnerId | FK uniqueidentifier | FALSE
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/milestones/{id}`
+
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the given `Milestone`entity.
+
+
+## DELETE /api/v1/assignments/{id}/milestones/{milestoneId}
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones/{milestoneId}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+This endpoint will `permanently` delete the relationship between the given `Assignment` entity and the `Milestone` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/assignments/{id}/milestones/{milestoneId}`
 
 
 # Companies
@@ -6609,7 +9661,8 @@ Name | Description
 [POST /api/v1/companies/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-list)  | Returns a list of `Company` entities in the database.
 [POST /api/v1/companies] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies)  | Creates a `Company` entity in the tenant database.
 [GET /api/v1/companies/{id}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-companies-id)  | Returns information about any given `Company` entity in the database.
-[PUT /api/v2/companies/{id}] (https://bullhorn.github.io/invenias-api-docs/#put-api-v2-companies-id)  | Adds or changes values to any given `Company` entity in the database.
+[PATCH /api/v2/companies/{id}] (https://bullhorn.github.io/invenias-api-docs/#patch-api-v2-companies-id)  | Update one or more fields of a target `Company` entity.
+[PUT /api/v2/companies/{id}] (https://bullhorn.github.io/invenias-api-docs/#put-api-v2-companies-id)  | Replace the representation of a target `Company` entity.
 [DELETE /api/v1/companies/{id}] (https://bullhorn.github.io/invenias-api-docs/#delete-api-v1-companies-id)  | Deletes any given `Company` entity in the database.
 [PUT /api/v1/companies/bulkdelete] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-companies-bulkdelete)  | Deletes many `Company` entities in the database.
 [POST /api/v1/companies/{id}/students/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-companies-id-students-list) | Returns a list `People` entities who have one or more `Education` entities relationally linked to a `Company` entity including their related qualifications.
@@ -7010,6 +10063,97 @@ This endpoint will return information about any given `Company` entity in the te
 `https://{subdomain}.invenias.com/api/v1/companies/{id}`
 
 <i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `Company` entity.
+
+
+## PATCH /api/v1/companies/{id}
+
+
+```shell
+curl --location --globoff --request PATCH 'https://{subdomain}.invenias.com/api/v1/companies/{id}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Fields": {
+        "IsPlaceOfStudy": 1,
+        "InternalComments": "Maecenas non condimentum dui. Aliquam quis finibus quam. Sed ornare a nibh sed consectetur."
+    }
+}'
+```
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint enables the partial update of one or more fields within the specified `Company` entity using the PATCH method. Refer to the table below for the list of updatable fields.
+
+<p><i>Table 1. Patchable Field Summary</i></p>
+
+Name | Type | Nullable
+---- | ---- | --------
+FileAs | nvarchar (100) | TRUE
+Synonyms | nvarchar(max) | TRUE
+InternalComments | nvarchar(max) | TRUE
+ClientStatus | FK uniqueidentifier | TRUE
+DoNotMailshotChecked | boolean | TRUE
+DoNotContactChecked | boolean | TRUE
+TypePartnerChecked | boolean | TRUE
+TypeSupplierChecked | boolean | TRUE
+TypeClientChecked | boolean | TRUE
+IsPlaceOfStudy | boolean | TRUE
+BillingCurrency | FK uniqueidentifier | TRUE
+CustomPhone1 | nvarchar(50) | TRUE
+CustomPhone2 | nvarchar(50) | TRUE
+CustomPhone3 | nvarchar(50) | TRUE
+CustomPhone4 | nvarchar(50) | TRUE
+CustomPhone5 | nvarchar(50) | TRUE
+CustomEmail1 | nvarchar(100) | TRUE
+CustomEmail2 | nvarchar(100) | TRUE
+CustomEmail3 | nvarchar(100) | TRUE
+CustomEmail4 | nvarchar(100) | TRUE
+CustomEmail5 | nvarchar(100) | TRUE
+WebPage | nvarchar(400) | TRUE
+LinkedIn | nvarchar(400) | TRUE
+Facebook | nvarchar(400) | TRUE
+Twitter | nvarchar(400) | TRUE
+BoardEx | nvarchar(400) | TRUE
+BoardExRCM | nvarchar(max) | TRUE
+XING | nvarchar(max) | TRUE
+Etz | nvarchar(max) | TRUE
+Xero | nvarchar(max) | TRUE
+BlueSteps | nvarchar(max) | TRUE
+Broadbean | nvarchar(max) | TRUE
+Idibu | nvarchar(max) | TRUE
+Email2Address | nvarchar(100) | TRUE
+Email3Address | nvarchar(100) | TRUE
+BusinessPhone2 | nvarchar(500) | TRUE
+AccountsPhone | nvarchar (50) | TRUE
+SalesPhone | nvarchar (50) | TRUE
+SupportPhone | nvarchar (50) | TRUE
+ISDN | nvarchar (50) | TRUE
+Skype | nvarchar (100) | TRUE
+VATNumber | nvarchar (50) | TRUE
+RegistrationNumber | nvarchar (50) | TRUE
+ClientRef | nvarchar (50) | TRUE
+PaymentTerms | nvarchar (50) | TRUE
+ExternalId1 | nvarchar(max) | TRUE
+ExternalId2 | nvarchar(max) | TRUE
+ExternalId3 | nvarchar(max) | TRUE
+MarketCap | float | TRUE
+MarketCapCurrency | FK uniqueidentifier | TRUE
+Revenue | float | TRUE
+RevenueCurrency | FK uniqueidentifier | TRUE
+NumberOfEmployees | FK uniqueidentifier | TRUE
+TickerSymbol | nvarchar(max) | TRUE
+CompanyType | int | TRUE
+OwnerId | FK uniqueidentifier | FALSE
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{id}`
+
+<i>Table 2. Parameters Summary</i>
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -7997,14 +11141,1150 @@ Parameter | Default | Description
 id | [required] | Specify the unique identifier for the desired `Company` entity.
 external | [required] | Specify if you wish to update the internal or external 'Overview' for the desired `Company` entity.
 
-<!-- # People
+# People
 Within the Invenias platform, the `People` entity stands as one of the core pillars among four primary entities. A person in this context can embody multiple roles, serving as a Partner, Supplier, Client, Referee, Source, and/or a Candidate.
 
 The `People` entity thrives on establishing meaningful connections and associations across a wide spectrum of data. Through relational links, it dynamically connects with other entities such as Assignments, Education, Locations, fellow `People`, and Employment, among numerous other relationship types.
 
 By encompassing such diverse roles and facilitating a network of relationships, the `People` entity plays a crucial role in the Invenias system, empowering comprehensive management and insightful analysis of data related to individuals and their affiliations.
 
-<p><i>Table 1. People Endpoint Summary</i></p> -->
+<p><i>Table 1. People Endpoint Summary</i></p>
+
+Name | Description
+---- | -----------
+[POST /api/v1/people/list] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people-list) | Returns a list of `People` entities in the database.
+[POST /api/v1/people] (https://bullhorn.github.io/invenias-api-docs/#post-api-v1-people) | Create a `People` entity in the database.
+[GET /api/v1/people/{id}] (https://bullhorn.github.io/invenias-api-docs/#get-api-v1-people-id) | Returns information about any given `People` entity in the database.
+[PUT /api/v1/people/{id}] (https://bullhorn.github.io/invenias-api-docs/#put-api-v1-people-id) | Replace the representation of a target `People` entity.
+[PATCH /api/v1/people/{id}] (https://bullhorn.github.io/invenias-api-docs/#patch-api-v1-people-id) | Update one or more fields of a target `People` entity.
+[DELETE /api/v1/people/{id}] (https://bullhorn.github.io/invenias-api-docs/#patch-api-v1-people-id) | Deletes any given `People` entity in the database.
+[POST /api/v1/people/bulkDelete] (https://bullhorn.github.io/invenias-api-docs/#POST-api-v1-people-bulkDelete) | Deletes many `Company` entities in the database.
+
+## POST /api/v1/people/list
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/people/list' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+  "PageSize": 3,
+  "PageIndex": 0,
+  "UsePaging": true,
+  "ReturnTotalCount": true,
+  "ReturnTotalDatabaseItemCount": true,
+  "Select": [
+    "FileAs",
+    "PersonReferenceNumber",
+    "CompanyDisplayName",
+    "PositionJobTitle"
+  ],
+  "Sort": [
+    {
+      "Selector": "PersonReferenceNumber",
+      "Desc": false
+    }
+  ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Items": [
+        {
+            "CompanyDisplayName": "Daiwa Securities",
+            "FileAs": "Ms. ANGELA COOPER",
+            "ItemType": "People",
+            "PersonReferenceNumber": "P0000001",
+            "PositionJobTitle": "Associate",
+            "ItemId": "fc64f137-afca-43d8-8631-032c15908ebf",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "CompanyDisplayName": "Citigroup",
+            "FileAs": "Paula Fisher",
+            "ItemType": "People",
+            "PersonReferenceNumber": "P0000002",
+            "PositionJobTitle": "Analyst",
+            "ItemId": "9234609c-86c0-4956-aeb5-034e1fcf823a",
+            "OffLimitsStatus": "Off"
+        },
+        {
+            "CompanyDisplayName": "Jefferies Group",
+            "FileAs": "Peter Phillips",
+            "ItemType": "People",
+            "PersonReferenceNumber": "P0000003",
+            "PositionJobTitle": "President",
+            "ItemId": "cf7e0b6d-5dce-43bc-8d01-03b4cf703add",
+            "OffLimitsStatus": "Off"
+        }
+    ]  
+}
+```
+
+This endpoint will return a list of `Person` type entities in the tenant database.
+
+<aside class="notice">
+    Please note, it's possible to POST a request body in a list endpoint request allowing you to define filters, sorting, grouping, column selection, pagination, and more.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/list`
+
+## POST /api/v1/people
+
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/people' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+  "OptionalId": "f7a082a8-c2fd-4581-bccb-3237cf34442d",
+  "DefaultPosition": {
+    "OptionalId": "8c19e03f-48c8-4b75-ba14-aa0ad448b3c9",
+    "JobTitle": "Cheif Executive Officer",
+    "StartDate": "2024-07-02T12:14:41.717Z",
+    "EndDate": "",
+    "PositionStatus": "Current",
+    "PositionType": {
+      "Value": 0
+    },
+    "IsDefault": true,
+    "Company": {
+      "Id": "43e49a08-1766-4324-84d8-d918af2fd5ca"
+    },
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut laoreet scelerisque est, egestas porttitor ipsum vulputate ut. Cras aliquam erat id erat malesuada, sed iaculis dui porttitor",
+    "InternalComments": "Cras in augue varius tellus tincidunt luctus"
+  },
+  "Owner": {
+    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+  },
+  "NameComponents": {
+    "FullName": "Jane Doe",
+    "FamilyName": "Doe",
+    "FirstName": "Jane",
+    "Title": "Miss"
+  },
+  "CandidateStatus": {
+    "Id": "72434cd3-4d02-4678-ab21-b32b2e8d11bb"
+  },
+  "IsClient": false,
+  "IsPartner": false,
+  "IsCandidate": true,
+  "IsSupplier": false,
+  "IsPermanentCandidate": true,
+  "IsInterimCandidate": false,
+  "IsNonExecCandidate": false,
+  "IsDoNotMailshot": true,
+  "IsDoNotContact": false,
+  "IsVIP": false,
+  "IsWillingToTravel": true,
+  "IsWillingToRelocate": true,
+  "DateOfBirth": "1975-07-02T12:14:41.717Z",
+  "MaritalStatus": {
+    "Id": "e4060a61-7071-4fdc-aec7-b742a96d6f4b"
+  },
+  "Nationality": {
+    "Id": "24c4712e-5637-4072-9bd7-d6c654690dee"
+  },
+  "Gender": {
+    "Id": "63f0b6e6-35c8-4ab5-9a00-89ad7e8d9df0"
+  },
+  "HomeAddress": {
+    "FullAddress": "38 Market Place\r\nReading\r\nRG1 2DE\r\nUNITED KINGDOM",
+    "Street": "38 Market Place",
+    "TownCity": "Reading",
+    "Postcode": "RG1 2DE",
+    "Country": "UNITED KINGDOM"
+  },
+  "EmailAddresses": [
+    {
+      "IsPersonal": true,
+      "IsBusiness": false,
+      "PreferredDisplayOrderIndexLegacy": 0,
+      "PreferredDisplayOrderIndex": 0,
+      "IsVisibleAsDefault": true,
+      "FieldName": "Email1Address",
+      "ItemValue": "jane.doe@live.com"
+    }
+  ],
+  "PhoneNumbers": [
+    {
+      "IsPrimary": true,
+      "PreferredDisplayOrderIndexLegacy": 0,
+      "PreferredDisplayOrderIndex": 0,
+      "FormattedValue": "+44 (7700) 900328",
+      "PhoneNumberComponents": {
+        "Area": "7700",
+        "CountryCode": "44",
+        "Local": "900328",
+        "Country": "UNITED KINGDOM",
+        "PhoneCode": "44"
+      },
+      "IsVisibleAsDefault": true,
+      "FieldName": "MobilePhone",
+      "ItemValue": "+447700900328"
+    }
+  ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "f7a082a8-c2fd-4581-bccb-3237cf34442d",
+    "DefaultPosition": {
+        "PositionId": "8c19e03f-48c8-4b75-ba14-aa0ad448b3c9",
+        "EntityDetails": {
+            "DateCreated": "2024-07-02T13:23:54.0749031+00:00",
+            "DateModified": "2024-07-02T13:23:54.0749031+00:00",
+            "CreatedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "ModifiedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        },
+        "JobTitle": "Cheif Executive Officer",
+        "StartDate": "2024-07-02T12:14:41.717+00:00",
+        "PositionStatus": "Current",
+        "PositionType": {
+            "Value": 0,
+            "ItemType": "Positions"
+        },
+        "IsDefault": true,
+        "Company": {
+            "Id": "43e49a08-1766-4324-84d8-d918af2fd5ca",
+            "ItemDisplayText": "Barclays Capital",
+            "ItemType": "Companies"
+        },
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut laoreet scelerisque est, egestas porttitor ipsum vulputate ut. Cras aliquam erat id erat malesuada, sed iaculis dui porttitor",
+        "InternalComments": "Cras in augue varius tellus tincidunt luctus",
+        "BusinessAddress": {
+            "FullAddress": ""
+        }
+    },
+    "EntityDetails": {
+        "DateCreated": "2024-07-02T13:23:54.043703+00:00",
+        "DateModified": "2024-07-02T13:23:54.0749031+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "ExternalLikesCount": 0,
+    "IsLikedByCurrentUser": false,
+    "IsFavourite": false,
+    "PersonNumber": "P0000215",
+    "Age": 48,
+    },
+    "NameComponents": {
+        "FullName": "Jane Doe",
+        "FamilyName": "Doe",
+        "FirstName": "Jane"
+    },
+    "CandidateStatus": {
+        "Id": "72434cd3-4d02-4678-ab21-b32b2e8d11bb",
+        "DisplayTitle": "Candidate Status",
+        "ItemDisplayText": "Placed",
+        "ItemType": "LookupListEntries"
+    },
+    "IsClient": false,
+    "IsPartner": false,
+    "IsCandidate": true,
+    "IsSupplier": false,
+    "IsPermanentCandidate": true,
+    "IsInterimCandidate": false,
+    "IsNonExecCandidate": false,
+    "IsDoNotMailshot": true,
+    "IsDoNotContact": false,
+    "IsVIP": false,
+    "IsWillingToTravel": true,
+    "IsWillingToRelocate": true,
+    "DateOfBirth": "1975-07-02T12:14:41.717+00:00",
+    "MaritalStatus": {
+        "Id": "e4060a61-7071-4fdc-aec7-b742a96d6f4b",
+        "DisplayTitle": "Marital Status",
+        "ItemDisplayText": "Divorced",
+        "ItemType": "LookupListEntries"
+    },
+    "Nationality": {
+        "Id": "24c4712e-5637-4072-9bd7-d6c654690dee",
+        "DisplayTitle": "Nationality",
+        "ItemDisplayText": "British",
+        "ItemType": "LookupListEntries"
+    },
+    "Gender": {
+        "Id": "63f0b6e6-35c8-4ab5-9a00-89ad7e8d9df0",
+        "DisplayTitle": "Gender",
+        "ItemDisplayText": "Female",
+        "ItemType": "LookupListEntries"
+    },
+    "HomeAddress": {
+        "FullAddress": "38 Market Place\r\nReading\r\nRG1 2DE\r\nUNITED KINGDOM",
+        "PreferredDisplayOrderIndex": 0,
+        "Street": "38 Market Place",
+        "TownCity": "Reading",
+        "County": "",
+        "Postcode": "RG1 2DE",
+        "Country": "UNITED KINGDOM"
+    },
+    "EmailAddresses": [
+        {
+            "IsPersonal": true,
+            "IsBusiness": false,
+            "PreferredDisplayOrderIndexLegacy": 0,
+            "PreferredDisplayOrderIndex": 2,
+            "IsVisibleAsDefault": true,
+            "FieldName": "Email1Address",
+            "DisplayTitle": "Email",
+            "ItemValue": "jane.doe@live.com"
+        }
+    ],
+    "PhoneNumbers": [
+        {
+            "IsPrimary": true,
+            "PreferredDisplayOrderIndexLegacy": 3,
+            "PreferredDisplayOrderIndex": 0,
+            "FormattedValue": "+44 (7700) 900328",
+            "PhoneNumberComponents": {
+                "Area": "7700",
+                "CountryCode": "44",
+                "Local": "900328",
+                "Country": "United Kingdom",
+                "PhoneCode": "44"
+            },
+            "IsVisibleAsDefault": true,
+            "FieldName": "MobilePhone",
+            "DisplayTitle": "Mobile",
+            "ItemValue": "+447700900328"
+        }
+    ]
+}
+```
+
+> Please note, a successful request will return a 201 created code.
+
+This endpoint will allow you to create a new `Person` entity in the tenant database.
+
+<aside class="notice">
+    Please note, the minimum required fields to create a Person entity are 'FirstName' and 'LastName'.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people`
+
+## GET /api/v1/people/{id}
+
+```shell
+
+```
+
+> Example Response (JSON)
+
+```shell
+
+```
+
+This endpoint will return information about any given `Person` entity in the tenant database.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/companies/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `Person` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people`
+
+## PUT /api/v1/people/{id}
+
+
+```shell
+curl --location --request PUT 'https://{subdomain}.invenias.com/api/v1/people/{id}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+  "Owner": {
+    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5"
+  },
+  "DefaultPosition": {
+    "CopyLocationInformationToPosition": true,
+    "JobTitle": "Cheif Executive Officer",
+    "StartDate": "2024-07-02T12:14:41.717Z",
+    "EndDate": "",
+    "PositionStatus": "Current",
+    "PositionType": {
+      "Value": 0
+    },
+    "IsDefault": true,
+    "Company": {
+      "Id": "43e49a08-1766-4324-84d8-d918af2fd5ca"
+    },
+    "Benefits": "string",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut laoreet scelerisque est, egestas porttitor ipsum vulputate ut. Cras aliquam erat id erat malesuada, sed iaculis dui porttitor",
+    "InternalComments": "Cras in augue varius tellus tincidunt luctus"
+  },
+  "NameComponents": {
+    "FullName": "Jane Doe",
+    "FamilyName": "Doe",
+    "FirstName": "Jane",
+    "Title": "Miss"
+  },
+  "InternalComments": "Phasellus eget aliquet velit, ornare lobortis lectus. Morbi dignissim iaculis erat, ut dapibus magna aliquam at. Praesent eu rutrum sem.",
+  "Headline": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec euismod nunc. Ut rhoncus libero id volutpat lacinia. In mauris diam, viverra id justo ac, auctor luctus augue.",
+  "CandidateStatus": {
+    "Id": "72434cd3-4d02-4678-ab21-b32b2e8d11bb"
+  },
+  "IsClient": false,
+  "IsPartner": false,
+  "IsCandidate": true,
+  "IsSupplier": false,
+  "IsPermanentCandidate": true,
+  "IsInterimCandidate": false,
+  "IsNonExecCandidate": false,
+  "IsDoNotMailshot": true,
+  "IsDoNotContact": false,
+  "IsVIP": false,
+  "IsWillingToTravel": true,
+  "IsWillingToRelocate": true,
+  "DateOfBirth": "2024-07-04T10:27:26.794Z",
+ "MaritalStatus": {
+    "Id": "e4060a61-7071-4fdc-aec7-b742a96d6f4b"
+  },
+  "Nationality": {
+    "Id": "24c4712e-5637-4072-9bd7-d6c654690dee"
+  },
+  "Gender": {
+    "Id": "63f0b6e6-35c8-4ab5-9a00-89ad7e8d9df0"
+  },
+  "HomeAddress": {
+    "FullAddress": "38 Market Place\r\nReading\r\nRG1 2DE\r\nUNITED KINGDOM",
+    "Street": "38 Market Place",
+    "TownCity": "Reading",
+    "Postcode": "RG1 2DE",
+    "Country": "UNITED KINGDOM"
+  },
+  "EmailAddresses": [
+    {
+      "IsPersonal": true,
+      "IsBusiness": false,
+      "PreferredDisplayOrderIndexLegacy": 0,
+      "PreferredDisplayOrderIndex": 0,
+      "IsVisibleAsDefault": true,
+      "FieldName": "Email1Address",
+      "ItemValue": "jane.doe@live.com"
+    }
+  ],
+  "PhoneNumbers": [
+    {
+      "IsPrimary": true,
+      "PreferredDisplayOrderIndexLegacy": 0,
+      "PreferredDisplayOrderIndex": 0,
+      "FormattedValue": "+44 (7700) 900328",
+      "PhoneNumberComponents": {
+        "Area": "7700",
+        "CountryCode": "44",
+        "Local": "900328",
+        "Country": "UNITED KINGDOM",
+        "PhoneCode": "44"
+      },
+      "IsVisibleAsDefault": true,
+      "FieldName": "MobilePhone",
+      "ItemValue": "+447700900328"
+    }
+  ]
+}'
+```
+
+> Example Response (JSON)
+
+```shell
+{
+    "Id": "f7a082a8-c2fd-4581-bccb-3237cf34442d",
+    "DefaultPosition": {
+        "PositionId": "8c19e03f-48c8-4b75-ba14-aa0ad448b3c9",
+        "EntityDetails": {
+            "DateCreated": "2024-07-02T13:23:54.0749031+00:00",
+            "DateModified": "2024-07-04T10:38:42.9864095+00:00",
+            "CreatedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "ModifiedBy": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            },
+            "Owner": {
+                "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                "ItemDisplayText": "Glen Chamberlain",
+                "ItemType": "Users"
+            }
+        },
+        "PermanentPackages": [],
+        "NonExecPackages": [],
+        "InterimRates": [],
+        "JobTitle": "Cheif Executive Officer",
+        "StartDate": "2024-07-02T12:14:41.717+00:00",
+        "PositionStatus": "Current",
+        "PositionType": {
+            "Value": 0,
+            "ItemType": "Positions"
+        },
+        "IsDefault": true,
+        "Roles": {
+            "ItemReferences": []
+        },
+        "Company": {
+            "Id": "43e49a08-1766-4324-84d8-d918af2fd5ca",
+            "ItemDisplayText": "Barclays Capital",
+            "ItemType": "Companies"
+        },
+        "Benefits": "string",
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut laoreet scelerisque est, egestas porttitor ipsum vulputate ut. Cras aliquam erat id erat malesuada, sed iaculis dui porttitor",
+        "InternalComments": "Cras in augue varius tellus tincidunt luctus",
+        "BusinessAddress": {
+            "FullAddress": ""
+        },
+        "Websites": [
+            {
+                "Icon": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABfBJREFUWAnlV1tsVFUU3efeiy3yUGJtNAVhZkwxhg+R+GOA+IqPH0GbdihJjbRBIjRtBxKMxo9+KEYSmaGgJhLASEKZann9GMRHosQfbfDDkEAyM2hLNBWDUist3HuPa53eM5mObcEE8cNDyjl377XXPo+99zkj8n9v6lo2oFNr53RX/sEwUCtFyRKlJRYquYu2jpYftZKCaOlzXH14YVv8606lwmvhJWbKCTy/t1D552/SJjrcBGz1NZIOinLeuvlW6Xp/TWzkajaTTqAhk6vDOtJaZB5JlKgzonROa3lKlApguFschbnpFtHaVUo+Fq0SWnTtGF76tSOpno5E71STcMqVWmvVkMm/LqF8ZJwr6XOV+6hS6gk4WG7IHbU2m4qvy7bH1imMDQd0xBCL2fYZW3CQi5zlfuz3OAWBqzKFbvRJAHxHqY7ujtg7INbJdP4w5CuwvXt6UrEWS8C+IV3Yja1oBu4IJraSPI2ZwvpQ6wzUHuTZAx2xRvKU2nE8bgeS2wuv0TmAF8R1Hz+Qir9No+TOXC0snwZ+qKJy+svlJJFsiBhiaUNbcpCLnOQut+N3cQI8cwn1K5D52nHqetoXfFE0uKJacc44ZrVv34t3DBbl0YAy6ogRYqNGDnLh0ye38WGVUW8mwGhnwFHGbR/nHDIE1jPUIdJ2sZ+oWZ3FWgy5yMlv+qAvqzMy/ocz3IwzfJPBk+2IP8AttKDVXblnfV96ofsDqzwJeQ1WOhuA2cQgiC4iKy5ieA7OF2O2Mz1P6va3JQ5Sz8aYSGby30C3BDH0EmJo65gG9p0oMqfS+Z8gqGYEd6cWfM5z5Faa1WiZa8H/qFcygAkfkml6Z7Y1caYxffaRQAefgWPw3lT8TlusVOP23NIgkK+witOOqCfhNMNgMudJj1g5V4V0+xArec8TL+9Nc3+PV9cMUZ0fPDfLvxLc4osfx869gLpQb22oBy9z8Cgm0wH7Y+CvdV1Z1t2eOEG1Z8orPKCk5FFkvgdgBuRDDCqeayC6C7JldN6TSnxKo7L2K775l29I56iq51HBti3Qei3smrCgFZA/hkL2JVzVjvkUMwEsGueCxgpnnCPPK6bPuDu7Mb5hfyr2HVQ11HPl7KdqJZga2pKDXKwd5DZVlASRTw49Xiwm4lheWeHaY3upKDYEHMfc9qJskgEx/mWfqzE2hEVp24I6cALHsws6lz4thWrYljP+reBG9T0bE6YKFwvRjXJc7sdDEPwQip6PaJ3wCJLbcr9gi6oqb6qo+qB1LoNt0vbczoHbRi6PnsfSzmc3Jm4vBeII1tgjoE+r86LHxHyejQ70HhSlpaztxZLLIqN1FVMNRlNOIMIw9ViYTGt69+fq0ZFLb+ggbLYy4zP68JAWfRg/FN3nyzVutdFLw/XJbXmbhuegjzPP0U+ZCRGG1AOr04X7mIbgasL3LKTmMNNwLNvkW4LYPD6jUIg2oRLEUbMXQWYKEfJ3vY8/U1QgZJFhnl+1EMED/t0PW5ZtW4iOjBUiOcabxXX0EaPDfw7fcOgHsc0LAYrzPlfT9D1wuAPOB4CfSbCpcFqO+9rP8ZxPDeRH+ccxZcAdNxgDhg1LMTjIZTjBjYnxtTQY+SQSMLSpLqNGXNMBXjbcCVY4wK/vZcQJ8Iq8dCE8g2ifh2NoNY8JKqKGre/HCud6ylkcVUerKvY8c1+HJ7lylGzzjrRK3ISt2J0dWG3/9DlObelj1dQBCviApAGfUQ3bzz5sjdlj5YfYM6jYT9SszmIthlxwnuY3fZQ6p6xYiMzr1VFbIPNUGPaOmwSuVEQhw6uJaUXD0kYZdcTw+rU6cpAL3x5eOlsmeiEXJ0Aj3AOvInCyyIA5EgSfrErnN2CseJ9j+44CMos5TWxpi2RINTlKLG1oSw5ykZPcpTZ2DJvxjcbmATn2PuT+97nibsYKcV1rc10r12m2l5apcEG4B1s/DEeL0McDCbYiZswty5VHC5vwzvnbBOx0yn+YYHtPR2+G6/rDZNIJcCL/6U8zuxPsO//FH6d/AaZdUklntQ86AAAAAElFTkSuQmCC",
+                "PreferredDisplayOrderIndexLegacy": 0,
+                "Id": "0b10da2c-7281-4f9a-8592-94d5e6a16bfe",
+                "IsVisibleAsDefault": true,
+                "FieldName": "WebPage",
+                "DisplayTitle": "Website"
+            }
+        ],
+        "PhoneNumbers": [
+            {
+                "IsPrimary": false,
+                "PreferredDisplayOrderIndex": 1,
+                "PhoneNumberComponents": {},
+                "IsVisibleAsDefault": true,
+                "FieldName": "BusinessPhone",
+                "DisplayTitle": "Business Tel",
+                "ItemValue": ""
+            },
+            {
+                "IsPrimary": false,
+                "PreferredDisplayOrderIndexLegacy": 1,
+                "PhoneNumberComponents": {},
+                "IsVisibleAsDefault": true,
+                "FieldName": "BusinessFax",
+                "DisplayTitle": "Business Fax",
+                "ItemValue": ""
+            }
+        ],
+        "Assistants": [],
+        "Managers": [],
+        "Departments": []
+    },
+    "RecordPictures": [],
+    "Links": [],
+    "InternalLikesCount": 0,
+    "EntityDetails": {
+        "DateCreated": "2024-07-02T13:23:54.043703+00:00",
+        "DateModified": "2024-07-04T10:38:42.9707743+00:00",
+        "CreatedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "ModifiedBy": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        },
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemDisplayText": "Glen Chamberlain",
+            "ItemType": "Users"
+        }
+    },
+    "ExternalLikesCount": 0,
+    "IsLikedByCurrentUser": false,
+    "IsFavourite": false,
+    "PersonNumber": "P0000215",
+    "Age": -1,
+    "OffMarketComponents": {
+        "IsRestricted": false,
+        "IsInherited": true,
+        "NotificationMessage": "Off Limits restrictions apply to this record because this person currently works for a company that is set as off limits. Policy Enforced on Subsidiaries",
+        "ParentModels": [
+            {
+                "ParentItemReference": {
+                    "Id": "f7c604c3-75ca-42cd-bf5c-36d670187bc4",
+                    "ItemDisplayText": "Policy Enforced on Subsidiaries",
+                    "ItemType": "OffLimitPolicies"
+                },
+                "IsOffMarket": true,
+                "Reason": "Policy Enforced on Subsidiaries",
+                "Owner": {
+                    "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+                    "ItemType": "Users"
+                },
+                "Status": 1,
+                "IsPriority": false
+            }
+        ],
+        "IsOffMarket": true,
+        "Reason": "Policy Enforced on Subsidiaries",
+        "Owner": {
+            "Id": "b91c87bd-0f45-4441-92bd-2c19f79c8af5",
+            "ItemType": "Users"
+        },
+        "Status": 1,
+        "IsPriority": false
+    },
+    "OffLimitsComponents": {
+        "IsOffLimits": true,
+        "NotificationMessage": "Policy Enforced on Subsidiaries"
+    },
+    "PermanentPackages": [],
+    "NonExecPackages": [],
+    "InterimRates": [],
+    "RecordManagementDetails": {
+        "Owners": [],
+        "Groups": [
+            {
+                "Id": "8542c690-55f8-4d3e-b504-0646fa8c2bee",
+                "ItemDisplayText": "Team B",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "0726e379-8040-4efd-b953-65b38d4e4262",
+                "ItemDisplayText": "General Search",
+                "ItemType": "RecordManagementGroupListEntries"
+            },
+            {
+                "Id": "a24f1f31-e45b-49b6-8aa8-a23f16b6d6ed",
+                "ItemDisplayText": "Business Unit A",
+                "ItemType": "RecordManagementGroupListEntries"
+            }
+        ],
+        "Organisations": []
+    },
+    "IsProfessionalUser": false,
+    "IsClientUser": false,
+    "IsCandidateUser": false,
+    "Consent": {
+        "ConsentStatus": "NotInformed",
+        "StatusDisplayText": "Not Yet Informed",
+        "IsApprovedAndValid": false,
+        "Purposes": [
+            {
+                "Id": "a30761f0-5488-4071-a889-475438df30a4",
+                "ItemDisplayText": "Executive Search / Board Search",
+                "ItemType": "DataProtectionPurposes"
+            }
+        ],
+        "LawfulBases": [
+            {
+                "Id": "7aba49da-7603-42ad-bbdd-5ba4ec0e8e59",
+                "ItemDisplayText": "Legitimate Interest",
+                "ItemType": "DataProtectionLawfulBases"
+            }
+        ],
+        "IsInform": false
+    },
+    "IsDataProtectionRepresentative": false,
+    "NameComponents": {
+        "FullName": "Jane Doe",
+        "FamilyName": "Doe",
+        "FirstName": "Jane",
+        "Title": "Miss"
+    },
+    "InternalComments": "Phasellus eget aliquet velit, ornare lobortis lectus. Morbi dignissim iaculis erat, ut dapibus magna aliquam at. Praesent eu rutrum sem.",
+    "Headline": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec euismod nunc. Ut rhoncus libero id volutpat lacinia. In mauris diam, viverra id justo ac, auctor luctus augue.",
+    "CandidateStatus": {
+        "Id": "72434cd3-4d02-4678-ab21-b32b2e8d11bb",
+        "DisplayTitle": "Candidate Status",
+        "ItemDisplayText": "Placed",
+        "ItemType": "LookupListEntries"
+    },
+    "IsClient": false,
+    "IsPartner": false,
+    "IsCandidate": true,
+    "IsSupplier": false,
+    "IsPermanentCandidate": true,
+    "IsInterimCandidate": false,
+    "IsNonExecCandidate": false,
+    "IsDoNotMailshot": true,
+    "IsDoNotContact": false,
+    "IsVIP": false,
+    "IsWillingToTravel": true,
+    "IsWillingToRelocate": true,
+    "DateOfBirth": "2024-07-04T10:27:26.794+00:00",
+    "MaritalStatus": {
+        "Id": "e4060a61-7071-4fdc-aec7-b742a96d6f4b",
+        "DisplayTitle": "Marital Status",
+        "ItemDisplayText": "Divorced",
+        "ItemType": "LookupListEntries"
+    },
+    "Nationality": {
+        "Id": "24c4712e-5637-4072-9bd7-d6c654690dee",
+        "DisplayTitle": "Nationality",
+        "ItemDisplayText": "British",
+        "ItemType": "LookupListEntries"
+    },
+    "Gender": {
+        "Id": "63f0b6e6-35c8-4ab5-9a00-89ad7e8d9df0",
+        "DisplayTitle": "Gender",
+        "ItemDisplayText": "Female",
+        "ItemType": "LookupListEntries"
+    },
+    "HomeAddress": {
+        "FullAddress": "38 Market Place\r\nReading\r\nRG1 2DE\r\nUNITED KINGDOM",
+        "Latitude": 51.4555942,
+        "Longitude": -0.9698702,
+        "PreferredDisplayOrderIndex": 0,
+        "Street": "38 Market Place",
+        "TownCity": "Reading",
+        "County": "",
+        "Postcode": "RG1 2DE",
+        "Country": "UNITED KINGDOM"
+    },
+    "EmailAddresses": [
+        {
+            "IsPersonal": true,
+            "IsBusiness": false,
+            "PreferredDisplayOrderIndexLegacy": 0,
+            "PreferredDisplayOrderIndex": 2,
+            "IsVisibleAsDefault": true,
+            "FieldName": "Email1Address",
+            "DisplayTitle": "Email",
+            "ItemValue": "jane.doe@live.com"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "PreferredDisplayOrderIndexLegacy": 1,
+            "IsVisibleAsDefault": true,
+            "FieldName": "Email2Address",
+            "DisplayTitle": "Email 2"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "FieldName": "Email3Address",
+            "DisplayTitle": "Email 3"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "PreferredDisplayOrderIndexLegacy": 2,
+            "IsVisibleAsDefault": true,
+            "FieldName": "Skype",
+            "DisplayTitle": "Skype"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "FieldName": "Messenger",
+            "DisplayTitle": "Live Messenger"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "FieldName": "Yahoo",
+            "DisplayTitle": "Yahoo"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "FieldName": "ICQ",
+            "DisplayTitle": "ICQ"
+        },
+        {
+            "IsPersonal": false,
+            "IsBusiness": false,
+            "FieldName": "GTalk",
+            "DisplayTitle": "GTalk"
+        }
+    ],
+    "PhoneNumbers": [
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "DirectLine",
+            "DisplayTitle": "Direct Line",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PreferredDisplayOrderIndexLegacy": 2,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": true,
+            "FieldName": "HomePhone",
+            "DisplayTitle": "Home",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "HomePhone2",
+            "DisplayTitle": "Home 2",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "HomeFax",
+            "DisplayTitle": "Home Fax",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": true,
+            "PreferredDisplayOrderIndexLegacy": 3,
+            "FormattedValue": "+44 (7700) 900328",
+            "PhoneNumberComponents": {
+                "Area": "7700",
+                "CountryCode": "44",
+                "Local": "900328",
+                "Country": "United Kingdom",
+                "PhoneCode": "44"
+            },
+            "IsVisibleAsDefault": true,
+            "FieldName": "MobilePhone",
+            "DisplayTitle": "Mobile",
+            "ItemValue": "+447700900328"
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "MobilePhone2",
+            "DisplayTitle": "Mobile 2",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "CarPhone",
+            "DisplayTitle": "Car Phone",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "Pager",
+            "DisplayTitle": "Pager",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "ISDN",
+            "DisplayTitle": "ISDN",
+            "ItemValue": ""
+        },
+        {
+            "IsPrimary": false,
+            "PhoneNumberComponents": {},
+            "IsVisibleAsDefault": false,
+            "FieldName": "OtherPhone",
+            "DisplayTitle": "Other",
+            "ItemValue": ""
+        }
+    ],
+    "Websites": [],
+    "CustomFreeTextFields": [
+        {
+            "FieldName": "PersonCustom4",
+            "DisplayTitle": "GMAT"
+        },
+        {
+            "FieldName": "PersonCustom5",
+            "DisplayTitle": "Employment status"
+        },
+        {
+            "FieldName": "PersonCustom6",
+            "DisplayTitle": "Residential status"
+        },
+        {
+            "FieldName": "PersonCustom7",
+            "DisplayTitle": "Work Pass type"
+        }
+    ],
+    "CustomReferenceFields": [
+        {
+            "FieldName": "PersonCustom1",
+            "ApplicationEnumerationKey": "PersonCustom1",
+            "DisplayTitle": "LOS",
+            "ItemDisplayText": ""
+        },
+        {
+            "FieldName": "PersonCustom2",
+            "ApplicationEnumerationKey": "PersonCustom2",
+            "DisplayTitle": "Current Firm LOS",
+            "ItemDisplayText": ""
+        },
+        {
+            "FieldName": "PersonCustom3",
+            "ApplicationEnumerationKey": "PersonCustom3",
+            "DisplayTitle": "Non-Compete",
+            "ItemDisplayText": ""
+        }
+    ]
+}
+```
+
+This endpoint allows you to replace a representation of the target `People` entity with the request payload.
+
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{id}`
+
+<i>Table 2. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `People` entity.
+
+## PATCH /api/v1/people/{id}
+
+
+```shell
+curl --location --globoff --request PATCH 'https://{subdomain}.invenias.com/api/v1/people/{id}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data-raw '{
+    "Fields": {
+        "Email1Address": "john.doe@example.com",
+        "Headline": "john.doe@example.com",
+        "DoNotMailshotChecked": true,
+        "DateOfBirth": "1975-07-02"
+    }
+}'
+```
+
+> Please note, successful requests will return a 204 No Content response code.
+
+This endpoint enables the partial update of one or more fields within the specified People entity using the PATCH method. Refer to the table below for the list of updatable fields.
+
+<p><i>Table 1. Patchable Field Summary</i></p>
+
+Name | Type | Nullable
+---- | ---- | --------
+FileAs | nvarchar(100) | TRUE
+FirstName | nvarchar(50) | TRUE
+FamilyName | nvarchar(50) | TRUE
+MiddleName | nvarchar(50) | TRUE
+MaidenName | nvarchar(50) | TRUE
+Suffix | nvarchar(20) | TRUE
+Title | nvarchar(20) | TRUE
+Source | FK uniqueidentifier | TRUE
+VIPChecked | boolean | TRUE
+TypeClientChecked | boolean | TRUE
+ClientStatus | FK uniqueidentifier | TRUE
+TypeCandidateChecked | boolean | TRUE
+CandidateStatus | FK uniqueidentifier | TRUE
+ContractChecked | boolean | TRUE
+NonExecChecked | boolean | TRUE
+PermanentChecked | boolean | TRUE
+TypeSupplierChecked | boolean | TRUE
+TypePartnerChecked | boolean | TRUE
+Headline | nvarchar(max) | TRUE
+InternalComments | nvarchar(max) | TRUE
+DoNotContactChecked | boolean | TRUE
+DoNotMailshotChecked | boolean | TRUE
+MartialStatus | FK uniqueidentifier | TRUE
+Sex | FK uniqueidentifier | TRUE
+Nationality | FK uniqueidentifier | TRUE
+RelocateChecked | boolean | TRUE
+TravelChecked | boolean | TRUE
+PayrollNumber | nvarchar | TRUE
+NiNumber | nvarchar | TRUE
+DateOfBirth | datetime | TRUE
+PersonCustom1 | FK uniqueidentifier | TRUE
+PersonCustom2 | FK uniqueidentifier | TRUE
+PersonCustom3 | FK uniqueidentifier | TRUE
+PersonCustom4 | nvarchar(max) | TRUE
+PersonCustom5 | nvarchar(max) | TRUE
+PersonCustom6 | nvarchar(max) | TRUE
+PersonCustom7 | nvarchar(max) | TRUE
+NoticePeriod | FK uniqueidentifier | TRUE
+CustomPhone1 | nvarchar(50) | TRUE
+CustomPhone2 | nvarchar(50) | TRUE
+CustomPhone3 | nvarchar(50) | TRUE
+CustomPhone4 | nvarchar(50) | TRUE
+CustomPhone5 | nvarchar(50) | TRUE
+HomePhone | nvarchar(50) | TRUE
+HomePhone2 | nvarchar(50) | TRUE
+MobilePhone | nvarchar(50) | TRUE
+MobilePhone2 | nvarchar(50) | TRUE
+DirectLine | nvarchar(50) | TRUE
+HomeFax | nvarchar(50) | TRUE
+CarPhone | nvarchar(50) | TRUE
+Pager | nvarchar(50) | TRUE
+ISDN | nvarchar(50) | TRUE
+OtherPhone | nvarchar(50) | TRUE
+CustomEmail1 | nvarchar(100) | TRUE
+CustomEmail2 | nvarchar(100) | TRUE
+CustomEmail3 | nvarchar(100) | TRUE
+CustomEmail4 | nvarchar(100) | TRUE
+CustomEmail5 | nvarchar(100) | TRUE
+Email1Address | nvarchar(100) | TRUE
+Email2Address | nvarchar(100) | TRUE
+Email3Address | nvarchar(100) | TRUE
+Email1AddressIsPersonal | boolean | FALSE
+Email2AddressIsPersonal | boolean | FALSE
+Email3AddressIsPersonal | boolean | FALSE
+CustomEmail1IsPersonal | boolean | FALSE
+CustomEmail2IsPersonal | boolean | FALSE
+CustomEmail3IsPersonal | boolean | FALSE
+CustomEmail4IsPersonal | boolean | FALSE
+CustomEmail5IsPersonal | boolean | FALSE
+Email1AddressIsBusiness | boolean | FALSE
+Email2AddressIsBusiness | boolean | FALSE
+Email3AddressIsBusiness | boolean | FALSE
+CustomEmail1IsBusiness | boolean | FALSE
+CustomEmail2IsBusiness | boolean | FALSE
+CustomEmail3IsBusiness | boolean | FALSE
+CustomEmail4IsBusiness | boolean | FALSE
+CustomEmail5IsBusiness | boolean | FALSE
+Skype | nvarchar(100) | TRUE
+Messenger | nvarchar(100) | TRUE
+Yahoo | nvarchar(100) | TRUE
+ICQ | nvarchar(100) | TRUE
+GTalk | nvarchar(100) | TRUE
+LinkedIn | nvarchar(max) | TRUE
+LinkedInId | nvarchar(max) | TRUE
+XING | nvarchar(max) | TRUE
+Facebook | nvarchar(max) | TRUE
+Twitter | nvarchar(max) | TRUE
+BoardEx | nvarchar(max) | TRUE
+BoardExRCM | nvarchar(max) | TRUE
+Etz | nvarchar(max) | TRUE
+Xero | nvarchar(max) | TRUE
+BlueSteps | nvarchar(max) | TRUE
+Broadbean | nvarchar(max) | TRUE
+Idibu | nvarchar(max) | TRUE
+HomeStreet | nvarchar(250) | TRUE
+HomeCity | nvarchar(100) | TRUE
+HomeCountry | nvarchar(100) | TRUE
+HomePostalCode | nvarchar(20) | TRUE
+HomeState | nvarchar(100) | TRUE
+BenefitsSought | nvarchar(max) | TRUE
+NickName | nvarchar(50) | TRUE
+AIM | nvarchar(100) | TRUE
+Bebo | nvarchar(100) | TRUE
+PassportNumber | nvarchar(100) | TRUE
+VisaStatus | nvarchar(100) | TRUE
+AvailableDate | datetime | TRUE
+ContactObjective | nvarchar(255) | TRUE
+ObjectiveDate | datetime | TRUE
+ExternalId1 | nvarchar(max) | TRUE
+ExternalId2 | nvarchar(max) | TRUE
+ExternalId3 | nvarchar(max) | TRUE
+OwnerId | FK uniqueidentifier | FALSE
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{id}`
+
+<i>Table 2. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `People` entity.
+
+
+## DELETE /api/v1/people/{id}
+
+
+> Example (cURL)
+
+```shell
+curl --location --request DELETE 'https://{subdomain}.invenias.com/api/v1/people/{id}' \
+--header 'Authorization: Bearer {token}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The DELETE /api/v1/people/{id} endpoint is used to `permanently` delete a single `People` entity per request.
+
+<aside class="notice">
+    Please note, when deleting a 'People' entity, it will also delete any relations that exist between it and other core entities.
+</aside>
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/{id}`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id | [required] | Specify the unique identifier for the desired `People` entity.
+
+## POST /api/v1/people/bulkdelete
+
+> Example (cURL)
+
+```shell
+curl --location 'https://{subdomain}.invenias.com/api/v1/people/bulkdelete' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {token}' \
+--data '{
+    "ItemReferences": [
+        {
+            "Id": "904d913e-c2dd-4b5d-9c0d-699aaf03dc58"
+        },
+        {
+            "Id": "06ee9193-a64f-4ab9-93a3-df9e03feba3c"
+        }
+    ]
+}'
+```
+
+> Please note, successful requests will return a 200 OK response code.
+
+The POST /api/v1/people/bulkdelete endpoint is used to `permanently` delete more than one `People` entity.
+
+### HTTP Request
+`https://{subdomain}.invenias.com/api/v1/people/bulkdelete`
+
+<i>Table 1. Parameters Summary</i>
+
+Parameter | Default | Description
+--------- | ------- | -----------
+ids | [required] | Specify the unique identifiers for the `People` entities you wish to delete.
+
 
 # Images
 Invenias applications allow their end-users to add, replace and remove images from `Company` and `People` entities. The following endpoints can be leveraged to read, replace and add images to the aforementiond entities.
@@ -8045,6 +12325,7 @@ This endpoint allows you to upload and link an image to a given `Company` entity
 Parameter | Default | Type | Description
 --------- | ------- | ---- | -----------
 id | [required] | String | Specify the unique identifier for the `Company` entity you wish to upload and link an image to.
+
 
 ## GET /api/v1/companies/{id}/recordpicture
 
